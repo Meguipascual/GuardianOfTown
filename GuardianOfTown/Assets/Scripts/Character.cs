@@ -4,13 +4,18 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected int hp;
-    public int Attack { get; set; }
-    protected int defense;
-    protected int level;
-    protected float speed;
+    protected abstract int Level { get; set; }
+    public abstract int HP { get; set; }
+    public abstract int Attack { get; set; }
+    public abstract int Defense { get; set; }
+    protected abstract float Speed { get; set; }
 
-    protected abstract void ReceiveDamage(int damage);
+    public void ReceiveDamage(int damage)
+    {
+        HP -= damage;
+    }
 
-    protected abstract void Death();
+    public abstract void Death();
+
+    public abstract void Move();
 }

@@ -17,12 +17,21 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        var enemyType = Random.Range(0, enemyPrefab.Length);
-        var enemyX = Random.Range(-23, 23);
-        var enemyY = 1;
-        var enemyZ = 20f;
-        Vector3 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
+        if (FindObjectOfType<PlayerManager>().IsDead)
+        {
+            CancelInvoke("InvokeRepeating");
+            return;
+        }
+        else
+        {
+            var enemyType = Random.Range(0, enemyPrefab.Length);
+            var enemyX = Random.Range(-23, 23);
+            var enemyY = 1;
+            var enemyZ = 20f;
+            Vector3 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
 
-        Instantiate(enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+            Instantiate(enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+        }
+        
     }
 }
