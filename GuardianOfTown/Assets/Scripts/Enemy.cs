@@ -13,6 +13,7 @@ public class Enemy : Character
     {
         speed = 10f;
         hp = 100;
+        Attack = 30;
         enemyType = "Orc";
         ReceiveDamage(10);
         Debug.Log(hp + ": " + enemyType);
@@ -34,7 +35,7 @@ public class Enemy : Character
         }
     }
 
-    public override void Death()
+    protected override void Death()
     {
         Destroy(gameObject);
     }
