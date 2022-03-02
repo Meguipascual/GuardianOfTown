@@ -17,8 +17,8 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        var enemyType = Random.RandomRange(0, enemyPrefab.Length);
-        var enemyX = Random.RandomRange(-23, 23);
+        var enemyType = Random.Range(0, enemyPrefab.Length);
+        var enemyX = Random.Range(-23, 23);
         var enemyY = 1;
         var enemyZ = 20f;
         Vector3 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
