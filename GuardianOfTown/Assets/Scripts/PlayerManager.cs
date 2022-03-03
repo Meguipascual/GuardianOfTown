@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class PlayerManager : Character
 {
-    protected override int Level { get; set; }
+    public override int Level { get; set; }
     public override int HP { get; set; }
     public override int Attack { get; set; }
     public override int Defense { get; set; }
     protected override float Speed { get; set; }
     public bool IsDead { get; set; }
     public int TownHP { get; set; }
+    public int Exp { get; set; }
     private GameManager gameManager;
+    private int hpMax;
 
     // Start is called before the first frame update
     void Start()
     {
         Level = 1;
         HP = 100;
+        hpMax = HP;
         Attack = 10;
         Defense = 10;
         Speed = 10f;
@@ -73,8 +76,32 @@ public class PlayerManager : Character
             gameManager.playerHPText.text = "HP: " + HP;
         }
     }  
+
     public void TownReceiveDamage(int damage)
     {
-        TownHP -= damage;
+        if(damage > 0)
+        {
+            TownHP -= damage;
+        }
+    }
+
+    public override void LevelUp() 
+    {
+        HP = hpMax;
+        for (int i = 0; i < 2; i++)
+        {
+            HP += 10;
+            var randomUpgrade = Random.Range(0, 2);
+            switch (randomUpgrade)
+            {
+                case 0: Attack += 5; break;
+                case 1: Defense += 4; break;
+            }
+        }
+        hpMax = HP;
+        Level++;
+        gameManager.playerLevelText.text = "Lvl: " + Level;
+        Exp = 0;
+        Debug.Log(Level + ": Level\n" + Attack + ": Attack " + Defense + " :Defense");
     }
 }

@@ -7,7 +7,8 @@ public abstract class Enemy : Character
 { 
     protected abstract PlayerManager player { get; set; }
     protected abstract GameManager gameManager { get; set; }
-    protected override abstract int Level { get; set; }
+    protected abstract int Exp { get; set; }
+    public override abstract int Level { get; set; }
     public override abstract int HP { get; set; }
     public override abstract int Attack { get; set; }
     public override abstract int Defense { get; set; }
@@ -22,6 +23,11 @@ public abstract class Enemy : Character
             if (HP <= 0)
             {
                 Death();
+                player.Exp += Exp;
+                if(player.Exp > 20)
+                {
+                    player.LevelUp();
+                }
             }
         }
         else if (other.CompareTag("Wall"))
@@ -41,6 +47,12 @@ public abstract class Enemy : Character
         }
         else if (other.CompareTag("Player"))
         {
+            player.Exp += Exp;
+            if (player.Exp > 20)
+            {
+                player.LevelUp();
+                gameManager.playerHPText.text = "HP: " + player.HP;
+            }
             Death();
         }
     }
@@ -53,5 +65,18 @@ public abstract class Enemy : Character
     public override void Move()
     {
         transform.position += Vector3.back * Time.deltaTime * Speed;
+    }
+    public override void LevelUp()
+    {
+        for (int i = 0; i < Level * 2; i++)
+        {
+            HP += 10;
+            var randomUpgrade = Random.Range(0, 2);
+            switch (randomUpgrade)
+            {
+                case 0: Attack += 5; break;
+                case 1: Defense += 4; break;
+            }
+        }
     }
 }

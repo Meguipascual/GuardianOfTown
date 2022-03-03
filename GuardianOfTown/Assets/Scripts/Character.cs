@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected abstract int Level { get; set; }
+    public abstract int Level { get; set; }
     public abstract int HP { get; set; }
     public abstract int Attack { get; set; }
     public abstract int Defense { get; set; }
@@ -12,8 +12,14 @@ public abstract class Character : MonoBehaviour
 
     public void ReceiveDamage(int damage)
     {
-        HP -= damage;
+        if (damage > 0)
+        {
+            HP -= damage;
+        }
+        
     }
+
+    public virtual void LevelUp() { }
 
     public abstract void Death();
 

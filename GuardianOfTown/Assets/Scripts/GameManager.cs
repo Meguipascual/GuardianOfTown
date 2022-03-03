@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
+    public TextMeshProUGUI playerLevelText;
 
     // Start is called before the first frame update
     void Start()
