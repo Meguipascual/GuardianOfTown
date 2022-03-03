@@ -47,12 +47,23 @@ public class PlayerManager : Character
 
     private void OnTriggerEnter(Collider other)
     {
-        var enemy = other.GetComponent<Enemy>();
 
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Orc"))
         {
+            var enemy = other.GetComponent<OrcManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
         }
+        else if (other.CompareTag("Troll"))
+        {
+            var enemy = other.GetComponent<TrollManager>();
+            ReceiveDamage(enemy.Attack - (Defense / 2));
+        }
+        else if (other.CompareTag("Goblin"))
+        {
+            var enemy = other.GetComponent<GoblinManager>();
+            ReceiveDamage(enemy.Attack - (Defense / 2));
+        }
+        
         if (HP <= 0)
         {
             gameManager.playerHPText.text = "HP: 0";

@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Wall
   - Bullet
-  - Enemy
+  - Orc
+  - Goblin
+  - Troll
   layers:
   - Default
   - TransparentFX

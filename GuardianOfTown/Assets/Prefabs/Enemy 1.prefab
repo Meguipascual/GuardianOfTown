@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7581730917106667815}
   - component: {fileID: 7581730917106667812}
   - component: {fileID: 7581730917106667808}
-  - component: {fileID: -8010352732629646095}
+  - component: {fileID: -7817426819273090174}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Enemy
+  m_TagString: Orc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 118
   m_CollisionDetection: 0
---- !u!114 &-8010352732629646095
+--- !u!114 &-7817426819273090174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +123,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7581730917106667813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8154cad14c80b49ad03ca2cb25c8bc, type: 3}
+  m_Script: {fileID: 11500000, guid: cb2bfc5f37c2998419e2ce020196412f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7581730917106667815}
   - component: {fileID: 7581730917106667812}
   - component: {fileID: 7581730917106667808}
-  - component: {fileID: -1188621024643801930}
+  - component: {fileID: 7011047767993667393}
   m_Layer: 0
   m_Name: Enemy 3
-  m_TagString: Enemy
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 118
   m_CollisionDetection: 0
---- !u!114 &-1188621024643801930
+--- !u!114 &7011047767993667393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +123,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7581730917106667813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8154cad14c80b49ad03ca2cb25c8bc, type: 3}
+  m_Script: {fileID: 11500000, guid: da10c1d7c518eba419e61ef38317cc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

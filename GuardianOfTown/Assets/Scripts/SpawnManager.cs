@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] enemyPrefab;
     private float spawnSpeed = 3.0f;
-    private int actualWave = 6;
+    private int actualWave = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +25,8 @@ public class SpawnManager : MonoBehaviour
         else
         {
             var enemyType = Random.Range(0, enemyPrefab.Length);
-            var enemyX = Random.Range(-23, 23);
-            var enemyY = 1;
+            float enemyX = Random.Range(-23f, 23f);
+            var enemyY = 1f;
             var enemyZ = 20f;
             Vector3 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
 

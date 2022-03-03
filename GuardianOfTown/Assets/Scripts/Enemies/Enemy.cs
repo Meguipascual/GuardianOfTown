@@ -3,38 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Enemy : Character
-{
-    private string enemyType;
-    private PlayerManager player;
-    private GameManager gameManager;
+public abstract class Enemy : Character
+{ 
+    protected abstract PlayerManager player { get; set; }
+    protected abstract GameManager gameManager { get; set; }
+    protected override abstract int Level { get; set; }
+    public override abstract int HP { get; set; }
+    public override abstract int Attack { get; set; }
+    public override abstract int Defense { get; set; }
+    protected override abstract float Speed { get; set; }
 
-    protected override int Level { get; set; }
-    public override int HP { get; set; }
-    public override int Attack { get; set; }
-    public override int Defense { get; set; }
-    protected override float Speed { get; set; }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        enemyType = "Orc";
-        Level = 1;
-        HP = 100;
-        Attack = 15;
-        Defense = 10;
-        Speed = 10f;
-        player = FindObjectOfType<PlayerManager>();
-        gameManager = FindObjectOfType<GameManager>();
-    }
-    private void Update()
-    {
-        if (!player.IsDead)Move();
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
+    protected void Trigger (Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
@@ -73,6 +52,6 @@ public class Enemy : Character
 
     public override void Move()
     {
-        transform.position = transform.position + Vector3.back * Time.deltaTime * Speed;
+        transform.position += Vector3.back * Time.deltaTime * Speed;
     }
 }
