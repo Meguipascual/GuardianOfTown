@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : Character
 {
     private string enemyType;
-    public PlayerManager player;
+    private PlayerManager player;
+    private GameManager gameManager;
 
     protected override int Level { get; set; }
     public override int HP { get; set; }
@@ -24,10 +26,12 @@ public class Enemy : Character
         Defense = 10;
         Speed = 10f;
         player = FindObjectOfType<PlayerManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
     private void Update()
     {
-        Move();
+        if (!player.IsDead)Move();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,11 +48,16 @@ public class Enemy : Character
         else if (other.CompareTag("Wall"))
         {
             Death();
-            player.ReceiveDamage(Attack);
-            Debug.Log(player.HP);
-            if (player.HP <= 0)
+            player.TownReceiveDamage(Attack);
+            
+            if (player.TownHP <= 0)
             {
+                gameManager.townHPText.text = "Town Resistance: 0";
                 player.Death();
+            }
+            else
+            {
+                gameManager.townHPText.text = "Town Resistance: " + player.TownHP;
             }
         }
         else if (other.CompareTag("Player"))
