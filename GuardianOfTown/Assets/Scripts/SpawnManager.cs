@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] enemyPrefab;
     private float spawnSpeed = 3.0f;
-    private int actualWave = 1;
+    private int actualWave = 10;
 
     // Start is called before the first frame update
     void Start()
