@@ -14,6 +14,8 @@ public class PlayerManager : Character
     public int Exp { get; set; }
     private GameManager gameManager;
     private int hpMax;
+    private float xRange = 23f;
+    private float horizontalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,33 @@ public class PlayerManager : Character
     // Update is called once per frame
     void Update()
     {
-        
+        if (!IsDead)
+        {
+            // Check for left and right bounds
+            if (transform.position.x < -xRange)
+            {
+                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            }
+
+            if (transform.position.x > xRange)
+            {
+                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            }
+
+            // Player movement left to right
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * Time.deltaTime * Speed * horizontalInput);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // Get an object object from the pool
+                GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+                if (pooledProjectile != null)
+                {
+                    pooledProjectile.SetActive(true); // activate it
+                    pooledProjectile.transform.position = transform.position; // position it at player
+                }
+            }
+        }
     }
 
     public override void Death()

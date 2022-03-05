@@ -18,8 +18,11 @@ public abstract class Enemy : Character
     {
         if (other.CompareTag("Bullet"))
         {
+            
+            other.gameObject.SetActive(false);
             var damage = player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
+            Debug.Log("ouch, it hurts" + HP);
             if (HP <= 0)
             {
                 Death();
