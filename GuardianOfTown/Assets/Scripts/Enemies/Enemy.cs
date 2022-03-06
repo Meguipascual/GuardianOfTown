@@ -4,67 +4,56 @@ using UnityEngine;
 using TMPro;
 
 public abstract class Enemy : Character
-{ 
-    protected abstract PlayerManager player { get; set; }
-    protected abstract GameManager gameManager { get; set; }
-    protected abstract int Exp { get; set; }
-    public override abstract int Level { get; set; }
-    public override abstract int HP { get; set; }
-    public override abstract int Attack { get; set; }
-    public override abstract int Defense { get; set; }
-    protected override abstract float Speed { get; set; }
+{
+    
+    private GameManager gameManager;
+    protected int Exp { get; set; }
+    protected PlayerManager Player { get; set; }
 
+    protected virtual void Start()
+    {
+        Player = FindObjectOfType<PlayerManager>();
+        gameManager = FindObjectOfType<GameManager>();
+    }
     protected void Trigger (Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
-            
             other.gameObject.SetActive(false);
-            var damage = player.Attack - (Defense / 2); 
+            var damage = Player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
             Debug.Log("ouch, it hurts" + HP);
             if (HP <= 0)
             {
-                Death();
-                player.Exp += Exp;
-                if(player.Exp > 20)
+                Die();
+                Player.Exp += Exp;
+                if(Player.Exp > 20)
                 {
-                    player.LevelUp();
+                    Player.LevelUp();
                 }
             }
         }
         else if (other.CompareTag("Wall"))
         {
-            Death();
-            player.TownReceiveDamage(Attack);
-            
-            if (player.TownHP <= 0)
-            {
-                gameManager.townHPText.text = "Town Resistance: 0";
-                player.Death();
-            }
-            else
-            {
-                gameManager.townHPText.text = "Town Resistance: " + player.TownHP;
-            }
+            Die();
+            Player.TownReceiveDamage(Attack); 
         }
         else if (other.CompareTag("Player"))
         {
-            player.Exp += Exp;
-            if (player.Exp > 20)
+            Player.Exp += Exp;
+            if (Player.Exp > 20)
             {
-                player.LevelUp();
-                gameManager.playerHPText.text = "HP: " + player.HP;
+                Player.LevelUp();
+                gameManager.playerHPText.text = "HP: " + Player.HP;
             }
-            Death();
+            Die();
         }
     }
 
-    public override void Death()
+    public override void Die()
     {
         Destroy(gameObject);
     }
-
     public override void Move()
     {
         transform.position += Vector3.back * Time.deltaTime * Speed;

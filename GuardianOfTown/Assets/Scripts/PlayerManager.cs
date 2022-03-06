@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class PlayerManager : Character
 {
-    public override int Level { get; set; }
-    public override int HP { get; set; }
-    public override int Attack { get; set; }
-    public override int Defense { get; set; }
-    protected override float Speed { get; set; }
-    public bool IsDead { get; set; }
-    public int TownHP { get; set; }
-    public int Exp { get; set; }
     private GameManager gameManager;
     private int hpMax;
     private float xRange = 23f;
     private float horizontalInput;
-
+    
+    public bool IsDead { get; set; }
+    public int TownHP { get; set; }
+    public int Exp { get; set; }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +58,7 @@ public class PlayerManager : Character
         }
     }
 
-    public override void Death()
+    public override void Die()
     {
         
         Debug.Log("GameOver");
@@ -98,7 +94,7 @@ public class PlayerManager : Character
         if (HP <= 0)
         {
             gameManager.playerHPText.text = "HP: 0";
-            Death();
+            Die();
         }else
         {
             gameManager.playerHPText.text = "HP: " + HP;
@@ -107,9 +103,19 @@ public class PlayerManager : Character
 
     public void TownReceiveDamage(int damage)
     {
+
         if(damage > 0)
         {
             TownHP -= damage;
+        }
+        if (TownHP <= 0)
+        {
+            gameManager.townHPText.text = "Town Resistance: 0";
+            Die();
+        }
+        else
+        {
+            gameManager.townHPText.text = "Town Resistance: " + TownHP;
         }
     }
 

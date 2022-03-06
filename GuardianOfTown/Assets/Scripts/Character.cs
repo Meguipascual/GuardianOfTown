@@ -4,11 +4,11 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public abstract int Level { get; set; }
-    public abstract int HP { get; set; }
-    public abstract int Attack { get; set; }
-    public abstract int Defense { get; set; }
-    protected abstract float Speed { get; set; }
+    public int Level { get; set; }
+    public int HP { get; set; }
+    public int Attack { get; set; }
+    public int Defense { get; set; }
+    protected float Speed { get; set; }
 
     public void ReceiveDamage(int damage)
     {
@@ -21,7 +21,7 @@ public abstract class Character : MonoBehaviour
 
     public virtual void LevelUp() { }
 
-    public abstract void Death();
+    public abstract void Die();
 
     public abstract void Move();
 }
