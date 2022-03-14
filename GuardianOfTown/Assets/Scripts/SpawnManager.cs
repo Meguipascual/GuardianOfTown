@@ -11,7 +11,6 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         InvokeRepeating("SpawnEnemies", 3.0f, spawnSpeed / actualWave);
     }
 

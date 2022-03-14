@@ -8,7 +8,9 @@ public class PlayerManager : Character
     private int hpMax;
     private float xRange = 23f;
     private float horizontalInput;
-    
+    [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
+
+
     public bool IsDead { get; set; }
     public int TownHP { get; set; }
     public int Exp { get; set; }
@@ -31,20 +33,7 @@ public class PlayerManager : Character
     {
         if (!IsDead)
         {
-            // Check for left and right bounds
-            if (transform.position.x < -xRange)
-            {
-                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.x > xRange)
-            {
-                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-            }
-
-            // Player movement left to right
-            horizontalInput = Input.GetAxis("Horizontal");
-            transform.Translate(Vector3.right * Time.deltaTime * Speed * horizontalInput);
+            Move();
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // Get an object object from the pool
@@ -52,7 +41,7 @@ public class PlayerManager : Character
                 if (pooledProjectile != null)
                 {
                     pooledProjectile.SetActive(true); // activate it
-                    pooledProjectile.transform.position = transform.position; // position it at player
+                    pooledProjectile.transform.position = transform.position + offset; // position it at player
                 }
             }
         }
@@ -68,8 +57,21 @@ public class PlayerManager : Character
 
     public override void Move()
     {
-        throw new System.NotImplementedException();
-        //axis mover derecha izquierda
+        // Check for left and right bounds
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+
+        // Player movement left to right
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * Time.deltaTime * Speed * horizontalInput);
+        
     }
 
     private void OnTriggerEnter(Collider other)
