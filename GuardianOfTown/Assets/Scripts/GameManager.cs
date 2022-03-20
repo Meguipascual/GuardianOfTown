@@ -6,16 +6,19 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private PlayerManager playerScript;
+    private SpawnManager spawnManager;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         playerScript = FindObjectOfType<PlayerManager>();
+        spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -27,9 +30,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ChangeStage()
-    {
-        //wave in dont destroy = SpawnManager.actualWave++;
-
-    }
+    
 }

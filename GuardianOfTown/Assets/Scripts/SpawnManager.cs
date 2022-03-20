@@ -5,13 +5,18 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] enemyPrefab;
+    private DataPersistantManager dataPersistantManager;
     private float spawnSpeed = 1.0f;
-    private int actualWave = 1;
+    public int actualWave = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        //actualWave = the wave number saved in non destruct object
+        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
+        if (dataPersistantManager.wave > 1)
+        {
+            actualWave = dataPersistantManager.wave;
+        }
         SpawnEnemies();
     }
 
@@ -51,7 +56,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(10);
-        SpawnAmountOfBosses(3); 
+        SpawnAmountOfBosses(amountOfBosses); 
         StopCoroutine(SpawnAmountOfEnemies(amountOfEnemies, amountOfBosses));
     }
 
@@ -66,9 +71,14 @@ public class SpawnManager : MonoBehaviour
             switch (actualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(100, 3));
+                    StartCoroutine( SpawnAmountOfEnemies(20, 1));
                     break;
-                case 2: break;
+                case 2:
+                    StartCoroutine(SpawnAmountOfEnemies(50, 1)); 
+                    break;
+                default:
+                    FindObjectOfType<PlayerManager>().IsDead = true;
+                    break;
             }
         }
     }
