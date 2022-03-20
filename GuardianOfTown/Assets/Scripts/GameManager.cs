@@ -26,4 +26,10 @@ public class GameManager : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
         }
     }
+
+    void ChangeStage()
+    {
+        //wave in dont destroy = SpawnManager.actualWave++;
+
+    }
 }

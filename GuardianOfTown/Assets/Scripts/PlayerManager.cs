@@ -26,6 +26,7 @@ public class PlayerManager : Character
         Speed = 10f;
         TownHP = 100;
         gameManager = FindObjectOfType<GameManager>();
+        DontDestroyOnLoad(gameObject);//Check if it works this way
     }
 
     // Update is called once per frame

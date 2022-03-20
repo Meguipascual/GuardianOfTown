@@ -52,6 +52,10 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
+        if (this.CompareTag("Boss"))
+        {
+
+        }
         Destroy(gameObject);
     }
     public override void Move()

@@ -9,6 +9,7 @@ TagManager:
   - Orc
   - Goblin
   - Troll
+  - Boss
   layers:
   - Default
   - TransparentFX

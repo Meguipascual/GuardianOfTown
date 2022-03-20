@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BossManager : Enemy
+{
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+        Level = 0;
+        Attack = 40;
+        HP = 250;
+        Defense = 20;
+        Speed = .5f;
+        Exp = 50;
+        LevelUp();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!Player.IsDead)
+        {
+            Move();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Trigger(other);
+    }
+}
