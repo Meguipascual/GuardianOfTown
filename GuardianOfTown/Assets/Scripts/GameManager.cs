@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private GameObject dataPersistantManagerGameObject;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
+    public TextMeshProUGUI wavePopUpText;
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         playerHPText.text = "HP: " + dataPersistantManager.playerHP;
         townHPText.text = "Town Resistance: " + dataPersistantManager.townHP;
         waveText.text = "Wave: " + dataPersistantManager.wave;
+        StartCoroutine(ShowWaveText());
     }
 
     // Update is called once per frame
@@ -48,6 +50,15 @@ public class GameManager : MonoBehaviour
         {
             ToggleMenu();
         }
+    }
+
+    IEnumerator ShowWaveText()
+    {
+        wavePopUpText.text = "Wave " + dataPersistantManager.wave;
+        wavePopUpText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        wavePopUpText.gameObject.SetActive(false);
+        spawnManager.ControlWavesSpawn();
     }
 
     private void ToggleMenu()

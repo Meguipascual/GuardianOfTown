@@ -18,6 +18,7 @@ public class DataPersistantManager : MonoBehaviour
     public int playerDefense;
     public float playerSpeed;
     public int townHP;
+    public Vector3 playerPosition;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class DataPersistantManager : MonoBehaviour
         playerDefense = 10;
         playerSpeed = 12f;
         townHP = 100;
+        playerPosition = new Vector3(0, 1, -10);
     }
     public void ChangeStage()
     {
@@ -56,6 +58,7 @@ public class DataPersistantManager : MonoBehaviour
         playerDefense = playerController.Defense;
         playerSpeed = playerController.Speed;
         townHP = playerController.TownHP;
+        playerPosition = playerController.transform.position;
     }
 
     public void LoadPlayerStats()
@@ -68,6 +71,7 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Defense = playerDefense;
         playerController.Speed = playerSpeed;
         playerController.TownHP = townHP;
+        playerController.transform.position = playerPosition;
     }
 
     public void SaveNextWave()

@@ -22,7 +22,8 @@ public class SpawnManager : MonoBehaviour
             actualWave = 1;
             Debug.Log("data persistant error ");
         }
-        SpawnEnemies();
+        
+        
     }
 
     void SpawnAmountOfBosses(int amountOfBosses)
@@ -65,7 +66,7 @@ public class SpawnManager : MonoBehaviour
         StopCoroutine(SpawnAmountOfEnemies(amountOfEnemies, amountOfBosses));
     }
 
-    void SpawnEnemies()
+    public void ControlWavesSpawn()
     {
         if (FindObjectOfType<PlayerController>().IsDead)
         {
@@ -87,4 +88,6 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+
+    
 }
