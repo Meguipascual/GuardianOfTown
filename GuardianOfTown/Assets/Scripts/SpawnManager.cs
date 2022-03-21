@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject [] enemyPrefab;
     private DataPersistantManager dataPersistantManager;
     private float spawnSpeed = 1.0f;
-    public int actualWave;
+    public int ActualWave { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -15,15 +15,13 @@ public class SpawnManager : MonoBehaviour
         dataPersistantManager = FindObjectOfType<DataPersistantManager>();
         if (dataPersistantManager != null)
         {
-            actualWave = dataPersistantManager.wave;
+            ActualWave = dataPersistantManager.Wave;
         }
         else
         {
-            actualWave = 1;
+            ActualWave = 1;
             Debug.Log("data persistant error ");
-        }
-        
-        
+        } 
     }
 
     void SpawnAmountOfBosses(int amountOfBosses)
@@ -57,13 +55,12 @@ public class SpawnManager : MonoBehaviour
                 enemyType = Random.Range(0, enemyPrefab.Length - 1);
                 enemyX = Random.Range(-23f, 23f);
                 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
-                yield return new WaitForSeconds(spawnSpeed / actualWave);
+                yield return new WaitForSeconds(spawnSpeed / ActualWave);
                 Instantiate(enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
             }
         }
         yield return new WaitForSeconds(10);
-        SpawnAmountOfBosses(amountOfBosses); 
-        StopCoroutine(SpawnAmountOfEnemies(amountOfEnemies, amountOfBosses));
+        SpawnAmountOfBosses(amountOfBosses);
     }
 
     public void ControlWavesSpawn()
@@ -74,7 +71,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            switch (actualWave)
+            switch (ActualWave)
             {
                 case 1:
                     StartCoroutine( SpawnAmountOfEnemies(6, 1));
@@ -84,10 +81,9 @@ public class SpawnManager : MonoBehaviour
                     break;
                 default:
                     FindObjectOfType<PlayerController>().IsDead = true;
+                    //Really here you might win the game, I suppose
                     break;
             }
         }
-    }
-
-    
+    } 
 }

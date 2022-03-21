@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
+    public TextMeshProUGUI BulletText;
     public GameObject menuCanvas;
     private bool pauseToggle;
 
@@ -26,15 +27,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManager = FindObjectOfType<DataPersistantManager>();
         dataPersistantManagerGameObject = dataPersistantManager.GetComponent<GameObject>();
-        playerLevelText.text = "Lvl: " + dataPersistantManager.playerLevel;
-        playerHPText.text = "HP: " + dataPersistantManager.playerHP;
-        townHPText.text = "Town Resistance: " + dataPersistantManager.townHP;
-        waveText.text = "Wave: " + dataPersistantManager.wave;
+        playerLevelText.text = "Lvl: " + dataPersistantManager.SavedPlayerLevel;
+        playerHPText.text = "HP: " + dataPersistantManager.SavedPlayerHP;
+        townHPText.text = "Town Resistance: " + dataPersistantManager.SavedTownHP;
+        waveText.text = "Wave: " + dataPersistantManager.Wave;
         StartCoroutine(ShowWaveText());
     }
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWaveText()
     {
-        wavePopUpText.text = "Wave " + dataPersistantManager.wave;
+        wavePopUpText.text = "Wave " + dataPersistantManager.Wave;
         wavePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         wavePopUpText.gameObject.SetActive(false);

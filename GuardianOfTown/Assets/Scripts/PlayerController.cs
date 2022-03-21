@@ -21,7 +21,7 @@ public class PlayerController : Character
         dataPersistantManager = FindObjectOfType<DataPersistantManager>();
         if(dataPersistantManager != null)
         {
-            Debug.Log("It seems that we have data HP: "+ dataPersistantManager.playerHP);
+            Debug.Log("It seems that we have data HP: "+ dataPersistantManager.SavedPlayerHP);
         }
         else
         {
@@ -46,6 +46,7 @@ public class PlayerController : Character
                 {
                     pooledProjectile.SetActive(true); // activate it
                     pooledProjectile.transform.position = transform.position + offset; // position it at player
+                    gameManager.BulletText.text = "Bullets: " + (ObjectPooler.SharedInstance.amountToPool - ObjectPooler.SharedInstance.pooledObjects.Count);
                 }
             }
         }

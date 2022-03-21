@@ -10,15 +10,15 @@ public class DataPersistantManager : MonoBehaviour
     private SpawnManager spawnManager;
     private PlayerController playerController;
     
-    public int wave;
-    public int playerLevel;
-    public int playerHP;
-    public int playerHpMax;
-    public int playerAttack;
-    public int playerDefense;
-    public float playerSpeed;
-    public int townHP;
-    public Vector3 playerPosition;
+    public int Wave { get; set; }
+    public int SavedPlayerLevel { get; set; }
+    public int SavedPlayerHP { get; set; }
+    public int SavedPlayerHpMax { get; set; }
+    public int SavedPlayerAttack { get; set; }
+    public int SavedPlayerDefense { get; set; }
+    public float SavedPlayerSpeed { get; set; }
+    public int SavedTownHP { get; set; }
+    public Vector3 SavedPlayerPosition { get; set; }
 
     private void Awake()
     {
@@ -32,15 +32,15 @@ public class DataPersistantManager : MonoBehaviour
     }
     private void Start()
     {
-        wave = 1;
-        playerLevel = 1;
-        playerHP = 100;
-        playerHpMax = playerHP;
-        playerAttack = 10;
-        playerDefense = 10;
-        playerSpeed = 12f;
-        townHP = 100;
-        playerPosition = new Vector3(0, 1, -10);
+        Wave = 1;
+        SavedPlayerLevel = 1;
+        SavedPlayerHP = 100;
+        SavedPlayerHpMax = SavedPlayerHP;
+        SavedPlayerAttack = 10;
+        SavedPlayerDefense = 10;
+        SavedPlayerSpeed = 12f;
+        SavedTownHP = 100;
+        SavedPlayerPosition = new Vector3(0, 1, -10);
     }
     public void ChangeStage()
     {
@@ -51,31 +51,31 @@ public class DataPersistantManager : MonoBehaviour
     public void SavePlayerStats()
     {
         playerController = FindObjectOfType<PlayerController>();
-        playerLevel = playerController.Level;
-        playerHP = playerController.HP;
-        playerHpMax = playerController.HpMax;
-        playerAttack = playerController.Attack;
-        playerDefense = playerController.Defense;
-        playerSpeed = playerController.Speed;
-        townHP = playerController.TownHP;
-        playerPosition = playerController.transform.position;
+        SavedPlayerLevel = playerController.Level;
+        SavedPlayerHP = playerController.HP;
+        SavedPlayerHpMax = playerController.HpMax;
+        SavedPlayerAttack = playerController.Attack;
+        SavedPlayerDefense = playerController.Defense;
+        SavedPlayerSpeed = playerController.Speed;
+        SavedTownHP = playerController.TownHP;
+        SavedPlayerPosition = playerController.transform.position;
     }
 
     public void LoadPlayerStats()
     {
         playerController = FindObjectOfType<PlayerController>();
-        playerController.Level = playerLevel;
-        playerController.HP = playerHP;
-        playerController.HpMax = playerHpMax;
-        playerController.Attack = playerAttack;
-        playerController.Defense = playerDefense;
-        playerController.Speed = playerSpeed;
-        playerController.TownHP = townHP;
-        playerController.transform.position = playerPosition;
+        playerController.Level = SavedPlayerLevel;
+        playerController.HP = SavedPlayerHP;
+        playerController.HpMax = SavedPlayerHpMax;
+        playerController.Attack = SavedPlayerAttack;
+        playerController.Defense = SavedPlayerDefense;
+        playerController.Speed = SavedPlayerSpeed;
+        playerController.TownHP = SavedTownHP;
+        playerController.transform.position = SavedPlayerPosition;
     }
 
     public void SaveNextWave()
     {
-        wave++;
+        Wave++;
     }
 }

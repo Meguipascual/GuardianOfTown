@@ -6,7 +6,7 @@ public class BossManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = DataPersistentManager.wave;
+        Level = DataPersistentManager.Wave;
         Attack = 100;
         HP = 500;
         Defense = 20;
