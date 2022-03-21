@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : Character
+public class PlayerController : Character
 {
     private GameManager gameManager;
-    private int hpMax;
+    private DataPersistantManager dataPersistantManager;
     private float xRange = 23f;
     private float horizontalInput;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
 
-
     public bool IsDead { get; set; }
     public int TownHP { get; set; }
     public int Exp { get; set; }
+    public int HpMax { get; set; }
     
     // Start is called before the first frame update
     void Start()
     {
-        Level = 1;
-        HP = 100;
-        hpMax = HP;
-        Attack = 10;
-        Defense = 10;
-        Speed = 10f;
-        TownHP = 100;
+        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
+        if(dataPersistantManager != null)
+        {
+            Debug.Log("It seems that we have data HP: "+ dataPersistantManager.playerHP);
+        }
+        else
+        {
+            Debug.Log("there is no data");
+        }
         gameManager = FindObjectOfType<GameManager>();
-        DontDestroyOnLoad(gameObject);//Check if it works this way
+
+        dataPersistantManager.LoadPlayerStats();
     }
 
     // Update is called once per frame
@@ -92,6 +95,10 @@ public class PlayerManager : Character
         {
             var enemy = other.GetComponent<GoblinManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
+        }else if (other.CompareTag("Boss"))
+        {
+            var enemy = other.GetComponent<BossManager>();
+            ReceiveDamage(enemy.Attack - (Defense / 2));
         }
         
         if (HP <= 0)
@@ -124,7 +131,7 @@ public class PlayerManager : Character
 
     public override void LevelUp() 
     {
-        HP = hpMax;
+        HP = HpMax;
         for (int i = 0; i < 2; i++)
         {
             HP += 10;
@@ -135,7 +142,7 @@ public class PlayerManager : Character
                 case 1: Defense += 4; break;
             }
         }
-        hpMax = HP;
+        HpMax = HP;
         Level++;
         gameManager.playerLevelText.text = "Lvl: " + Level;
         Exp = 0;

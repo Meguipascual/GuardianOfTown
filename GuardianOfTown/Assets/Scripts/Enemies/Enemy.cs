@@ -9,11 +9,11 @@ public abstract class Enemy : Character
     private GameManager gameManager;
     private DataPersistantManager dataPersistantManager;
     protected int Exp { get; set; }
-    protected PlayerManager Player { get; set; }
+    protected PlayerController Player { get; set; }
 
     protected virtual void Start()
     {
-        Player = FindObjectOfType<PlayerManager>();
+        Player = FindObjectOfType<PlayerController>();
         gameManager = FindObjectOfType<GameManager>();
         dataPersistantManager = FindObjectOfType<DataPersistantManager>();
     }

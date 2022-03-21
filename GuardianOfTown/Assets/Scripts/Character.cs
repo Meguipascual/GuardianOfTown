@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     public int HP { get; set; }
     public int Attack { get; set; }
     public int Defense { get; set; }
-    protected float Speed { get; set; }
+    public float Speed { get; set; }
 
     public void ReceiveDamage(int damage)
     {

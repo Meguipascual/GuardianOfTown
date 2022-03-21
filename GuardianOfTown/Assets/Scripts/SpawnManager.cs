@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
         float enemyX;
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            if (FindObjectOfType<PlayerManager>().IsDead)
+            if (FindObjectOfType<PlayerController>().IsDead)
             {
                 StopAllCoroutines();
             }
@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (FindObjectOfType<PlayerManager>().IsDead)
+        if (FindObjectOfType<PlayerController>().IsDead)
         {
             return;
         }
@@ -71,13 +71,13 @@ public class SpawnManager : MonoBehaviour
             switch (actualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(20, 1));
+                    StartCoroutine( SpawnAmountOfEnemies(2, 1));
                     break;
                 case 2:
-                    StartCoroutine(SpawnAmountOfEnemies(50, 1)); 
+                    StartCoroutine(SpawnAmountOfEnemies(5, 1)); 
                     break;
                 default:
-                    FindObjectOfType<PlayerManager>().IsDead = true;
+                    FindObjectOfType<PlayerController>().IsDead = true;
                     break;
             }
         }

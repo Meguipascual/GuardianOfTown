@@ -306,6 +306,7 @@ MonoBehaviour:
   - {fileID: 7581730917106667813, guid: 14ea8019560abf64faa7b91537b4671f, type: 3}
   - {fileID: 7581730917106667813, guid: 6cf832c56a5425c4fbfb2d919ed5447e, type: 3}
   - {fileID: 1694062514575109753, guid: 7d593f21d08b0e54f938b7cdccb43d51, type: 3}
+  actualWave: 1
 --- !u!114 &307879603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,5 +1594,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 705861371842507161, guid: b86a71aea2f1e9940bb44a9c9526911d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b86a71aea2f1e9940bb44a9c9526911d, type: 3}

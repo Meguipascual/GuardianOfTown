@@ -5,8 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private PlayerManager playerScript;
+    private PlayerController playerController;
     private SpawnManager spawnManager;
+    private DataPersistantManager dataPersistantManager;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI playerHPText;
@@ -17,14 +18,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerScript = FindObjectOfType<PlayerManager>();
+        
+        playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
+        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
+        playerLevelText.text = "Lvl: " + dataPersistantManager.playerLevel;
+        playerHPText.text = "HP: " + dataPersistantManager.playerHP;
+        townHPText.text = "Town Resistance: " + dataPersistantManager.townHP;
+        waveText.text = "Wave: " + dataPersistantManager.wave;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerScript.IsDead)
+        if(playerController.IsDead)
         {
             gameOverText.gameObject.SetActive(true);
         }

@@ -8,7 +8,7 @@ public class DataPersistantManager : MonoBehaviour
     public static DataPersistantManager Instance;
 
     private SpawnManager spawnManager;
-    private PlayerManager playerManager;
+    private PlayerController playerController;
     
     public int wave;
     public int playerLevel;
@@ -17,29 +17,61 @@ public class DataPersistantManager : MonoBehaviour
     public int playerAttack;
     public int playerDefense;
     public float playerSpeed;
-    public int TownHP;
+    public int townHP;
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); 
     }
     private void Start()
     {
-        spawnManager = FindObjectOfType<SpawnManager>();
-        playerManager = FindObjectOfType<PlayerManager>();
         playerLevel = 1;
         playerHP = 100;
         playerHpMax = playerHP;
         playerAttack = 10;
         playerDefense = 10;
         playerSpeed = 10f;
-        TownHP = 100;
+        townHP = 100;
     }
     public void ChangeStage()
     {
-        wave = spawnManager.actualWave++;
+        SaveNextWave();
+        SavePlayerStats();
         SceneManager.LoadScene(1);
-        //player stats= player stats in this script
+    }
+    public void SavePlayerStats()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+        playerLevel = playerController.Level;
+        playerHP = playerController.HP;
+        playerHpMax = playerController.HpMax;
+        playerAttack = playerController.Attack;
+        playerDefense = playerController.Defense;
+        playerSpeed = playerController.Speed;
+        townHP = playerController.TownHP;
+    }
+
+    public void LoadPlayerStats()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+        playerController.Level = playerLevel;
+        playerController.HP = playerHP;
+        playerController.HpMax = playerHpMax;
+        playerController.Attack = playerAttack;
+        playerController.Defense = playerDefense;
+        playerController.Speed = playerSpeed;
+        playerController.TownHP = townHP;
+    }
+
+    public void SaveNextWave()
+    {
+        spawnManager = FindObjectOfType<SpawnManager>();
+        wave = spawnManager.actualWave++;    
     }
 }

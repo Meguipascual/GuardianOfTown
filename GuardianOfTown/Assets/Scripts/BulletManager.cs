@@ -6,11 +6,11 @@ public class BulletManager : MonoBehaviour
 {
     private float topBound = 30;
     private float proyectileSpeed = 5.0f;
-    private PlayerManager playerManager;
+    private PlayerController playerManager;
     // Start is called before the first frame update
     void Start()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        playerManager = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
