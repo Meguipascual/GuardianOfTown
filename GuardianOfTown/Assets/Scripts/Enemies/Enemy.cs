@@ -7,7 +7,7 @@ public abstract class Enemy : Character
 {
     
     private GameManager gameManager;
-    protected DataPersistantManager DataPersistantManager { get; set; }
+    protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
 
@@ -15,7 +15,7 @@ public abstract class Enemy : Character
     {
         Player = FindObjectOfType<PlayerController>();
         gameManager = FindObjectOfType<GameManager>();
-        DataPersistantManager = FindObjectOfType<DataPersistantManager>();
+        DataPersistentManager = FindObjectOfType<DataPersistantManager>();
     }
     protected void Trigger (Collider other)
     {
@@ -56,7 +56,7 @@ public abstract class Enemy : Character
     {
         if (this.CompareTag("Boss"))
         {
-            DataPersistantManager.ChangeStage();
+            DataPersistentManager.ChangeStage();
         }
         Destroy(gameObject);
     }
