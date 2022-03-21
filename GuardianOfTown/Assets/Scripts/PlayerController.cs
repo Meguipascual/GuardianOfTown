@@ -85,31 +85,40 @@ public class PlayerController : Character
         {
             var enemy = other.GetComponent<OrcManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
+            ComprobateLifeRemaining();
         }
         else if (other.CompareTag("Troll"))
         {
             var enemy = other.GetComponent<TrollManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
+            ComprobateLifeRemaining();
         }
         else if (other.CompareTag("Goblin"))
         {
             var enemy = other.GetComponent<GoblinManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
-        }else if (other.CompareTag("Boss"))
+            ComprobateLifeRemaining();
+        }
+        else if (other.CompareTag("Boss"))
         {
             var enemy = other.GetComponent<BossManager>();
             ReceiveDamage(enemy.Attack - (Defense / 2));
-        }
-        
+            ComprobateLifeRemaining();
+        } 
+    }  
+
+    private void ComprobateLifeRemaining ()
+    {
         if (HP <= 0)
         {
             gameManager.playerHPText.text = "HP: 0";
             Die();
-        }else
+        }
+        else
         {
             gameManager.playerHPText.text = "HP: " + HP;
         }
-    }  
+    }
 
     public void TownReceiveDamage(int damage)
     {

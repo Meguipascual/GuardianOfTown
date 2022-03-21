@@ -6,7 +6,7 @@ public class TrollManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = 0;
+        Level = DataPersistantManager.wave;
         Attack = 20;
         HP = 100;
         Defense = 0;

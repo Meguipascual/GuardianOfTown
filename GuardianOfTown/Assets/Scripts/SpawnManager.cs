@@ -7,15 +7,20 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject [] enemyPrefab;
     private DataPersistantManager dataPersistantManager;
     private float spawnSpeed = 1.0f;
-    public int actualWave = 1;
+    public int actualWave;
 
     // Start is called before the first frame update
     void Start()
     {
         dataPersistantManager = FindObjectOfType<DataPersistantManager>();
-        if (dataPersistantManager.wave > 1)
+        if (dataPersistantManager != null)
         {
             actualWave = dataPersistantManager.wave;
+        }
+        else
+        {
+            actualWave = 1;
+            Debug.Log("data persistant error ");
         }
         SpawnEnemies();
     }
@@ -71,10 +76,10 @@ public class SpawnManager : MonoBehaviour
             switch (actualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(2, 1));
+                    StartCoroutine( SpawnAmountOfEnemies(6, 1));
                     break;
                 case 2:
-                    StartCoroutine(SpawnAmountOfEnemies(5, 1)); 
+                    StartCoroutine(SpawnAmountOfEnemies(12, 1)); 
                     break;
                 default:
                     FindObjectOfType<PlayerController>().IsDead = true;

@@ -6,9 +6,9 @@ public class BossManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = 0;
-        Attack = 40;
-        HP = 250;
+        Level = DataPersistantManager.wave;
+        Attack = 100;
+        HP = 500;
         Defense = 20;
         Speed = .5f;
         Exp = 50;
@@ -26,6 +26,15 @@ public class BossManager : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Trigger(other);
+        if (other.CompareTag("Wall"))
+        {
+            Player.TownReceiveDamage(Attack);
+        }
+        else
+        {
+            Trigger(other);
+        }
+        
+        
     }
 }

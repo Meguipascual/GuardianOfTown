@@ -8,7 +8,7 @@ public class OrcManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = 0;
+        Level = DataPersistantManager.wave;
         Attack = 10;
         HP = 50;
         Defense = 10;

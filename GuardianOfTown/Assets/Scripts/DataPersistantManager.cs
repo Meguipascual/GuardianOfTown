@@ -31,12 +31,13 @@ public class DataPersistantManager : MonoBehaviour
     }
     private void Start()
     {
+        wave = 1;
         playerLevel = 1;
         playerHP = 100;
         playerHpMax = playerHP;
         playerAttack = 10;
         playerDefense = 10;
-        playerSpeed = 10f;
+        playerSpeed = 12f;
         townHP = 100;
     }
     public void ChangeStage()
@@ -71,7 +72,6 @@ public class DataPersistantManager : MonoBehaviour
 
     public void SaveNextWave()
     {
-        spawnManager = FindObjectOfType<SpawnManager>();
-        wave = spawnManager.actualWave++;    
+        wave++;
     }
 }
