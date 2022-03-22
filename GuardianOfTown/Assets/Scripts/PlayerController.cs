@@ -112,8 +112,13 @@ public class PlayerController : Character
         }
         HpMax = HP;
         Level++;
-        GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
+        
         Exp = 0;
-        Debug.Log(Level + ": Level\n" + Attack + ": Attack " + Defense + " :Defense");
+        GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
+        GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
+        GameManager.SharedInstance.menuPlayerHPText.text = $"HP Max: {HpMax}";
+        GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
+        GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
+        GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
     }
 }

@@ -35,8 +35,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerLevel = 1;
         SavedPlayerHP = 100;
         SavedPlayerHpMax = SavedPlayerHP;
-        SavedPlayerAttack = 1000;
-        SavedPlayerDefense = 100;
+        SavedPlayerAttack = 10;
+        SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedTownHP = 100;
         SavedPlayerPosition = new Vector3(0, 1, -10);

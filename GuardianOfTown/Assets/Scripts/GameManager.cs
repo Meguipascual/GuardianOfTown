@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerLevelText;
     public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI projectileText;
+    public TextMeshProUGUI menuPlayerLevelText;
+    public TextMeshProUGUI menuPlayerHPText;
+    public TextMeshProUGUI menuPlayerAttackText;
+    public TextMeshProUGUI menuPlayerDefenseText;
+    public TextMeshProUGUI menuPlayerSpeedText;
     public GameObject menuCanvas;
     private bool pauseToggle;
 
@@ -36,7 +41,12 @@ public class GameManager : MonoBehaviour
         playerHPText.text = "HP: " + DataPersistantManager.Instance.SavedPlayerHP;
         townHPText.text = "Town Resistance: " + DataPersistantManager.Instance.SavedTownHP;
         waveText.text = "Wave: " + DataPersistantManager.Instance.Wave;
-        StartCoroutine(ShowWaveText());
+        menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
+        menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
+        menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
+        menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
+        menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
+    StartCoroutine(ShowWaveText());
     }
 
     // Update is called once per frame
