@@ -26,12 +26,12 @@ public abstract class Enemy : Character
             Debug.Log("ouch, it hurts" + HP);
             if (HP <= 0)
             {
-                Die();
                 Player.Exp += Exp;
                 if(Player.Exp > 20)
                 {
                     Player.LevelUp();
                 }
+                Die();
             }
         }
         else if (other.CompareTag("Wall"))
