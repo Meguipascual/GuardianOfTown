@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
-    private GameManager gameManager;
-    private DataPersistantManager dataPersistantManager;
     private float xRange = 23f;
     private float horizontalInput;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
@@ -18,18 +16,7 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
-        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
-        if(dataPersistantManager != null)
-        {
-            Debug.Log("It seems that we have data HP: "+ dataPersistantManager.SavedPlayerHP);
-        }
-        else
-        {
-            Debug.Log("there is no data");
-        }
-        gameManager = FindObjectOfType<GameManager>();
-
-        dataPersistantManager.LoadPlayerStats();
+        DataPersistantManager.Instance.LoadPlayerStats();
     }
 
     // Update is called once per frame
@@ -46,7 +33,7 @@ public class PlayerController : Character
                 {
                     pooledProjectile.SetActive(true); // activate it
                     pooledProjectile.transform.position = transform.position + offset; // position it at player
-                    gameManager.BulletText.text = "Bullets: " + (ObjectPooler.SharedInstance.amountToPool - ObjectPooler.SharedInstance.pooledObjects.Count);
+                    
                 }
             }
         }
@@ -79,45 +66,16 @@ public class PlayerController : Character
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("Orc"))
-        {
-            var enemy = other.GetComponent<OrcManager>();
-            ReceiveDamage(enemy.Attack - (Defense / 2));
-            ComprobateLifeRemaining();
-        }
-        else if (other.CompareTag("Troll"))
-        {
-            var enemy = other.GetComponent<TrollManager>();
-            ReceiveDamage(enemy.Attack - (Defense / 2));
-            ComprobateLifeRemaining();
-        }
-        else if (other.CompareTag("Goblin"))
-        {
-            var enemy = other.GetComponent<GoblinManager>();
-            ReceiveDamage(enemy.Attack - (Defense / 2));
-            ComprobateLifeRemaining();
-        }
-        else if (other.CompareTag("Boss"))
-        {
-            var enemy = other.GetComponent<BossManager>();
-            ReceiveDamage(enemy.Attack - (Defense / 2));
-            ComprobateLifeRemaining();
-        } 
-    }  
-
-    private void ComprobateLifeRemaining ()
+    public void ComprobateLifeRemaining ()
     {
         if (HP <= 0)
         {
-            gameManager.playerHPText.text = "HP: 0";
+            GameManager.SharedInstance.playerHPText.text = "HP: 0";
             Die();
         }
         else
         {
-            gameManager.playerHPText.text = "HP: " + HP;
+            GameManager.SharedInstance.playerHPText.text = "HP: " + HP;
         }
     }
 
@@ -130,12 +88,12 @@ public class PlayerController : Character
         }
         if (TownHP <= 0)
         {
-            gameManager.townHPText.text = "Town Resistance: 0";
+            GameManager.SharedInstance.townHPText.text = "Town Resistance: 0";
             Die();
         }
         else
         {
-            gameManager.townHPText.text = "Town Resistance: " + TownHP;
+            GameManager.SharedInstance.townHPText.text = "Town Resistance: " + TownHP;
         }
     }
 
@@ -154,7 +112,7 @@ public class PlayerController : Character
         }
         HpMax = HP;
         Level++;
-        gameManager.playerLevelText.text = "Lvl: " + Level;
+        GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
         Exp = 0;
         Debug.Log(Level + ": Level\n" + Attack + ": Attack " + Defense + " :Defense");
     }

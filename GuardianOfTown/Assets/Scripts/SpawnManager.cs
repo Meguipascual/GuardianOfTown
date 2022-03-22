@@ -5,17 +5,15 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] enemyPrefab;
-    private DataPersistantManager dataPersistantManager;
-    private float spawnSpeed = 1.0f;
+    private float spawnSpeed = 10f;
     public int ActualWave { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
-        if (dataPersistantManager != null)
+        if (DataPersistantManager.Instance != null)
         {
-            ActualWave = dataPersistantManager.Wave;
+            ActualWave = DataPersistantManager.Instance.Wave;
         }
         else
         {
@@ -74,10 +72,39 @@ public class SpawnManager : MonoBehaviour
             switch (ActualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(6, 1));
+                    StartCoroutine( SpawnAmountOfEnemies(1, 1));//6
                     break;
                 case 2:
-                    StartCoroutine(SpawnAmountOfEnemies(12, 1)); 
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//12 
+                    break;
+                case 3:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//20
+                    break;
+                case 4:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//40
+                    break;
+                case 5:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//65
+                    break;
+                case 6:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//80
+                    break;
+                case 7:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//120
+                    break;
+                case 8:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//200
+                    break;
+                case 9:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//220
+                    break;
+                case 10:
+                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//250
+                    break;
+                case 11:
+                    GameManager.SharedInstance.wavePopUpText.text = "Hero, you saved the town.\nHurray!";
+                    GameManager.SharedInstance.wavePopUpText.gameObject.SetActive(true);
+                    Time.timeScale = 0;
                     break;
                 default:
                     FindObjectOfType<PlayerController>().IsDead = true;

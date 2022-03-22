@@ -24,7 +24,7 @@ public class BossManager : Enemy
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wall"))
         {
@@ -36,5 +36,5 @@ public class BossManager : Enemy
         }
         
         
-    }
+    }*/
 }

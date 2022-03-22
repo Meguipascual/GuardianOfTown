@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 67.36609, y: 9.161133, z: 53.128967, w: 13.728516}
+  m_margin: {x: 67.36609, y: 9.161133, z: 7.4032784, w: 13.728516}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 777435152}
   - component: {fileID: 777435151}
   m_Layer: 5
-  m_Name: BulletText
+  m_Name: ProjectileText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1222,9 +1222,9 @@ RectTransform:
   m_Father: {fileID: 1006651580}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 717.9, y: 20.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -106.5, y: 20.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &777435151
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bullets: 20'
+  m_text: 'Projectile: 20'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1310,7 +1310,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 67.36609, y: 9.161133, z: 32.34518, w: 13.728516}
+  m_margin: {x: 67.36609, y: 9.161133, z: -13.6718025, w: 13.728516}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   playerHPText: {fileID: 398603702}
   townHPText: {fileID: 1975299260}
   playerLevelText: {fileID: 242380561}
-  BulletText: {fileID: 777435151}
+  projectileText: {fileID: 777435151}
   menuCanvas: {fileID: 1295159161}
 --- !u!4 &1432110490
 Transform:

@@ -9,9 +9,9 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager SharedInstance;
     private PlayerController playerController;
     private SpawnManager spawnManager;
-    private DataPersistantManager dataPersistantManager;
     private GameObject dataPersistantManagerGameObject;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
-    public TextMeshProUGUI BulletText;
+    public TextMeshProUGUI projectileText;
     public GameObject menuCanvas;
     private bool pauseToggle;
 
@@ -27,14 +27,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SharedInstance = this;
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
-        dataPersistantManager = FindObjectOfType<DataPersistantManager>();
-        dataPersistantManagerGameObject = dataPersistantManager.GetComponent<GameObject>();
-        playerLevelText.text = "Lvl: " + dataPersistantManager.SavedPlayerLevel;
-        playerHPText.text = "HP: " + dataPersistantManager.SavedPlayerHP;
-        townHPText.text = "Town Resistance: " + dataPersistantManager.SavedTownHP;
-        waveText.text = "Wave: " + dataPersistantManager.Wave;
+        dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
+        playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
+        playerHPText.text = "HP: " + DataPersistantManager.Instance.SavedPlayerHP;
+        townHPText.text = "Town Resistance: " + DataPersistantManager.Instance.SavedTownHP;
+        waveText.text = "Wave: " + DataPersistantManager.Instance.Wave;
         StartCoroutine(ShowWaveText());
     }
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWaveText()
     {
-        wavePopUpText.text = "Wave " + dataPersistantManager.Wave;
+        wavePopUpText.text = "Wave " + DataPersistantManager.Instance.Wave;
         wavePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         wavePopUpText.gameObject.SetActive(false);

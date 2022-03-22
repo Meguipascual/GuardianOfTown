@@ -21,6 +21,8 @@ public class BulletManager : MonoBehaviour
             if (transform.position.z > topBound)
             {
                 gameObject.SetActive(false);
+                ObjectPooler.ProjectileCount++;
+                GameManager.SharedInstance.projectileText.text = $"Projectile: {ObjectPooler.ProjectileCount}";
             }
             else
             {

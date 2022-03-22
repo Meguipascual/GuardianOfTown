@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class DataPersistantManager : MonoBehaviour
 {
     public static DataPersistantManager Instance;
-
     private SpawnManager spawnManager;
     private PlayerController playerController;
     
@@ -36,9 +35,9 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerLevel = 1;
         SavedPlayerHP = 100;
         SavedPlayerHpMax = SavedPlayerHP;
-        SavedPlayerAttack = 10;
-        SavedPlayerDefense = 10;
-        SavedPlayerSpeed = 12f;
+        SavedPlayerAttack = 1000;
+        SavedPlayerDefense = 100;
+        SavedPlayerSpeed = 15f;
         SavedTownHP = 100;
         SavedPlayerPosition = new Vector3(0, 1, -10);
     }

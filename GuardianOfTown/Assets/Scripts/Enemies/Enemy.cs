@@ -5,8 +5,6 @@ using TMPro;
 
 public abstract class Enemy : Character
 {
-    
-    private GameManager gameManager;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
@@ -14,7 +12,6 @@ public abstract class Enemy : Character
     protected virtual void Start()
     {
         Player = FindObjectOfType<PlayerController>();
-        gameManager = FindObjectOfType<GameManager>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
     }
     protected void Trigger (Collider other)
@@ -22,6 +19,8 @@ public abstract class Enemy : Character
         if (other.CompareTag("Bullet"))
         {
             other.gameObject.SetActive(false);
+            ObjectPooler.ProjectileCount++;
+            GameManager.SharedInstance.projectileText.text = $"Projectile: {ObjectPooler.ProjectileCount}"; 
             var damage = Player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
             Debug.Log("ouch, it hurts" + HP);
@@ -42,13 +41,18 @@ public abstract class Enemy : Character
         }
         else if (other.CompareTag("Player"))
         {
-            Player.Exp += Exp;
-            if (Player.Exp > 20)
+            Player.ReceiveDamage(Attack - (Player.Defense / 2));
+            Player.ComprobateLifeRemaining();
+            if (!Player.IsDead)
             {
-                Player.LevelUp();
-                gameManager.playerHPText.text = "HP: " + Player.HP;
+                Player.Exp += Exp;
+                if (Player.Exp > 20)
+                {
+                    Player.LevelUp();
+                    GameManager.SharedInstance.playerHPText.text = "HP: " + Player.HP;
+                }
+                Die();
             }
-            Die();
         }
     }
 
@@ -56,6 +60,11 @@ public abstract class Enemy : Character
     {
         if (this.CompareTag("Boss"))
         {
+            if (Player.Exp > 20)
+            {
+                Player.LevelUp();
+                GameManager.SharedInstance.playerHPText.text = "HP: " + Player.HP;
+            }
             DataPersistentManager.ChangeStage();
         }
         Destroy(gameObject);
