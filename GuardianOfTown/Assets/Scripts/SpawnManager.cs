@@ -32,6 +32,7 @@ public class SpawnManager : MonoBehaviour
             var bossX = Random.Range(-23f, 23f);
             Vector3 enemyPosition = new Vector3(bossX, bossY, bossZ);
             Instantiate(enemyPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+            GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
         }
     }
 
@@ -42,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 enemyPosition;
         int enemyType;
         float enemyX;
+        GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfEnemies + amountOfBosses}";
         for (int i = 0; i < amountOfEnemies; i++)
         {
             if (FindObjectOfType<PlayerController>().IsDead)
@@ -55,6 +57,7 @@ public class SpawnManager : MonoBehaviour
                 enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
                 yield return new WaitForSeconds(spawnSpeed / ActualWave);
                 Instantiate(enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+                GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {(amountOfEnemies - (i+1)) + amountOfBosses}";
             }
         }
         yield return new WaitForSeconds(10);
@@ -72,34 +75,34 @@ public class SpawnManager : MonoBehaviour
             switch (ActualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(1, 1));//6
+                    StartCoroutine( SpawnAmountOfEnemies(6, 1));//6
                     break;
                 case 2:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//12 
+                    StartCoroutine(SpawnAmountOfEnemies(12, 1));//12 
                     break;
                 case 3:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//20
+                    StartCoroutine(SpawnAmountOfEnemies(20, 1));//20
                     break;
                 case 4:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//40
+                    StartCoroutine(SpawnAmountOfEnemies(40, 1));//40
                     break;
                 case 5:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//65
+                    StartCoroutine(SpawnAmountOfEnemies(65, 1));//65
                     break;
                 case 6:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//80
+                    StartCoroutine(SpawnAmountOfEnemies(80, 1));//80
                     break;
                 case 7:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//120
+                    StartCoroutine(SpawnAmountOfEnemies(120, 1));//120
                     break;
                 case 8:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//200
+                    StartCoroutine(SpawnAmountOfEnemies(200, 1));//200
                     break;
                 case 9:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//220
+                    StartCoroutine(SpawnAmountOfEnemies(220, 1));//220
                     break;
                 case 10:
-                    StartCoroutine(SpawnAmountOfEnemies(1, 1));//250
+                    StartCoroutine(SpawnAmountOfEnemies(250, 1));//250
                     break;
                 case 11:
                     GameManager.SharedInstance.wavePopUpText.text = "Hero, you saved the town.\nHurray!";

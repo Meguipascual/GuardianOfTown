@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
+    public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI projectileText;
     public GameObject menuCanvas;
     private bool pauseToggle;
