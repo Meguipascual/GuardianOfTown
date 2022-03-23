@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     private float topBound = 30;
-    private float proyectileSpeed = 5.0f;
+    private float proyectileSpeed = 10.0f;
     private PlayerController playerManager;
     // Start is called before the first frame update
     void Start()
