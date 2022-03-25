@@ -39,7 +39,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedTownHP = 100;
-        SavedPlayerPosition = new Vector3(0, 1, -10);
+        SavedPlayerPosition = new Vector3(0, 1, -10f);
     }
     public void ChangeStage()
     {
