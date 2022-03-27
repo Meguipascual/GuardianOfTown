@@ -3650,11 +3650,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TownHpShields:
-  - {fileID: 400636578}
-  - {fileID: 730178349}
-  - {fileID: 1162534535}
-  - {fileID: 644476132}
-  - {fileID: 1353158353}
+  - {fileID: 400636576}
+  - {fileID: 730178347}
+  - {fileID: 1162534533}
+  - {fileID: 644476130}
+  - {fileID: 1353158351}
   gameOverText: {fileID: 2005576281}
   waveText: {fileID: 590789880}
   wavePopUpText: {fileID: 1444684723}

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private PlayerController playerController;
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
-    [SerializeField] public List<Image> TownHpShields;
+    public List<Image> TownHpShields;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI wavePopUpText;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
         menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
         menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
-    StartCoroutine(ShowWaveText());
+        StartCoroutine(ShowWaveText());
     }
 
     // Update is called once per frame

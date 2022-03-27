@@ -16,6 +16,7 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
+        DataPersistantManager.Instance.InitialiceTownHp();
         fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
     }

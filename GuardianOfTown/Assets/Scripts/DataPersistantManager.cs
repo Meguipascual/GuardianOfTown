@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class DataPersistantManager : MonoBehaviour
     }
     private void Start()
     {
+        SavedTownHpShields = new List<Image>(5);
         Wave = 1;
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
@@ -58,9 +60,15 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = playerController.Defense;
         SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
-        SavedTownHpShields = new List<Image>(GameManager.SharedInstance.TownHpShields);
+        SavedTownHpShields = GameManager.SharedInstance.TownHpShields.ToList();
     }
-
+    public void InitialiceTownHp()
+    {
+        for (int i = 0; i < GameManager.SharedInstance.TownHpShields.Count; i++)
+        {
+            SavedTownHpShields[i] = GameManager.SharedInstance.TownHpShields[i];
+        }
+    }
     public void LoadPlayerStats()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -71,7 +79,7 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Defense = SavedPlayerDefense;
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
-        GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields);
+        GameManager.SharedInstance.TownHpShields = SavedTownHpShields.ToList();
     }
 
     public void SaveNextWave()
