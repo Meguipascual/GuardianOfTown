@@ -73,12 +73,7 @@ public class PlayerController : Character
         fillHealthBar.FillSliderValue();
         if (HP <= 0)
         {
-            GameManager.SharedInstance.playerHPText.text = "HP: 0";
             Die();
-        }
-        else
-        {
-            GameManager.SharedInstance.playerHPText.text = "HP: " + HP;
         }
     }
 
@@ -120,7 +115,6 @@ public class PlayerController : Character
         Exp = 0;
         GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
         GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
-        GameManager.SharedInstance.menuPlayerHPText.text = $"HP Max: {HpMax}";
         GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
         GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
         GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";

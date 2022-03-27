@@ -49,7 +49,6 @@ public abstract class Enemy : Character
                 if (Player.Exp > 20)
                 {
                     Player.LevelUp();
-                    GameManager.SharedInstance.playerHPText.text = "HP: " + Player.HP;
                 }
                 Die();
             }
@@ -63,7 +62,6 @@ public abstract class Enemy : Character
             if (Player.Exp > 20)
             {
                 Player.LevelUp();
-                GameManager.SharedInstance.playerHPText.text = "HP: " + Player.HP;
             }
             DataPersistentManager.ChangeStage();
         }

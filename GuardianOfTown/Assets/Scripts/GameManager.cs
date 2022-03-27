@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI wavePopUpText;
-    public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
     public TextMeshProUGUI enemiesLeftText;
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        playerHPText.text = "HP: " + DataPersistantManager.Instance.SavedPlayerHP;
         townHPText.text = "Town Resistance: " + DataPersistantManager.Instance.SavedTownHP;
         waveText.text = "Wave: " + DataPersistantManager.Instance.Wave;
         menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
