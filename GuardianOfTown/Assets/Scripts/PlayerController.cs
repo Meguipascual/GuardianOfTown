@@ -6,6 +6,7 @@ public class PlayerController : Character
 {
     private float xRange = 23f;
     private float horizontalInput;
+    private FillHealthBar fillHealthBar;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
 
     public bool IsDead { get; set; }
@@ -16,6 +17,7 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
+        fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
     }
 
@@ -68,6 +70,7 @@ public class PlayerController : Character
 
     public void ComprobateLifeRemaining ()
     {
+        fillHealthBar.FillSliderValue();
         if (HP <= 0)
         {
             GameManager.SharedInstance.playerHPText.text = "HP: 0";
@@ -112,7 +115,8 @@ public class PlayerController : Character
         }
         HpMax = HP;
         Level++;
-        
+        fillHealthBar.ModifySliderMaxValue(1);
+        fillHealthBar.FillSliderValue();
         Exp = 0;
         GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
         GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";

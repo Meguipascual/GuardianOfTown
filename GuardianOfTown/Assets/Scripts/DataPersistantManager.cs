@@ -33,7 +33,7 @@ public class DataPersistantManager : MonoBehaviour
     {
         Wave = 1;
         SavedPlayerLevel = 1;
-        SavedPlayerHP = 100;
+        SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;
         SavedPlayerAttack = 10;
         SavedPlayerDefense = 10;
