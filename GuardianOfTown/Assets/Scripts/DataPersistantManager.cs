@@ -64,20 +64,11 @@ public class DataPersistantManager : MonoBehaviour
 
     public void InitializeTownHp()
     {
-        //var i = 0;
         SavedTownHpShields = new List<Image>();
-        //Image[] images = GameManager.SharedInstance.TownHpText.GetComponentsInChildren
-          //  (
-          //  GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
-          //  ) as Image[];
-
         foreach (Image image in GameManager.SharedInstance.TownHpShields)
         {
-            //images[i].gameObject.SetActive(true);
             SavedTownHpShields.Add(image);
-            //i++;
         }
-
     }
 
     public void SaveTownHp()

@@ -79,22 +79,16 @@ public class PlayerController : Character
 
     public void TownReceiveDamage()
     {
-        Image image =
-        //GetComponentsInChildren(
-        //GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].GetType()) as Image[];
-        (Image)GameManager.SharedInstance.TownHpText.GetComponentInChildren
-            (GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType());
-
-        image.gameObject.SetActive(false);
-        
-            
+        var shields = GameManager.SharedInstance.TownHpText.GetComponentsInChildren(
+            GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
+            );
+        shields[shields.Length-1].gameObject.SetActive(false);
         GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].gameObject.SetActive(false);
         GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
         if(GameManager.SharedInstance.TownHpShields.Count <= 0)
         {
             Die();
         }
-
     }
 
     public override void LevelUp() 
