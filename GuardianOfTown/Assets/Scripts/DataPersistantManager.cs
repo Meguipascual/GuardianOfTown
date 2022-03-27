@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,7 +18,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerDefense { get; set; }
     public float SavedPlayerSpeed { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
-    public List<Image> SavedTownHpShields { get; set; }
+    public List<Image> SavedTownHpShields;
 
     private void Awake()
     {
@@ -33,7 +32,7 @@ public class DataPersistantManager : MonoBehaviour
     }
     private void Start()
     {
-        SavedTownHpShields = new List<Image>(5);
+        SavedTownHpShields = new List<Image>();
         Wave = 1;
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
@@ -60,15 +59,47 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = playerController.Defense;
         SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
-        SavedTownHpShields = GameManager.SharedInstance.TownHpShields.ToList();
+        SaveTownHp();
     }
-    public void InitialiceTownHp()
+
+    public void InitializeTownHp()
     {
-        for (int i = 0; i < GameManager.SharedInstance.TownHpShields.Count; i++)
+        //var i = 0;
+        SavedTownHpShields = new List<Image>();
+        //Image[] images = GameManager.SharedInstance.TownHpText.GetComponentsInChildren
+          //  (
+          //  GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
+          //  ) as Image[];
+
+        foreach (Image image in GameManager.SharedInstance.TownHpShields)
         {
-            SavedTownHpShields[i] = GameManager.SharedInstance.TownHpShields[i];
+            //images[i].gameObject.SetActive(true);
+            SavedTownHpShields.Add(image);
+            //i++;
+        }
+
+    }
+
+    public void SaveTownHp()
+    {
+        //SavedTownHpShields = new List<Image>();
+        
+        while (SavedTownHpShields.Count > GameManager.SharedInstance.TownHpShields.Count) 
+        {
+            SavedTownHpShields.RemoveAt(SavedTownHpShields.Count - 1);
+        }
+
+    }
+
+    public void LoadTownHp()
+    {
+        GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields.Count);
+        foreach (Image image in SavedTownHpShields)
+        {
+            GameManager.SharedInstance.TownHpShields.Add(image);
         }
     }
+
     public void LoadPlayerStats()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -79,7 +110,6 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Defense = SavedPlayerDefense;
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
-        GameManager.SharedInstance.TownHpShields = SavedTownHpShields.ToList();
     }
 
     public void SaveNextWave()

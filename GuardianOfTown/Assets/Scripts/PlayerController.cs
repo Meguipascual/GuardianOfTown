@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : Character
 {
@@ -16,7 +17,6 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
-        DataPersistantManager.Instance.InitialiceTownHp();
         fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
     }
@@ -79,7 +79,22 @@ public class PlayerController : Character
 
     public void TownReceiveDamage()
     {
+        Image image =
+        //GetComponentsInChildren(
+        //GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].GetType()) as Image[];
+        (Image)GameManager.SharedInstance.TownHpText.GetComponentInChildren
+            (GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType());
+
+        image.gameObject.SetActive(false);
+        
+            
+        GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].gameObject.SetActive(false);
         GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
+        if(GameManager.SharedInstance.TownHpShields.Count <= 0)
+        {
+            Die();
+        }
+
     }
 
     public override void LevelUp() 

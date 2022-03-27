@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
     public List<Image> TownHpShields;
+    public TextMeshProUGUI TownHpText;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI wavePopUpText;
@@ -44,6 +45,19 @@ public class GameManager : MonoBehaviour
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
         menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
         menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
+        if(DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
+        {
+            DataPersistantManager.Instance.LoadTownHp();
+        }else
+        {
+            DataPersistantManager.Instance.InitializeTownHp();
+        }
+
+        for(int i = 0; i < TownHpShields.Count; i++)
+        {
+            GameObject.Instantiate(TownHpShields[i], TownHpText.transform).gameObject.SetActive(true);
+        }
+        
         StartCoroutine(ShowWaveText());
     }
 
