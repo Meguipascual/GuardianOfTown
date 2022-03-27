@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,10 +14,10 @@ public class GameManager : MonoBehaviour
     private PlayerController playerController;
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
+    [SerializeField] public List<Image> TownHpShields;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI wavePopUpText;
-    public TextMeshProUGUI townHPText;
     public TextMeshProUGUI playerLevelText;
     public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI projectileText;
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        townHPText.text = "Town Resistance: " + DataPersistantManager.Instance.SavedTownHP;
         waveText.text = "Wave: " + DataPersistantManager.Instance.Wave;
         menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
         menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DataPersistantManager : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerAttack { get; set; }
     public int SavedPlayerDefense { get; set; }
     public float SavedPlayerSpeed { get; set; }
-    public int SavedTownHP { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
+    public List<Image> SavedTownHpShields { get; set; }
 
     private void Awake()
     {
@@ -38,8 +39,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerAttack = 10;
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
-        SavedTownHP = 100;
         SavedPlayerPosition = new Vector3(0, 1, -10f);
+
     }
     public void ChangeStage()
     {
@@ -56,8 +57,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerAttack = playerController.Attack;
         SavedPlayerDefense = playerController.Defense;
         SavedPlayerSpeed = playerController.Speed;
-        SavedTownHP = playerController.TownHP;
         SavedPlayerPosition = playerController.transform.position;
+        SavedTownHpShields = new List<Image>(GameManager.SharedInstance.TownHpShields);
     }
 
     public void LoadPlayerStats()
@@ -69,8 +70,8 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Attack = SavedPlayerAttack;
         playerController.Defense = SavedPlayerDefense;
         playerController.Speed = SavedPlayerSpeed;
-        playerController.TownHP = SavedTownHP;
         playerController.transform.position = SavedPlayerPosition;
+        GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields);
     }
 
     public void SaveNextWave()

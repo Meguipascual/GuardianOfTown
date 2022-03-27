@@ -37,7 +37,7 @@ public abstract class Enemy : Character
         else if (other.CompareTag("Wall"))
         {
             Die();
-            Player.TownReceiveDamage(Attack); 
+            Player.TownReceiveDamage(); 
         }
         else if (other.CompareTag("Player"))
         {

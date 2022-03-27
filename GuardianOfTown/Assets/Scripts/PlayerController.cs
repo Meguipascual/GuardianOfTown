@@ -10,7 +10,6 @@ public class PlayerController : Character
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
 
     public bool IsDead { get; set; }
-    public int TownHP { get; set; }
     public int Exp { get; set; }
     public int HpMax { get; set; }
     
@@ -77,22 +76,9 @@ public class PlayerController : Character
         }
     }
 
-    public void TownReceiveDamage(int damage)
+    public void TownReceiveDamage()
     {
-
-        if(damage > 0)
-        {
-            TownHP -= damage;
-        }
-        if (TownHP <= 0)
-        {
-            GameManager.SharedInstance.townHPText.text = "Town Resistance: 0";
-            Die();
-        }
-        else
-        {
-            GameManager.SharedInstance.townHPText.text = "Town Resistance: " + TownHP;
-        }
+        GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
     }
 
     public override void LevelUp() 
