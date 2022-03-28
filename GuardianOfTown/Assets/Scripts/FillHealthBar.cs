@@ -24,6 +24,13 @@ public class FillHealthBar : MonoBehaviour
         {
             fillImage.enabled = false;
         }
+        if(slider.value <= slider.maxValue * 0.2f)
+        {
+            fillImage.color = Color.red;
+        }else if (slider.value <= slider.maxValue * 0.5f)
+        {
+            fillImage.color = Color.yellow;
+        }
     }
 
     public void ModifySliderMaxValue(int value) 

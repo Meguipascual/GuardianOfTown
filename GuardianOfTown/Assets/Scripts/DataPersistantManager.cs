@@ -16,6 +16,8 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerHpMax { get; set; }
     public int SavedPlayerAttack { get; set; }
     public int SavedPlayerDefense { get; set; }
+    public int SavedPlayerCriticalRate { get; set; }
+    public int SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
@@ -41,6 +43,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedPlayerPosition = new Vector3(0, 1, -10f);
+        SavedPlayerCriticalRate = 0;
+        SavedPlayerCriticalDamage = 50;
 
     }
     public void ChangeStage()
@@ -57,6 +61,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerHpMax = playerController.HpMax;
         SavedPlayerAttack = playerController.Attack;
         SavedPlayerDefense = playerController.Defense;
+        SavedPlayerCriticalRate = playerController.CriticalRate;
+        SavedPlayerCriticalDamage = playerController.CriticalDamage;
         SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
         SaveTownHp();
@@ -99,6 +105,8 @@ public class DataPersistantManager : MonoBehaviour
         playerController.HpMax = SavedPlayerHpMax;
         playerController.Attack = SavedPlayerAttack;
         playerController.Defense = SavedPlayerDefense;
+        playerController.CriticalRate = SavedPlayerCriticalRate;
+        playerController.CriticalDamage = SavedPlayerCriticalDamage;
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
     }

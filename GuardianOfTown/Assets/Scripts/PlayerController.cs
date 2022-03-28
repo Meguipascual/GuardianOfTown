@@ -13,7 +13,9 @@ public class PlayerController : Character
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int HpMax { get; set; }
-    
+    public int CriticalRate { get; set; }
+    public int CriticalDamage { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +98,7 @@ public class PlayerController : Character
         HP = HpMax;
         for (int i = 0; i < 2; i++)
         {
-            HP += 10;
+            HP += 5;
             var randomUpgrade = Random.Range(0, 2);
             switch (randomUpgrade)
             {
@@ -107,6 +109,7 @@ public class PlayerController : Character
         HpMax = HP;
         Level++;
         fillHealthBar.ModifySliderMaxValue(1);
+        fillHealthBar.fillImage.color = Color.green;
         fillHealthBar.FillSliderValue();
         Exp = 0;
         GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
