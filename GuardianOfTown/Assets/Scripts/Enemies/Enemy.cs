@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public abstract class Enemy : Character
 {
+    private FillEnemyHealthBar fillEnemyHealthBar;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
@@ -13,6 +15,10 @@ public abstract class Enemy : Character
     {
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
+        if (gameObject.CompareTag("Orc"))
+        {
+            fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
+        }
     }
     protected void Trigger (Collider other)
     {
@@ -23,6 +29,11 @@ public abstract class Enemy : Character
             GameManager.SharedInstance.projectileText.text = $"Projectile: {ObjectPooler.ProjectileCount}"; 
             var damage = Player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
+            if (gameObject.CompareTag("Orc"))
+            {
+                fillEnemyHealthBar.FillEnemySliderValue();
+            }
+            
             Debug.Log("ouch, it hurts" + HP);
             if (HP <= 0)
             {

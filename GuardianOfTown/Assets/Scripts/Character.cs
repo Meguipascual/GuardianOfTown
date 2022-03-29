@@ -6,6 +6,7 @@ public abstract class Character : MonoBehaviour
 {
     public int Level { get; set; }
     public int HP { get; set; }
+    public int HpMax { get; set; }
     public int Attack { get; set; }
     public int Defense { get; set; }
     public float Speed { get; set; }

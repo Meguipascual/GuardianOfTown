@@ -2277,7 +2277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1024139702}
   - component: {fileID: 1024139703}
-  - component: {fileID: 1024139704}
+  - component: {fileID: 1024139705}
   m_Layer: 5
   m_Name: HealthBarSlider
   m_TagString: Untagged
@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1024139704
+--- !u!114 &1024139705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

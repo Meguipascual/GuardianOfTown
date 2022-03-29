@@ -12,7 +12,6 @@ public class PlayerController : Character
 
     public bool IsDead { get; set; }
     public int Exp { get; set; }
-    public int HpMax { get; set; }
     public int CriticalRate { get; set; }
     public int CriticalDamage { get; set; }
 

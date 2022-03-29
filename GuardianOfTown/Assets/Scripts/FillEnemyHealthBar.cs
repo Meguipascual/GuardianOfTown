@@ -3,34 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FillHealthBar : MonoBehaviour
+public class FillEnemyHealthBar : MonoBehaviour
 {
-    public PlayerController playerController;
+    public Enemy enemy;
     public Image fillImage;
     public Slider slider;
 
     // Start is called before the first frame update
     void awake()
     {
-        slider.maxValue = playerController.HpMax;
-        FillSliderValue();
+        slider.maxValue = enemy.HpMax;
     }
     
-    public void FillSliderValue()
+    public void FillEnemySliderValue()
     {
-        float fillValue = (float)playerController.HP / (float)playerController.HpMax;
+        slider.gameObject.SetActive(true);
+        float fillValue = (float)enemy.HP / (float)enemy.HpMax;
         slider.value = fillValue;
+        fillImage.enabled = true;
+
         if (slider.value <= slider.minValue)
         {
             fillImage.enabled = false;
         }
 
-        if(slider.value <= slider.maxValue * 0.2f)
+        if (slider.value <= slider.maxValue * 0.2f)
         {
             fillImage.color = Color.red;
-        }else if (slider.value <= slider.maxValue * 0.5f)
+        }
+        else if (slider.value <= slider.maxValue * 0.5f)
         {
             fillImage.color = Color.yellow;
+        }else
+        {
+            fillImage.color = Color.green;
         }
     }
 
