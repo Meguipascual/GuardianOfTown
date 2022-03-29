@@ -31,6 +31,7 @@ public abstract class Enemy : Character
             ReceiveDamage(damage);
             if (gameObject.CompareTag("Orc"))
             {
+                fillEnemyHealthBar.gameObject.SetActive(true);
                 fillEnemyHealthBar.FillEnemySliderValue();
             }
             
@@ -86,7 +87,8 @@ public abstract class Enemy : Character
     {
         for (int i = 0; i < Level * 2; i++)
         {
-            HP += 10;
+            HpMax += 10;
+            HP = HpMax;
             var randomUpgrade = Random.Range(0, 2);
             switch (randomUpgrade)
             {

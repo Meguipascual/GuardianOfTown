@@ -11,6 +11,7 @@ public class OrcManager : Enemy
         Level = DataPersistentManager.Wave;
         Attack = 10;
         HP = 50;
+        HpMax = HP;
         Defense = 10;
         Speed = 1.5f;
         Exp = 10;
