@@ -13,7 +13,8 @@ public class PlayerController : Character
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int CriticalRate { get; set; }
-    public int CriticalDamage { get; set; }
+    public int Damage { get; set; }
+    public float CriticalDamage { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -116,5 +117,21 @@ public class PlayerController : Character
         GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
         GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
         GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
+    }
+
+    public bool IsCritical()
+    {
+        var isCritical = false;
+        var random = Random.Range(0, 100);
+        if (CriticalRate > random)
+        {
+            isCritical = true;
+            Damage = (int)(Attack * CriticalDamage);
+        }
+        else
+        {
+            Damage = Attack;
+        }
+        return isCritical;
     }
 }

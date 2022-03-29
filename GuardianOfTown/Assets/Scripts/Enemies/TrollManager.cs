@@ -9,7 +9,8 @@ public class TrollManager : Enemy
         Level = DataPersistentManager.Wave;
         Attack = 20;
         HP = 100;
-        Defense = 0;
+        HpMax = HP;
+        Defense = 10;
         Speed = 1f;
         Exp = 20;
         LevelUp();

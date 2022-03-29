@@ -9,6 +9,7 @@ public class BossManager : Enemy
         Level = DataPersistentManager.Wave;
         Attack = 100;
         HP = 500;
+        HpMax = HP;
         Defense = 20;
         Speed = .5f;
         Exp = 50;

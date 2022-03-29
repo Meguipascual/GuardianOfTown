@@ -17,7 +17,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerAttack { get; set; }
     public int SavedPlayerDefense { get; set; }
     public int SavedPlayerCriticalRate { get; set; }
-    public int SavedPlayerCriticalDamage { get; set; }
+    public float SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
@@ -43,8 +43,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedPlayerPosition = new Vector3(0, 1, -10f);
-        SavedPlayerCriticalRate = 0;
-        SavedPlayerCriticalDamage = 50;
+        SavedPlayerCriticalRate = 50;
+        SavedPlayerCriticalDamage = 1.50f;
 
     }
     public void ChangeStage()

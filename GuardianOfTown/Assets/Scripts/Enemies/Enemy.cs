@@ -22,13 +22,26 @@ public abstract class Enemy : Character
     {
         if (other.CompareTag("Bullet"))
         {
+            var damage = 0;
+
+            if (Player.IsCritical())
+            {
+                Debug.Log("critical damage!!!!!");
+                //Enable critical effects
+            }
+            else
+            {
+                //Not critical effects
+            }
+
+            damage = Player.Damage - (Defense / 2);
             other.gameObject.SetActive(false);
             ObjectPooler.ProjectileCount++; 
-            var damage = Player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
             fillEnemyHealthBar.slider.gameObject.SetActive(true);
             fillEnemyHealthBar.FillEnemySliderValue();
             Debug.Log("ouch, it hurts" + HP);
+
             if (HP <= 0)
             {
                 Player.Exp += Exp;

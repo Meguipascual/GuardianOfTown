@@ -11,6 +11,7 @@ public class GoblinManager : Enemy
         Level = DataPersistentManager.Wave;
         Attack = 5;
         HP = 30;
+        HpMax = HP;
         Defense = 5;
         Speed = 3f;
         Exp = 5;
