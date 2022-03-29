@@ -15,26 +15,19 @@ public abstract class Enemy : Character
     {
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
-        if (gameObject.CompareTag("Orc"))
-        {
-            fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
-        }
+        fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
+        fillEnemyHealthBar.slider.gameObject.SetActive(false);
     }
     protected void Trigger (Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
             other.gameObject.SetActive(false);
-            ObjectPooler.ProjectileCount++;
-            GameManager.SharedInstance.projectileText.text = $"Projectile: {ObjectPooler.ProjectileCount}"; 
+            ObjectPooler.ProjectileCount++; 
             var damage = Player.Attack - (Defense / 2); 
             ReceiveDamage(damage);
-            if (gameObject.CompareTag("Orc"))
-            {
-                fillEnemyHealthBar.gameObject.SetActive(true);
-                fillEnemyHealthBar.FillEnemySliderValue();
-            }
-            
+            fillEnemyHealthBar.slider.gameObject.SetActive(true);
+            fillEnemyHealthBar.FillEnemySliderValue();
             Debug.Log("ouch, it hurts" + HP);
             if (HP <= 0)
             {

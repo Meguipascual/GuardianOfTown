@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711ed93472f9a5d4f974761d2d41575d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SavedTownHpShields: []
 --- !u!4 &248943569
 Transform:
   m_ObjectHideFlags: 0
