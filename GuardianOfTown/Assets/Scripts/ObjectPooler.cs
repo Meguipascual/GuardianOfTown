@@ -32,15 +32,12 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        ProjectileCount = 20;
         // For as many objects as are in the pooledObjects list
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            ProjectileCount--;
             // if the pooled objects is NOT active, return that object 
             if (!pooledObjects[i].activeInHierarchy)
             {
-                GameManager.SharedInstance.projectileText.text = "Projectile: " + ProjectileCount;
                 return pooledObjects[i];
             }
         }

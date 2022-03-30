@@ -36,7 +36,8 @@ public abstract class Enemy : Character
 
             damage = Player.Damage - (Defense / 2);
             other.gameObject.SetActive(false);
-            ObjectPooler.ProjectileCount++; 
+            ObjectPooler.ProjectileCount++;
+            GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
             ReceiveDamage(damage);
             fillEnemyHealthBar.slider.gameObject.SetActive(true);
             fillEnemyHealthBar.FillEnemySliderValue();
