@@ -20,7 +20,7 @@ public abstract class Enemy : Character
     }
     protected void Trigger (Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag(Tags.Bullet))
         {
             var damage = 0;
 
@@ -45,6 +45,7 @@ public abstract class Enemy : Character
             if (HP <= 0)
             {
                 Player.Exp += Exp;
+
                 if(Player.Exp > 20)
                 {
                     Player.LevelUp();
@@ -52,15 +53,16 @@ public abstract class Enemy : Character
                 Die();
             }
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.CompareTag(Tags.Wall))
         {
             Die();
             Player.TownReceiveDamage(); 
         }
-        else if (other.CompareTag("Player"))
+        else if (other.CompareTag(Tags.Player))
         {
             Player.ReceiveDamage(Attack - (Player.Defense / 2));
             Player.ComprobateLifeRemaining();
+
             if (!Player.IsDead)
             {
                 Player.Exp += Exp;
@@ -75,7 +77,7 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
-        if (this.CompareTag("Boss"))
+        if (this.CompareTag(Tags.Boss))
         {
             if (Player.Exp > 20)
             {
@@ -85,10 +87,12 @@ public abstract class Enemy : Character
         }
         Destroy(gameObject);
     }
+
     public override void Move()
     {
         transform.position += Vector3.back * Time.deltaTime * Speed;
     }
+
     public override void LevelUp()
     {
         for (int i = 0; i < Level * 2; i++)
