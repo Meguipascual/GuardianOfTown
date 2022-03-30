@@ -45,11 +45,8 @@ public abstract class Enemy : Character
             if (HP <= 0)
             {
                 Player.Exp += Exp;
-
-                if(Player.Exp > 20)
-                {
-                    Player.LevelUp();
-                }
+                Player.LevelUp();
+                
                 Die();
             }
         }

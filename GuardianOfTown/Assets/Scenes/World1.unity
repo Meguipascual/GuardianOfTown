@@ -5371,11 +5371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404236065228993276, guid: 367e57d60f011f648a34ea6d6705fc85, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404236065228993276, guid: 367e57d60f011f648a34ea6d6705fc85, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4404236065228993276, guid: 367e57d60f011f648a34ea6d6705fc85, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar

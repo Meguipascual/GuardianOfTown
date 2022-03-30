@@ -95,28 +95,42 @@ public class PlayerController : Character
 
     public override void LevelUp() 
     {
-        HP = HpMax;
-        for (int i = 0; i < 2; i++)
+        int randomUpgrade;
+        if (Exp > 10*Level)
         {
-            HP += 5;
-            var randomUpgrade = Random.Range(0, 2);
-            switch (randomUpgrade)
+            HP = HpMax;
+            for (int i = 0; i < 2; i++)
             {
-                case 0: Attack += 5; break;
-                case 1: Defense += 4; break;
+                HP += 5;
+                if(CriticalRate >= 100)
+                {
+                    randomUpgrade = Random.Range(0, 3);
+                }
+                else
+                {
+                    randomUpgrade = Random.Range(0, 4);
+                }
+                
+                switch (randomUpgrade)
+                {
+                    case 0: Attack += 5; break;
+                    case 1: Defense += 4; break;
+                    case 2: CriticalDamage += 0.1f; break;
+                    case 3: CriticalRate += 5; break;
+                }
             }
+            HpMax = HP;
+            Level++;
+            fillHealthBar.ModifySliderMaxValue(1);
+            fillHealthBar.fillImage.color = Color.green;
+            fillHealthBar.FillSliderValue();
+            Exp = 0;
+            GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
+            GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
+            GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
+            GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
+            GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
         }
-        HpMax = HP;
-        Level++;
-        fillHealthBar.ModifySliderMaxValue(1);
-        fillHealthBar.fillImage.color = Color.green;
-        fillHealthBar.FillSliderValue();
-        Exp = 0;
-        GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
-        GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
-        GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
-        GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
-        GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
     }
 
     public bool IsCritical()
