@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] enemyPrefab;
+    [SerializeField] private GameObject[] powerupPrefab;
     private float spawnSpeed = 5f;//the higher the speed the slower the spawn
     public int ActualWave { get; private set; }
 

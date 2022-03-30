@@ -123,8 +123,7 @@ public class PlayerController : Character
             HpMax = HP;
             Level++;
             fillHealthBar.ModifySliderMaxValue(1);
-            fillHealthBar.fillImage.color = Color.green;
-            fillHealthBar.FillSliderValue();
+            FillSliderValue();
             Exp = 0;
             GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
             GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
@@ -148,5 +147,10 @@ public class PlayerController : Character
             Damage = Attack;
         }
         return isCritical;
+    }
+
+    public void FillSliderValue()
+    {
+        fillHealthBar.FillSliderValue();
     }
 }

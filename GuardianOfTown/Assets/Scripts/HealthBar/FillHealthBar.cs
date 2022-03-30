@@ -32,6 +32,10 @@ public class FillHealthBar : MonoBehaviour
         {
             fillImage.color = Color.yellow;
         }
+        else
+        {
+            fillImage.color = Color.green;
+        }
     }
 
     public void ModifySliderMaxValue(int value) 
