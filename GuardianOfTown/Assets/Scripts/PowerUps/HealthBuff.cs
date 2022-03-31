@@ -30,4 +30,9 @@ public class HealthBuff : PoweupEffect
 
         player.FillSliderValue();
     }
+
+    public override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
 }

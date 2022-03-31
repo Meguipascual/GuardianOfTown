@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
         } 
     }
 
-    void SpawnAmountOfBosses(int amountOfBosses)
+    IEnumerator SpawnAmountOfBosses(int amountOfBosses)
     {
         var bossY = 1.8f;//Because Boss is bigger
         var bossPrefab = enemyPrefab.Length - 1;
@@ -34,6 +34,7 @@ public class SpawnManager : MonoBehaviour
             Vector3 enemyPosition = new Vector3(bossX, bossY, bossZ);
             Instantiate(enemyPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
             GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
+            yield return new WaitForSeconds(spawnSpeed / ActualWave);
         }
     }
 
@@ -62,7 +63,32 @@ public class SpawnManager : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(10);
-        SpawnAmountOfBosses(amountOfBosses);
+        StartCoroutine(SpawnAmountOfBosses(amountOfBosses));
+    }
+
+    IEnumerator SpawnPowerups()
+    {
+        var powerupY = 1f;
+        var powerupZ = 20f;
+        Vector3 powerupPosition;
+        int powerupType;
+        float powerupX;
+        if (FindObjectOfType<PlayerController>().IsDead)
+        {
+            StopAllCoroutines();
+        }
+        else
+        {
+            for (int i = 0; i < powerupPrefab.Length; i++)
+            {
+                powerupType = Random.Range(0, powerupPrefab.Length - 1);
+                powerupX = Random.Range(-23f, 23f);
+                powerupPosition = new Vector3(powerupX, powerupY, powerupZ);
+                yield return new WaitForSeconds((spawnSpeed * 2) / ActualWave);
+                Instantiate(powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
+            }
+        }
+        yield return null;
     }
 
     public void ControlWavesSpawn()
@@ -76,10 +102,12 @@ public class SpawnManager : MonoBehaviour
             switch (ActualWave)
             {
                 case 1:
-                    StartCoroutine( SpawnAmountOfEnemies(6, 1));//6
+                    StartCoroutine(SpawnAmountOfEnemies(6, 1));//6
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 2:
                     StartCoroutine(SpawnAmountOfEnemies(12, 1));//12 
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 3:
                     StartCoroutine(SpawnAmountOfEnemies(20, 1));//20

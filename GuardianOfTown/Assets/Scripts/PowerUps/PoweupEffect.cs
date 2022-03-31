@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class PoweupEffect : ScriptableObject
 {
     public abstract void Apply(GameObject target);
+    public abstract void Move();
 }

@@ -17,7 +17,12 @@ public class SpeedBuff : PoweupEffect
         }
         FindObjectOfType<MonoBehaviour>().StartCoroutine(ActivateEffect(player));
     }
-    
+
+    public override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
+
     IEnumerator ActivateEffect(PlayerController player)
     {
         var speed = player.Speed;
