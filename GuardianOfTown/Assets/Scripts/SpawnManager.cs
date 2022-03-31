@@ -79,12 +79,12 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < powerupPrefab.Length; i++)
+            while (!FindObjectOfType<PlayerController>().IsDead)
             {
-                powerupType = Random.Range(0, powerupPrefab.Length - 1);
+                powerupType = Random.Range(0, powerupPrefab.Length);
                 powerupX = Random.Range(-23f, 23f);
                 powerupPosition = new Vector3(powerupX, powerupY, powerupZ);
-                yield return new WaitForSeconds((spawnSpeed * 2) / ActualWave);
+                yield return new WaitForSeconds((spawnSpeed) / ActualWave);
                 Instantiate(powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
             }
         }
@@ -107,7 +107,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 2:
                     StartCoroutine(SpawnAmountOfEnemies(12, 1));//12 
-                    StartCoroutine(SpawnPowerups());
+                    //StartCoroutine(SpawnPowerups());
                     break;
                 case 3:
                     StartCoroutine(SpawnAmountOfEnemies(20, 1));//20

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI menuPlayerAttackText;
     public TextMeshProUGUI menuPlayerDefenseText;
     public TextMeshProUGUI menuPlayerSpeedText;
+    public TextMeshProUGUI menuPlayerCriticalRateText;
+    public TextMeshProUGUI menuPlayerCriticalDamageText;
     public GameObject menuCanvas;
     private bool pauseToggle;
 
@@ -45,7 +47,9 @@ public class GameManager : MonoBehaviour
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
         menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
         menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
-        if(DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
+        menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
+        menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
+        if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
             DataPersistantManager.Instance.LoadTownHp();
         }else

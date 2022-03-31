@@ -125,11 +125,15 @@ public class PlayerController : Character
             fillHealthBar.ModifySliderMaxValue(1);
             FillSliderValue();
             Exp = 0;
-            GameManager.SharedInstance.playerLevelText.text = "Lvl: " + Level;
+            GameManager.SharedInstance.playerLevelText.text = $"Lvl: {Level}";
+            GameManager.SharedInstance.menuPlayerHPText.text = $"HP Max: {HpMax}";
             GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
             GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
             GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
             GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
+            GameManager.SharedInstance.menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
+            GameManager.SharedInstance.menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
+
         }
     }
 

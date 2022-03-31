@@ -9,13 +9,13 @@ public class HealthBuff : PoweupEffect
     public override void Apply(GameObject target)
     {
         var player = target.GetComponent<PlayerController>();
+        var amountToIncrement = amount;
+        amountToIncrement *= player.HpMax;
 
-        amount *= player.HpMax;
-
-        if ((player.HP + (int) amount) < player.HpMax)
+        if ((player.HP + (int) amountToIncrement) < player.HpMax)
         {
             Debug.Log("aumentar salud");
-            player.HP += (int) amount;
+            player.HP += (int) amountToIncrement;
         }
         else if(player.HP <= 0 )
         {
@@ -29,10 +29,5 @@ public class HealthBuff : PoweupEffect
         }
 
         player.FillSliderValue();
-    }
-
-    public override void Move()
-    {
-        throw new System.NotImplementedException();
     }
 }

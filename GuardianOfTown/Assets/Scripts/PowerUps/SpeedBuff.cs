@@ -6,21 +6,18 @@ using UnityEngine;
 public class SpeedBuff : PoweupEffect
 {
     [SerializeField] private float amount;
+    private MonoBehaviour m_MonoBehaviour;
 
     public override void Apply(GameObject target)
     {
+        m_MonoBehaviour = FindObjectOfType<MonoBehaviour>();
         var player = target.GetComponent<PlayerController>();
         if (player.Speed > 16f)
         {
             Debug.Log("Don't speed up");
             return;
         }
-        FindObjectOfType<MonoBehaviour>().StartCoroutine(ActivateEffect(player));
-    }
-
-    public override void Move()
-    {
-        throw new System.NotImplementedException();
+        m_MonoBehaviour.StartCoroutine(ActivateEffect(player));
     }
 
     IEnumerator ActivateEffect(PlayerController player)
@@ -30,5 +27,6 @@ public class SpeedBuff : PoweupEffect
         Debug.Log("Speed Augmented");
         yield return new WaitForSeconds(3f);
         player.Speed = speed;
+        Debug.Log("Speed Reverted");
     } 
 }
