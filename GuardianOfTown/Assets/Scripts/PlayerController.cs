@@ -133,7 +133,6 @@ public class PlayerController : Character
             GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
             GameManager.SharedInstance.menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
             GameManager.SharedInstance.menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
-
         }
     }
 
@@ -145,6 +144,7 @@ public class PlayerController : Character
         {
             isCritical = true;
             Damage = (int)(Attack * CriticalDamage);
+            
         }
         else
         {
