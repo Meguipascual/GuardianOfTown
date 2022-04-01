@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject [] enemyPrefab;
     [SerializeField] private GameObject[] powerupPrefab;
     private float spawnSpeed = 5f;//the higher the speed the slower the spawn
+    private float spawnPoweupSpeed = 9; 
     public int ActualWave { get; private set; }
 
     // Start is called before the first frame update
@@ -84,7 +85,7 @@ public class SpawnManager : MonoBehaviour
                 powerupType = Random.Range(0, powerupPrefab.Length);
                 powerupX = Random.Range(-23f, 23f);
                 powerupPosition = new Vector3(powerupX, powerupY, powerupZ);
-                yield return new WaitForSeconds((spawnSpeed) / ActualWave);
+                yield return new WaitForSeconds(spawnPoweupSpeed + ActualWave);
                 Instantiate(powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
             }
         }
@@ -106,32 +107,40 @@ public class SpawnManager : MonoBehaviour
                     StartCoroutine(SpawnPowerups());
                     break;
                 case 2:
-                    StartCoroutine(SpawnAmountOfEnemies(12, 1));//12 
-                    //StartCoroutine(SpawnPowerups());
+                    StartCoroutine(SpawnAmountOfEnemies(12, 2));//12 
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 3:
                     StartCoroutine(SpawnAmountOfEnemies(20, 1));//20
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 4:
                     StartCoroutine(SpawnAmountOfEnemies(40, 1));//40
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 5:
                     StartCoroutine(SpawnAmountOfEnemies(65, 1));//65
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 6:
                     StartCoroutine(SpawnAmountOfEnemies(80, 1));//80
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 7:
                     StartCoroutine(SpawnAmountOfEnemies(120, 1));//120
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 8:
                     StartCoroutine(SpawnAmountOfEnemies(200, 1));//200
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 9:
                     StartCoroutine(SpawnAmountOfEnemies(220, 1));//220
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 10:
                     StartCoroutine(SpawnAmountOfEnemies(250, 1));//250
+                    StartCoroutine(SpawnPowerups());
                     break;
                 case 11:
                     GameManager.SharedInstance.wavePopUpText.text = "Hero, you saved the town.\nHurray!";

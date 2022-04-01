@@ -56,8 +56,7 @@ public class PowerupMoveController : MonoBehaviour
 
     private void MoveDiagonal()
     {
-
-        transform.position += Vector3.back * Time.deltaTime * speed;
-        transform.Rotate(Vector3.back * Time.deltaTime * 75);
+        //transform.position += Vector3.back * Time.deltaTime * speed;
+        //transform.Rotate(Vector3.back * Time.deltaTime * 75);
     }
 }

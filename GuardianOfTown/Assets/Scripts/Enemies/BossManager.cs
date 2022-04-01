@@ -10,7 +10,7 @@ public class BossManager : Enemy
         Attack = 100;
         HP = 500;
         HpMax = HP;
-        Defense = 20;
+        Defense = 10;
         Speed = .5f;
         Exp = 50;
         LevelUp();
