@@ -11,6 +11,8 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public static GameManager SharedInstance;
+    public Camera mainCamera;
+    private Quaternion cameraStartRotation;
     private PlayerController playerController;
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         wavePopUpText.gameObject.SetActive(false);
         spawnManager.ControlWavesSpawn();
+        cameraStartRotation = mainCamera.transform.rotation; 
     }
 
     private void ToggleMenu()
@@ -124,6 +127,18 @@ public class GameManager : MonoBehaviour
         #else
             Application.Quit(); // original code to quit Unity player
         #endif
+    }
+
+    public IEnumerator MoveCamera()
+    {
+        var startCameraRotation = cameraStartRotation;
+        GameManager.SharedInstance.mainCamera.gameObject.transform.rotation = startCameraRotation;
+        GameManager.SharedInstance.mainCamera.gameObject.transform.Rotate(Vector3.back * Time.deltaTime * 45);
+        yield return new WaitForSeconds(0.00005f);
+        GameManager.SharedInstance.mainCamera.gameObject.transform.rotation = startCameraRotation;
+        GameManager.SharedInstance.mainCamera.gameObject.transform.Rotate(Vector3.forward * Time.deltaTime * 45);
+        yield return new WaitForSeconds(0.00005f);
+        GameManager.SharedInstance.mainCamera.gameObject.transform.rotation = startCameraRotation;
     }
 
 }

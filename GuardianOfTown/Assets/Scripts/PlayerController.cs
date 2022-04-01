@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class PlayerController : Character
@@ -144,12 +145,13 @@ public class PlayerController : Character
         {
             isCritical = true;
             Damage = (int)(Attack * CriticalDamage);
-            
         }
         else
         {
             Damage = Attack;
         }
+
+        Debug.Log($"Is a critical hit? {isCritical}");
         return isCritical;
     }
 

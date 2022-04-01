@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public abstract class Enemy : Character
 {
     private FillEnemyHealthBar fillEnemyHealthBar;
+    private TextMeshProUGUI criticalHitText;
+    private ParticleSystem criticalHitParticleSystem;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
@@ -16,7 +18,10 @@ public abstract class Enemy : Character
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
         fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
+        criticalHitText = GetComponentInChildren<TextMeshProUGUI>();
+        criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
         fillEnemyHealthBar.slider.gameObject.SetActive(false);
+        criticalHitText.gameObject.SetActive(false);
     }
     protected void Trigger (Collider other)
     {
@@ -24,14 +29,11 @@ public abstract class Enemy : Character
         {
             var damage = 0;
 
-            if (Player.IsCritical())
+            if(Player.IsCritical())
             {
-                Debug.Log("critical damage!!!!!");
-                //Enable critical effects
-            }
-            else
-            {
-                //Not critical effects
+                criticalHitParticleSystem.Play();
+                StartCoroutine(ShowCriticalHitText());
+                StartCoroutine(GameManager.SharedInstance.MoveCamera());
             }
 
             damage = Player.Damage - (Defense / 2);
@@ -47,7 +49,6 @@ public abstract class Enemy : Character
             {
                 Player.Exp += Exp;
                 Player.LevelUp();
-                
                 Die();
             }
         }
@@ -104,5 +105,12 @@ public abstract class Enemy : Character
                 case 1: Defense += 4; break;
             }
         }
+    }
+
+    IEnumerator ShowCriticalHitText()
+    {
+        criticalHitText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        criticalHitText.gameObject.SetActive(false);
     }
 }
