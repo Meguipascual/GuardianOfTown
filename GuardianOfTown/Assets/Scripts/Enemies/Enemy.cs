@@ -34,7 +34,7 @@ public abstract class Enemy : Character
             {
                 criticalHitParticleSystem.Play();
                 StartCoroutine(ShowCriticalHitText());
-                StartCoroutine(GameManager.SharedInstance.MoveCamera());
+                GameManager.SharedInstance.ShakeCamera();
                 critical = true;
             }
 

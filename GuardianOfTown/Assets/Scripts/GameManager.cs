@@ -11,7 +11,7 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public static GameManager SharedInstance;
-    public Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private Quaternion cameraStartRotation;
     private PlayerController playerController;
     private SpawnManager spawnManager;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI menuPlayerCriticalDamageText;
     public GameObject menuCanvas;
     private bool pauseToggle;
+    private string cameraQuake = "CameraQuake";
 
 
     // Start is called before the first frame update
@@ -129,13 +130,9 @@ public class GameManager : MonoBehaviour
         #endif
     }
 
-    public IEnumerator MoveCamera()
+    public void ShakeCamera()
     {
-        var startCameraRotation = cameraStartRotation;
-        mainCamera.transform.rotation = startCameraRotation;
-        mainCamera.transform.Rotate(Vector3.forward * Time.deltaTime * 15);
-        yield return new WaitForSeconds(0.00005f);
-        mainCamera.transform.rotation = startCameraRotation;
+        mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
     }
 
 }
