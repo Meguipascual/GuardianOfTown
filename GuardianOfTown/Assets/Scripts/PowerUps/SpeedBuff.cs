@@ -22,11 +22,14 @@ public class SpeedBuff : PoweupEffect
 
     IEnumerator ActivateEffect(PlayerController player)
     {
+        DontDestroyOnLoad(this);
         var speed = player.Speed;
         player.Speed += amount;
         Debug.Log("Speed Augmented");
+        GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {player.Speed}";
         yield return new WaitForSeconds(3f);
         player.Speed = speed;
+        GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {player.Speed}";
         Debug.Log("Speed Reverted");
     } 
 }

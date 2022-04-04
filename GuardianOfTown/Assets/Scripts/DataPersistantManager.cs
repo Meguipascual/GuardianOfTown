@@ -63,7 +63,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = playerController.Defense;
         SavedPlayerCriticalRate = playerController.CriticalRate;
         SavedPlayerCriticalDamage = playerController.CriticalDamage;
-        SavedPlayerSpeed = playerController.Speed;
+        //SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
         SaveTownHp();
     }
