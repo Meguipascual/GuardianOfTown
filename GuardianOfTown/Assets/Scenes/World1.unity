@@ -713,8 +713,8 @@ MonoBehaviour:
   - {fileID: 7581730917106667813, guid: 6cf832c56a5425c4fbfb2d919ed5447e, type: 3}
   - {fileID: 1694062514575109753, guid: 7d593f21d08b0e54f938b7cdccb43d51, type: 3}
   powerupPrefab:
-  - {fileID: 735765011908941694, guid: 57f8ae3a6c906624ca9b7faa24a481ed, type: 3}
-  - {fileID: 299936171553271037, guid: 92cde92bddd155a498ddcd0a6f5a0ecd, type: 3}
+  - {fileID: 2837738109722762653, guid: a40db2296796b5a4ab64f3fb0710a849, type: 3}
+  - {fileID: 1934110677331010905, guid: ecafba1a2d898b54fa33fc0cfe533466, type: 3}
   - {fileID: 360154474472176383, guid: 0708faae9e86ae7489354b3d92d44bff, type: 3}
   - {fileID: 6685055771686232650, guid: f20217e6deadf40419b7ec7ac9ec7b97, type: 3}
 --- !u!114 &307879603
