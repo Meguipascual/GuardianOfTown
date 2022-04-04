@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TrollManager : Enemy
 {
+    [SerializeField] private GameObject floatingTextPrefab;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -27,6 +28,6 @@ public class TrollManager : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Trigger(other);
+        Trigger(other, floatingTextPrefab);
     }
 }

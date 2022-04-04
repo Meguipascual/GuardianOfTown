@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BossManager : Enemy
 {
+    [SerializeField] private GameObject floatingTextPrefab;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -33,7 +34,7 @@ public class BossManager : Enemy
         }
         else
         {*/
-        Trigger(other);
+        Trigger(other, floatingTextPrefab);
         //} 
     }    
 }

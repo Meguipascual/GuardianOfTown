@@ -23,23 +23,26 @@ public abstract class Enemy : Character
         fillEnemyHealthBar.slider.gameObject.SetActive(false);
         criticalHitText.gameObject.SetActive(false);
     }
-    protected void Trigger (Collider other)
+    protected void Trigger (Collider other, GameObject floatingTextPrefab)
     {
         if (other.CompareTag(Tags.Bullet))
         {
             var damage = 0;
+            var critical = false;
 
             if(Player.IsCritical())
             {
                 criticalHitParticleSystem.Play();
                 StartCoroutine(ShowCriticalHitText());
                 StartCoroutine(GameManager.SharedInstance.MoveCamera());
+                critical = true;
             }
 
             damage = Player.Damage - (Defense / 2);
             other.gameObject.SetActive(false);
             ObjectPooler.ProjectileCount++;
             GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
+            ShowDamage(critical, damage, floatingTextPrefab);
             ReceiveDamage(damage);
             fillEnemyHealthBar.slider.gameObject.SetActive(true);
             fillEnemyHealthBar.FillEnemySliderValue();
@@ -112,5 +115,14 @@ public abstract class Enemy : Character
         criticalHitText.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         criticalHitText.gameObject.SetActive(false);
+    }
+    void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab)
+    {
+        GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        prefab.GetComponentInChildren<TextMesh>().text = damage.ToString();
+        if (isCritical)
+        {
+            prefab.GetComponentInChildren<TextMesh>().color = Color.yellow;
+        }
     }
 }
