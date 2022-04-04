@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoblinManager : Enemy
 {
     [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private GameObject criticalHitTextPrefab;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -30,6 +31,6 @@ public class GoblinManager : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Trigger(other, floatingTextPrefab);
+        Trigger(other, floatingTextPrefab, criticalHitTextPrefab);
     }
 }

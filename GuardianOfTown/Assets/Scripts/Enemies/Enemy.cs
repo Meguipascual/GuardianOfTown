@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public abstract class Enemy : Character
 {
     private FillEnemyHealthBar fillEnemyHealthBar;
-    private TextMeshProUGUI criticalHitText;
     private ParticleSystem criticalHitParticleSystem;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
@@ -18,12 +17,10 @@ public abstract class Enemy : Character
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
         fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
-        criticalHitText = GetComponentInChildren<TextMeshProUGUI>();
         criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
         fillEnemyHealthBar.slider.gameObject.SetActive(false);
-        criticalHitText.gameObject.SetActive(false);
     }
-    protected void Trigger (Collider other, GameObject floatingTextPrefab)
+    protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
         if (other.CompareTag(Tags.Bullet))
         {
@@ -33,7 +30,6 @@ public abstract class Enemy : Character
             if(Player.IsCritical())
             {
                 criticalHitParticleSystem.Play();
-                StartCoroutine(ShowCriticalHitText());
                 GameManager.SharedInstance.ShakeCamera();
                 critical = true;
             }
@@ -42,7 +38,7 @@ public abstract class Enemy : Character
             other.gameObject.SetActive(false);
             ObjectPooler.ProjectileCount++;
             GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
-            ShowDamage(critical, damage, floatingTextPrefab);
+            ShowDamage(critical, damage, floatingTextPrefab, criticalHitPrefab);
             ReceiveDamage(damage);
             fillEnemyHealthBar.slider.gameObject.SetActive(true);
             fillEnemyHealthBar.FillEnemySliderValue();
@@ -110,18 +106,13 @@ public abstract class Enemy : Character
         }
     }
 
-    IEnumerator ShowCriticalHitText()
-    {
-        criticalHitText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        criticalHitText.gameObject.SetActive(false);
-    }
-    void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab)
+    void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
         GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
         prefab.GetComponentInChildren<TextMesh>().text = damage.ToString();
         if (isCritical)
         {
+            Instantiate(criticalHitPrefab, transform.position, Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().color = Color.yellow;
         }
     }
