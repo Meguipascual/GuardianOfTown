@@ -9,6 +9,7 @@ public class PlayerController : Character
     private float xRange = 23f;
     private float horizontalInput;
     private FillHealthBar fillHealthBar;
+    public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
 
     public bool IsDead { get; set; }
@@ -20,6 +21,7 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
+        shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
         fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
     }

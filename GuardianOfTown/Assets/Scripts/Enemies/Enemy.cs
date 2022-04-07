@@ -63,6 +63,7 @@ public abstract class Enemy : Character
 
             if (!Player.IsDead)
             {
+                Player.shieldParticleSystem.Play();
                 Player.Exp += Exp;
                 if (Player.Exp > 20)
                 {
