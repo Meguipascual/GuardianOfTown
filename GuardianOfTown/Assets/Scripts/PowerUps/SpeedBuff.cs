@@ -10,7 +10,7 @@ public class SpeedBuff : PoweupEffect
 
     public override void Apply(GameObject target)
     {
-        m_MonoBehaviour = FindObjectOfType<MonoBehaviour>();
+        m_MonoBehaviour = FindObjectOfType<PlayerController>();
         var player = target.GetComponent<PlayerController>();
         if (player.Speed > 16f)
         {
@@ -22,7 +22,6 @@ public class SpeedBuff : PoweupEffect
 
     IEnumerator ActivateEffect(PlayerController player)
     {
-        DontDestroyOnLoad(this);
         var speed = player.Speed;
         player.Speed += amount;
         Debug.Log("Speed Augmented");
