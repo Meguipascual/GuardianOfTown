@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public int Level { get; set; }
-    public int HP { get; set; }
-    public int HpMax { get; set; }
-    public int Attack { get; set; }
-    public int Defense { get; set; }
-    public float Speed { get; set; }
+    public int Level { get; set; }//Encapsulation
+    public int HP { get; set; }//Encapsulation
+    public int HpMax { get; set; }//Encapsulation
+    public int Attack { get; set; }//Encapsulation
+    public int Defense { get; set; }//Encapsulation
+    public float Speed { get; set; }//Encapsulation
 
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(int damage)//Abstraction
     {
         if (damage > 0)
         {
