@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PowerUps/HealthBuff")]
+[CreateAssetMenu(menuName = "ScriptableObjects/PowerUps/HealthBuff")]
 public class HealthBuff : PoweupEffect
 {
     [SerializeField] private float amount;

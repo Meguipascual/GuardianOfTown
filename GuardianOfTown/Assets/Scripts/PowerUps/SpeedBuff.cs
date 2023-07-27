@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PowerUps/SpeedBuff")]
+[CreateAssetMenu(menuName = "ScriptableObjects/PowerUps/SpeedBuff")]
 public class SpeedBuff : PoweupEffect
 {
     [SerializeField] private float amount;
