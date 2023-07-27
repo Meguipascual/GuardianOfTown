@@ -34,16 +34,21 @@ public class PlayerController : Character
             Move();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // Get an object object from the pool
-                GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
-                if (pooledProjectile != null)
-                {
-                    pooledProjectile.SetActive(true); // activate it
-                    pooledProjectile.transform.position = transform.position + offset; // position it at player
-                    ObjectPooler.ProjectileCount--;
-                    GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
-                }
+                Shoot();
             }
+        }
+    }
+
+    private void Shoot()
+    {
+        // Get an object object from the pool
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.SetActive(true); // activate it
+            pooledProjectile.transform.position = transform.position + offset; // position it at player
+            ObjectPooler.ProjectileCount--;
+            GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
         }
     }
 

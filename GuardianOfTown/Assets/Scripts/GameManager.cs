@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuCanvas;
     private bool pauseToggle;
     private string cameraQuake = "CameraQuake";
+    private int _numberOfBosses;
 
 
     // Start is called before the first frame update
@@ -135,4 +137,13 @@ public class GameManager : MonoBehaviour
         mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
     }
 
+    public void KillABoss()
+    {
+        _numberOfBosses--;
+        if (_numberOfBosses < 1)
+        {
+            DataPersistantManager.Instance.ChangeStage();
+        }
+        return;
+    }
 }

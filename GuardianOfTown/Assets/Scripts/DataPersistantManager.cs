@@ -11,6 +11,7 @@ public class DataPersistantManager : MonoBehaviour
     private PlayerController playerController;
     
     public int Wave { get; set; }
+    public int MaxWave { get; set; }
     public int SavedPlayerLevel { get; set; }
     public int SavedPlayerHP { get; set; }
     public int SavedPlayerHpMax { get; set; }
@@ -36,6 +37,7 @@ public class DataPersistantManager : MonoBehaviour
     {
         SavedTownHpShields = new List<Image>();
         Wave = 1;
+        MaxWave = 11;
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;

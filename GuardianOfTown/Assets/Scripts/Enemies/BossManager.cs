@@ -29,13 +29,6 @@ public class BossManager : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.CompareTag("Wall"))
-        {
-            Player.TownReceiveDamage(Attack);
-        }
-        else
-        {*/
         Trigger(other, floatingTextPrefab, criticalHitTextPrefab);
-        //} 
     }    
 }

@@ -4,31 +4,32 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject [] enemyPrefab;
-    [SerializeField] private GameObject[] powerupPrefab;
-    private PlayerController playerController;
-    private float spawnSpeed = 5f;//the higher the speed the slower the spawn
-    private float spawnPoweupSpeed = 9; 
-    public int ActualWave { get; private set; }
+    [SerializeField] private GameObject [] _enemyPrefab;
+    [SerializeField] private GameObject [] _powerupPrefab;
+    [SerializeField] private GameObject [] _wavesData;
+    private PlayerController _playerController;
+    private float _spawnSpeed = 5f;//the higher the speed the slower the spawn
+    private float _spawnPoweupSpeed = 9; 
+    public int CurrentWave { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        _playerController = FindObjectOfType<PlayerController>();
         if (DataPersistantManager.Instance != null)
         {
-            ActualWave = DataPersistantManager.Instance.Wave;
+            CurrentWave = DataPersistantManager.Instance.Wave;
         }
         else
         {
-            ActualWave = 1;
+            CurrentWave = 1;
             Debug.Log("data persistant error ");
         } 
     }
 
     private void Update()
     {
-        if (playerController.IsDead)
+        if (_playerController.IsDead)
         {
             StopAllCoroutines();
         }
@@ -37,15 +38,15 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnAmountOfBosses(int amountOfBosses)
     {
         var bossY = 1.8f;//Because Boss is bigger
-        var bossPrefab = enemyPrefab.Length - 1;
+        var bossPrefab = _enemyPrefab.Length - 1;
         var bossZ = 20f;
         for (int i = 0; i < amountOfBosses; i++)
         {
             var bossX = Random.Range(-23f, 23f);
             Vector3 enemyPosition = new Vector3(bossX, bossY, bossZ);
-            Instantiate(enemyPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+            Instantiate(_enemyPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
             GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
-            yield return new WaitForSeconds(spawnSpeed / ActualWave);
+            yield return new WaitForSeconds(_spawnSpeed / CurrentWave);
         }
     }
 
@@ -59,11 +60,11 @@ public class SpawnManager : MonoBehaviour
         GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfEnemies + amountOfBosses}";
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            enemyType = Random.Range(0, enemyPrefab.Length - 1);
+            enemyType = Random.Range(0, _enemyPrefab.Length - 1);
             enemyX = Random.Range(-23f, 23f);
             enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
-            yield return new WaitForSeconds(spawnSpeed / ActualWave);
-            Instantiate(enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+            yield return new WaitForSeconds(_spawnSpeed / CurrentWave);
+            Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
             GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {(amountOfEnemies - (i+1)) + amountOfBosses}";
         }
         yield return new WaitForSeconds(10);
@@ -78,26 +79,26 @@ public class SpawnManager : MonoBehaviour
         int powerupType;
         float powerupX;
         
-        while (!playerController.IsDead)
+        while (!_playerController.IsDead)
         {
-            powerupType = Random.Range(0, powerupPrefab.Length);
+            powerupType = Random.Range(0, _powerupPrefab.Length);
             powerupX = Random.Range(-23f, 23f);
             powerupPosition = new Vector3(powerupX, powerupY, powerupZ);
-            yield return new WaitForSeconds(spawnPoweupSpeed + ActualWave);
-            Instantiate(powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
+            yield return new WaitForSeconds(_spawnPoweupSpeed + CurrentWave);
+            Instantiate(_powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
         }
         yield return null;
     }
 
     public void ControlWavesSpawn()
     {
-        if (playerController.IsDead)
+        if (_playerController.IsDead)
         {
             return;
         }
         else
         {
-            switch (ActualWave)
+            switch (CurrentWave)
             {
                 case 1:
                     StartCoroutine(SpawnAmountOfEnemies(6, 1));//6

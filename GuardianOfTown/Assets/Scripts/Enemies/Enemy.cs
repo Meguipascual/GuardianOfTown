@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Character
 {
-    private FillEnemyHealthBar fillEnemyHealthBar;
-    private ParticleSystem criticalHitParticleSystem;
+    private FillEnemyHealthBar _fillEnemyHealthBar;
+    private ParticleSystem _criticalHitParticleSystem;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
@@ -16,9 +16,9 @@ public abstract class Enemy : Character
     {
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
-        fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
-        criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
-        fillEnemyHealthBar.slider.gameObject.SetActive(false);
+        _fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
+        _criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
+        _fillEnemyHealthBar.slider.gameObject.SetActive(false);
     }
     protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
@@ -29,7 +29,7 @@ public abstract class Enemy : Character
 
             if(Player.IsCritical())
             {
-                criticalHitParticleSystem.Play();
+                _criticalHitParticleSystem.Play();
                 GameManager.SharedInstance.ShakeCamera();
                 critical = true;
             }
@@ -40,8 +40,8 @@ public abstract class Enemy : Character
             GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
             ShowDamage(critical, damage, floatingTextPrefab, criticalHitPrefab);
             ReceiveDamage(damage);
-            fillEnemyHealthBar.slider.gameObject.SetActive(true);
-            fillEnemyHealthBar.FillEnemySliderValue();
+            _fillEnemyHealthBar.slider.gameObject.SetActive(true);
+            _fillEnemyHealthBar.FillEnemySliderValue();
             Debug.Log("ouch, it hurts" + HP);
 
             if (HP <= 0)
@@ -53,8 +53,13 @@ public abstract class Enemy : Character
         }
         else if (other.CompareTag(Tags.Wall))
         {
-            Die();
+            if (CompareTag(Tags.Boss))
+            {
+                Player.Die();
+                return;
+            }
             Player.TownReceiveDamage(); 
+            Die();
         }
         else if (other.CompareTag(Tags.Player))
         {
@@ -82,7 +87,7 @@ public abstract class Enemy : Character
             {
                 Player.LevelUp();
             }
-            DataPersistentManager.ChangeStage();
+            GameManager.SharedInstance.KillABoss();
         }
         Destroy(gameObject);
     }
