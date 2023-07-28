@@ -37,11 +37,14 @@ public class GameManager : MonoBehaviour
     private string cameraQuake = "CameraQuake";
     public int NumberOfBosses { get; set; }
 
+    private void Awake()
+    {
+        SharedInstance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        SharedInstance = this;
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
         menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
         menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
         menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
+        
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
             DataPersistantManager.Instance.LoadTownHp();
