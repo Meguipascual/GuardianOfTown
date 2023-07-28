@@ -24,59 +24,15 @@ public abstract class Enemy : Character
     {
         if (other.CompareTag(Tags.Bullet))
         {
-            var damage = 0;
-            var critical = false;
-
-            if(Player.IsCritical())
-            {
-                _criticalHitParticleSystem.Play();
-                GameManager.SharedInstance.ShakeCamera();
-                critical = true;
-            }
-
-            other.GetComponent<BulletManager>().DestroyBullet(other.gameObject);
-            //other.gameObject.SetActive(false);
-            //ObjectPooler.ProjectileCount++;
-            //GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
-            damage = Player.Damage - (Defense / 2);
-            ShowDamage(critical, damage, floatingTextPrefab, criticalHitPrefab);
-            ReceiveDamage(damage);
-            _fillEnemyHealthBar.slider.gameObject.SetActive(true);
-            _fillEnemyHealthBar.FillEnemySliderValue();
-            Debug.Log("ouch, it hurts" + HP);
-
-            if (HP <= 0)
-            {
-                Player.Exp += Exp;
-                Player.LevelUp();
-                Die();
-            }
+            CollisionWithBullet(other,floatingTextPrefab,criticalHitPrefab);
         }
         else if (other.CompareTag(Tags.Wall))
         {
-            if (CompareTag(Tags.Boss))
-            {
-                Player.Die();
-                return;
-            }
-            Player.TownReceiveDamage(); 
-            Die();
+            CollisionWithWall();
         }
         else if (other.CompareTag(Tags.Player))
         {
-            Player.ReceiveDamage(Attack - (Player.Defense / 2));
-            Player.ComprobateLifeRemaining();
-
-            if (!Player.IsDead)
-            {
-                Player.shieldParticleSystem.Play();
-                Player.Exp += Exp;
-                if (Player.Exp > 20)
-                {
-                    Player.LevelUp();
-                }
-                Die();
-            }
+            CollisionWithPlayer();
         }
     }
 
@@ -110,6 +66,62 @@ public abstract class Enemy : Character
                 case 0: Attack += 5; break;
                 case 1: Defense += 4; break;
             }
+        }
+    }
+    
+    private void CollisionWithBullet(Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
+    {
+        var damage = 0;
+        var critical = false;
+
+        if (Player.IsCritical())
+        {
+            _criticalHitParticleSystem.Play();
+            GameManager.SharedInstance.ShakeCamera();
+            critical = true;
+        }
+
+        other.GetComponent<BulletManager>().DestroyBullet(other.gameObject);
+        damage = Player.Damage - (Defense / 2);
+        ShowDamage(critical, damage, floatingTextPrefab, criticalHitPrefab);
+        ReceiveDamage(damage);
+        _fillEnemyHealthBar.slider.gameObject.SetActive(true);
+        _fillEnemyHealthBar.FillEnemySliderValue();
+        Debug.Log("ouch, it hurts" + HP);
+
+        if (HP <= 0)
+        {
+            Player.Exp += Exp;
+            Player.LevelUp();
+            Die();
+        }
+    }
+
+    void CollisionWithWall()
+    {
+        if (CompareTag(Tags.Boss))
+        {
+            Player.Die();
+            return;
+        }
+        Player.TownReceiveDamage();
+        Die();
+    }
+
+    private void CollisionWithPlayer()
+    {
+        Player.ReceiveDamage(Attack - (Player.Defense / 2));
+        Player.ComprobateLifeRemaining();
+
+        if (!Player.IsDead)
+        {
+            Player.shieldParticleSystem.Play();
+            Player.Exp += Exp;
+            if (Player.Exp > 20)
+            {
+                Player.LevelUp();
+            }
+            Die();
         }
     }
 
