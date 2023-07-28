@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa02dacb3eaad4d44b36d2710e3545b1, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  prefabName: 
-  numberOfPrefabsToCreate: 0
-  spawnPoints: []
+  numberOfEnemiesToCreate: 0
+  numberOfBossesToCreate: 0
+  LevelOfEnemies: 0
+  LevelOfBosses: 0

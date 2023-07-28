@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1017,16 +1017,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d90f87880c5d64da71994c28bcac83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab:
+  _enemyPrefab:
   - {fileID: 7581730917106667813, guid: 1228df6dbe81db54a8b01453de7694b3, type: 3}
   - {fileID: 7581730917106667813, guid: 14ea8019560abf64faa7b91537b4671f, type: 3}
   - {fileID: 7581730917106667813, guid: 6cf832c56a5425c4fbfb2d919ed5447e, type: 3}
   - {fileID: 1694062514575109753, guid: 7d593f21d08b0e54f938b7cdccb43d51, type: 3}
-  powerupPrefab:
-  - {fileID: 2837738109722762653, guid: a40db2296796b5a4ab64f3fb0710a849, type: 3}
+  _powerupPrefab:
+  - {fileID: 6685055771686232650, guid: f20217e6deadf40419b7ec7ac9ec7b97, type: 3}
   - {fileID: 1934110677331010905, guid: ecafba1a2d898b54fa33fc0cfe533466, type: 3}
   - {fileID: 360154474472176383, guid: 0708faae9e86ae7489354b3d92d44bff, type: 3}
-  - {fileID: 6685055771686232650, guid: f20217e6deadf40419b7ec7ac9ec7b97, type: 3}
+  - {fileID: 2837738109722762653, guid: a40db2296796b5a4ab64f3fb0710a849, type: 3}
+  _wavesData: []
 --- !u!114 &307879603
 MonoBehaviour:
   m_ObjectHideFlags: 0

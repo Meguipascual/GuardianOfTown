@@ -34,10 +34,11 @@ public abstract class Enemy : Character
                 critical = true;
             }
 
+            other.GetComponent<BulletManager>().DestroyBullet(other.gameObject);
+            //other.gameObject.SetActive(false);
+            //ObjectPooler.ProjectileCount++;
+            //GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
             damage = Player.Damage - (Defense / 2);
-            other.gameObject.SetActive(false);
-            ObjectPooler.ProjectileCount++;
-            GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
             ShowDamage(critical, damage, floatingTextPrefab, criticalHitPrefab);
             ReceiveDamage(damage);
             _fillEnemyHealthBar.slider.gameObject.SetActive(true);
