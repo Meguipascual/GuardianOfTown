@@ -1027,7 +1027,9 @@ MonoBehaviour:
   - {fileID: 1934110677331010905, guid: ecafba1a2d898b54fa33fc0cfe533466, type: 3}
   - {fileID: 360154474472176383, guid: 0708faae9e86ae7489354b3d92d44bff, type: 3}
   - {fileID: 2837738109722762653, guid: a40db2296796b5a4ab64f3fb0710a849, type: 3}
-  _wavesData: []
+  _wavesData:
+  - {fileID: 11400000, guid: cae8dfa7db6683f44a0c3bf64c28ce03, type: 2}
+  - {fileID: 11400000, guid: f999cbf9d29e5f04280ea08766292b2f, type: 2}
 --- !u!114 &307879603
 MonoBehaviour:
   m_ObjectHideFlags: 0

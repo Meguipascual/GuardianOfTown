@@ -36,7 +36,7 @@ public class DataPersistantManager : MonoBehaviour
     private void Start()
     {
         SavedTownHpShields = new List<Image>();
-        Wave = 1;
+        Wave = 0;
         MaxWave = 11;
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;

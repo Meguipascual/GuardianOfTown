@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuCanvas;
     private bool pauseToggle;
     private string cameraQuake = "CameraQuake";
-    private int _numberOfBosses;
+    public int NumberOfBosses { get; set; }
 
 
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        waveText.text = "Wave: " + DataPersistantManager.Instance.Wave;
+        waveText.text = "Wave: " + DataPersistantManager.Instance.Wave + 1;
         menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
         menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWaveText()
     {
-        wavePopUpText.text = "Wave " + DataPersistantManager.Instance.Wave;
+        wavePopUpText.text = "Wave " + DataPersistantManager.Instance.Wave + 1;
         wavePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         wavePopUpText.gameObject.SetActive(false);
@@ -139,8 +139,8 @@ public class GameManager : MonoBehaviour
 
     public void KillABoss()
     {
-        _numberOfBosses--;
-        if (_numberOfBosses < 1)
+        NumberOfBosses--;
+        if (NumberOfBosses < 1)
         {
             DataPersistantManager.Instance.ChangeStage();
         }
