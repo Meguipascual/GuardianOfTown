@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuCanvas;
     private bool pauseToggle;
     private string cameraQuake = "CameraQuake";
-    public int NumberOfBosses { get; set; }
+    public int NumberOfEnemiesAndBosses { get; set; }
+    public int NumberOfWavesLeft { get; set; }
 
     private void Awake()
     {
@@ -45,11 +46,15 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(NumberOfWavesLeft < 0)
+        {
+            return;
+        }
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        waveText.text = "Wave: " + DataPersistantManager.Instance.Wave + 1;
+        waveText.text = "Wave: " + (DataPersistantManager.Instance.Wave + 1);
         menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
         menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
@@ -57,7 +62,9 @@ public class GameManager : MonoBehaviour
         menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
         menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
         menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
-        
+        enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+
+
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
             DataPersistantManager.Instance.LoadTownHp();
@@ -90,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWaveText()
     {
-        wavePopUpText.text = "Wave " + DataPersistantManager.Instance.Wave + 1;
+        wavePopUpText.text = "Wave " + (DataPersistantManager.Instance.Wave + 1);
         wavePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         wavePopUpText.gameObject.SetActive(false);
@@ -141,13 +148,13 @@ public class GameManager : MonoBehaviour
         mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
     }
 
-    public void KillABoss()
+    public void DecreaseNumberOfEnemies()
     {
-        NumberOfBosses--;
-        if (NumberOfBosses < 1)
+        NumberOfEnemiesAndBosses--;
+        enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        if (NumberOfEnemiesAndBosses == 0)
         {
             DataPersistantManager.Instance.ChangeStage();
         }
-        return;
     }
 }

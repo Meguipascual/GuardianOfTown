@@ -20,11 +20,19 @@ public class SpawnManager : MonoBehaviour
         if (DataPersistantManager.Instance != null)
         {
             CurrentWave = DataPersistantManager.Instance.Wave;
-            GameManager.SharedInstance.NumberOfBosses = _wavesData[CurrentWave].numberOfBossesToCreate;
+            if(CurrentWave < _wavesData.Length)
+            {
+                GameManager.SharedInstance.NumberOfEnemiesAndBosses = _wavesData[CurrentWave].numberOfEnemiesToCreate + _wavesData[CurrentWave].numberOfBossesToCreate;
+                GameManager.SharedInstance.NumberOfWavesLeft = _wavesData.Length - CurrentWave;
+            }
+            else
+            {
+                GameManager.SharedInstance.NumberOfEnemiesAndBosses = 0;
+            }
         }
         else
         {
-            CurrentWave = 1;
+            CurrentWave = 0;
             Debug.Log("data persistant error ");
         }
     }
@@ -59,7 +67,6 @@ public class SpawnManager : MonoBehaviour
         Vector3 enemyPosition;
         int enemyType;
         float enemyX;
-        GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {spawnSettings.numberOfEnemiesToCreate + spawnSettings.numberOfBossesToCreate}";
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
             enemyType = Random.Range(0, _enemyPrefab.Length - 1);
@@ -67,7 +74,6 @@ public class SpawnManager : MonoBehaviour
             enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
             Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
-            GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {(spawnSettings.numberOfEnemiesToCreate - (i+1)) + spawnSettings.numberOfBossesToCreate}";
         }
         yield return new WaitForSeconds(10);
         StartCoroutine(SpawnAmountOfBosses(spawnSettings.numberOfBossesToCreate));
@@ -98,18 +104,17 @@ public class SpawnManager : MonoBehaviour
         {
             return;
         }
+
+        if (CurrentWave > _wavesData.Length - 1)
+        {
+            FindObjectOfType<PlayerController>().IsDead = true;
+            Debug.Log("Really here you might win the game, I suppose");
+            return;
+        }
         else
         {
-            if (CurrentWave <= _wavesData.Length - 1)
-            {
-                StartCoroutine(SpawnPowerups());
-                StartCoroutine(SpawnAmountOfEnemies(_wavesData[CurrentWave]));
-            }
-            else
-            {
-                FindObjectOfType<PlayerController>().IsDead = true;
-                //Really here you might win the game, I suppose
-            }
+            StartCoroutine(SpawnPowerups());
+            StartCoroutine(SpawnAmountOfEnemies(_wavesData[CurrentWave]));
         }
     } 
 }

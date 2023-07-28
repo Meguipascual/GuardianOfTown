@@ -38,14 +38,7 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
-        if (this.CompareTag(Tags.Boss))
-        {
-            if (Player.Exp > 20)
-            {
-                Player.LevelUp();
-            }
-            GameManager.SharedInstance.KillABoss();
-        }
+        GameManager.SharedInstance.DecreaseNumberOfEnemies();
         Destroy(gameObject);
     }
 
@@ -87,7 +80,6 @@ public abstract class Enemy : Character
         ReceiveDamage(damage);
         _fillEnemyHealthBar.slider.gameObject.SetActive(true);
         _fillEnemyHealthBar.FillEnemySliderValue();
-        Debug.Log("ouch, it hurts" + HP);
 
         if (HP <= 0)
         {
