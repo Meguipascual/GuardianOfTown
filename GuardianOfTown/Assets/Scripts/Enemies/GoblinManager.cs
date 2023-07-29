@@ -10,7 +10,7 @@ public class GoblinManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = DataPersistentManager.Wave;
+        Level = SpawnManager.LevelOfEnemies;
         Attack = 5;
         HP = 30;
         HpMax = HP;

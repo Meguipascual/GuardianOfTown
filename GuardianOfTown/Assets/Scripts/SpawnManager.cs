@@ -11,6 +11,14 @@ public class SpawnManager : MonoBehaviour
     private float _spawnSpeed = 5f;//the higher the speed the slower the spawn
     private float _spawnPoweupSpeed = 9; 
     public int CurrentWave { get; private set; }
+    public int LevelOfEnemies { get; private set; }
+    public int LevelOfBosses { get; private set; }
+
+    private void Awake()
+    {
+        LevelOfBosses = _wavesData[CurrentWave].LevelOfBosses;
+        LevelOfEnemies = _wavesData[CurrentWave].LevelOfEnemies;
+    }
 
     // Start is called before the first frame update
     void Start()

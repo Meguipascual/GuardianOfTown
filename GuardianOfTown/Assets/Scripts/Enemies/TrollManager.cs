@@ -8,7 +8,7 @@ public class TrollManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = DataPersistentManager.Wave;
+        Level = SpawnManager.LevelOfEnemies;
         Attack = 20;
         HP = 100;
         HpMax = HP;

@@ -9,6 +9,7 @@ public abstract class Enemy : Character
     private FillEnemyHealthBar _fillEnemyHealthBar;
     private ParticleSystem _criticalHitParticleSystem;
     protected DataPersistantManager DataPersistentManager { get; set; }
+    protected SpawnManager SpawnManager { get; set; }
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
 
@@ -16,6 +17,7 @@ public abstract class Enemy : Character
     {
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
+        SpawnManager = FindObjectOfType<SpawnManager>();
         _fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
         _criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
@@ -120,7 +122,13 @@ public abstract class Enemy : Character
     void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
         GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        if (damage < 0)
+        {
+            damage = 0;
+        }
+
         prefab.GetComponentInChildren<TextMesh>().text = damage.ToString();
+                
         if (isCritical)
         {
             Instantiate(criticalHitPrefab, transform.position, Quaternion.identity);

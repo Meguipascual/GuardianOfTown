@@ -11,7 +11,7 @@ public class OrcManager : Enemy
     protected override void Start()
     {
         base.Start();
-        Level = DataPersistentManager.Wave;
+        Level = SpawnManager.LevelOfEnemies;
         Attack = 10;
         HP = 50;
         HpMax = HP;
