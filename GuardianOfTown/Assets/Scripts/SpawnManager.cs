@@ -70,15 +70,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnAmountOfEnemies(SpawnManagerScriptableObject spawnSettings)
     {
-        var enemyY = 1f;
         var enemyZ = 20f;
         Vector3 enemyPosition;
         int enemyType;
         float enemyX;
+        float enemyY;
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
             enemyType = Random.Range(0, _enemyPrefab.Length - 1);
             enemyX = Random.Range(-23f, 23f);
+            enemyY = _enemyPrefab[enemyType].transform.localScale.y;
             enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
             Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);

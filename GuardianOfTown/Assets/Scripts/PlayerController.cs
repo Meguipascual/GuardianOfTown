@@ -157,8 +157,6 @@ public class PlayerController : Character
         {
             Damage = Attack;
         }
-
-        Debug.Log($"Is a critical hit? {isCritical}");
         return isCritical;
     }
 

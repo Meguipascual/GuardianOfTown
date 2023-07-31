@@ -20,8 +20,7 @@ public class FillEnemyHealthBar : MonoBehaviour
         fillImage.enabled = true;
         float fillValue = (float)enemy.HP / (float)enemy.HpMax;
         slider.value = fillValue;
-        Debug.Log($"enemy hp: {enemy.HP} hpMax: {enemy.HpMax}");
-
+        
         if (slider.value <= slider.minValue)
         {
             fillImage.enabled = false;
