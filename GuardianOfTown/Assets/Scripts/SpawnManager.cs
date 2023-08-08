@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject [] _enemyPrefab;
+    [SerializeField] private GameObject[] _bossPrefab;
     [SerializeField] private GameObject [] _powerupPrefab;
     [SerializeField] private SpawnManagerScriptableObject [] _wavesData;
+    [SerializeField] private float _spawnDistanceZ;
     private PlayerController _playerController;
     private float _spawnSpeed = 5f;//the higher the speed the slower the spawn
     private float _spawnPoweupSpeed = 9; 
@@ -55,14 +58,14 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnAmountOfBosses(int amountOfBosses)
     {
-        var bossY = 1.8f;//Because Boss is bigger
-        var bossPrefab = _enemyPrefab.Length - 1;
-        var bossZ = 20f;
+        float bossY;
+        var bossPrefab = Random.Range(0, _bossPrefab.Length);
         for (int i = 0; i < amountOfBosses; i++)
         {
             var bossX = Random.Range(-23f, 23f);
-            Vector3 enemyPosition = new Vector3(bossX, bossY, bossZ);
-            Instantiate(_enemyPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+            bossY = _bossPrefab[bossPrefab].transform.localScale.y;
+            Vector3 enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
+            Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
             GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
         }
@@ -70,17 +73,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnAmountOfEnemies(SpawnManagerScriptableObject spawnSettings)
     {
-        var enemyZ = 20f;
         Vector3 enemyPosition;
         int enemyType;
         float enemyX;
         float enemyY;
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
-            enemyType = Random.Range(0, _enemyPrefab.Length - 1);
+            enemyType = Random.Range(0, _enemyPrefab.Length);
             enemyX = Random.Range(-23f, 23f);
             enemyY = _enemyPrefab[enemyType].transform.localScale.y;
-            enemyPosition = new Vector3(enemyX, enemyY, enemyZ);
+            enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
             Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
         }
@@ -91,7 +93,6 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnPowerups()
     {
         var powerupY = 1f;
-        var powerupZ = 20f;
         Vector3 powerupPosition;
         int powerupType;
         float powerupX;
@@ -100,7 +101,7 @@ public class SpawnManager : MonoBehaviour
         {
             powerupType = Random.Range(0, _powerupPrefab.Length);
             powerupX = Random.Range(-23f, 23f);
-            powerupPosition = new Vector3(powerupX, powerupY, powerupZ);
+            powerupPosition = new Vector3(powerupX, powerupY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnPoweupSpeed + (CurrentWave + 1));
             Instantiate(_powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
         }
