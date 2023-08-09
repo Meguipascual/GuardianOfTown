@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   numberOfEnemiesToCreate: 6
-  numberOfBossesToCreate: 2
+  numberOfBossesToCreate: 5
   LevelOfEnemies: 1
   LevelOfBosses: 1
