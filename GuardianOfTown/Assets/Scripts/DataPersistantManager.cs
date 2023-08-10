@@ -44,7 +44,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerAttack = 10;
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
-        SavedPlayerPosition = new Vector3(0, 1, -10f);
+        SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
 

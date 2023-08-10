@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3507875758543284563}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5715112648717354067}
   - component: {fileID: 695731682314294554}
   - component: {fileID: 3885992214415848813}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 282855906365032695}
   - component: {fileID: 4763395169457658454}
   - component: {fileID: 3234279258503792450}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 1004244212114580136}
   - component: {fileID: 1848903578830147649}
   - component: {fileID: 2545863177648262770}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 2304472215880328280}
   - component: {fileID: 7577362390672872399}
   - component: {fileID: 6395665959625926697}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 7581730917106667812}
   - component: {fileID: 7581730917106667808}
   - component: {fileID: -7817426819273090174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy 1
   m_TagString: Orc
   m_Icon: {fileID: 0}
@@ -601,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CriticalHitParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 4840225011187687922, guid: d48e7af85ea12894c8535f182e5c3339, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48e7af85ea12894c8535f182e5c3339, type: 3}
 --- !u!4 &557836715912640582 stripped
@@ -671,14 +675,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7917291961305824890, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5731229141766309534, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2793727289926329592, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1500838157198093432, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -426369035985568217, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
       propertyPath: m_Name
       value: GoblinPose2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866621852552652557, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2952882357730211501, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a061614abc2f90c44ad45ca7779c3184, type: 2}
+    - target: {fileID: 3779745573541866595, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889987309386925154, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727007405964328823, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7216655632450529714, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -687,6 +735,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: acbfa516a0b50e446a68d4b415086455, type: 2}
+    - target: {fileID: 7840573829089992714, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022215874312191456, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00a7ffb5d5102c6429bfc1fcc8e2ffe8, type: 3}
 --- !u!4 &6491029442163588986 stripped

@@ -11,9 +11,11 @@ public class PlayerController : Character
     private FillHealthBar fillHealthBar;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
+    [SerializeField] private int _levelPoints;
 
     public bool IsDead { get; set; }
     public int Exp { get; set; }
+    public int LevelPoints { get; set; }
     public int CriticalRate { get; set; }
     public int Damage { get; set; }
     public float CriticalDamage { get; set; }
@@ -107,8 +109,12 @@ public class PlayerController : Character
         int randomUpgrade;
         if (Exp > 10*Level)
         {
+            LevelPoints += 2;
             HP = HpMax;
-            for (int i = 0; i < 2; i++)
+            //GameManager.SharedInstance.playerLevelPointsText.text = $"LP: {LevelPoints}";
+
+            //This part of the code are going to change to a method that openned when player will be going to levelup
+            for (int i = 0; i < LevelPoints; i++)
             {
                 HP += 5;
                 if(CriticalRate >= 100)
@@ -127,6 +133,7 @@ public class PlayerController : Character
                     case 2: CriticalDamage += 0.1f; break;
                     case 3: CriticalRate += 5; break;
                 }
+                LevelPoints--;
             }
             HpMax = HP;
             Level++;
@@ -141,6 +148,7 @@ public class PlayerController : Character
             GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
             GameManager.SharedInstance.menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
             GameManager.SharedInstance.menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
+            //GameManager.SharedInstance.menuPlayerLevelPointsText.text = $"LP: {LevelPoints}"; 
         }
     }
 
