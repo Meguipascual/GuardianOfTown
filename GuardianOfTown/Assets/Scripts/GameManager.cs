@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         }
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
+        mainCamera = FindObjectOfType<Camera>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
         waveText.text = "Wave: " + (DataPersistantManager.Instance.Wave + 1);

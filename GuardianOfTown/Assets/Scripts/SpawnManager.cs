@@ -59,12 +59,16 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnAmountOfBosses(int amountOfBosses)
     {
         float bossY;
-        var bossPrefab = Random.Range(0, _bossPrefab.Length);
+        float bossX;
+        int bossPrefab;
+        Vector3 enemyPosition;
+
         for (int i = 0; i < amountOfBosses; i++)
         {
-            var bossX = Random.Range(-23f, 23f);
+            bossPrefab = Random.Range(0, _bossPrefab.Length);
+            bossX = Random.Range(-23f, 23f);
             bossY = _bossPrefab[bossPrefab].transform.localScale.y;
-            Vector3 enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
+            enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
             Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
             GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
@@ -77,6 +81,7 @@ public class SpawnManager : MonoBehaviour
         int enemyType;
         float enemyX;
         float enemyY;
+
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
             enemyType = Random.Range(0, _enemyPrefab.Length);
@@ -119,6 +124,7 @@ public class SpawnManager : MonoBehaviour
         {
             FindObjectOfType<PlayerController>().IsDead = true;
             Debug.Log("Really here you might win the game, I suppose");
+            // Activate win panel when it exists
             return;
         }
         else
