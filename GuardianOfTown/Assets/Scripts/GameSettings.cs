@@ -27,24 +27,5 @@ public class GameSettings : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ActivateFront()
-    {
-        IsTopViewModeActive = false;
-        IsFrontViewModeActive = true;
-    }
-
-    public void ActivateTop()
-    {
-        IsTopViewModeActive = true;
-        IsFrontViewModeActive = false;
-    }
     
-    public void ToggleEasyMode()
-    {
-        IsEasyModeActive = !IsEasyModeActive;
-    }
-    public void ToggleDeveloperMode()
-    {
-        IsDeveloperModeActive = !IsDeveloperModeActive;
-    }
 }
