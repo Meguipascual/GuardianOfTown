@@ -6,15 +6,11 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance;
-    [SerializeField] private bool _isEasyModeActive; //easy mode with autoshooting
-    [SerializeField] private bool _isDeveloperModeActive; //activate buttons that can create any enemy, powerup or wave
-    [SerializeField] private bool _isFrontViewModeActive; //activate the 3 person perspective camera and pannels
-    [SerializeField] private bool _isTopViewModeActive; //activate top view
-    private Camera[] _cameras;
-    [SerializeField] private GameObject _cameraTopViewPrefab;
-    [SerializeField] private GameObject _cameraFrontViewPrefab;
-    [SerializeField] private GameObject _cameraTopViewGameObject;
-    [SerializeField] private GameObject _cameraFrontViewGameObject;
+    public bool IsEasyModeActive { get; set; } //easy mode with autoshooting
+    public bool IsDeveloperModeActive { get; set; } //activate buttons that can create any enemy, powerup or wave
+    public bool IsFrontViewModeActive { get; set; } //activate the 3 person perspective camera and pannels
+    public bool IsTopViewModeActive { get; set; } //activate top view
+
 
     private void ComprobateInstance()
     {
@@ -31,68 +27,24 @@ public class GameSettings : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void ClearCameras()
+    public void ActivateFront()
     {
-        _cameras = null;
-        _cameras = FindObjectsOfType<Camera>();
-
-        if (_cameras != null)
-        {
-            for (int i = 0; i < _cameras.Length; i++)
-            {
-                Destroy(_cameras[i].gameObject);
-            }
-        }
+        IsTopViewModeActive = false;
+        IsFrontViewModeActive = true;
     }
 
-    private void OnLevelWasLoaded(int level)
+    public void ActivateTop()
     {
-        if (level == 1) 
-        {
-            ClearCameras();
-            if (_isTopViewModeActive && !_isFrontViewModeActive)
-            {
-                _cameraTopViewGameObject = Instantiate(_cameraTopViewPrefab);
-                Debug.Log($"instanciada Top");
-                _isTopViewModeActive = true;
-                _isFrontViewModeActive = false;
-                ActivateTopView();
-            }
-            else
-            {
-                _cameraFrontViewGameObject = Instantiate(_cameraFrontViewPrefab);
-                Debug.Log($"instanciada Front");
-                _isTopViewModeActive = false;
-                _isFrontViewModeActive = true;
-                ActivateFrontView();
-            }
-        }
-        else
-        {
-            Debug.Log($"You are in level {level}");
-        }
-        
-    }
-
-    private void ActivateFrontView()
-    {
-        _cameraFrontViewGameObject.SetActive(true);
-        if(_cameraTopViewGameObject != null)
-        {
-            _cameraTopViewGameObject.SetActive(false);
-        }
-        //Change canvas' orientation for this camera
+        IsTopViewModeActive = true;
+        IsFrontViewModeActive = false;
     }
     
-    private void ActivateTopView()
+    public void ToggleEasyMode()
     {
-        _cameraTopViewGameObject.SetActive(true);
-        if(_cameraTopViewGameObject != null)
-        {
-            _cameraFrontViewGameObject.SetActive(false);
-        }
-        
-        
-        //Change canvas' orientation for this camera
+        IsEasyModeActive = !IsEasyModeActive;
+    }
+    public void ToggleDeveloperMode()
+    {
+        IsDeveloperModeActive = !IsDeveloperModeActive;
     }
 }
