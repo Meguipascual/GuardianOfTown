@@ -918,15 +918,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Range
-      value: 5
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Color.b
+      value: 0.107547104
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16734447
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Intensity
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Lightmapping
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
