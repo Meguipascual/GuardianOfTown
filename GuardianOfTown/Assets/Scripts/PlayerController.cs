@@ -12,6 +12,8 @@ public class PlayerController : Character
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
     [SerializeField] private int _levelPoints;
+    [SerializeField] private float _bulletTimeCounter;
+    [SerializeField] private float _bulletDelay;
 
     public bool IsDead { get; set; }
     public int Exp { get; set; }
@@ -23,6 +25,8 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
+        _bulletTimeCounter = 0;
+        _bulletDelay = 0.2f;
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
         fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
@@ -31,9 +35,26 @@ public class PlayerController : Character
     // Update is called once per frame
     void Update()
     {
-        if (!IsDead)
+        if (IsDead)
         {
-            Move();
+            return;
+        }
+
+        Move();
+
+        if (GameSettings.Instance.IsEasyModeActive)
+        {
+            if (Input.GetKey(KeyCode.Space)){
+                _bulletTimeCounter += Time.deltaTime;
+                if (_bulletTimeCounter > _bulletDelay)
+                {
+                    _bulletTimeCounter = 0;
+                    Shoot();
+                }
+            }
+        }
+        else
+        {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Shoot();

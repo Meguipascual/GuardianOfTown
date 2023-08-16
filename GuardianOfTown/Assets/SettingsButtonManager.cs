@@ -28,8 +28,7 @@ public class SettingsButtonManager : MonoBehaviour
         GameSettings.Instance.IsEasyModeActive = !GameSettings.Instance.IsEasyModeActive;
         GameSettings.Instance.IsDeveloperModeActive = false;
         StopAllCoroutines();
-        StartCoroutine(ShowOptionChangeMessage($"Easy Gamemode activated" +
-            $"(not developed yet)"));
+        StartCoroutine(ShowOptionChangeMessage($"Easy Gamemode activated"));
     }
     public void ToggleDeveloperMode()
     {
@@ -44,8 +43,7 @@ public class SettingsButtonManager : MonoBehaviour
         GameSettings.Instance.IsEasyModeActive = false;
         GameSettings.Instance.IsDeveloperModeActive = false;
         StopAllCoroutines();
-        StartCoroutine(ShowOptionChangeMessage($"Normal Gamemode activated" +
-            $"(the only Gamemode)"));
+        StartCoroutine(ShowOptionChangeMessage($"Normal Gamemode activated"));
     }
 
     IEnumerator ShowOptionChangeMessage(string message)
