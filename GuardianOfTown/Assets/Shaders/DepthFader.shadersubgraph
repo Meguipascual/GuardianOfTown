@@ -454,7 +454,7 @@
         "m_GuidSerialized": "a64bb5e6-b72c-47ba-abe0-99320c53bb90"
     },
     "m_Name": "depth",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Vector1_42bd26beb7884906b24e540838441189",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
@@ -1129,7 +1129,7 @@
         "m_GuidSerialized": "2ee71e17-6dac-498b-af45-2081446fba09"
     },
     "m_Name": "depthFallOff",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Vector1_f45e255070be4ea18886dfdfd830aab1",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,

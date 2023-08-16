@@ -53,7 +53,7 @@ public class DataPersistantManager : MonoBehaviour
     {
         SaveNextWave();
         SavePlayerStats();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Random.Range(1, 3));
     }
     public void SavePlayerStats()
     {
