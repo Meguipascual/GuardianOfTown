@@ -10,7 +10,7 @@ public class MenuTitleManager : MonoBehaviour
 {
     public void StartGameButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Random.Range(1, 3));
     }
 
     public void Exitbutton()
