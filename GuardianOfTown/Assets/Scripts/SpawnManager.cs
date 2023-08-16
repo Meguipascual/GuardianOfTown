@@ -34,6 +34,7 @@ public class SpawnManager : MonoBehaviour
             {
                 GameManager.SharedInstance.NumberOfEnemiesAndBosses = _wavesData[CurrentWave].numberOfEnemiesToCreate + _wavesData[CurrentWave].numberOfBossesToCreate;
                 GameManager.SharedInstance.NumberOfWavesLeft = _wavesData.Length - CurrentWave;
+                GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
             }
             else
             {

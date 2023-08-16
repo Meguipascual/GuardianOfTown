@@ -3907,6 +3907,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: waveText
+      value: 
+      objectReference: {fileID: 590789880}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownHpText
+      value: 
+      objectReference: {fileID: 1975299260}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuCanvas
+      value: 
+      objectReference: {fileID: 1295159161}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 2005576281}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: wavePopUpText
+      value: 
+      objectReference: {fileID: 1444684723}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: projectileText
+      value: 
+      objectReference: {fileID: 777435151}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: enemiesLeftText
+      value: 
+      objectReference: {fileID: 431489195}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: playerLevelText
+      value: 
+      objectReference: {fileID: 242380561}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerHPText
+      value: 
+      objectReference: {fileID: 1787439652}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerLevelText
+      value: 
+      objectReference: {fileID: 1795086760}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerSpeedText
+      value: 
+      objectReference: {fileID: 12789567}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerAttackText
+      value: 
+      objectReference: {fileID: 567395141}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerDefenseText
+      value: 
+      objectReference: {fileID: 332783071}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerCriticalRateText
+      value: 
+      objectReference: {fileID: 819084699}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: menuPlayerCriticalDamageText
+      value: 
+      objectReference: {fileID: 2051429477}
     - target: {fileID: 1136239616363345667, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: m_Name
       value: GameManager (1)
