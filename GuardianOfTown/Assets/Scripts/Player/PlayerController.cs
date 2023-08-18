@@ -85,6 +85,7 @@ public class PlayerController : Character
             }
             if (_cannonOverHeatedTimer > _cannonOverHeatedLimit)
             {
+                OverHeatedManager.Instance.ChangeCannonMaterial(100);
                 _isCannonOverheated = true;
                 _cannonOverHeatedTimer = _coolDownDelay;
             }

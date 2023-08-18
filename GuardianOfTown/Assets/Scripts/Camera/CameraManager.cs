@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _cameraTopViewGameObject;
-    [SerializeField] private GameObject _cameraFrontViewGameObject;
-    [SerializeField] private GameObject _cameraTopViewPrefab;
-    [SerializeField] private GameObject _cameraFrontViewPrefab;
-    private Camera [] _cameras;
+    [SerializeField] private GameObject[] _camerasTopViewGameObject;
+    [SerializeField] private GameObject[] _camerasFrontViewGameObject;
+    [SerializeField] private GameObject[] _camerasTopViewPrefab;
+    [SerializeField] private GameObject[] _camerasFrontViewPrefab;
+    private Camera [] _camerasToDestroy;
 
     private void Awake()
     {
         ClearCameras();
+        _camerasFrontViewGameObject = new GameObject[_camerasFrontViewPrefab.Length];
+        _camerasTopViewGameObject = new GameObject[_camerasTopViewPrefab.Length];
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _cameraTopViewGameObject = Instantiate(_cameraTopViewPrefab);
-        Debug.Log($"instanciada Top");
-        _cameraFrontViewGameObject = Instantiate(_cameraFrontViewPrefab);
-        Debug.Log($"instanciada Front");
+        for(int i=0;i<_camerasFrontViewPrefab.Length;i++)
+        {
 
+            var topGameobject = Instantiate(_camerasTopViewPrefab[i]);
+            _camerasTopViewGameObject[i] = topGameobject;
+            Debug.Log($"instanciada Top");
+
+            var frontGameobject = Instantiate(_camerasFrontViewPrefab[i]);
+            _camerasFrontViewGameObject[i] = frontGameobject;
+            Debug.Log($"instanciada Front");
+        }
+        
         if (GameSettings.Instance.IsTopViewModeActive && !GameSettings.Instance.IsFrontViewModeActive)
         {
-            ActivateTopView();
+            ActivateTopView(0);
 
         }
         else
         {
             GameSettings.Instance.IsTopViewModeActive = false;
-            ActivateFrontView();
+            ActivateFrontView(0);
         }
         
         
@@ -39,37 +48,43 @@ public class CameraManager : MonoBehaviour
 
     private void ClearCameras()
     {
-        _cameras = null;
-        _cameras = FindObjectsOfType<Camera>();
+        _camerasToDestroy = null;
+        _camerasToDestroy = FindObjectsOfType<Camera>();
 
-        if (_cameras != null)
+        if (_camerasToDestroy != null)
         {
-            for (int i = 0; i < _cameras.Length; i++)
+            for (int i = 0; i < _camerasToDestroy.Length; i++)
             {
-                Destroy(_cameras[i].gameObject);
+                Destroy(_camerasToDestroy[i].gameObject);
             }
         }
     }
 
-    private void ActivateFrontView()
+    private void ActivateFrontView(int selectedCamera)
     {
-        
-        _cameraFrontViewGameObject.SetActive(true);
-        if (_cameraTopViewGameObject != null)
+        if (_camerasTopViewGameObject != null)
         {
-            _cameraTopViewGameObject.SetActive(false);
+            for (int i=0;i< _camerasTopViewGameObject.Length; i++)
+            {
+                _camerasTopViewGameObject[i].SetActive(false);
+            }
         }
+        _camerasFrontViewGameObject[selectedCamera].SetActive(true);
+        
         //Change canvas' orientation for this camera
     }
 
-    private void ActivateTopView()
+    private void ActivateTopView(int selectedCamera)
     {
-        _cameraTopViewGameObject.SetActive(true);
-        if (_cameraTopViewGameObject != null)
-        {
-            _cameraFrontViewGameObject.SetActive(false);
-        }
 
+        if (_camerasFrontViewGameObject != null)
+        {
+            for (int i = 0; i < _camerasTopViewGameObject.Length; i++)
+            {
+                _camerasFrontViewGameObject[i].SetActive(false);
+            }
+        }
+        _camerasTopViewGameObject[selectedCamera].SetActive(true);
 
         //Change canvas' orientation for this camera
     }

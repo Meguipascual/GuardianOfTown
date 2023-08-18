@@ -5473,6 +5473,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1010055096091911832, guid: 7b55677411f90ad459e7a63df0f3bcc6, type: 3}
+      propertyPath: _camerasTopViewPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010055096091911832, guid: 7b55677411f90ad459e7a63df0f3bcc6, type: 3}
+      propertyPath: _camerasFrontViewPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010055096091911832, guid: 7b55677411f90ad459e7a63df0f3bcc6, type: 3}
+      propertyPath: _camerasTopViewPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 21446430214163976, guid: 13c278508dd5a4e49811fb21bef697bb, type: 3}
+    - target: {fileID: 1010055096091911832, guid: 7b55677411f90ad459e7a63df0f3bcc6, type: 3}
+      propertyPath: _camerasFrontViewPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 7722748132924799835, guid: c6933de727c0787458b99c6cece97500, type: 3}
     - target: {fileID: 1010055096091911833, guid: 7b55677411f90ad459e7a63df0f3bcc6, type: 3}
       propertyPath: m_RootOrder
       value: 11

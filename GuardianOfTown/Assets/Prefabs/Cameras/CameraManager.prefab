@@ -43,7 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee0c139cc9f19d44b93b45594296a89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTopViewGameObject: {fileID: 0}
-  _cameraFrontViewGameObject: {fileID: 0}
-  _cameraTopViewPrefab: {fileID: 21446430214163976, guid: 13c278508dd5a4e49811fb21bef697bb, type: 3}
-  _cameraFrontViewPrefab: {fileID: 7722748132924799835, guid: c6933de727c0787458b99c6cece97500, type: 3}
+  _camerasTopViewGameObject: []
+  _camerasFrontViewGameObject: []
+  _camerasTopViewPrefab:
+  - {fileID: 21446430214163976, guid: 13c278508dd5a4e49811fb21bef697bb, type: 3}
+  - {fileID: 21446430214163976, guid: cb0f125bcf2515843bd8c1c7289d4abe, type: 3}
+  - {fileID: 21446430214163976, guid: 284937caaf1236a4ba35473903327890, type: 3}
+  - {fileID: 21446430214163976, guid: 22c29710945aada4b8d5cc21abd056d9, type: 3}
+  _camerasFrontViewPrefab:
+  - {fileID: 7722748132924799835, guid: c6933de727c0787458b99c6cece97500, type: 3}
+  - {fileID: 7722748132924799835, guid: 085a07340ee7aaa47985fe0440585a04, type: 3}
+  - {fileID: 7722748132924799835, guid: baf714615c239494b94e99637a7950be, type: 3}
+  - {fileID: 7722748132924799835, guid: 7b3b8e233c80ad044a47082602b1bbf1, type: 3}
