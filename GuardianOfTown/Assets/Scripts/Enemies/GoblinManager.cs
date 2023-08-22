@@ -28,7 +28,7 @@ public class GoblinManager : Enemy
     {
         if (Player.IsDead) return;
 
-        Move();
+        TryToMove();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -47,7 +47,7 @@ public class PlayerController : Character
             return;
         }
 
-        Move();
+        TryToMove();
 
         if (GameSettings.Instance.IsEasyModeActive)
         {
@@ -113,7 +113,7 @@ public class PlayerController : Character
         //GameOver
     }
 
-    public override void Move()
+    public override void TryToMove()
     {
         // Check for left and right bounds
         if (transform.position.x < -xRange)

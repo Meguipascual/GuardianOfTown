@@ -24,5 +24,5 @@ public abstract class Character : MonoBehaviour
 
     public abstract void Die();
 
-    public abstract void Move();
+    public abstract void TryToMove();
 }

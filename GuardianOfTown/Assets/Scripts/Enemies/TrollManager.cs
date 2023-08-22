@@ -26,7 +26,7 @@ public class TrollManager : Enemy
     {
         if (Player.IsDead) return;
 
-        Move();
+        TryToMove();
     }
 
     private void OnTriggerEnter(Collider other)

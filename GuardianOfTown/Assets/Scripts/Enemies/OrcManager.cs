@@ -18,8 +18,8 @@ public class OrcManager : Enemy
         Defense = 10;
         Speed = 1.5f;
         Exp = 10;
-        TimeToMove = 2f;
-        TimeToRest = 2f;
+        TimeToMove = 1f;
+        TimeToRest = 1f;
         EnemyMove = "OrcMove";
         LevelUp();
     }
@@ -29,7 +29,7 @@ public class OrcManager : Enemy
     {
         if (Player.IsDead) return;
 
-        Move();
+        TryToMove();
     }
 
     private void OnTriggerEnter(Collider other)

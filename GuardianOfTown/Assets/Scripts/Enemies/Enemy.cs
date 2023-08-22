@@ -8,6 +8,7 @@ public abstract class Enemy : Character
 {
     private FillEnemyHealthBar _fillEnemyHealthBar;
     private ParticleSystem _criticalHitParticleSystem;
+    private Animator _animator;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected SpawnManager SpawnManager { get; set; }
     protected int Exp { get; set; }
@@ -29,6 +30,7 @@ public abstract class Enemy : Character
         SpawnManager = FindObjectOfType<SpawnManager>();
         _fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
         _criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
+        _animator = GetComponentInChildren<Animator>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
     }
     protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
@@ -53,7 +55,7 @@ public abstract class Enemy : Character
         Destroy(gameObject);
     }
 
-    public override void Move()
+    public override void TryToMove()
     {
         if (IsResting)
         {
@@ -69,7 +71,10 @@ public abstract class Enemy : Character
         }
         else if(MovementTimer >= 0)
         {
-            GetComponentInChildren<Animator>().Play(EnemyMove);
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName(EnemyMove)) 
+            {
+                _animator.Play(EnemyMove);
+            } 
             Advance();
             MovementTimer -= Time.deltaTime;
         }
