@@ -13,7 +13,7 @@ public abstract class Enemy : Character
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
 
-    protected string EnemyMove = "EnemyMove";
+    protected string EnemyMove { get; set; }
 
     protected float TimeToRest { get; set; }
     protected float TimeToMove { get; set; }

@@ -17,6 +17,7 @@ public class TrollManager : Enemy
         Exp = 20;
         TimeToMove = 2f;
         TimeToRest = 2f;
+        EnemyMove = "TrollMove";
         LevelUp();
     }
 

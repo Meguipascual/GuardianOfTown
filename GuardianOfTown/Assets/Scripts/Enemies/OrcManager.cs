@@ -20,6 +20,7 @@ public class OrcManager : Enemy
         Exp = 10;
         TimeToMove = 2f;
         TimeToRest = 2f;
+        EnemyMove = "OrcMove";
         LevelUp();
     }
 

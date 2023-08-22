@@ -19,6 +19,7 @@ public class GoblinManager : Enemy
         Exp = 5;
         TimeToMove = 2f;
         TimeToRest = 2f;
+        EnemyMove = "GoblinMove";
         LevelUp();
     }
 
