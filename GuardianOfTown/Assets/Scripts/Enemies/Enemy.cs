@@ -162,7 +162,8 @@ public abstract class Enemy : Character
 
     void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
-        GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        
+        GameObject prefab = Instantiate(floatingTextPrefab, transform.position, _fillEnemyHealthBar.gameObject.transform.rotation);
         if (damage < 0)
         {
             damage = 0;
@@ -172,7 +173,7 @@ public abstract class Enemy : Character
                 
         if (isCritical)
         {
-            Instantiate(criticalHitPrefab, transform.position, Quaternion.identity);
+            Instantiate(criticalHitPrefab, transform.position, _fillEnemyHealthBar.gameObject.transform.rotation);
             prefab.GetComponentInChildren<TextMesh>().color = Color.yellow;
         }
     }
