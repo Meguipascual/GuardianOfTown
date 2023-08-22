@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossManager : Enemy
@@ -13,22 +14,23 @@ public class BossManager : Enemy
         HP = 500;
         HpMax = HP;
         Defense = 10;
-        Speed = .5f;
+        Speed = 0.5f;
         Exp = 50;
+        TimeToMove = 2f;
+        TimeToRest = 2f;
         LevelUp();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Player.IsDead)
-        {
-            Move();
-        }
+        if(Player.IsDead) return;
+
+        Move();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Trigger(other, floatingTextPrefab, criticalHitTextPrefab);
-    }    
+    }   
 }

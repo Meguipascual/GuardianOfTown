@@ -60,7 +60,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private void ActivateFrontView(int selectedCamera)
+    public void ActivateFrontView(int selectedCamera)
     {
         if (_camerasTopViewGameObject != null)
         {
@@ -74,7 +74,7 @@ public class CameraManager : MonoBehaviour
         //Change canvas' orientation for this camera
     }
 
-    private void ActivateTopView(int selectedCamera)
+    public void ActivateTopView(int selectedCamera)
     {
 
         if (_camerasFrontViewGameObject != null)

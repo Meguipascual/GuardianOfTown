@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        //mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
+        mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
     }
 
     public void DecreaseNumberOfEnemies()

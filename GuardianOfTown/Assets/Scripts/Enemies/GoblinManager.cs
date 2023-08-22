@@ -17,16 +17,17 @@ public class GoblinManager : Enemy
         Defense = 5;
         Speed = 3f;
         Exp = 5;
+        TimeToMove = 2f;
+        TimeToRest = 2f;
         LevelUp();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Player.IsDead)
-        {
-            Move();
-        }
+        if (Player.IsDead) return;
+
+        Move();
     }
 
     private void OnTriggerEnter(Collider other)

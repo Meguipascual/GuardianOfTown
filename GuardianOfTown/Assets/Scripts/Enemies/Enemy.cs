@@ -13,6 +13,15 @@ public abstract class Enemy : Character
     protected int Exp { get; set; }
     protected PlayerController Player { get; set; }
 
+    protected string EnemyMove = "EnemyMove";
+
+    protected float TimeToRest { get; set; }
+    protected float TimeToMove { get; set; }
+
+    private float MovementTimer { get; set; }
+    private float RestingTimer { get; set; }
+    private bool IsResting { get; set; }
+
     protected virtual void Start()
     {
         Player = FindObjectOfType<PlayerController>();
@@ -46,9 +55,36 @@ public abstract class Enemy : Character
 
     public override void Move()
     {
-        transform.position += Vector3.back * Time.deltaTime * Speed;
+        if (IsResting)
+        {
+            if(RestingTimer >= 0)
+            {
+                RestingTimer -= Time.deltaTime;
+            }
+            else
+            {
+                RestingTimer = TimeToRest;
+                IsResting = false;
+            }
+        }
+        else if(MovementTimer >= 0)
+        {
+            GetComponentInChildren<Animator>().Play(EnemyMove);
+            Advance();
+            MovementTimer -= Time.deltaTime;
+        }
+        else
+        {
+            IsResting = true;
+            MovementTimer = TimeToMove;
+        }
+        
     }
-
+    private void Advance()
+    {
+        transform.position += Vector3.back * Time.deltaTime * Speed;
+        
+    }
     public override void LevelUp()
     {
         for (int i = 0; i < Level * 2; i++)

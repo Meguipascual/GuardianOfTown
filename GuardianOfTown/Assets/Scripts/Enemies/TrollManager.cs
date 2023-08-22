@@ -15,16 +15,17 @@ public class TrollManager : Enemy
         Defense = 10;
         Speed = 1f;
         Exp = 20;
+        TimeToMove = 2f;
+        TimeToRest = 2f;
         LevelUp();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Player.IsDead)
-        {
-            Move();
-        }
+        if (Player.IsDead) return;
+
+        Move();
     }
 
     private void OnTriggerEnter(Collider other)
