@@ -15,8 +15,10 @@ public abstract class Enemy : Character
     protected PlayerController Player { get; set; }
 
     protected string EnemyMove { get; set; }
+    protected string EnemyDeath { get; set; }
 
     protected float TimeToRest { get; set; }
+    protected float DeathDelay { get; set; }
     protected float TimeToMove { get; set; }
 
     private float MovementTimer { get; set; }
@@ -53,6 +55,12 @@ public abstract class Enemy : Character
     {
         GameManager.SharedInstance.DecreaseNumberOfEnemies();
         Destroy(gameObject);
+    }
+
+    IEnumerator DieInSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Die();
     }
 
     public override void TryToMove()
@@ -128,7 +136,17 @@ public abstract class Enemy : Character
         {
             Player.Exp += Exp;
             Player.LevelUp();
-            Die();
+            if(EnemyDeath != null)
+            {
+                IsResting= true;
+                this.GetComponent<Collider>().enabled = false;
+                _animator.Play(EnemyDeath);
+                StartCoroutine(DieInSeconds(DeathDelay));
+            }
+            else
+            {
+                Die();
+            } 
         }
     }
 

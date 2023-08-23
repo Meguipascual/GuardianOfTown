@@ -20,6 +20,8 @@ public class GoblinManager : Enemy
         TimeToMove = 1f;
         TimeToRest = 1f;
         EnemyMove = "GoblinMove";
+        EnemyDeath = "GoblinDeath";
+        DeathDelay = 0.6f;
         LevelUp();
     }
 
