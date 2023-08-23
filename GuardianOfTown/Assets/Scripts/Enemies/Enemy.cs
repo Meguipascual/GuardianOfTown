@@ -145,6 +145,7 @@ public abstract class Enemy : Character
             {
                 IsDying = true;
                 _collider.enabled = false;
+                _fillEnemyHealthBar.slider.gameObject.SetActive(false);
                 StartCoroutine(DieInSeconds(DeathDelay));
                 _animator.Play(EnemyDeath);
             }
