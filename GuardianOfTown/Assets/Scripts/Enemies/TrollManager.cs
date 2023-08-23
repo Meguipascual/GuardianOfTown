@@ -18,6 +18,8 @@ public class TrollManager : Enemy
         TimeToMove = 1.5f;
         TimeToRest = 1.5f;
         EnemyMove = "TrollMove";
+        EnemyDeath = "TrollDeath";
+        DeathDelay = 1.25f;
         LevelUp();
     }
 

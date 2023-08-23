@@ -21,6 +21,8 @@ public class OrcManager : Enemy
         TimeToMove = 1f;
         TimeToRest = 1f;
         EnemyMove = "OrcMove";
+        EnemyDeath = "OrcDeath";
+        DeathDelay = 0.4f;
         LevelUp();
     }
 

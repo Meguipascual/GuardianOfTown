@@ -9,6 +9,7 @@ public abstract class Enemy : Character
     private FillEnemyHealthBar _fillEnemyHealthBar;
     private ParticleSystem _criticalHitParticleSystem;
     private Animator _animator;
+    private Collider _collider;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected SpawnManager SpawnManager { get; set; }
     protected int Exp { get; set; }
@@ -24,6 +25,7 @@ public abstract class Enemy : Character
     private float MovementTimer { get; set; }
     private float RestingTimer { get; set; }
     private bool IsResting { get; set; }
+    private bool IsDying { get; set; }
 
     protected virtual void Start()
     {
@@ -33,6 +35,7 @@ public abstract class Enemy : Character
         _fillEnemyHealthBar = GetComponentInChildren<FillEnemyHealthBar>();
         _criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
         _animator = GetComponentInChildren<Animator>();
+        _collider = GetComponent<Collider>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
     }
     protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
@@ -65,6 +68,8 @@ public abstract class Enemy : Character
 
     public override void TryToMove()
     {
+        if (IsDying) return;
+
         if (IsResting)
         {
             if(RestingTimer >= 0)
@@ -138,10 +143,10 @@ public abstract class Enemy : Character
             Player.LevelUp();
             if(EnemyDeath != null)
             {
-                IsResting= true;
-                this.GetComponent<Collider>().enabled = false;
-                _animator.Play(EnemyDeath);
+                IsDying = true;
+                _collider.enabled = false;
                 StartCoroutine(DieInSeconds(DeathDelay));
+                _animator.Play(EnemyDeath);
             }
             else
             {
@@ -181,7 +186,7 @@ public abstract class Enemy : Character
     void ShowDamage(bool isCritical, int damage, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
         
-        GameObject prefab = Instantiate(floatingTextPrefab, transform.position, _fillEnemyHealthBar.gameObject.transform.rotation);
+        GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
         if (damage < 0)
         {
             damage = 0;
@@ -191,7 +196,7 @@ public abstract class Enemy : Character
                 
         if (isCritical)
         {
-            Instantiate(criticalHitPrefab, transform.position, _fillEnemyHealthBar.gameObject.transform.rotation);
+            Instantiate(criticalHitPrefab, transform.position, Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().color = Color.yellow;
         }
     }
