@@ -18,7 +18,9 @@ public class FemaleBossManager : Enemy
         Exp = 50;
         TimeToMove = 2f;
         TimeToRest = 2f;
-        EnemyMove = "EnemyMove";
+        EnemyMove = "FemaleBossMove";
+        EnemyDeath = "FemaleBossDeath";
+        DeathDelay = 1.2f;
         LevelUp();
     }
 
