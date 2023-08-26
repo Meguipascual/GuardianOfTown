@@ -53,7 +53,8 @@ public class DataPersistantManager : MonoBehaviour
     {
         SaveNextWave();
         SavePlayerStats();
-        SceneManager.LoadScene(Random.Range(1, 3));
+        //SceneManager.LoadScene(Random.Range(1, 3));
+        SceneManager.LoadScene(1);
     }
     public void SavePlayerStats()
     {
@@ -65,7 +66,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerDefense = playerController.Defense;
         SavedPlayerCriticalRate = playerController.CriticalRate;
         SavedPlayerCriticalDamage = playerController.CriticalDamage;
-        //SavedPlayerSpeed = playerController.Speed;
+        SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
         SaveTownHp();
     }

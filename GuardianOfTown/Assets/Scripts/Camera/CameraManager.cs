@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-
+        _camerasGameObject = null;
         ClearCameras();
         if (GameSettings.Instance.IsTopViewModeActive)
         {
