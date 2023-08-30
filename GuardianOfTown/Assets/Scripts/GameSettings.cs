@@ -11,8 +11,7 @@ public class GameSettings : MonoBehaviour
     public bool IsFrontViewModeActive { get; set; } //activate the 3 person perspective camera and pannels
     public bool IsTopViewModeActive { get; set; } //activate top view
 
-
-    private void ComprobateInstance()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -20,10 +19,6 @@ public class GameSettings : MonoBehaviour
             return;
         }
         Instance = this;
-    }
-    private void Awake()
-    {
-        ComprobateInstance();
         DontDestroyOnLoad(gameObject);
     }
 

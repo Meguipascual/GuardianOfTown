@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < amountOfBosses; i++)
         {
             bossPrefab = Random.Range(0, _bossPrefab.Length);
-            bossX = Random.Range(-23f, 23f);
+            bossX = Random.Range(1472f, 1528f);//-23 23
             bossY = _bossPrefab[bossPrefab].transform.localScale.y;
             enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
             Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
@@ -85,7 +85,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
             enemyType = Random.Range(0, _enemyPrefab.Length);
-            enemyX = Random.Range(-23f, 23f);
+            enemyX = Random.Range(1472f, 1528f);//-23 23
             enemyY = _enemyPrefab[enemyType].transform.localScale.y;
             enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
@@ -105,7 +105,7 @@ public class SpawnManager : MonoBehaviour
         while (!_playerController.IsDead)
         {
             powerupType = Random.Range(0, _powerupPrefab.Length);
-            powerupX = Random.Range(-23f, 23f);
+            powerupX = Random.Range(1472f, 1528f); //-23 23
             powerupPosition = new Vector3(powerupX, powerupY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnPoweupSpeed + (CurrentWave + 1));
             Instantiate(_powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
