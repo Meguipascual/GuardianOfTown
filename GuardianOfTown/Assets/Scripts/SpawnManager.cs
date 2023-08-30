@@ -7,7 +7,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject [] _enemyPrefab;
     [SerializeField] private GameObject[] _bossPrefab;
     [SerializeField] private GameObject [] _powerupPrefab;
-    [SerializeField] private SpawnManagerScriptableObject [] _wavesData;
+    [SerializeField] private WaveScriptableObject [] _wavesData;
+    [SerializeField] private float[] _spawnBoundariesLeft;
+    [SerializeField] private float[] _spawnBoundariesRight;
     [SerializeField] private float _spawnDistanceZ;
     private PlayerController _playerController;
     private float _spawnSpeed = 5f;//the higher the speed the slower the spawn
@@ -20,6 +22,8 @@ public class SpawnManager : MonoBehaviour
     {
         LevelOfBosses = _wavesData[CurrentWave].LevelOfBosses;
         LevelOfEnemies = _wavesData[CurrentWave].LevelOfEnemies;
+        _spawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
+        _spawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
     }
 
     // Start is called before the first frame update
@@ -66,7 +70,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < amountOfBosses; i++)
         {
             bossPrefab = Random.Range(0, _bossPrefab.Length);
-            bossX = Random.Range(1472f, 1528f);//-23 23
+            bossX = Random.Range(_spawnBoundariesLeft[_wavesData[CurrentWave].Gate], _spawnBoundariesRight[_wavesData[CurrentWave].Gate]);//-23 23
             bossY = _bossPrefab[bossPrefab].transform.localScale.y;
             enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
             Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
@@ -75,7 +79,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnAmountOfEnemies(SpawnManagerScriptableObject spawnSettings)
+    IEnumerator SpawnAmountOfEnemies(WaveScriptableObject spawnSettings)
     {
         Vector3 enemyPosition;
         int enemyType;
@@ -85,7 +89,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
         {
             enemyType = Random.Range(0, _enemyPrefab.Length);
-            enemyX = Random.Range(1472f, 1528f);//-23 23
+            enemyX = Random.Range(_spawnBoundariesLeft[_wavesData[CurrentWave].Gate], _spawnBoundariesRight[_wavesData[CurrentWave].Gate]);//-23 23
             enemyY = _enemyPrefab[enemyType].transform.localScale.y;
             enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnSpeed / (CurrentWave + 1));
@@ -105,7 +109,7 @@ public class SpawnManager : MonoBehaviour
         while (!_playerController.IsDead)
         {
             powerupType = Random.Range(0, _powerupPrefab.Length);
-            powerupX = Random.Range(1472f, 1528f); //-23 23
+            powerupX = Random.Range(_spawnBoundariesLeft[_wavesData[CurrentWave].Gate], _spawnBoundariesRight[_wavesData[CurrentWave].Gate]); //-23 23
             powerupPosition = new Vector3(powerupX, powerupY, _spawnDistanceZ);
             yield return new WaitForSeconds(_spawnPoweupSpeed + (CurrentWave + 1));
             Instantiate(_powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);

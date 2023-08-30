@@ -16,3 +16,4 @@ MonoBehaviour:
   numberOfBossesToCreate: 5
   LevelOfEnemies: 1
   LevelOfBosses: 1
+  Gate: 0

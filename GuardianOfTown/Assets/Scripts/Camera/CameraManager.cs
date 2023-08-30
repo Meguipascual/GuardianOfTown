@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         SetCamerasGameObject();
-        ActivateCamera(1);
+        ActivateCamera(0);
     }
 
     private void SetCamerasGameObject()
