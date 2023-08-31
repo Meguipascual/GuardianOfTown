@@ -11,6 +11,9 @@ public class Powerup : MonoBehaviour
         {
             Destroy(gameObject);
             powerupEffect.Apply(other.gameObject);
-        } 
+        }else if(other.CompareTag(Tags.Wall))
+        {
+            Destroy(gameObject);
+        }
     }
 }
