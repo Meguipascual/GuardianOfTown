@@ -1336,6 +1336,10 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
 --- !u!1001 &8209290950295339547
@@ -1441,6 +1445,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1171549304580213878, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3f3d8b174d76ee4f947b4b429c518ce, type: 2}
     - target: {fileID: 1784747260517925682, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1466,8 +1474,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4373755574485294491, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
+      propertyPath: m_Name
+      value: Peana
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373755574485294491, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373755574485294491, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6562889748348933850, guid: 0c1966eaf23aa464e8780537e23e8e22, type: 3}
       propertyPath: m_Layer
