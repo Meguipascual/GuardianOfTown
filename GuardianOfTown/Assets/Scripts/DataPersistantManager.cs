@@ -10,6 +10,7 @@ public class DataPersistantManager : MonoBehaviour
     private SpawnManager spawnManager;
     private PlayerController playerController;
     
+    public int Stage { get; set; }
     public int Wave { get; set; }
     public int MaxWave { get; set; }
     public int SavedPlayerLevel { get; set; }
@@ -36,12 +37,13 @@ public class DataPersistantManager : MonoBehaviour
     private void Start()
     {
         SavedTownHpShields = new List<Image>();
+        Stage = 0;
         Wave = 0;
         MaxWave = 11;
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;
-        SavedPlayerAttack = 10;
+        SavedPlayerAttack = 30;
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
@@ -49,12 +51,18 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalDamage = 1.0f;
 
     }
-    public void ChangeStage()
+
+    public void ChangeWave() 
     {
         SaveNextWave();
-        SavePlayerStats();
-        //SceneManager.LoadScene(Random.Range(1, 3));
-        SceneManager.LoadScene(1);
+        ReloadScene();
+    }
+
+    public void ChangeStage()
+    {
+        SaveNextStage();
+        //If there are more stages activate Level up panel and when the level up ended change Stage scriptable and reload scene
+        ReloadScene();
     }
     public void SavePlayerStats()
     {
@@ -114,8 +122,20 @@ public class DataPersistantManager : MonoBehaviour
         playerController.transform.position = SavedPlayerPosition;
     }
 
+    public void SaveNextStage()
+    {
+        Wave = 0;
+        Stage++;
+    }
+
     public void SaveNextWave()
     {
         Wave++;
+    }
+
+    private void ReloadScene()
+    {
+        SavePlayerStats();
+        SceneManager.LoadScene(3);
     }
 }

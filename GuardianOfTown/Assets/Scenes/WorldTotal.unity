@@ -8597,7 +8597,7 @@ GameObject:
   - component: {fileID: 590789881}
   - component: {fileID: 590789880}
   m_Layer: 5
-  m_Name: Wave
+  m_Name: StageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8642,7 +8642,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wave: 1'
+  m_text: 'Stage: 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25796,7 +25796,7 @@ GameObject:
   - component: {fileID: 1444684724}
   - component: {fileID: 1444684723}
   m_Layer: 5
-  m_Name: WavePopUpText
+  m_Name: StagePopUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25841,7 +25841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " Wave 1 \n\n"
+  m_text: " Stage 1 \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -36859,6 +36859,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1975299260}
     - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: _levelText
+      value: 
+      objectReference: {fileID: 590789880}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: _stageText
+      value: 
+      objectReference: {fileID: 590789880}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: menuCanvas
       value: 
       objectReference: {fileID: 1295159161}
@@ -36874,6 +36882,14 @@ PrefabInstance:
       propertyPath: projectileText
       value: 
       objectReference: {fileID: 777435151}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: _levelPopUpText
+      value: 
+      objectReference: {fileID: 1444684723}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: _stagePopUpText
+      value: 
+      objectReference: {fileID: 1444684723}
     - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: enemiesLeftText
       value: 
@@ -36923,6 +36939,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _levelsData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _stagesData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _levelsData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6309ff986ca95344ea05dbf322581599, type: 2}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _stagesData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 98752e00b80e024469b05e2c58332f61, type: 2}
     - target: {fileID: 2597599847727287062, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
       propertyPath: m_Name
       value: SpawnManager

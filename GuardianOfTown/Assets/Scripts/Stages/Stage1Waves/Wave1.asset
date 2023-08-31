@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa02dacb3eaad4d44b36d2710e3545b1, type: 3}
-  m_Name: Wave3
+  m_Name: Wave1
   m_EditorClassIdentifier: 
-  numberOfEnemiesToCreate: 10
-  numberOfBossesToCreate: 3
-  LevelOfEnemies: 3
+  numberOfEnemiesToCreate: 1
+  numberOfBossesToCreate: 1
+  LevelOfEnemies: 1
   LevelOfBosses: 1
-  Gate: 3
+  Gate: 0

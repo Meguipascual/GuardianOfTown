@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     public List<Image> TownHpShields;
     public TextMeshProUGUI TownHpText;
     public TextMeshProUGUI gameOverText;
-    public TextMeshProUGUI waveText;
-    public TextMeshProUGUI wavePopUpText;
+    public TextMeshProUGUI _stageText;
+    public TextMeshProUGUI _stagePopUpText;
     public TextMeshProUGUI playerLevelText;
     public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI projectileText;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     private bool pauseToggle;
     private string cameraQuake = "CameraQuake";
     public int NumberOfEnemiesAndBosses { get; set; }
-    public int NumberOfWavesLeft { get; set; }
+    public int NumberOfStagesLeft { get; set; }
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(NumberOfWavesLeft < 0)
+        if(NumberOfStagesLeft < 0)
         {
             return;
         }
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        waveText.text = "Wave: " + (DataPersistantManager.Instance.Wave + 1);
+        _stageText.text = "Stage: " + (DataPersistantManager.Instance.Stage + 1);
         menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
         menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
         menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
@@ -79,7 +79,13 @@ public class GameManager : MonoBehaviour
             GameObject.Instantiate(TownHpShields[i], TownHpText.transform).gameObject.SetActive(true);
         }
         
-        StartCoroutine(ShowWaveText());
+        if(DataPersistantManager.Instance.Wave == 0)
+        {
+            StartCoroutine(ShowWaveText());
+        }
+
+        spawnManager.ControlWavesSpawn();
+        cameraStartRotation = mainCamera.transform.rotation;
     }
 
     // Update is called once per frame
@@ -98,12 +104,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWaveText()
     {
-        wavePopUpText.text = "Wave " + (DataPersistantManager.Instance.Wave + 1);
-        wavePopUpText.gameObject.SetActive(true);
+        _stagePopUpText.text = "Stage " + (DataPersistantManager.Instance.Stage + 1);
+        _stagePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
-        wavePopUpText.gameObject.SetActive(false);
-        spawnManager.ControlWavesSpawn();
-        cameraStartRotation = mainCamera.transform.rotation;
+        _stagePopUpText.gameObject.SetActive(false);
     }
 
     private void ToggleMenu()
@@ -155,7 +159,7 @@ public class GameManager : MonoBehaviour
         enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
         if (NumberOfEnemiesAndBosses == 0)
         {
-            DataPersistantManager.Instance.ChangeStage();
+            spawnManager.ChangeWave();
         }
     }
 }

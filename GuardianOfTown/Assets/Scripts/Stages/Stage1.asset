@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e56b8b1544fa56642b62e3a9eca1536b, type: 3}
-  m_Name: Level1
+  m_Name: Stage1
   m_EditorClassIdentifier: 
   _wavesData:
   - {fileID: 11400000, guid: cae8dfa7db6683f44a0c3bf64c28ce03, type: 2}
   - {fileID: 11400000, guid: f999cbf9d29e5f04280ea08766292b2f, type: 2}
   - {fileID: 11400000, guid: 2d2338511e815a047a02e230c31f039c, type: 2}
-  Level: 0
+  _stage: 0
