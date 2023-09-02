@@ -84,14 +84,12 @@ public class CameraManager : MonoBehaviour
 
     public void ActivateCamera(int selectedCamera)
     {
-        Debug.Log($"trying to activate {selectedCamera}");
         CamerasGameObject[selectedCamera].SetActive(true);
         ActiveCameraIndex = selectedCamera;
         //Change canvas' orientation for this camera
     }
     public void DeactivateCamera(int selectedCamera)
     {
-        Debug.Log($"trying to deactivate {selectedCamera}");
         CamerasGameObject[selectedCamera].SetActive(false);
     }
 }

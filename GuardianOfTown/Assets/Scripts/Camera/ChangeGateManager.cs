@@ -16,16 +16,23 @@ public class ChangeGateManager : MonoBehaviour
 
     public void RightButtonClicked()
     {
-        var camera = _cameraManager.ActiveCameraIndex;
-        if (camera < _cameraManager.CamerasGameObject.Length - 1)
-        {
-            _cameraManager.ActivateCamera(camera + 1);
-            _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[camera + 1];
-            _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[camera + 1];
+        var cameraIndex = _cameraManager.ActiveCameraIndex;
+        if (cameraIndex < _cameraManager.CamerasGameObject.Length - 1)
+        { 
+            _cameraManager.ActivateCamera(cameraIndex + 1);
+            _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[cameraIndex + 1];
+            _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex + 1];
             _playerController.transform.position = new Vector3(
-                _playerController.transform.position.x + DataPersistantManager.Instance.SpawnBoundariesLeft[camera + 1],
+                (_playerController.transform.position.x - Mathf.Abs(DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex]))
+                + DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex + 1],
                 _playerController.transform.position.y,
                 _playerController.transform.position.z);
+            Debug.Log(_playerController.transform.position.x);
+            if(cameraIndex == 0)
+            {
+                Debug.Log(_playerController.transform.position.x);
+                _playerController.transform.position = new Vector3(_playerController.transform.position.x + 46, _playerController.transform.position.y, _playerController.transform.position.z);
+            }
             
         }
         else
@@ -34,11 +41,12 @@ public class ChangeGateManager : MonoBehaviour
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
             _playerController.transform.position = new Vector3(
-                _playerController.transform.position.x + DataPersistantManager.Instance.SpawnBoundariesLeft[0],
+                (_playerController.transform.position.x - Mathf.Abs(DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex]))
+                + DataPersistantManager.Instance.SpawnBoundariesLeft[0],
                 _playerController.transform.position.y,
                 _playerController.transform.position.z);
         }
-        _cameraManager.DeactivateCamera(camera);
+        _cameraManager.DeactivateCamera(cameraIndex);
         _playerController.gameObject.SetActive(false);
         _playerController.gameObject.SetActive(true);
     }
