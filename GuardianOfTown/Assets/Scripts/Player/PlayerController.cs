@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : Character
 {
-    private float xRange = 23f;
+    public float XLeftBound { get; set; }
+    public float XRightBound { get; set; }
     private float horizontalInput;
     private FillHealthBar fillHealthBar;
     public ParticleSystem shieldParticleSystem;
@@ -34,6 +35,8 @@ public class PlayerController : Character
         _cannonOverHeatedLimit = 30f;
         _cannonOverHeatedTimer = 0;
         _coolDownDelay = 5f;
+        XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
+        XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
         fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
@@ -116,14 +119,14 @@ public class PlayerController : Character
     public override void TryToMove()
     {
         // Check for left and right bounds
-        if (transform.position.x < -xRange)
+        if (transform.position.x < XLeftBound)
         {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            transform.position = new Vector3(XLeftBound, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.x > xRange)
+        if (transform.position.x > XRightBound)
         {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            transform.position = new Vector3(XRightBound, transform.position.y, transform.position.z);
         }
 
         // Player movement left to right

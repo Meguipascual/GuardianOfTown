@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _camerasGameObject;
+    public GameObject[] CamerasGameObject { get; set; }
+    public int ActiveCameraIndex {  get; set; }
     [SerializeField] private GameObject[] _camerasTopViewPrefab;
     [SerializeField] private GameObject[] _camerasFrontViewPrefab;
     private Camera [] _camerasToDestroy;
@@ -13,7 +14,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        _camerasGameObject = null;
+        CamerasGameObject = null;
         ClearCameras();
         
         
@@ -23,7 +24,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         SetCamerasGameObject();
-        ActivateCamera(0);
+        SetUpCameras();
     }
 
     private void SetCamerasGameObject()
@@ -31,22 +32,22 @@ public class CameraManager : MonoBehaviour
         if (GameSettings.Instance.IsTopViewModeActive)
         {
             _isTopViewActive = true;
-            _camerasGameObject = new GameObject[_camerasTopViewPrefab.Length];
+            CamerasGameObject = new GameObject[_camerasTopViewPrefab.Length];
             for (int i = 0; i < _camerasTopViewPrefab.Length; i++)
             {
                 var topGameobject = Instantiate(_camerasTopViewPrefab[i]);
-                _camerasGameObject[i] = topGameobject;
+                CamerasGameObject[i] = topGameobject;
                 Debug.Log($"instanciada Top {i}");
             }
         }
         else
         {
             _isTopViewActive = false;
-            _camerasGameObject = new GameObject[_camerasFrontViewPrefab.Length];
+            CamerasGameObject = new GameObject[_camerasFrontViewPrefab.Length];
             for (int i = 0; i < _camerasFrontViewPrefab.Length; i++)
             {
                 var frontGameobject = Instantiate(_camerasFrontViewPrefab[i]);
-                _camerasGameObject[i] = frontGameobject;
+                CamerasGameObject[i] = frontGameobject;
                 Debug.Log($"instanciada Front {i}");
             }
             GameSettings.Instance.IsTopViewModeActive = false;
@@ -67,17 +68,30 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+
+    //Activate and Deactivate the cameras for an initial set up
+    private void SetUpCameras()
+    {
+        if (CamerasGameObject != null)
+        {
+            for (int i = 0; i < CamerasGameObject.Length; i++)
+            {
+                DeactivateCamera(i);
+            }
+            ActivateCamera(0);
+        }
+    }
+
     public void ActivateCamera(int selectedCamera)
     {
-        if (_camerasGameObject != null)
-        {
-            for (int i=0;i< _camerasGameObject.Length; i++)
-            {
-                _camerasGameObject[i].SetActive(false);
-            }
-        }
-        _camerasGameObject[selectedCamera].SetActive(true);
-        
+        Debug.Log($"trying to activate {selectedCamera}");
+        CamerasGameObject[selectedCamera].SetActive(true);
+        ActiveCameraIndex = selectedCamera;
         //Change canvas' orientation for this camera
+    }
+    public void DeactivateCamera(int selectedCamera)
+    {
+        Debug.Log($"trying to deactivate {selectedCamera}");
+        CamerasGameObject[selectedCamera].SetActive(false);
     }
 }

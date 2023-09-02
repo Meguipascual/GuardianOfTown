@@ -23,6 +23,8 @@ public class DataPersistantManager : MonoBehaviour
     public float SavedPlayerSpeed { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
+    public float[] SpawnBoundariesLeft { get; private set; }
+    public float[] SpawnBoundariesRight { get; private set; }
 
     private void Awake()
     {
@@ -49,6 +51,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
+        SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
+        SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 
     }
 
