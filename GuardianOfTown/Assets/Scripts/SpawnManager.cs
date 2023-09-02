@@ -19,11 +19,14 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfBosses;
-        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfEnemies;
-        
+        LoadLevelOfEnemies();
     }
 
+    private void LoadLevelOfEnemies()
+    {
+        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfBosses;
+        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfEnemies;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +37,7 @@ public class SpawnManager : MonoBehaviour
             CurrentWave = DataPersistantManager.Instance.Wave;
             if(CurrentStage < _stagesData.Length)
             {
-                GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData[CurrentStage]._wavesData[CurrentWave].numberOfEnemiesToCreate + _stagesData[CurrentStage]._wavesData[CurrentWave].numberOfBossesToCreate;
-                GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
-                GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
+                LoadNumberOfEnemies();
             }
             else
             {
@@ -48,6 +49,13 @@ public class SpawnManager : MonoBehaviour
             CurrentStage = 0;
             Debug.Log("data persistant error ");
         }
+    }
+
+    private void LoadNumberOfEnemies()
+    {
+        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave].numberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave].numberOfBossesToCreate;
+        GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
+        GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
     }
 
     private void Update()
@@ -141,9 +149,12 @@ public class SpawnManager : MonoBehaviour
     
     public void ChangeWave()
     {
-        if (CurrentWave < _stagesData[CurrentStage]._wavesData.Count)
+        if (CurrentWave < _stagesData[CurrentStage]._wavesData.Count-1)
         {
             CurrentWave++;
+            LoadLevelOfEnemies();
+            LoadNumberOfEnemies();
+            ControlWavesSpawn();
             Debug.Log($"there are some waves left");
             DataPersistantManager.Instance.ChangeWave();
         }

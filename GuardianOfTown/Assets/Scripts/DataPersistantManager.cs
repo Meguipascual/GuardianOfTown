@@ -59,7 +59,7 @@ public class DataPersistantManager : MonoBehaviour
     public void ChangeWave() 
     {
         SaveNextWave();
-        ReloadScene();
+        //ReloadScene();
     }
 
     public void ChangeStage()
