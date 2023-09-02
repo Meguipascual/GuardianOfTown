@@ -48,7 +48,6 @@ public class CameraManager : MonoBehaviour
             {
                 var frontGameobject = Instantiate(_camerasFrontViewPrefab[i]);
                 CamerasGameObject[i] = frontGameobject;
-                Debug.Log($"instanciada Front {i}");
             }
             GameSettings.Instance.IsTopViewModeActive = false;
         }
