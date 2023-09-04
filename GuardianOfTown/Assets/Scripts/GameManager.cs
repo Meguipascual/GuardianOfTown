@@ -18,23 +18,24 @@ public class GameManager : MonoBehaviour
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
     public List<Image> TownHpShields;
-    public TextMeshProUGUI TownHpText;
-    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI _townHpText;
+    public TextMeshProUGUI _gameOverText;
     public TextMeshProUGUI _stageText;
     public TextMeshProUGUI _stagePopUpText;
-    public TextMeshProUGUI playerLevelText;
-    public TextMeshProUGUI enemiesLeftText;
-    public TextMeshProUGUI projectileText;
-    public TextMeshProUGUI menuPlayerLevelText;
-    public TextMeshProUGUI menuPlayerHPText;
-    public TextMeshProUGUI menuPlayerAttackText;
-    public TextMeshProUGUI menuPlayerDefenseText;
-    public TextMeshProUGUI menuPlayerSpeedText;
-    public TextMeshProUGUI menuPlayerCriticalRateText;
-    public TextMeshProUGUI menuPlayerCriticalDamageText;
-    public GameObject menuCanvas;
-    private bool pauseToggle;
-    private string cameraQuake = "CameraQuake";
+    public TextMeshProUGUI _wavePopUpText;
+    public TextMeshProUGUI _playerLevelText;
+    public TextMeshProUGUI _enemiesLeftText;
+    public TextMeshProUGUI _projectileText;
+    public TextMeshProUGUI _menuPlayerLevelText;
+    public TextMeshProUGUI _menuPlayerHPText;
+    public TextMeshProUGUI _menuPlayerAttackText;
+    public TextMeshProUGUI _menuPlayerDefenseText;
+    public TextMeshProUGUI _menuPlayerSpeedText;
+    public TextMeshProUGUI _menuPlayerCriticalRateText;
+    public TextMeshProUGUI _menuPlayerCriticalDamageText;
+    public GameObject _menuCanvas;
+    private bool _pauseToggle;
+    private string _cameraQuake = "CameraQuake";
     public int NumberOfEnemiesAndBosses { get; set; }
     public int NumberOfStagesLeft { get; set; }
 
@@ -54,16 +55,16 @@ public class GameManager : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnManager>();
         mainCamera = FindObjectOfType<Camera>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
-        playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
+        _playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
         _stageText.text = "Stage: " + (DataPersistantManager.Instance.Stage + 1);
-        menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
-        menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
-        menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
-        menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
-        menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
-        menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
-        menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
-        enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        _menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
+        _menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
+        _menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
+        _menuPlayerDefenseText.text = $"Defense: {DataPersistantManager.Instance.SavedPlayerDefense}";
+        _menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
+        _menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
+        _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
+        _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
 
 
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < TownHpShields.Count; i++)
         {
-            GameObject.Instantiate(TownHpShields[i], TownHpText.transform).gameObject.SetActive(true);
+            GameObject.Instantiate(TownHpShields[i], _townHpText.transform).gameObject.SetActive(true);
         }
 
         spawnManager.ControlWavesSpawn();
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
         
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
-            StartCoroutine(ShowWaveText());
+            StartCoroutine(ShowStageText());
         }
     }
 
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         if(playerController.IsDead)
         {
-            gameOverText.gameObject.SetActive(true);
+            _gameOverText.gameObject.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -102,9 +103,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator ShowWaveText()
+    public IEnumerator ShowWaveText(bool randomWave)
     {
-        _stagePopUpText.text = "Stage " + (DataPersistantManager.Instance.Stage + 1);
+        if (randomWave)
+        {
+            _wavePopUpText.text = $"They are attacking all our gates";
+        }
+        else
+        {
+            _wavePopUpText.text = $"New enemies' wave incoming";
+        }
+        
+        _wavePopUpText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        _wavePopUpText.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowStageText()
+    {
+        _stagePopUpText.text = $"Stage {(DataPersistantManager.Instance.Stage + 1)}";
         _stagePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         _stagePopUpText.gameObject.SetActive(false);
@@ -112,17 +129,17 @@ public class GameManager : MonoBehaviour
 
     private void ToggleMenu()
     {
-        if (pauseToggle)
+        if (_pauseToggle)
         {
             Time.timeScale = 1;
-            menuCanvas.SetActive(false);
+            _menuCanvas.SetActive(false);
         }
         else
         {
             Time.timeScale = 0;
-            menuCanvas.SetActive(true);
+            _menuCanvas.SetActive(true);
         }
-        pauseToggle = !pauseToggle;
+        _pauseToggle = !_pauseToggle;
     }
 
     public void ReturnToMainMenuButton()
@@ -135,8 +152,8 @@ public class GameManager : MonoBehaviour
     public void ResumeButton()
     {
         Time.timeScale = 1;
-        menuCanvas.SetActive(false);
-        pauseToggle = !pauseToggle;
+        _menuCanvas.SetActive(false);
+        _pauseToggle = !_pauseToggle;
     }
 
     public void ExitButton()
@@ -150,13 +167,13 @@ public class GameManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        mainCamera.GetComponent<Animator>().Play(cameraQuake, 0, 0.0f);
+        mainCamera.GetComponent<Animator>().Play(_cameraQuake, 0, 0.0f);
     }
 
     public void DecreaseNumberOfEnemies()
     {
         NumberOfEnemiesAndBosses--;
-        enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
         if (NumberOfEnemiesAndBosses == 0)
         {
             spawnManager.ChangeWave();

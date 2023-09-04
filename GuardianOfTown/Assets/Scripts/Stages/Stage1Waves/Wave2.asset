@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa02dacb3eaad4d44b36d2710e3545b1, type: 3}
   m_Name: Wave2
   m_EditorClassIdentifier: 
-  numberOfEnemiesToCreate: 1
-  numberOfBossesToCreate: 1
-  LevelOfEnemies: 2
-  LevelOfBosses: 2
+  _numberOfEnemiesToCreate: 15
+  _numberOfBossesToCreate: 2
+  _levelOfEnemies: 0
+  _levelOfBosses: 0
+  _numberOfEnemiesByGate: 0
   Gate: 1
+  _isRandomized: 1

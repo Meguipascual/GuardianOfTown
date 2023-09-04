@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour
     {
         GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfBossesToCreate;
         GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
-        GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
+        GameManager.SharedInstance._enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
     }
 
     private void Update()
@@ -179,7 +179,7 @@ public class SpawnManager : MonoBehaviour
             LoadNumberOfEnemies();
             ControlWavesSpawn();
             Debug.Log($"there are some waves left");
-            DataPersistantManager.Instance.ChangeWave();
+            DataPersistantManager.Instance.ChangeWave(_stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized);
         }
         else
         {

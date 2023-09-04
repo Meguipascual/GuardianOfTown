@@ -56,8 +56,9 @@ public class DataPersistantManager : MonoBehaviour
 
     }
 
-    public void ChangeWave() 
+    public void ChangeWave(bool isNextWaveRandom) 
     {
+        StartCoroutine(GameManager.SharedInstance.ShowWaveText(isNextWaveRandom));
         SaveNextWave();
         //ReloadScene();
     }

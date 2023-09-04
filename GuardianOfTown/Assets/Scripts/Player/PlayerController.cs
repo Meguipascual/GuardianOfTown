@@ -10,7 +10,6 @@ public class PlayerController : Character
     public float XRightBound { get; set; }
     private float horizontalInput;
     private FillHealthBar fillHealthBar;
-    private bool _shootButton;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
     [SerializeField] private int _levelPoints;
@@ -31,7 +30,6 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
-        _shootButton = Input.GetKey(KeyCode.Escape);
         _bulletTimeCounter = 0;
         _bulletDelay = 0.2f;
         _cannonOverHeatedLimit = 30f;
@@ -60,7 +58,7 @@ public class PlayerController : Character
         }
         else
         {
-            if (_shootButton)
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
                 Shoot();
             }
@@ -69,7 +67,7 @@ public class PlayerController : Character
 
     private void ShootEasyMode()
     {
-        if (_isCannonOverheated || !_shootButton)
+        if (_isCannonOverheated || (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.W)))
         {
             _cannonOverHeatedTimer -= Time.deltaTime;
             if (_cannonOverHeatedTimer < 0)
@@ -79,7 +77,7 @@ public class PlayerController : Character
             return;
         }
 
-        if (_shootButton)
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             _bulletTimeCounter += Time.deltaTime;
             _cannonOverHeatedTimer += Time.deltaTime;
@@ -106,7 +104,7 @@ public class PlayerController : Character
             pooledProjectile.SetActive(true); // activate it
             pooledProjectile.transform.position = transform.position + offset; // position it at player
             ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance.projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
+            GameManager.SharedInstance._projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
         }
     }
 
@@ -155,7 +153,7 @@ public class PlayerController : Character
 
     public void TownReceiveDamage()
     {
-        var shields = GameManager.SharedInstance.TownHpText.GetComponentsInChildren(
+        var shields = GameManager.SharedInstance._townHpText.GetComponentsInChildren(
             GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
             );
         shields[shields.Length-1].gameObject.SetActive(false);
@@ -203,14 +201,14 @@ public class PlayerController : Character
             fillHealthBar.ModifySliderMaxValue(1);
             FillSliderValue();
             Exp = 0;
-            GameManager.SharedInstance.playerLevelText.text = $"Lvl: {Level}";
-            GameManager.SharedInstance.menuPlayerHPText.text = $"HP Max: {HpMax}";
-            GameManager.SharedInstance.menuPlayerLevelText.text = $"Level: {Level}";
-            GameManager.SharedInstance.menuPlayerAttackText.text = $"Attack: {Attack}";
-            GameManager.SharedInstance.menuPlayerDefenseText.text = $"Defense: {Defense}";
-            GameManager.SharedInstance.menuPlayerSpeedText.text = $"Speed: {Speed}";
-            GameManager.SharedInstance.menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
-            GameManager.SharedInstance.menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
+            GameManager.SharedInstance._playerLevelText.text = $"Lvl: {Level}";
+            GameManager.SharedInstance._menuPlayerHPText.text = $"HP Max: {HpMax}";
+            GameManager.SharedInstance._menuPlayerLevelText.text = $"Level: {Level}";
+            GameManager.SharedInstance._menuPlayerAttackText.text = $"Attack: {Attack}";
+            GameManager.SharedInstance._menuPlayerDefenseText.text = $"Defense: {Defense}";
+            GameManager.SharedInstance._menuPlayerSpeedText.text = $"Speed: {Speed}";
+            GameManager.SharedInstance._menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
+            GameManager.SharedInstance._menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
             //GameManager.SharedInstance.menuPlayerLevelPointsText.text = $"LP: {LevelPoints}"; 
         }
     }
