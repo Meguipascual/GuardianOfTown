@@ -78,14 +78,14 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Instantiate(TownHpShields[i], TownHpText.transform).gameObject.SetActive(true);
         }
-        
-        if(DataPersistantManager.Instance.Wave == 0)
-        {
-            StartCoroutine(ShowWaveText());
-        }
 
         spawnManager.ControlWavesSpawn();
         cameraStartRotation = mainCamera.transform.rotation;
+        
+        if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
+        {
+            StartCoroutine(ShowWaveText());
+        }
     }
 
     // Update is called once per frame

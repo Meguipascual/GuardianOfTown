@@ -10,6 +10,7 @@ public class PlayerController : Character
     public float XRightBound { get; set; }
     private float horizontalInput;
     private FillHealthBar fillHealthBar;
+    private bool _shootButton;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
     [SerializeField] private int _levelPoints;
@@ -30,6 +31,7 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
+        _shootButton = Input.GetKey(KeyCode.Escape);
         _bulletTimeCounter = 0;
         _bulletDelay = 0.2f;
         _cannonOverHeatedLimit = 30f;
@@ -58,7 +60,7 @@ public class PlayerController : Character
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_shootButton)
             {
                 Shoot();
             }
@@ -67,7 +69,7 @@ public class PlayerController : Character
 
     private void ShootEasyMode()
     {
-        if (_isCannonOverheated || !Input.GetKey(KeyCode.Space))
+        if (_isCannonOverheated || !_shootButton)
         {
             _cannonOverHeatedTimer -= Time.deltaTime;
             if (_cannonOverHeatedTimer < 0)
@@ -77,7 +79,7 @@ public class PlayerController : Character
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (_shootButton)
         {
             _bulletTimeCounter += Time.deltaTime;
             _cannonOverHeatedTimer += Time.deltaTime;

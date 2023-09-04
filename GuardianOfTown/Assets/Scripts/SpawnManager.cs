@@ -19,29 +19,36 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
+        _playerController = FindObjectOfType<PlayerController>();
         LoadLevelOfEnemies();
+        if (DataPersistantManager.Instance != null)
+        {
+            LoadStageAndWaveCurrentIndex();
+        }
     }
 
     private void LoadLevelOfEnemies()
     {
-        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfBosses;
-        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfEnemies;
+        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave]._levelOfBosses;
+        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave]._levelOfEnemies;
+    }
+    private void LoadStageAndWaveCurrentIndex()
+    {
+        CurrentStage = DataPersistantManager.Instance.Stage;
+        CurrentWave = DataPersistantManager.Instance.Wave;
     }
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = FindObjectOfType<PlayerController>();
         if (DataPersistantManager.Instance != null)
         {
-            CurrentStage = DataPersistantManager.Instance.Stage;
-            CurrentWave = DataPersistantManager.Instance.Wave;
-            if(CurrentStage < _stagesData.Length)
+            if (CurrentStage < _stagesData.Length)
             {
                 LoadNumberOfEnemies();
             }
             else
             {
-                GameManager.SharedInstance.NumberOfEnemiesAndBosses = 0;
+                GameManager.SharedInstance.NumberOfEnemiesAndBosses = 600;
             }
         }
         else
@@ -53,7 +60,7 @@ public class SpawnManager : MonoBehaviour
 
     private void LoadNumberOfEnemies()
     {
-        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave].numberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave].numberOfBossesToCreate;
+        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfBossesToCreate;
         GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
         GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
     }
@@ -81,7 +88,6 @@ public class SpawnManager : MonoBehaviour
             bossY = _bossPrefab[bossPrefab].transform.localScale.y;
             enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
             Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
-            GameManager.SharedInstance.enemiesLeftText.text = $"Enemies Left: {amountOfBosses - (i + 1)}";
             yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
         }
     }
@@ -93,18 +99,35 @@ public class SpawnManager : MonoBehaviour
         float enemyX;
         float enemyY;
 
-        for (int i = 0; i < spawnSettings.numberOfEnemiesToCreate; i++)
+        if (!spawnSettings._isRandomized)
         {
-            enemyType = Random.Range(0, _enemyPrefab.Length);
-            enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate],
-                DataPersistantManager.Instance.SpawnBoundariesRight[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate]);//-23 23
-            enemyY = _enemyPrefab[enemyType].transform.localScale.y;
-            enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
-            yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
-            Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+            for (int i = 0; i < spawnSettings._numberOfEnemiesToCreate; i++)
+            {
+                enemyType = Random.Range(0, _enemyPrefab.Length);
+                enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate],
+                    DataPersistantManager.Instance.SpawnBoundariesRight[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate]);//-23 23
+                enemyY = _enemyPrefab[enemyType].transform.localScale.y;
+                enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
+                yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
+                Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+            }
         }
+        else
+        {
+            for (int i = 0; i < spawnSettings._numberOfEnemiesToCreate; i++)
+            {
+                var gate = Random.Range(0, 4);
+                enemyType = Random.Range(0, _enemyPrefab.Length);
+                enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[gate], DataPersistantManager.Instance.SpawnBoundariesRight[gate]);
+                enemyY = _enemyPrefab[enemyType].transform.localScale.y;
+                enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
+                yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
+                Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+            }
+        }
+
         yield return new WaitForSeconds(10);
-        StartCoroutine(SpawnAmountOfBosses(spawnSettings.numberOfBossesToCreate));
+        StartCoroutine(SpawnAmountOfBosses(spawnSettings._numberOfBossesToCreate));
     }
 
     IEnumerator SpawnPowerups()
@@ -135,7 +158,7 @@ public class SpawnManager : MonoBehaviour
 
         if (CurrentStage > _stagesData.Length - 1)
         {
-            FindObjectOfType<PlayerController>().IsDead = true;
+            _playerController.IsDead = true;
             Debug.Log("Really here you might win the game, I suppose");
             // Activate win panel when it exists
             return;
@@ -161,6 +184,7 @@ public class SpawnManager : MonoBehaviour
         else
         {
             CurrentStage++;
+            GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
             Debug.Log($"there are'nt any waves left");
             DataPersistantManager.Instance.ChangeStage();
         }
