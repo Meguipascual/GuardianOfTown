@@ -8,7 +8,7 @@ public class PlayerController : Character
 {
     public float XLeftBound { get; set; }
     public float XRightBound { get; set; }
-    private float horizontalInput;
+    private float _horizontalInput;
     private FillHealthBar fillHealthBar;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
@@ -19,6 +19,8 @@ public class PlayerController : Character
     [SerializeField] private float _cannonOverHeatedTimer;
     [SerializeField] private float _cannonOverHeatedLimit;
     [SerializeField] private float _coolDownDelay;
+    private KeyCode _shoot;
+    private KeyCode _alternateShoot;
 
     public bool IsDead { get; set; }
     public int Exp { get; set; }
@@ -35,6 +37,8 @@ public class PlayerController : Character
         _cannonOverHeatedLimit = 30f;
         _cannonOverHeatedTimer = 0;
         _coolDownDelay = 5f;
+        _shoot = ControlButtons._shoot;
+        _alternateShoot = ControlButtons._alterShoot;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
@@ -58,7 +62,7 @@ public class PlayerController : Character
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
             {
                 Shoot();
             }
@@ -67,7 +71,7 @@ public class PlayerController : Character
 
     private void ShootEasyMode()
     {
-        if (_isCannonOverheated || (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.W)))
+        if (_isCannonOverheated || (!Input.GetKey(_shoot) && !Input.GetKey(_alternateShoot)))
         {
             _cannonOverHeatedTimer -= Time.deltaTime;
             if (_cannonOverHeatedTimer < 0)
@@ -77,7 +81,7 @@ public class PlayerController : Character
             return;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
         {
             _bulletTimeCounter += Time.deltaTime;
             _cannonOverHeatedTimer += Time.deltaTime;
@@ -130,8 +134,8 @@ public class PlayerController : Character
         }
 
         // Player movement left to right
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * Speed * horizontalInput);
+        _horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
         
     }
 

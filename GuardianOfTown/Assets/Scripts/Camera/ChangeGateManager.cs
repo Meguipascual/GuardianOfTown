@@ -42,8 +42,6 @@ public class ChangeGateManager : MonoBehaviour
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[0], playerY, playerZ);
         }
         _cameraManager.DeactivateCamera(cameraIndex);
-        //_playerController.gameObject.SetActive(false);
-        //_playerController.gameObject.SetActive(true);
     }
 
     public void LeftButtonClicked()
@@ -70,7 +68,5 @@ public class ChangeGateManager : MonoBehaviour
         }
 
         _cameraManager.DeactivateCamera(cameraIndex);
-        //_playerController.gameObject.SetActive(false);
-        //_playerController.gameObject.SetActive(true);
     }
 }
