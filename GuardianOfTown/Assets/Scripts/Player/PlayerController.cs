@@ -81,7 +81,7 @@ public class PlayerController : Character
         {
             _bulletTimeCounter += Time.deltaTime;
             _cannonOverHeatedTimer += Time.deltaTime;
-            if (_bulletTimeCounter > _bulletDelay)
+            if (_bulletTimeCounter >= _bulletDelay)
             {
                 _bulletTimeCounter = 0;
                 Shoot();

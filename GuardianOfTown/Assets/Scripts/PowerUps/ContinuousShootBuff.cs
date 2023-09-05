@@ -16,12 +16,17 @@ public class ContinuousShootBuff : PoweupEffect
             GameSettings.Instance.IsEasyModeActive = true;
             m_MonoBehaviour.StartCoroutine(ActivateEffect(player));
         }
-        Debug.Log("Already in use");
+        else
+        {
+            Debug.Log("Already in use");
+        }
     }
 
     IEnumerator ActivateEffect(PlayerController player)
     {
+        Debug.Log($"deactivate easy mode in {amount} seconds");
         yield return new WaitForSeconds(amount);
+        Debug.Log($"deactivate easy mode");
         GameSettings.Instance.IsEasyModeActive = false;
     }
 }
