@@ -74,8 +74,10 @@ public class PlayerController : Character
         if (_isCannonOverheated || (!Input.GetKey(_shoot) && !Input.GetKey(_alternateShoot)))
         {
             _cannonOverHeatedTimer -= Time.deltaTime;
+            OverHeatedManager.Instance.ChangeCannonMaterial(_cannonOverHeatedTimer / _coolDownDelay);
             if (_cannonOverHeatedTimer < 0)
             {
+                OverHeatedManager.Instance.ChangeCannonMaterial(0);
                 _isCannonOverheated = false;
             }
             return;
@@ -89,10 +91,10 @@ public class PlayerController : Character
             {
                 _bulletTimeCounter = 0;
                 Shoot();
+                OverHeatedManager.Instance.ChangeCannonMaterial(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
             }
             if (_cannonOverHeatedTimer > _cannonOverHeatedLimit)
             {
-                OverHeatedManager.Instance.ChangeCannonMaterial(100);
                 _isCannonOverheated = true;
                 _cannonOverHeatedTimer = _coolDownDelay;
             }

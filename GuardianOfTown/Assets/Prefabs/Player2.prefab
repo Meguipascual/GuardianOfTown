@@ -354,6 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cannonMaterial: {fileID: 2100000, guid: 68c655f38c9af1b4cabfa5add1c87ccb, type: 2}
+  _cannonColdMaterial: {fileID: 2100000, guid: ca007613edd6a564d928d4256d5d8df8, type: 2}
+  _overheatedCannonMaterial: {fileID: 2100000, guid: 5fc2d0535b1cd8941a6720192462f5a7, type: 2}
 --- !u!1 &706843349400995309
 GameObject:
   m_ObjectHideFlags: 0

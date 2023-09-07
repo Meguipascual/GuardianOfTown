@@ -5,8 +5,9 @@ using UnityEngine;
 public class OverHeatedManager : MonoBehaviour
 {
     [SerializeField] private Material _cannonMaterial;
+    [SerializeField] private Material _cannonColdMaterial;
+    [SerializeField] private Material _overheatedCannonMaterial;
     private PlayerController _playerController;
-    private Color _previousColor;
 
     public static OverHeatedManager Instance;
 
@@ -14,7 +15,6 @@ public class OverHeatedManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        _previousColor = _cannonMaterial.color;
         _playerController = GetComponentInParent<PlayerController>();
         if(_playerController == null)
         {
@@ -22,17 +22,12 @@ public class OverHeatedManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
-
     public void ChangeCannonMaterial(float heatPercentage)
     {
-        Debug.Log($"Color: {_cannonMaterial.color.linear}");
-        //_cannonMaterial.color = Color.red;
+        if(heatPercentage < 0) { return; }
+
+        Debug.Log($"Heat Percentage: {heatPercentage}");
+        _cannonMaterial.Lerp(_cannonColdMaterial, _overheatedCannonMaterial, heatPercentage);
     }
 
 }

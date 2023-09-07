@@ -409,8 +409,8 @@
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": 0.0,
     "m_FloatType": 1,
@@ -601,9 +601,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1166.4000244140625,
-            "y": 404.0,
-            "width": 121.5999755859375,
-            "height": 34.39999771118164
+            "y": 423.2000427246094,
+            "width": 122.40003204345703,
+            "height": 33.5999755859375
         }
     },
     "m_Slots": [
