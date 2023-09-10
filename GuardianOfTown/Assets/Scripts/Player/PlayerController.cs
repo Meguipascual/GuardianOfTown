@@ -13,12 +13,8 @@ public class PlayerController : Character
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
     [SerializeField] private int _levelPoints;
-    [SerializeField] private float _bulletTimeCounter;
-    [SerializeField] private float _bulletDelay;
-    [SerializeField] private bool _isCannonOverheated;
-    [SerializeField] private float _cannonOverHeatedTimer;
-    [SerializeField] private float _cannonOverHeatedLimit;
-    [SerializeField] private float _coolDownDelay;
+    [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
+    [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
 
@@ -32,11 +28,8 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()
     {
-        _bulletTimeCounter = 0;
+        _bulletTimer = 0;
         _bulletDelay = 0.2f;
-        _cannonOverHeatedLimit = 30f;
-        _cannonOverHeatedTimer = 0;
-        _coolDownDelay = 5f;
         _shoot = ControlButtons._shoot;
         _alternateShoot = ControlButtons._alterShoot;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
@@ -62,6 +55,11 @@ public class PlayerController : Character
         }
         else
         {
+            if(OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
+            {
+                OverHeatedManager.Instance.CoolCannon();
+            }
+
             if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
             {
                 Shoot();
@@ -71,33 +69,24 @@ public class PlayerController : Character
 
     private void ShootEasyMode()
     {
-        if (_isCannonOverheated || (!Input.GetKey(_shoot) && !Input.GetKey(_alternateShoot)))
+        if (OverHeatedManager.Instance.IsOverheatedCannon())
         {
-            _cannonOverHeatedTimer -= Time.deltaTime;
-            OverHeatedManager.Instance.ChangeCannonMaterial(_cannonOverHeatedTimer / _coolDownDelay);
-            if (_cannonOverHeatedTimer < 0)
-            {
-                OverHeatedManager.Instance.ChangeCannonMaterial(0);
-                _isCannonOverheated = false;
-            }
+            OverHeatedManager.Instance.CoolCannon();
             return;
         }
-
         if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
         {
-            _bulletTimeCounter += Time.deltaTime;
-            _cannonOverHeatedTimer += Time.deltaTime;
-            if (_bulletTimeCounter >= _bulletDelay)
+            OverHeatedManager.Instance.HeatCannon();
+            _bulletTimer += Time.deltaTime;
+            if(_bulletTimer >= _bulletDelay)
             {
-                _bulletTimeCounter = 0;
                 Shoot();
-                OverHeatedManager.Instance.ChangeCannonMaterial(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
+                _bulletTimer = 0;
             }
-            if (_cannonOverHeatedTimer > _cannonOverHeatedLimit)
-            {
-                _isCannonOverheated = true;
-                _cannonOverHeatedTimer = _coolDownDelay;
-            }
+        }
+        else
+        {
+            OverHeatedManager.Instance.CoolCannon();
         }
     }
 
@@ -139,13 +128,6 @@ public class PlayerController : Character
         _horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
         
-    }
-
-    IEnumerator CoolDownCannon()
-    {
-        yield return new WaitForSeconds(_cannonOverHeatedLimit);
-        _cannonOverHeatedTimer = 0;
-        _isCannonOverheated = false;
     }
 
     public void ComprobateLifeRemaining ()

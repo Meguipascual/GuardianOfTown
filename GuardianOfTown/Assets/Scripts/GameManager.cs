@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < TownHpShields.Count; i++)
         {
-            GameObject.Instantiate(TownHpShields[i], _townHpText.transform).gameObject.SetActive(true);
+            Instantiate(TownHpShields[i], _townHpText.transform).gameObject.SetActive(true);
         }
 
         spawnManager.ControlWavesSpawn();
@@ -103,17 +103,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowWaveText(bool randomWave)
+    public IEnumerator ShowWaveText(string text)
     {
-        if (randomWave)
-        {
-            _wavePopUpText.text = $"They are attacking all our gates";
-        }
-        else
-        {
-            _wavePopUpText.text = $"New enemies' wave incoming";
-        }
-        
+        _wavePopUpText.text = text;
         _wavePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         _wavePopUpText.gameObject.SetActive(false);

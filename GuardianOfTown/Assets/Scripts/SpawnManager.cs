@@ -179,7 +179,7 @@ public class SpawnManager : MonoBehaviour
             LoadNumberOfEnemies();
             ControlWavesSpawn();
             Debug.Log($"there are some waves left");
-            DataPersistantManager.Instance.ChangeWave(_stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized);
+            DataPersistantManager.Instance.ChangeWave(_stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
         }
         else
         {

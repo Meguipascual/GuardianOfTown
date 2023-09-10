@@ -56,11 +56,18 @@ public class DataPersistantManager : MonoBehaviour
 
     }
 
-    public void ChangeWave(bool isNextWaveRandom) 
+    public void ChangeWave(bool isNextWaveRandom, int gate) 
     {
-        StartCoroutine(GameManager.SharedInstance.ShowWaveText(isNextWaveRandom));
+        if (isNextWaveRandom)
+        {
+            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"They are attacking all our gates"));
+        }
+        else
+        {
+            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"New enemies' wave incoming at Gate {gate+1}"));
+        }
+
         SaveNextWave();
-        //ReloadScene();
     }
 
     public void ChangeStage()
