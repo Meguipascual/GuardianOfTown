@@ -19,6 +19,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerAttack { get; set; }
     public int SavedPlayerDefense { get; set; }
     public int SavedPlayerCriticalRate { get; set; }
+    public int SavedPlayerExp { get; set; }
     public float SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
@@ -51,6 +52,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
+        SavedPlayerExp = 0;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 
@@ -88,6 +90,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalDamage = playerController.CriticalDamage;
         SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
+        SavedPlayerExp = playerController.Exp;
         SaveTownHp();
     }
 
@@ -132,6 +135,7 @@ public class DataPersistantManager : MonoBehaviour
         playerController.CriticalDamage = SavedPlayerCriticalDamage;
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
+        playerController.Exp = SavedPlayerExp;
     }
 
     public void SaveNextStage()
