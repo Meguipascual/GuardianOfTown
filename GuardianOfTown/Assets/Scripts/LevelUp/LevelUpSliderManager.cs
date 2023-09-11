@@ -13,6 +13,7 @@ public class LevelUpSliderManager : MonoBehaviour
     [SerializeField] private int _levelPoints;
     [SerializeField] private int _currentLevel;
     [SerializeField] private int _previousLevel;
+    private bool _isLevelingUp;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +22,18 @@ public class LevelUpSliderManager : MonoBehaviour
         _slider = GetComponentInChildren<Slider>();
         _levelPoints = _playerController.LevelPoints;
         _previousLevel = _currentLevel = _playerController.Level;
-        
+        _slider.minValue = 0;
+        _isLevelingUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.activeInHierarchy == true)
+        if(gameObject.activeInHierarchy == true && !_isLevelingUp)
         {
             WriteInitialText();
-            LevelUp();
+            StartCoroutine(LevelUp());
+            _isLevelingUp = true;
         }   
     }
 
@@ -41,11 +44,27 @@ public class LevelUpSliderManager : MonoBehaviour
         _playerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
     }
 
-    private void LevelUp()
+    IEnumerator LevelUp()
     {
-        if (_playerController.Exp > 20 * _currentLevel)
+        while (_playerController.Exp > 20 * _currentLevel)
         {
+            _slider.value = 0;
+            _currentLevel ++;
+            _slider.maxValue = 20 * _currentLevel;
+            Debug.Log($"Max value: {_slider.maxValue}");
 
+            do
+            {
+                _playerController.Exp --;
+                _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
+                _slider.value ++;
+                yield return new WaitForSeconds(0.05f);//modificate time in order to be shorter when bigger the max value
+            }
+            while (_slider.value < _slider.maxValue);
+
+            Debug.Log($"Current level: {_currentLevel}");
+            _playerLevelText.text = $"Level: {_currentLevel}";
+            _playerController.Exp -= (int) _slider.maxValue;
         }
     }
 }

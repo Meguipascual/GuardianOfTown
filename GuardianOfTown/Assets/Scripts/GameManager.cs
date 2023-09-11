@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI _menuPlayerCriticalRateText;
     public TextMeshProUGUI _menuPlayerCriticalDamageText;
     public GameObject _menuCanvas;
+    public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
     private bool _pauseToggle;
     private string _cameraQuake = "CameraQuake";
@@ -66,7 +67,10 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
         _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        //Trying leveling up
+        _generalCanvas.SetActive(false);
         _levelEndCanvas.SetActive(true);
+        
 
 
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
