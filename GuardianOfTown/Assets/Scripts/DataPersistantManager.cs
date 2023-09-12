@@ -43,7 +43,7 @@ public class DataPersistantManager : MonoBehaviour
         Stage = 0;
         Wave = 0;
         MaxWave = 11;
-        SavedPlayerLevel = 1;
+        SavedPlayerLevel = 4;
         SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;
         SavedPlayerAttack = 30;
@@ -52,7 +52,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
-        SavedPlayerExp = 700;
+        SavedPlayerExp = 705;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 

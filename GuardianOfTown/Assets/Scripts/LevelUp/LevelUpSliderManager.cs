@@ -14,6 +14,8 @@ public class LevelUpSliderManager : MonoBehaviour
     [SerializeField] private int _currentLevel;
     [SerializeField] private int _previousLevel;
     private bool _isLevelingUp;
+    public Button _skipButton;
+    public Button _continueButton;
 
     // Start is called before the first frame update
     void Start()
@@ -44,27 +46,58 @@ public class LevelUpSliderManager : MonoBehaviour
         _playerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
     }
 
+    public void SkipButton()
+    {
+        var spentExp = 0;
+        StopAllCoroutines();
+
+        while (_playerController.Exp - spentExp > 20 * _currentLevel)
+        {
+            spentExp += 20 * _currentLevel;
+            _currentLevel++;
+        }
+
+        _slider.value = 0;
+        _currentLevel--;
+        _playerController.Level = _currentLevel;
+        _playerController.Exp -= spentExp;
+        _playerLevelText.text = $"Level: {_currentLevel}";
+        _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
+        _skipButton.gameObject.SetActive(false);
+        _continueButton.gameObject.SetActive(true);
+    }
+
+    public void ContinueButton()
+    {
+        Debug.Log($"it's continuing, look how fast I continue");
+    }
+
     IEnumerator LevelUp()
     {
+        var exp = _playerController.Exp;
+
         while (_playerController.Exp > 20 * _currentLevel)
         {
             _slider.value = 0;
             _currentLevel ++;
             _slider.maxValue = 20 * _currentLevel;
-            Debug.Log($"Max value: {_slider.maxValue}");
 
             do
             {
-                _playerController.Exp --;
-                _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
+                exp --;
+                _playerObtainedExpText.text = $"Exp: {exp}";
                 _slider.value ++;
-                yield return new WaitForSeconds(0.05f);//modificate time in order to be shorter when bigger the max value
+                yield return new WaitForSeconds(1/_slider.maxValue);//modificate time in order to be shorter when bigger the max value
             }
             while (_slider.value < _slider.maxValue);
 
-            Debug.Log($"Current level: {_currentLevel}");
+            _slider.value = 0;
+            _playerController.Level = _currentLevel;
             _playerLevelText.text = $"Level: {_currentLevel}";
             _playerController.Exp -= (int) _slider.maxValue;
+            _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
         }
+        _skipButton.gameObject.SetActive(false);
+        _continueButton.gameObject.SetActive(true);
     }
 }
