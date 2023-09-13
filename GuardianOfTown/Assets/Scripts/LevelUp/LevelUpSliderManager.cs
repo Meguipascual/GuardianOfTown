@@ -13,6 +13,8 @@ public class LevelUpSliderManager : MonoBehaviour
     [SerializeField] private int _levelPoints;
     [SerializeField] private int _currentLevel;
     [SerializeField] private int _previousLevel;
+    public GameObject _LevelUpPanel;
+    public GameObject _levelPointsAssignPanel;
     private bool _isLevelingUp;
     public Button _skipButton;
     public Button _continueButton;
@@ -54,6 +56,7 @@ public class LevelUpSliderManager : MonoBehaviour
         while (_playerController.Exp - spentExp > 20 * _currentLevel)
         {
             spentExp += 20 * _currentLevel;
+            _playerController.LevelPoints += 2;
             _currentLevel++;
         }
 
@@ -70,7 +73,9 @@ public class LevelUpSliderManager : MonoBehaviour
     public void ContinueButton()
     {
         Debug.Log($"it's continuing, look how fast I continue");
-    }
+        _LevelUpPanel.gameObject.SetActive(false);
+        _levelPointsAssignPanel.SetActive(true);
+}
 
     IEnumerator LevelUp()
     {
@@ -91,6 +96,7 @@ public class LevelUpSliderManager : MonoBehaviour
             }
             while (_slider.value < _slider.maxValue);
 
+            _playerController.LevelPoints += 2;
             _slider.value = 0;
             _playerController.Level = _currentLevel;
             _playerLevelText.text = $"Level: {_currentLevel}";

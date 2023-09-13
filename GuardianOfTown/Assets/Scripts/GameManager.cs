@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
         _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
         //Trying leveling up
-        _generalCanvas.SetActive(false);
-        _levelEndCanvas.SetActive(true);
+        //_generalCanvas.SetActive(false);
+        //_levelEndCanvas.SetActive(true);
         
 
 
