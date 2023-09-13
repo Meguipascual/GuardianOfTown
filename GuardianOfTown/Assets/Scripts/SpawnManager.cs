@@ -140,11 +140,19 @@ public class SpawnManager : MonoBehaviour
         
         while (!_playerController.IsDead)
         {
-            powerupType = Random.Range(0, _powerupPrefab.Length);
+            if (GameSettings.Instance.IsEasyModeActive)
+            {
+                powerupType = Random.Range(1, _powerupPrefab.Length);//the first position is continuous shoot powerUp, in easy mode is not needed
+            }
+            else
+            {
+                powerupType = Random.Range(0, _powerupPrefab.Length);
+            }
+
             powerupX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate],
-                DataPersistantManager.Instance.SpawnBoundariesRight[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate]); //-23 23
+                DataPersistantManager.Instance.SpawnBoundariesRight[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate]); 
             powerupPosition = new Vector3(powerupX, powerupY, _spawnDistanceZ);
-            yield return new WaitForSeconds(_spawnPoweupSpeed + (CurrentStage + 1));
+            yield return new WaitForSeconds(_spawnPoweupSpeed - (CurrentStage + 1));
             Instantiate(_powerupPrefab[powerupType], powerupPosition, gameObject.transform.rotation);
         }
         yield return null;
