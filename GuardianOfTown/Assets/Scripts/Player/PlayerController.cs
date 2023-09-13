@@ -9,7 +9,8 @@ public class PlayerController : Character
     public float XLeftBound { get; set; }
     public float XRightBound { get; set; }
     private float _horizontalInput;
-    private FillHealthBar fillHealthBar;
+    private FillHealthBar _fillHealthBar;
+    private ChangeGateManager _changeGateManager;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
     [SerializeField] private int _levelPoints;
@@ -17,6 +18,8 @@ public class PlayerController : Character
     [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
+    private KeyCode _rightGateButton;
+    private KeyCode _leftGateButton;
 
     public bool IsDead { get; set; }
     public int Exp { get; set; }
@@ -32,10 +35,13 @@ public class PlayerController : Character
         _bulletDelay = 0.2f;
         _shoot = ControlButtons._shoot;
         _alternateShoot = ControlButtons._alterShoot;
+        _rightGateButton = ControlButtons._rightGateButton;
+        _leftGateButton = ControlButtons._leftGateButton;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
-        fillHealthBar = FindObjectOfType<FillHealthBar>();
+        _fillHealthBar = FindObjectOfType<FillHealthBar>();
+        _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
     }
 
@@ -64,6 +70,15 @@ public class PlayerController : Character
             {
                 Shoot();
             }
+        }
+
+        if (Input.GetKeyDown(_rightGateButton))
+        {
+            _changeGateManager.RightButtonClicked();
+        }
+        if (Input.GetKeyDown(_leftGateButton))
+        {
+            _changeGateManager.LeftButtonClicked();
         }
     }
 
@@ -132,7 +147,7 @@ public class PlayerController : Character
 
     public void ComprobateLifeRemaining ()
     {
-        fillHealthBar.FillSliderValue();
+        _fillHealthBar.FillSliderValue();
         if (HP <= 0)
         {
             Die();
@@ -186,7 +201,7 @@ public class PlayerController : Character
             }
             HpMax = HP;
             Level++;
-            fillHealthBar.ModifySliderMaxValue(1);
+            _fillHealthBar.ModifySliderMaxValue(1);
             FillSliderValue();
             Exp = 0;
             GameManager.SharedInstance._playerLevelText.text = $"Lvl: {Level}";
@@ -219,6 +234,6 @@ public class PlayerController : Character
 
     public void FillSliderValue()
     {
-        fillHealthBar.FillSliderValue();
+        _fillHealthBar.FillSliderValue();
     }
 }

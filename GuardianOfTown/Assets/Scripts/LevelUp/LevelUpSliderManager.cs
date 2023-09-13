@@ -33,7 +33,7 @@ public class LevelUpSliderManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.activeInHierarchy == true && !_isLevelingUp)
+        if(gameObject.activeInHierarchy && !_isLevelingUp)
         {
             WriteInitialText();
             StartCoroutine(LevelUp());

@@ -17,5 +17,5 @@ MonoBehaviour:
   _levelOfEnemies: 3
   _levelOfBosses: 3
   _numberOfEnemiesByGate: 0
-  Gate: 2
+  Gate: 0
   _isRandomized: 0

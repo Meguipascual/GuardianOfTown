@@ -140,7 +140,7 @@ public abstract class Enemy : Character
         if (HP <= 0)
         {
             Player.Exp += Exp;
-            Player.LevelUp();
+            //Player.LevelUp();
             if(EnemyDeath != null)
             {
                 IsDying = true;
@@ -176,10 +176,10 @@ public abstract class Enemy : Character
         {
             Player.shieldParticleSystem.Play();
             Player.Exp += Exp;
-            if (Player.Exp > 20)
-            {
-                Player.LevelUp();
-            }
+            //if (Player.Exp > 20)
+            //{
+            //    Player.LevelUp();
+            //}
             Die();
         }
     }

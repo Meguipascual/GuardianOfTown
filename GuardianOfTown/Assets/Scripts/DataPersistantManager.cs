@@ -75,8 +75,10 @@ public class DataPersistantManager : MonoBehaviour
     public void ChangeStage()
     {
         SaveNextStage();
+        StopAllCoroutines();
+        GameManager.SharedInstance.LevelUp();
         //If there are more stages activate Level up panel and when the level up ended change Stage scriptable and reload scene
-        ReloadScene();
+        //ReloadScene();
     }
     public void SavePlayerStats()
     {

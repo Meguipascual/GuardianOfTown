@@ -107,6 +107,10 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public void NextStage()
     {
         ConfirmIncrements();
+        for(int i=0; i< _increments.Length; i++)
+        {
+            Debug.Log($"Stat {i}: {_increments[i]}");
+        }
     }
 
     private void ConfirmIncrements()
