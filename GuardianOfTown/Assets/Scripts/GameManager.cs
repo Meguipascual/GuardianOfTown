@@ -166,7 +166,10 @@ public class GameManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        mainCamera.GetComponent<Animator>().Play(_cameraQuake, 0, 0.0f);
+        if (mainCamera != null)
+        {
+            mainCamera.GetComponent<Animator>().Play(_cameraQuake, 0, 0.0f);
+        }
     }
 
     public void DecreaseNumberOfEnemies()
