@@ -42,6 +42,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (DataPersistantManager.Instance != null)
         {
+            CurrentStage = DataPersistantManager.Instance.Stage;
             if (CurrentStage < _stagesData.Length)
             {
                 LoadNumberOfEnemies();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +21,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     private int _levelPoints;
     private int _currentLevelPoints;
     private int[] _increments;
+    private int[] _playerStatsCopy;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,18 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints}";
         _playerLevelText.text = $"Level: {_playerController.Level}";
         _increments = new int[6];
+        _playerStatsCopy = new int[6];
+        CopyPlayerStats();
+    }
 
+    private void CopyPlayerStats()
+    {
+        _playerStatsCopy[0] = _playerController.HpMax;
+        _playerStatsCopy[1] = _playerController.Attack;
+        _playerStatsCopy[2] = _playerController.Defense;
+        _playerStatsCopy[3] = _playerController.CriticalRate;
+        _playerStatsCopy[4] = (int)_playerController.CriticalDamage;
+        _playerStatsCopy[5] = (int)_playerController.Speed;
     }
 
     private void TryToDisableButtons()
@@ -59,6 +72,9 @@ public class LevelUpPointsAssignManager : MonoBehaviour
             _speedButton.enabled = true;
         }
         _increments = new int[6];
+        CopyPlayerStats();
+        _currentLevelPoints = 0;
+        _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
     }
 
     public void increaseHP()
@@ -111,6 +127,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         {
             Debug.Log($"Stat {i}: {_increments[i]}");
         }
+        DataPersistantManager.Instance.ReloadScene();
     }
 
     private void ConfirmIncrements()

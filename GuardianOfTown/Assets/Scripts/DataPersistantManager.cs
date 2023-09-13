@@ -151,7 +151,7 @@ public class DataPersistantManager : MonoBehaviour
         Wave++;
     }
 
-    private void ReloadScene()
+    public void ReloadScene()
     {
         SavePlayerStats();
         SceneManager.LoadScene(3);
