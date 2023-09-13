@@ -41815,6 +41815,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 332783071}
     - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: _playerLevelPointsText
+      value: 
+      objectReference: {fileID: 455052328}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: menuPlayerCriticalRateText
       value: 
       objectReference: {fileID: 819084699}
@@ -41849,7 +41853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
       propertyPath: _stagesData.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
       propertyPath: _levelsData.Array.data[0]
@@ -41863,6 +41867,10 @@ PrefabInstance:
       propertyPath: _stagesData.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 98752e00b80e024469b05e2c58332f61, type: 2}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _stagesData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8543aedfc41e1cf4fbb39a6f416c6365, type: 2}
     - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
       propertyPath: _powerupPrefab.Array.data[0]
       value: 

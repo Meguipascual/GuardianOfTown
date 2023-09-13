@@ -13,7 +13,6 @@ public class PlayerController : Character
     private ChangeGateManager _changeGateManager;
     public ParticleSystem shieldParticleSystem;
     [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
-    [SerializeField] private int _levelPoints;
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
     [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting
     private KeyCode _shoot;

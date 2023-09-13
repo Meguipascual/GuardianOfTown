@@ -18,22 +18,24 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public Button _speedButton;
     public Button _nextLevelButton;
     private int _increment;
+    private float _critDamageIncrement;
     private int _levelPoints;
     private int _currentLevelPoints;
-    private int[] _increments;
-    private int[] _playerStatsCopy;
+    private float[] _increments;
+    private float[] _playerStatsCopy;
 
     // Start is called before the first frame update
     void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();
-        _increment = -5;
+        _increment = 5;
+        _critDamageIncrement = 0.1f;
         _currentLevelPoints = 0;
         _levelPoints = _playerController.LevelPoints;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints}";
         _playerLevelText.text = $"Level: {_playerController.Level}";
-        _increments = new int[6];
-        _playerStatsCopy = new int[6];
+        _increments = new float[6];
+        _playerStatsCopy = new float[6];
         CopyPlayerStats();
     }
 
@@ -43,8 +45,8 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerStatsCopy[1] = _playerController.Attack;
         _playerStatsCopy[2] = _playerController.Defense;
         _playerStatsCopy[3] = _playerController.CriticalRate;
-        _playerStatsCopy[4] = (int)_playerController.CriticalDamage;
-        _playerStatsCopy[5] = (int)_playerController.Speed;
+        _playerStatsCopy[4] = _playerController.CriticalDamage;
+        _playerStatsCopy[5] = _playerController.Speed;
     }
 
     private void TryToDisableButtons()
@@ -71,7 +73,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
             _critDamageButton.enabled = true;
             _speedButton.enabled = true;
         }
-        _increments = new int[6];
+        _increments = new float[6];
         CopyPlayerStats();
         _currentLevelPoints = 0;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
@@ -110,7 +112,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[4] += _increment;
+        _increments[4] += _critDamageIncrement;
         TryToDisableButtons();
     }
     public void increaseSpeed()
@@ -132,11 +134,12 @@ public class LevelUpPointsAssignManager : MonoBehaviour
 
     private void ConfirmIncrements()
     {
-        _playerController.HpMax += _increments[0];
-        _playerController.Attack += _increments[1];
-        _playerController.Defense += _increments[2];
-        _playerController.CriticalRate += _increments[3];
+        _playerController.HpMax += (int)_increments[0];
+        _playerController.Attack += (int)_increments[1];
+        _playerController.Defense += (int)_increments[2];
+        _playerController.CriticalRate += (int)_increments[3];
         _playerController.CriticalDamage += _increments[4];
         _playerController.Speed += _increments[5];
+        _playerController.LevelPoints -= _currentLevelPoints;
     }
 }

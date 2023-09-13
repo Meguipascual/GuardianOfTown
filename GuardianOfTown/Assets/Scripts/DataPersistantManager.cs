@@ -22,6 +22,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerExp { get; set; }
     public float SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
+    public int SavedPlayerLevelPoints {  get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
     public float[] SpawnBoundariesLeft { get; private set; }
@@ -43,7 +44,7 @@ public class DataPersistantManager : MonoBehaviour
         Stage = 0;
         Wave = 0;
         MaxWave = 11;
-        SavedPlayerLevel = 4;
+        SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;
         SavedPlayerAttack = 30;
@@ -52,7 +53,8 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
-        SavedPlayerExp = 705;
+        SavedPlayerExp = 0;
+        SavedPlayerLevelPoints = 0;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 
@@ -74,12 +76,11 @@ public class DataPersistantManager : MonoBehaviour
 
     public void ChangeStage()
     {
-        SaveNextStage();
         StopAllCoroutines();
+        SaveNextStage();
         GameManager.SharedInstance.LevelUp();
-        //If there are more stages activate Level up panel and when the level up ended change Stage scriptable and reload scene
-        //ReloadScene();
     }
+
     public void SavePlayerStats()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -93,6 +94,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerSpeed = playerController.Speed;
         SavedPlayerPosition = playerController.transform.position;
         SavedPlayerExp = playerController.Exp;
+        SavedPlayerLevelPoints = playerController.LevelPoints;
         SaveTownHp();
     }
 
@@ -138,6 +140,7 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
         playerController.Exp = SavedPlayerExp;
+        playerController.LevelPoints = SavedPlayerLevelPoints;
     }
 
     public void SaveNextStage()

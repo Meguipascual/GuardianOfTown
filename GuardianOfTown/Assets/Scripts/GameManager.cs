@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI _stagePopUpText;
     public TextMeshProUGUI _wavePopUpText;
     public TextMeshProUGUI _playerLevelText;
+    public TextMeshProUGUI _playerLevelPointsText;
     public TextMeshProUGUI _enemiesLeftText;
     public TextMeshProUGUI _projectileText;
     public TextMeshProUGUI _menuPlayerLevelText;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         _menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
         _menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
+        _playerLevelPointsText.text = $"LP: {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
         //Trying leveling up
         //LevelUp();
