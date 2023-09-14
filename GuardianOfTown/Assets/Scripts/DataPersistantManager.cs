@@ -157,6 +157,6 @@ public class DataPersistantManager : MonoBehaviour
     public void ReloadScene()
     {
         SavePlayerStats();
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(1);
     }
 }

@@ -11,7 +11,7 @@ public class MenuTitleManager : MonoBehaviour
     public void StartGameButton()
     {
         //SceneManager.LoadScene(Random.Range(1, 3));
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(1);
     }
 
     public void Exitbutton()
