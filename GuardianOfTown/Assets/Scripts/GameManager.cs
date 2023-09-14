@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     {
         _wavePopUpText.text = text;
         _wavePopUpText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         _wavePopUpText.gameObject.SetActive(false);
     }
 

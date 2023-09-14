@@ -36,9 +36,10 @@ public class DataPersistantManager : MonoBehaviour
             return;
         }
         Instance = this;
+        Initialice();
         DontDestroyOnLoad(gameObject); 
     }
-    private void Start()
+    private void Initialice()
     {
         SavedTownHpShields = new List<Image>();
         Stage = 0;
@@ -60,7 +61,7 @@ public class DataPersistantManager : MonoBehaviour
 
     }
 
-    public void ChangeWave(bool isNextWaveRandom, int gate) 
+    public void ChangeWave(bool isFirstWave, bool isNextWaveRandom, int gate) 
     {
         if (isNextWaveRandom)
         {
@@ -71,7 +72,10 @@ public class DataPersistantManager : MonoBehaviour
             StartCoroutine(GameManager.SharedInstance.ShowWaveText($"New enemies' wave incoming at Gate {gate+1}"));
         }
 
-        SaveNextWave();
+        if(!isFirstWave)
+        {
+            SaveNextWave();
+        }
     }
 
     public void ChangeStage()

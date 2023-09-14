@@ -176,6 +176,10 @@ public class SpawnManager : MonoBehaviour
         {
             StartCoroutine(SpawnPowerups());
             StartCoroutine(SpawnAmountOfEnemies(_stagesData[CurrentStage]._wavesData[CurrentWave]));
+            if(CurrentWave == 0)
+            {
+                DataPersistantManager.Instance.ChangeWave(true, _stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
+            }
         }
     }
     
@@ -188,7 +192,7 @@ public class SpawnManager : MonoBehaviour
             LoadNumberOfEnemies();
             ControlWavesSpawn();
             Debug.Log($"there are some waves left");
-            DataPersistantManager.Instance.ChangeWave(_stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
+            DataPersistantManager.Instance.ChangeWave(false, _stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
         }
         else
         {

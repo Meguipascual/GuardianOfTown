@@ -28,7 +28,7 @@ public class PlayerController : Character
     public float CriticalDamage { get; set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Start()    
     {
         _bulletTimer = 0;
         _bulletDelay = 0.2f;
