@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         _playerLevelPointsText.text = $"LP: {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
         //Trying leveling up
-        LevelUp();
+        //LevelUp();
         
 
 
