@@ -72,10 +72,9 @@ public class LevelUpSliderManager : MonoBehaviour
 
     public void ContinueButton()
     {
-        Debug.Log($"it's continuing, look how fast I continue");
         _LevelUpPanel.gameObject.SetActive(false);
         _levelPointsAssignPanel.SetActive(true);
-}
+    }
 
     IEnumerator LevelUp()
     {

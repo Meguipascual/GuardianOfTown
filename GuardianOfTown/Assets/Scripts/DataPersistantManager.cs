@@ -53,7 +53,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
-        SavedPlayerExp = 0;
+        SavedPlayerExp = 705;
         SavedPlayerLevelPoints = 0;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
