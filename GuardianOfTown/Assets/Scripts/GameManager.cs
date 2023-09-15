@@ -12,7 +12,7 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public static GameManager SharedInstance;
-    [SerializeField] private Camera mainCamera;
+    public Camera MainCamera {get; set;}
     private Quaternion cameraStartRotation;
     private PlayerController playerController;
     private SpawnManager spawnManager;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         }
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
-        mainCamera = FindObjectOfType<Camera>();
+        MainCamera = FindObjectOfType<Camera>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         _playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
         _stageText.text = "Stage: " + (DataPersistantManager.Instance.Stage + 1);
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
 
         spawnManager.ControlWavesSpawn();
-        cameraStartRotation = mainCamera.transform.rotation;
+        cameraStartRotation = MainCamera.transform.rotation;
         
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
@@ -164,9 +164,9 @@ public class GameManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        if (mainCamera != null)
+        if (MainCamera != null)
         {
-            mainCamera.GetComponent<Animator>().Play(_cameraQuake, 0, 0.0f);
+            MainCamera.GetComponent<Animator>().Play(_cameraQuake, 0, 0.0f);
         }
     }
 

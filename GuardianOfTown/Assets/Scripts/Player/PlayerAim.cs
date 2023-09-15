@@ -39,12 +39,16 @@ public class PlayerAim : MonoBehaviour
         if (Physics.Raycast(_aimRay, out _hit, _detectionDistance, _layerMask))
         {
             _lineRenderer.SetPosition(1, transform.position + new Vector3(_offSetX, _offSetY, _hit.transform.position.z - transform.position.z));
-            _lineRenderer.SetColors(Color.red, colorEnd);
+            //_lineRenderer.SetColors(Color.red, colorEnd);
+            _lineRenderer.startColor = Color.red;
+            _lineRenderer.endColor = colorEnd;
         }
         else
         {
             _lineRenderer.SetPosition(1, transform.position + new Vector3(_offSetX, _offSetY, _lineRendererDistance));
-            _lineRenderer.SetColors(_lineStartColor, _lineEndColor);
+            //_lineRenderer.SetColors(_lineStartColor, _lineEndColor);
+            _lineRenderer.startColor = _lineStartColor;
+            _lineRenderer.endColor = _lineEndColor;
         }
     }
 }
