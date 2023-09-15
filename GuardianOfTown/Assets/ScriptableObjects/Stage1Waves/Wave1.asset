@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa02dacb3eaad4d44b36d2710e3545b1, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  _numberOfEnemiesToCreate: 5
-  _numberOfBossesToCreate: 1
+  _numberOfEnemiesToCreate: 0
+  _numberOfBossesToCreate: 20
   _levelOfEnemies: 1
   _levelOfBosses: 1
   _numberOfEnemiesByGate: 0
   Gate: 0
-  _isRandomized: 0
+  _isRandomized: 1

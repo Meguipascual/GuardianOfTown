@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56b8b1544fa56642b62e3a9eca1536b, type: 3}
   m_Name: Stage4
   m_EditorClassIdentifier: 
-  _wavesData:
-  - {fileID: 11400000, guid: 3294e1af535040242adfc1c1ea7a43f1, type: 2}
+  _wavesData: []
   _stage: 3

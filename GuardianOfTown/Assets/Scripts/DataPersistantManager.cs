@@ -88,15 +88,21 @@ public class DataPersistantManager : MonoBehaviour
         StopAllCoroutines();
         SaveNextStage();
         GameManager.SharedInstance.IsGamePaused = true;
-        if(Stage != spawnManager._stagesData.Length)
-        {
-            GameManager.SharedInstance.LevelUp();
-        }
-        else
+        if((Stage >= spawnManager._stagesData.Length))
         {
             Debug.Log("you win, son?");
             //activate win panel?
+            return;
         }
+
+        if (spawnManager._stagesData[Stage]._wavesData.Count == 0)
+        {
+            Debug.Log($"Stage scriptable {Stage+1} empty");    
+            //Maybe Generate a random wave to fix the problem
+            return;
+        }
+        
+        GameManager.SharedInstance.LevelUp();
     }
 
     public void SavePlayerStats()
