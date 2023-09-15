@@ -149,6 +149,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public void NextStage()
     {
         ConfirmIncrements();
+        GameManager.SharedInstance.IsGamePaused = false;
         DataPersistantManager.Instance.ReloadScene();
     }
 

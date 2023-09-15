@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject [] _enemyPrefab;
     [SerializeField] private GameObject[] _bossPrefab;
     [SerializeField] private GameObject [] _powerupPrefab;
-    [SerializeField] private StageWavesScriptableObjects [] _stagesData;
+    [SerializeField] public StageWavesScriptableObjects [] _stagesData;
     [SerializeField] private float _spawnDistanceZ;
     private PlayerController _playerController;
     private float _spawnSpeed = 5f;//the higher the speed the slower the spawn
@@ -165,7 +165,7 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
-        if (CurrentStage > _stagesData.Length - 1)
+        if (CurrentStage > _stagesData.Length - 1 || (_stagesData[CurrentStage] == null))
         {
             _playerController.IsDead = true;
             Debug.Log("Really here you might win the game, I suppose");

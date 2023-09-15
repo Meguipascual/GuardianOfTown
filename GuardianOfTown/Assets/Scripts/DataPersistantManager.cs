@@ -61,6 +61,11 @@ public class DataPersistantManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        spawnManager = FindObjectOfType<SpawnManager>();
+    }
+
     public void ChangeWave(bool isFirstWave, bool isNextWaveRandom, int gate) 
     {
         if (isNextWaveRandom)
@@ -82,7 +87,16 @@ public class DataPersistantManager : MonoBehaviour
     {
         StopAllCoroutines();
         SaveNextStage();
-        GameManager.SharedInstance.LevelUp();
+        GameManager.SharedInstance.IsGamePaused = true;
+        if(Stage != spawnManager._stagesData.Length)
+        {
+            GameManager.SharedInstance.LevelUp();
+        }
+        else
+        {
+            Debug.Log("you win, son?");
+            //activate win panel?
+        }
     }
 
     public void SavePlayerStats()

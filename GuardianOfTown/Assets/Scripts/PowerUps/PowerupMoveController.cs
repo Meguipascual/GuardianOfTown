@@ -7,11 +7,17 @@ public class PowerupMoveController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private string movementType;
+    private PlayerController playerController;
+
+    private void Start()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (FindObjectOfType<PlayerController>().IsDead)
+        if (playerController.IsDead || GameManager.SharedInstance.IsGamePaused)
         {
             return;
         }

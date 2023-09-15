@@ -68,7 +68,7 @@ public abstract class Enemy : Character
 
     public override void TryToMove()
     {
-        if (IsDying) return;
+        if (IsDying || GameManager.SharedInstance.IsGamePaused) return;
 
         if (IsResting)
         {

@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject _menuCanvas;
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
-    private bool _pauseToggle;
     private string _cameraQuake = "CameraQuake";
+    public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
     public int NumberOfStagesLeft { get; set; }
 
@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
         _playerLevelPointsText.text = $"LP: {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
-        //Trying leveling up
-        //LevelUp();
         
 
 
@@ -104,7 +102,7 @@ public class GameManager : MonoBehaviour
             _gameOverText.gameObject.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(ControlButtons._menu))
         {
             ToggleMenu();
         }
@@ -128,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void ToggleMenu()
     {
-        if (_pauseToggle)
+        if (IsGamePaused)
         {
             Time.timeScale = 1;
             _menuCanvas.SetActive(false);
@@ -138,13 +136,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             _menuCanvas.SetActive(true);
         }
-        _pauseToggle = !_pauseToggle;
+        IsGamePaused = !IsGamePaused;
     }
 
     public void ReturnToMainMenuButton()
     {
         Time.timeScale = 1;
-        Destroy(dataPersistantManagerGameObject);
+        Destroy(DataPersistantManager.Instance.gameObject);
         SceneManager.LoadScene(0);
     }
     
@@ -152,7 +150,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _menuCanvas.SetActive(false);
-        _pauseToggle = !_pauseToggle;
+        IsGamePaused = !IsGamePaused;
     }
 
     public void ExitButton()

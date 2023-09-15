@@ -47,7 +47,7 @@ public class PlayerController : Character
     // Update is called once per frame
     void Update()
     {
-        if (IsDead)
+        if (IsDead || GameManager.SharedInstance.IsGamePaused)
         {
             return;
         }
