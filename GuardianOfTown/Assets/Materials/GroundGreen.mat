@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ground
+  m_Name: GroundGreen
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _DETAIL_MULX2 _ENVIRONMENTREFLECTIONS_OFF _NORMALMAP _OCCLUSIONMAP
     _PARALLAXMAP _SPECULARHIGHLIGHTS_OFF
@@ -35,7 +35,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: b1d156abe80ed344b97269371b9ed0c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: ee95ea11f20f29e4ca8b4e67c5d8b51e, type: 3}
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -59,7 +59,7 @@ Material:
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b1d156abe80ed344b97269371b9ed0c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: ee95ea11f20f29e4ca8b4e67c5d8b51e, type: 3}
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -120,7 +120,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.38659325, g: 0.9433962, b: 0.36845848, a: 1}
+    - _BaseColor: {r: 0.5303781, g: 0.7830189, b: 0.20240295, a: 1}
     - _Color: {r: 0.3654444, g: 0.8207547, b: 0.2431292, a: 1}
     - _EmissionColor: {r: 0.013059134, g: 0.14150941, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
