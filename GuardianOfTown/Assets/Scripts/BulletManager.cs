@@ -52,7 +52,7 @@ public class BulletManager : MonoBehaviour
     {
         gameObject.SetActive(false);
         ObjectPooler.ProjectileCount++;
-        GameManager.SharedInstance._projectileText.text = $"Projectile: {ObjectPooler.ProjectileCount}";
+        GameManager.SharedInstance._projectileText.text = $"{ObjectPooler.ProjectileCount}";
         ResetRotation();
     }
     public void ResetRotation()

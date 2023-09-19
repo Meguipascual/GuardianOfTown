@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         MainCamera = FindObjectOfType<Camera>();
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         _playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
-        _stageText.text = "Stage: " + (DataPersistantManager.Instance.Stage + 1);
+        _stageText.text = "Stage\n" + (DataPersistantManager.Instance.Stage + 1);
         _menuPlayerLevelText.text = $"Level: {DataPersistantManager.Instance.SavedPlayerLevel}";
         _menuPlayerHPText.text = $"HP Max: {DataPersistantManager.Instance.SavedPlayerHpMax}";
         _menuPlayerAttackText.text = $"Attack: {DataPersistantManager.Instance.SavedPlayerAttack}";
@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
         _menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
         _menuPlayerCriticalRateText.text = $"Critical Rate: {DataPersistantManager.Instance.SavedPlayerCriticalRate}%";
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage * 100}%";
-        _playerLevelPointsText.text = $"LP: {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
-        _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        _playerLevelPointsText.text = $": {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
+        _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         
 
 
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
     public void DecreaseNumberOfEnemies()
     {
         NumberOfEnemiesAndBosses--;
-        _enemiesLeftText.text = $"Enemies Left: {NumberOfEnemiesAndBosses}";
+        _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         if (NumberOfEnemiesAndBosses == 0)
         {
             spawnManager.ChangeWave();

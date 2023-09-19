@@ -113,7 +113,7 @@ public class PlayerController : Character
             pooledProjectile.SetActive(true); // activate it
             pooledProjectile.transform.position = transform.position + offset; // position it at player
             ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance._projectileText.text = "Projectile: " + ObjectPooler.ProjectileCount;
+            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
         }
     }
 
