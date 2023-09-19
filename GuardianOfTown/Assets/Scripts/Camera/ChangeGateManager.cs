@@ -8,21 +8,23 @@ public class ChangeGateManager : MonoBehaviour
     private CameraManager _cameraManager;
     private PlayerController _playerController;
     public GameObject _gateOrientationPanel;
-    private Image [] _gateImages;
-    private Light [] _gateDirectionalLights;
+    [SerializeField] private Image [] _gateCompassImages;
+    [SerializeField] private Light [] _gateDirectionalLights;
 
     // Start is called before the first frame update
     void Start()
     {
         _cameraManager = FindObjectOfType<CameraManager>();
         _playerController = FindObjectOfType<PlayerController>();
-        _gateImages = _gateOrientationPanel.GetComponentsInChildren<Image>();
-        for (int i = 0; i < _gateImages.Length; i++)
+
+        for (int i = 0; i < _gateCompassImages.Length; i++)
         {
-            _gateImages[i].gameObject.SetActive(false);
+            _gateCompassImages[i].gameObject.SetActive(false);
+            _gateDirectionalLights[i].gameObject.SetActive(false);
         }
 
-        _gateImages[0].gameObject.SetActive(true);
+        _gateDirectionalLights[0].gameObject.SetActive(true);
+        _gateCompassImages[0].gameObject.SetActive(true);
     }
 
     public void RightButtonClicked()
@@ -33,15 +35,11 @@ public class ChangeGateManager : MonoBehaviour
         var playerZ = _playerController.transform.position.z;
         var playerX = _playerController.transform.position.x - Mathf.Abs(DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex]);
 
-        for(int i = 0; i < _gateImages.Length; i++)
-        {
-            _gateImages[i].gameObject.SetActive(false);
-        }
-
         if (cameraIndex < _cameraManager.CamerasGameObject.Length - 1)
         { 
             _cameraManager.ActivateCamera(newCameraIndex);
-            _gateImages[newCameraIndex].gameObject.SetActive(true);
+            _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
+            _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
             GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex];
@@ -55,13 +53,16 @@ public class ChangeGateManager : MonoBehaviour
         else
         {
             _cameraManager.ActivateCamera(0);
-            _gateImages[0].gameObject.SetActive(true);
+            _gateCompassImages[0].gameObject.SetActive(true);
+            _gateDirectionalLights[0].gameObject.SetActive(true);
             GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[0].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[0], playerY, playerZ);
         }
         _cameraManager.DeactivateCamera(cameraIndex);
+        DeactivateDirectionalLight(cameraIndex);
+        DeactivateCompassImage(cameraIndex);
     }
 
     public void LeftButtonClicked()
@@ -72,15 +73,11 @@ public class ChangeGateManager : MonoBehaviour
         var playerZ = _playerController.transform.position.z;
         var playerX = _playerController.transform.position.x - Mathf.Abs(DataPersistantManager.Instance.SpawnBoundariesLeft[cameraIndex]);
 
-        for (int i = 0; i < _gateImages.Length; i++)
-        {
-            _gateImages[i].gameObject.SetActive(false);
-        }
-
         if (cameraIndex == 0)
         {
             _cameraManager.ActivateCamera(3);
-            _gateImages[3].gameObject.SetActive(true);
+            _gateCompassImages[3].gameObject.SetActive(true);
+            _gateDirectionalLights[3].gameObject.SetActive(true);
             GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[3].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[3];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[3];
@@ -89,12 +86,26 @@ public class ChangeGateManager : MonoBehaviour
         else
         {
             _cameraManager.ActivateCamera(newCameraIndex);
-            _gateImages[newCameraIndex].gameObject.SetActive(true);
+            _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
+            _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
             GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex], playerY, playerZ);
         }
         _cameraManager.DeactivateCamera(cameraIndex);
+        DeactivateCompassImage(cameraIndex);
+        DeactivateDirectionalLight(cameraIndex);
+    }
+
+    private void DeactivateCompassImage(int imageIndex)
+    {
+        _gateCompassImages[imageIndex].gameObject.SetActive(false);
+    }
+
+    private void DeactivateDirectionalLight(int lightIndex)
+    {
+
+        _gateDirectionalLights[lightIndex].gameObject.SetActive(false);
     }
 }

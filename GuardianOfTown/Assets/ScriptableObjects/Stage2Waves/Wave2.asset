@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberOfEnemiesToCreate: 12
   _numberOfBossesToCreate: 2
-  _levelOfEnemies: 2
-  _levelOfBosses: 2
+  _levelOfEnemies: 3
+  _levelOfBosses: 3
   _numberOfEnemiesByGate: 0
   Gate: 0
   _isRandomized: 1
