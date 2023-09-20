@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,7 +75,15 @@ public class DataPersistantManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"New enemies' wave incoming at Gate {gate+1}"));
+            string Gate = "";
+            switch (gate)
+            {
+                case 0: Gate = "North";break;
+                case 1: Gate = "East";break;
+                case 2: Gate = "South";break;
+                case 3: Gate = "West";break;
+            }
+            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"New enemies' wave incoming at {Gate} Gate "));
         }
 
         if(!isFirstWave)
@@ -88,7 +97,17 @@ public class DataPersistantManager : MonoBehaviour
         StopAllCoroutines();
         SaveNextStage();
         GameManager.SharedInstance.IsGamePaused = true;
-        if((Stage >= spawnManager._stagesData.Length))
+
+        if(spawnManager == null)
+        {
+            Debug.LogError($"spawnManager isn't null");
+        }
+        if (spawnManager._stagesData == null)
+        {
+            Debug.LogError($"_stagesData is null");
+        }
+
+        if ((Stage >= spawnManager._stagesData.Length))
         {
             Debug.Log("you win, son?");
             //activate win panel?
@@ -97,7 +116,8 @@ public class DataPersistantManager : MonoBehaviour
 
         if (spawnManager._stagesData[Stage]._wavesData.Count == 0)
         {
-            Debug.Log($"Stage scriptable {Stage+1} empty");    
+            Debug.Log($"Stage scriptable {Stage+1} empty");
+            Debug.LogError($"Stage scriptable {Stage + 1} empty");
             //Maybe Generate a random wave to fix the problem
             return;
         }
