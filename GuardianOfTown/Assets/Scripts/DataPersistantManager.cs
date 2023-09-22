@@ -40,6 +40,18 @@ public class DataPersistantManager : MonoBehaviour
         Initialice();
         DontDestroyOnLoad(gameObject); 
     }
+    
+    private void Start()
+    {
+        FindSpawnManager();
+        SceneManager.activeSceneChanged += (scene1, scene2) => FindSpawnManager();
+    }
+
+    private void FindSpawnManager()
+    {
+        spawnManager = FindObjectOfType<SpawnManager>();
+    }
+
     private void Initialice()
     {
         SavedTownHpShields = new List<Image>();
@@ -60,11 +72,6 @@ public class DataPersistantManager : MonoBehaviour
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 
-    }
-
-    private void Start()
-    {
-        spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     public void ChangeWave(bool isFirstWave, bool isNextWaveRandom, int gate) 
@@ -97,15 +104,6 @@ public class DataPersistantManager : MonoBehaviour
         StopAllCoroutines();
         SaveNextStage();
         GameManager.SharedInstance.IsGamePaused = true;
-
-        if(spawnManager == null)
-        {
-            Debug.LogError($"spawnManager isn't null");
-        }
-        if (spawnManager._stagesData == null)
-        {
-            Debug.LogError($"_stagesData is null");
-        }
 
         if ((Stage >= spawnManager._stagesData.Length))
         {

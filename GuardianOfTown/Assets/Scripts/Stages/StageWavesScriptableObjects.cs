@@ -6,5 +6,6 @@ using UnityEngine;
 public class StageWavesScriptableObjects : ScriptableObject
 {
     public List<WaveScriptableObject> _wavesData;
+    public List<WaveData> _wavesData2;
     public int Stage { get; set; }
 }
