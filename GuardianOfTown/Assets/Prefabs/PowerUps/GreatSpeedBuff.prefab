@@ -327,9 +327,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4f4cbf3c6233e9049910a5890ee66be6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4f4cbf3c6233e9049910a5890ee66be6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4018caf4aa07d024f8f0d21eb51264f0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 4f4cbf3c6233e9049910a5890ee66be6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
     - target: {fileID: 919132149155446097, guid: 4f4cbf3c6233e9049910a5890ee66be6, type: 3}
       propertyPath: m_Name
       value: SpeedPowerupPrefab
