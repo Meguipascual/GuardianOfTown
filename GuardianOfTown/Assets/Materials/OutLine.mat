@@ -106,7 +106,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _outlineThickness: 0.015
+    - _outlineThickness: 0.02
     m_Colors:
     - Color_baac9e5ff55e428a8538be3577b7b410: {r: 0, g: 0, b: 0, a: 1}
     - Color_dbbcc3f5c37245b9901a0ddee9582428: {r: 0, g: 0, b: 0, a: 1}

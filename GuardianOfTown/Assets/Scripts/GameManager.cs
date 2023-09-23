@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     private GameObject dataPersistantManagerGameObject;
     public List<Image> TownHpShields;
     public TextMeshProUGUI _townHpText;
-    public TextMeshProUGUI _gameOverText;
     public TextMeshProUGUI _stageText;
     public TextMeshProUGUI _stagePopUpText;
     public TextMeshProUGUI _wavePopUpText;
@@ -37,6 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject _menuCanvas;
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
+    public GameObject _gameOverCanvas;
     private string _cameraQuake = "CameraQuake";
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
@@ -70,8 +70,6 @@ public class GameManager : MonoBehaviour
         _playerLevelPointsText.text = $": {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         
-
-
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
             DataPersistantManager.Instance.LoadTownHp();
@@ -99,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         if(playerController.IsDead)
         {
-            _gameOverText.gameObject.SetActive(true);
+            _gameOverCanvas.gameObject.SetActive(true);
         }
 
         if (Input.GetKeyDown(ControlButtons._menu))
@@ -126,6 +124,8 @@ public class GameManager : MonoBehaviour
 
     private void ToggleMenu()
     {
+        if (playerController.IsDead) { return; }
+
         if (IsGamePaused)
         {
             Time.timeScale = 1;
