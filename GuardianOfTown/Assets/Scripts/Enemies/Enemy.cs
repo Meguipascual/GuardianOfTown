@@ -105,17 +105,11 @@ public abstract class Enemy : Character
     }
     public override void LevelUp()
     {
-        for (int i = 0; i < Level * 2; i++)
-        {
-            HpMax += 10;
-            HP = HpMax;
-            var randomUpgrade = Random.Range(0, 2);
-            switch (randomUpgrade)
-            {
-                case 0: Attack += 5; break;
-                case 1: Defense += 4; break;
-            }
-        }
+        var randomUpgrade = Random.Range(0, Level * 2);
+        Attack += randomUpgrade * 5;
+        Defense += (Level * 2) - randomUpgrade;
+        HpMax += 20 * Level;
+        HP = HpMax;
     }
     
     private void CollisionWithBullet(Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
