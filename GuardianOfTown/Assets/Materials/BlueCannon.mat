@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4184964079547882294
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tree_Leaf2
-  m_Shader: {fileID: -6465566751694194690, guid: a88b4b1c4137d614dbfc40bd41c3bba7, type: 3}
-  m_ShaderKeywords: _METALLICSPECGLOSSMAP
+  m_Name: BlueCannon
+  m_Shader: {fileID: -6465566751694194690, guid: 559361aa91aa271469aa28d154d12fda, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -33,15 +20,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_d338d1e5c09b4d308e77cdeb76009362:
-        m_Texture: {fileID: 2800000, guid: 6a7d69077c6a79f4b9e63e682002a15b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_ddc3e5a3bdc0453ea2941c51a45c29a2:
-        m_Texture: {fileID: 2800000, guid: 735d8daf63c823c40a0592c90e4c6829, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 735d8daf63c823c40a0592c90e4c6829, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -65,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 735d8daf63c823c40a0592c90e4c6829, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: da058c27cd6e5d84d8ba04127fda08fe, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -101,11 +88,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2d0e88c93c6e46ae9db01660120b3644: 1
-    - Vector1_e59a10964cb44c0da11f57bf83762578: 0.5
+    - Vector1_2d0e88c93c6e46ae9db01660120b3644: 1.03
+    - Vector1_e59a10964cb44c0da11f57bf83762578: 0.47
     - _AlphaClip: 0
     - _Blend: 0
-    - _BumpScale: 9.68
+    - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -122,7 +109,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.312
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -130,10 +117,23 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_168da7aca1a84d83b53ba57a9ddc3e92: {r: 0.1698113, g: 0.1698113, b: 0.1698113, a: 0}
-    - Color_f1c457c5c1e8416f8d5b58cb64eca793: {r: 0.45014277, g: 0.6509434, b: 0.44460663, a: 0}
-    - _BaseColor: {r: 0.38947624, g: 0.5660378, b: 0.3545746, a: 1}
+    - Color_168da7aca1a84d83b53ba57a9ddc3e92: {r: 0, g: 0, b: 0, a: 1}
+    - Color_f1c457c5c1e8416f8d5b58cb64eca793: {r: 0.035777852, g: 0.062340956, b: 0.2830189, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &974674671974656665
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
