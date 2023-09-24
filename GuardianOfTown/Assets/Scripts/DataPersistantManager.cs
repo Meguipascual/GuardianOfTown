@@ -21,11 +21,13 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerDefense { get; set; }
     public int SavedPlayerCriticalRate { get; set; }
     public int SavedPlayerExp { get; set; }
+    public int SavedTownHpShieldsDamaged {  get; set; }
     public float SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
     public int SavedPlayerLevelPoints {  get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
+    public List<Image> SavedTownDamagedShield;
     public float[] SpawnBoundariesLeft { get; private set; }
     public float[] SpawnBoundariesRight { get; private set; }
 
@@ -151,22 +153,34 @@ public class DataPersistantManager : MonoBehaviour
 
     public void SaveTownHp()
     {
-        //SavedTownHpShields = new List<Image>();
-        
-        while (SavedTownHpShields.Count > GameManager.SharedInstance.TownHpShields.Count) 
-        {
-            SavedTownHpShields.RemoveAt(SavedTownHpShields.Count - 1);
-        }
+        SavedTownHpShieldsDamaged = GameManager.SharedInstance.TownHpShieldsDamaged;
+
+        //while (SavedTownHpShields.Count > GameManager.SharedInstance.TownHpShields.Count) 
+        //{
+        //    SavedTownHpShields.RemoveAt(SavedTownHpShields.Count - 1);
+        //}
 
     }
 
     public void LoadTownHp()
     {
+        GameManager.SharedInstance.TownHpShieldsDamaged = SavedTownHpShieldsDamaged;
         GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields.Count);
-        foreach (Image image in SavedTownHpShields)
+        for (int i = 0; i < SavedTownHpShields.Count; i++)
         {
-            GameManager.SharedInstance.TownHpShields.Add(image);
+            if (i > SavedTownHpShieldsDamaged)
+            {
+                GameManager.SharedInstance.TownHpShields.Add(SavedTownDamagedShield[i]);
+            }
+            else
+            {
+                GameManager.SharedInstance.TownHpShields.Add(SavedTownHpShields[i].GetComponent<Image>());
+            }
         }
+        //foreach (Image image in SavedTownHpShields)
+        //{
+        //    GameManager.SharedInstance.TownHpShields.Add(image);
+        //}
     }
 
     public void LoadPlayerStats()

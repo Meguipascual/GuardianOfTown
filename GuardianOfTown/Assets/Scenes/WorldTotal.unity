@@ -18193,29 +18193,57 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1573560068}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield
+      value: 
+      objectReference: {fileID: 711113280205219143, guid: 6a7da8f9334cd2e4c95f730d45197bb3, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.size
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.data[0]
       value: 
-      objectReference: {fileID: 2489958921133196132, guid: 8a18a94d1a2ff514bbc92ba1d10bc09b, type: 3}
+      objectReference: {fileID: 8508868436407028096, guid: 2e8c1d8fbf1be604980b859549d63e26, type: 3}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.data[1]
       value: 
-      objectReference: {fileID: 6383583984371938325, guid: 0123ff87f73dc8349a56fb6a906ff68b, type: 3}
+      objectReference: {fileID: 2489958921133196132, guid: 8a18a94d1a2ff514bbc92ba1d10bc09b, type: 3}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.data[2]
       value: 
-      objectReference: {fileID: 7721675015665239592, guid: 2f5b248ec3d1bc0419bbe01bf9340b26, type: 3}
+      objectReference: {fileID: 6383583984371938325, guid: 0123ff87f73dc8349a56fb6a906ff68b, type: 3}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.data[3]
       value: 
-      objectReference: {fileID: 5463891549916907561, guid: be8b04906d9f45a4885edf87791d086d, type: 3}
+      objectReference: {fileID: 7721675015665239592, guid: 2f5b248ec3d1bc0419bbe01bf9340b26, type: 3}
     - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: SavedTownHpShields.Array.data[4]
       value: 
-      objectReference: {fileID: 8508868436407028096, guid: 2e8c1d8fbf1be604980b859549d63e26, type: 3}
+      objectReference: {fileID: 5463891549916907561, guid: be8b04906d9f45a4885edf87791d086d, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.data[0]
+      value: 
+      objectReference: {fileID: 8508868436407028096, guid: 3fdcd7f7d9af16a40beb3c51c235ec73, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.data[1]
+      value: 
+      objectReference: {fileID: 2489958921133196132, guid: 97ad88fcd48e20d49ac0862019bfa974, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.data[2]
+      value: 
+      objectReference: {fileID: 6383583984371938325, guid: 1f378b35e8e607f4f82c54c15a751906, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.data[3]
+      value: 
+      objectReference: {fileID: 7721675015665239592, guid: e511307c620851d43915f731fb143e13, type: 3}
+    - target: {fileID: 7122630169593575322, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
+      propertyPath: SavedTownDamagedShield.Array.data[4]
+      value: 
+      objectReference: {fileID: 5463891549916907561, guid: c243e7e116967914c971990d2a08edd6, type: 3}
     - target: {fileID: 7122630169593575323, guid: 2d2f252c0a3083b47a3ff02bba777304, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -31003,6 +31031,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1787439652}
     - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShield
+      value: 
+      objectReference: {fileID: 711113280205219143, guid: 6a7da8f9334cd2e4c95f730d45197bb3, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: _menuPlayerHPText
       value: 
       objectReference: {fileID: 1787439652}
@@ -31071,6 +31103,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: gateOrientationImage.Array.data[0]
       value: 
       objectReference: {fileID: 4584337332154489422, guid: 81de9ade474730d41bf14cd0f32a95d0, type: 3}
@@ -31086,6 +31122,26 @@ PrefabInstance:
       propertyPath: gateOrientationImage.Array.data[3]
       value: 
       objectReference: {fileID: 4584337332154489422, guid: ed584d96bc4443547a434921f75983f7, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 8508868436407028096, guid: 3fdcd7f7d9af16a40beb3c51c235ec73, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 2489958921133196132, guid: 97ad88fcd48e20d49ac0862019bfa974, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 6383583984371938325, guid: 1f378b35e8e607f4f82c54c15a751906, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 7721675015665239592, guid: e511307c620851d43915f731fb143e13, type: 3}
+    - target: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: TownDamagedShieldImages.Array.data[4]
+      value: 
+      objectReference: {fileID: 5463891549916907561, guid: c243e7e116967914c971990d2a08edd6, type: 3}
     - target: {fileID: 1136239616363345667, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: m_Name
       value: GameManager

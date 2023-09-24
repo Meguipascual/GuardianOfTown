@@ -158,10 +158,15 @@ public class PlayerController : Character
         var shields = GameManager.SharedInstance._townHpText.GetComponentsInChildren(
             GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
             );
-        shields[shields.Length-1].gameObject.SetActive(false);
-        GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].gameObject.SetActive(false);
-        GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
-        if(GameManager.SharedInstance.TownHpShields.Count <= 0)
+        //shields[shields.Length - 1].gameObject.SetActive(false);
+
+
+        GameManager.SharedInstance.TownHpShieldsDamaged++;
+        shields[shields.Length - GameManager.SharedInstance.TownHpShieldsDamaged].GetComponent<Image>().sprite 
+            = GameManager.SharedInstance.TownDamagedShieldImages[0].GetComponent<Image>().sprite;
+        //GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].gameObject.SetActive(false);
+        //GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
+        if(GameManager.SharedInstance.TownHpShields.Count == GameManager.SharedInstance.TownHpShieldsDamaged)
         {
             Die();
         }
@@ -169,6 +174,7 @@ public class PlayerController : Character
 
     public override void LevelUp() 
     {
+        //Deprecated
         int randomUpgrade;
         if (Exp > 10*Level)
         {

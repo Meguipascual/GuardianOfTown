@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private SpawnManager spawnManager;
     private GameObject dataPersistantManagerGameObject;
     public List<Image> TownHpShields;
+    public List<Image> TownDamagedShieldImages;
     public TextMeshProUGUI _townHpText;
     public TextMeshProUGUI _stageText;
     public TextMeshProUGUI _stagePopUpText;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
     public int NumberOfStagesLeft { get; set; }
+    public int TownHpShieldsDamaged { get; set; }
 
     private void Awake()
     {
