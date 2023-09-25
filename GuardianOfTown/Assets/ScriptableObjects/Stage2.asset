@@ -13,15 +13,31 @@ MonoBehaviour:
   m_Name: Stage2
   m_EditorClassIdentifier: 
   _wavesData:
-  - {fileID: 11400000, guid: 6885b0454eb23454dae8d892d7db6ca9, type: 2}
-  - {fileID: 11400000, guid: 145ef9e631f91174bae7ef77b4eb9374, type: 2}
-  - {fileID: 11400000, guid: a54d6f03244d5ab4a987b21b29afa3da, type: 2}
-  - {fileID: 11400000, guid: 551f2f74c01e55342a5c8b07647fc988, type: 2}
-  _wavesData2:
   - NumberOfEnemiesToCreate: 10
-    NumberOfBossesToCreate: 0
-    LevelOfEnemies: 0
-    LevelOfBosses: 0
+    NumberOfBossesToCreate: 5
+    LevelOfEnemies: 5
+    LevelOfBosses: 5
     NumberOfEnemiesByGate: 0
-    Gate: 0
+    Gate: 1
+    IsRandomized: 0
+  - NumberOfEnemiesToCreate: 2
+    NumberOfBossesToCreate: 10
+    LevelOfEnemies: 5
+    LevelOfBosses: 5
+    NumberOfEnemiesByGate: 0
+    Gate: 2
+    IsRandomized: 0
+  - NumberOfEnemiesToCreate: 0
+    NumberOfBossesToCreate: 10
+    LevelOfEnemies: 5
+    LevelOfBosses: 5
+    NumberOfEnemiesByGate: 0
+    Gate: 1
+    IsRandomized: 0
+  - NumberOfEnemiesToCreate: 10
+    NumberOfBossesToCreate: 2
+    LevelOfEnemies: 6
+    LevelOfBosses: 6
+    NumberOfEnemiesByGate: 0
+    Gate: 3
     IsRandomized: 0

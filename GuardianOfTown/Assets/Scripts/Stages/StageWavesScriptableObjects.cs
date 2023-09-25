@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stage", menuName = "ScriptableObjects/Stages", order = 1)]
 public class StageWavesScriptableObjects : ScriptableObject
 {
-    public List<WaveScriptableObject> _wavesData;
-    public List<WaveData> _wavesData2;
+    public List<WaveData> _wavesData;
     public int Stage { get; set; }
 }

@@ -154,12 +154,6 @@ public class DataPersistantManager : MonoBehaviour
     public void SaveTownHp()
     {
         SavedTownHpShieldsDamaged = GameManager.SharedInstance.TownHpShieldsDamaged;
-
-        //while (SavedTownHpShields.Count > GameManager.SharedInstance.TownHpShields.Count) 
-        //{
-        //    SavedTownHpShields.RemoveAt(SavedTownHpShields.Count - 1);
-        //}
-
     }
 
     public void LoadTownHp()
@@ -168,19 +162,15 @@ public class DataPersistantManager : MonoBehaviour
         GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields.Count);
         for (int i = 0; i < SavedTownHpShields.Count; i++)
         {
-            if (i > SavedTownHpShieldsDamaged)
-            {
-                GameManager.SharedInstance.TownHpShields.Add(SavedTownDamagedShield[i]);
-            }
-            else
+            if (i < (SavedTownHpShields.Count - SavedTownHpShieldsDamaged))
             {
                 GameManager.SharedInstance.TownHpShields.Add(SavedTownHpShields[i].GetComponent<Image>());
             }
+            else
+            {
+                GameManager.SharedInstance.TownHpShields.Add(SavedTownDamagedShield[i]);
+            }
         }
-        //foreach (Image image in SavedTownHpShields)
-        //{
-        //    GameManager.SharedInstance.TownHpShields.Add(image);
-        //}
     }
 
     public void LoadPlayerStats()

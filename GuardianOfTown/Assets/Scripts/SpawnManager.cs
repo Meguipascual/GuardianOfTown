@@ -29,8 +29,8 @@ public class SpawnManager : MonoBehaviour
 
     private void LoadLevelOfEnemies()
     {
-        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave]._levelOfBosses;
-        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave]._levelOfEnemies;
+        LevelOfBosses = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfBosses;
+        LevelOfEnemies = _stagesData[CurrentStage]._wavesData[CurrentWave].LevelOfEnemies;
     }
     private void LoadStageAndWaveCurrentIndex()
     {
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
 
     private void LoadNumberOfEnemies()
     {
-        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave]._numberOfBossesToCreate;
+        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesData [CurrentStage]._wavesData [CurrentWave].NumberOfEnemiesToCreate + _stagesData [CurrentStage]._wavesData [CurrentWave].NumberOfBossesToCreate;
         GameManager.SharedInstance.NumberOfStagesLeft = _stagesData.Length - CurrentStage;
         GameManager.SharedInstance._enemiesLeftText.text = $": {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
     }
@@ -74,15 +74,15 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnAmountOfBosses(WaveScriptableObject spawnSettings)
+    IEnumerator SpawnAmountOfBosses(WaveData spawnSettings)
     {
         float bossY;
         float bossX;
         int bossPrefab;
         Vector3 enemyPosition;
-        if (spawnSettings._isRandomized)
+        if (spawnSettings.IsRandomized)
         {
-            for (int i = 0; i < spawnSettings._numberOfBossesToCreate; i++)
+            for (int i = 0; i < spawnSettings.NumberOfBossesToCreate; i++)
             {
                 var gate = Random.Range(0, 4);
                 bossPrefab = Random.Range(0, _bossPrefab.Length);
@@ -95,7 +95,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < spawnSettings._numberOfBossesToCreate; i++)
+            for (int i = 0; i < spawnSettings.NumberOfBossesToCreate; i++)
             {
                 bossPrefab = Random.Range(0, _bossPrefab.Length);
                 bossX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate],
@@ -108,16 +108,16 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnAmountOfEnemies(WaveScriptableObject spawnSettings)
+    IEnumerator SpawnAmountOfEnemies(WaveData spawnSettings)
     {
         Vector3 enemyPosition;
         int enemyType;
         float enemyX;
         float enemyY;
 
-        if (!spawnSettings._isRandomized)
+        if (!spawnSettings.IsRandomized)
         {
-            for (int i = 0; i < spawnSettings._numberOfEnemiesToCreate; i++)
+            for (int i = 0; i < spawnSettings.NumberOfEnemiesToCreate; i++)
             {
                 enemyType = Random.Range(0, _enemyPrefab.Length);
                 enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesData[CurrentStage]._wavesData[CurrentWave].Gate],
@@ -130,7 +130,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < spawnSettings._numberOfEnemiesToCreate; i++)
+            for (int i = 0; i < spawnSettings.NumberOfEnemiesToCreate; i++)
             {
                 var gate = Random.Range(0, 4);
                 enemyType = Random.Range(0, _enemyPrefab.Length);
@@ -146,7 +146,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnAmountOfBosses(spawnSettings));
     }
 
-    IEnumerator SpawnPowerups(WaveScriptableObject spawnSettings)
+    IEnumerator SpawnPowerups(WaveData spawnSettings)
     {
         var powerupY = 1f;
         Vector3 powerupPosition;
@@ -164,7 +164,7 @@ public class SpawnManager : MonoBehaviour
                 powerupType = Random.Range(0, _powerupPrefab.Length);
             }
 
-            if (spawnSettings._isRandomized)
+            if (spawnSettings.IsRandomized)
             {
                 var gate = Random.Range(0, 4);
                 powerupX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[gate], DataPersistantManager.Instance.SpawnBoundariesRight[gate]);
@@ -202,7 +202,7 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpawnAmountOfEnemies(_stagesData[CurrentStage]._wavesData[CurrentWave]));
             if(CurrentWave == 0)
             {
-                DataPersistantManager.Instance.ChangeWave(true, _stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
+                DataPersistantManager.Instance.ChangeWave(true, _stagesData[CurrentStage]._wavesData[CurrentWave].IsRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
             }
         }
     }
@@ -216,7 +216,7 @@ public class SpawnManager : MonoBehaviour
             LoadNumberOfEnemies();
             ControlWavesSpawn();
             Debug.Log($"there are some waves left");
-            DataPersistantManager.Instance.ChangeWave(false, _stagesData[CurrentStage]._wavesData[CurrentWave]._isRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
+            DataPersistantManager.Instance.ChangeWave(false, _stagesData[CurrentStage]._wavesData[CurrentWave].IsRandomized, _stagesData[CurrentStage]._wavesData[CurrentWave].Gate);
         }
         else
         {

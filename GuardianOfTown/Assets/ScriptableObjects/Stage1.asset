@@ -13,5 +13,17 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: 
   _wavesData:
-  - {fileID: 11400000, guid: cae8dfa7db6683f44a0c3bf64c28ce03, type: 2}
-  _wavesData2: []
+  - NumberOfEnemiesToCreate: 10
+    NumberOfBossesToCreate: 1
+    LevelOfEnemies: 1
+    LevelOfBosses: 1
+    NumberOfEnemiesByGate: 0
+    Gate: 0
+    IsRandomized: 0
+  - NumberOfEnemiesToCreate: 20
+    NumberOfBossesToCreate: 1
+    LevelOfEnemies: 1
+    LevelOfBosses: 1
+    NumberOfEnemiesByGate: 0
+    Gate: 0
+    IsRandomized: 1
