@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class TrollManager : Enemy
 {
-    [SerializeField] private GameObject floatingTextPrefab;
-    [SerializeField] private GameObject criticalHitTextPrefab;
+    [SerializeField] private GameObject floatingTextFrontPrefab;
+    [SerializeField] private GameObject criticalHitTextFrontPrefab;
+    [SerializeField] private GameObject floatingTextTopPrefab;
+    [SerializeField] private GameObject criticalHitTextTopPrefab;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -33,6 +36,13 @@ public class TrollManager : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Trigger(other, floatingTextPrefab, criticalHitTextPrefab);
+        if (GameSettings.Instance.IsTopViewModeActive)
+        {
+            Trigger(other, floatingTextTopPrefab, criticalHitTextTopPrefab);
+        }
+        else
+        {
+            Trigger(other, floatingTextFrontPrefab, criticalHitTextFrontPrefab);
+        }
     }
 }

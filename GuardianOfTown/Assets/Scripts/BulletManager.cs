@@ -8,7 +8,7 @@ public class BulletManager : MonoBehaviour
     private float topBound = 30;
     [SerializeField] private float proyectileSpeed = 10.0f;
     [SerializeField] private float _proyectileRotationSpeed = 1.0f;
-    private PlayerController playerManager;
+    private PlayerController playerController;
     private float _rotateXAxisRandom;
     private float _rotateYAxisRandom;
     private float _rotateZAxisRandom;
@@ -21,7 +21,7 @@ public class BulletManager : MonoBehaviour
     void Start()
     {
         criticalParticles = GetComponent<ParticleSystem>();
-        playerManager = FindObjectOfType<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
         _rotateXAxisRandom = Random.value;
         _rotateYAxisRandom = Random.value;
         _rotateZAxisRandom = Random.value;
@@ -30,7 +30,7 @@ public class BulletManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!playerManager.IsDead)
+        if (!playerController.IsDead)
         {
             _rotationX += _rotateXAxisRandom * Time.deltaTime * _proyectileRotationSpeed;
             _rotationY += _rotateYAxisRandom * Time.deltaTime * _proyectileRotationSpeed;

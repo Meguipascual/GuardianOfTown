@@ -10,6 +10,8 @@ public abstract class Enemy : Character
     private ParticleSystem _criticalHitParticleSystem;
     private Animator _animator;
     private Collider _collider;
+    [SerializeField] private GameObject _enemyPanelTop;
+    [SerializeField] private GameObject _enemyPanelFront;
     protected DataPersistantManager DataPersistentManager { get; set; }
     protected SpawnManager SpawnManager { get; set; }
     protected int Exp { get; set; }
@@ -29,6 +31,16 @@ public abstract class Enemy : Character
 
     protected virtual void Start()
     {
+        if (GameSettings.Instance.IsTopViewModeActive)
+        {
+            _enemyPanelTop.gameObject.SetActive(true);
+            _enemyPanelFront.gameObject.SetActive(false);
+        }
+        else
+        {
+            _enemyPanelTop.gameObject.SetActive(false);
+            _enemyPanelFront.gameObject.SetActive(true);
+        }
         Player = FindObjectOfType<PlayerController>();
         DataPersistentManager = FindObjectOfType<DataPersistantManager>();
         SpawnManager = FindObjectOfType<SpawnManager>();
@@ -37,6 +49,7 @@ public abstract class Enemy : Character
         _animator = GetComponentInChildren<Animator>();
         _collider = GetComponent<Collider>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
+        
     }
     protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {

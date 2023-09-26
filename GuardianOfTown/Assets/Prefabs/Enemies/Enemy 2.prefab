@@ -279,7 +279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4006510082770108100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -740,7 +740,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -909,8 +909,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6609782315aa14eb0aded07208b2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatingTextPrefab: {fileID: 4295938482430373491, guid: 72684ee45d9255342997f7bf90242ae4, type: 3}
-  criticalHitTextPrefab: {fileID: 5076198094092984940, guid: b5717f78ae9cd694a917ac277a5d4416, type: 3}
+  _enemyPanelTop: {fileID: 2872810131707044824}
+  _enemyPanelFront: {fileID: 3007493722776704223}
+  floatingTextFrontPrefab: {fileID: 4295938482430373491, guid: 72684ee45d9255342997f7bf90242ae4, type: 3}
+  criticalHitTextFrontPrefab: {fileID: 5076198094092984940, guid: b5717f78ae9cd694a917ac277a5d4416, type: 3}
+  floatingTextTopPrefab: {fileID: 4295938482430373491, guid: 617ee20ba41e51140a1029df54128fa9, type: 3}
+  criticalHitTextTopPrefab: {fileID: 5076198094092984940, guid: af1af75302a2c8f42a36e8923e69172f, type: 3}
 --- !u!1001 &2530748149434472339
 PrefabInstance:
   m_ObjectHideFlags: 0
