@@ -14,7 +14,7 @@ public class BossManager : Enemy
         HP = 500;
         HpMax = HP;
         Defense = 10;
-        Speed = 0.5f;
+        Speed = 1f;
         Exp = 50;
         TimeToMove = 2f;
         TimeToRest = 2f;

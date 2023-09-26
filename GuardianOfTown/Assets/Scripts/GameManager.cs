@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
     public GameObject _gameOverCanvas;
+    public GameObject _WinCanvas;
     private string _cameraQuake = "CameraQuake";
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }

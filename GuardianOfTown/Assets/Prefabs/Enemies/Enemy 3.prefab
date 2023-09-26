@@ -859,7 +859,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 118
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &7011047767993667393
 MonoBehaviour:
@@ -1220,6 +1220,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8532064969717687792}
     m_Modifications:
+    - target: {fileID: 426051539007292636, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426051539007292636, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 2005722759250927672, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1326,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Lightmapping
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_ShadowRadius
@@ -1334,9 +1342,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005722761242645203, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Intensity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 2.5856562
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717802726593366747, guid: 17a59c469a7e9fc428dfefd5036f2a85, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 47
       objectReference: {fileID: 0}

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DataPersistantManager : MonoBehaviour
 {
     public static DataPersistantManager Instance;
-    private SpawnManager spawnManager;
+    private StagesData _stagesData;
     private PlayerController playerController;
     
     public int Stage { get; set; }
@@ -51,7 +51,7 @@ public class DataPersistantManager : MonoBehaviour
 
     private void FindSpawnManager()
     {
-        spawnManager = FindObjectOfType<SpawnManager>();
+        _stagesData = FindObjectOfType<StagesData>();
     }
 
     private void Initialice()
@@ -107,14 +107,14 @@ public class DataPersistantManager : MonoBehaviour
         SaveNextStage();
         GameManager.SharedInstance.IsGamePaused = true;
 
-        if ((Stage >= spawnManager._stagesData.Length))
+        if ((Stage >= _stagesData.StagesDataList.Count))
         {
             Debug.Log("you win, son?");
-            //activate win panel?
+            GameManager.SharedInstance._WinCanvas.SetActive(true);
             return;
         }
 
-        if (spawnManager._stagesData[Stage]._wavesData.Count == 0)
+        if (_stagesData.StagesDataList[Stage]._wavesData.Count == 0)
         {
             Debug.Log($"Stage scriptable {Stage+1} empty");
             Debug.LogError($"Stage scriptable {Stage + 1} empty");

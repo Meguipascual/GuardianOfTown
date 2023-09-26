@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wavesData:
   - NumberOfEnemiesToCreate: 10
-    NumberOfBossesToCreate: 1
+    NumberOfBossesToCreate: 2
     LevelOfEnemies: 1
     LevelOfBosses: 1
     NumberOfEnemiesByGate: 0
     Gate: 0
     IsRandomized: 0
-  - NumberOfEnemiesToCreate: 20
-    NumberOfBossesToCreate: 1
-    LevelOfEnemies: 1
-    LevelOfBosses: 1
+  - NumberOfEnemiesToCreate: 15
+    NumberOfBossesToCreate: 0
+    LevelOfEnemies: 2
+    LevelOfBosses: 0
     NumberOfEnemiesByGate: 0
-    Gate: 0
-    IsRandomized: 1
+    Gate: 2
+    IsRandomized: 0
