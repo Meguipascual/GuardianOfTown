@@ -194,8 +194,6 @@ public class SpawnManager : MonoBehaviour
         if (CurrentStage > _stagesDataList.Count - 1 || (_stagesDataList[CurrentStage] == null))
         {
             _playerController.IsDead = true;
-            Debug.Log("Really here you might win the game, I suppose");
-            //GameManager.SharedInstance._WinCanvas.SetActive(true);
             return;
         }
         else
