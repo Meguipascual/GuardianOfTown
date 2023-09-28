@@ -6,5 +6,7 @@ public class Tags
     public const string Boss = nameof(Boss);
     public const string Player = nameof(Player);
     public const string Wall = nameof(Wall);
+    public const string Sword = nameof(Sword);
+    public const string BackCannon = nameof(BackCannon);
     public const string Bullet = nameof(Bullet);
 }

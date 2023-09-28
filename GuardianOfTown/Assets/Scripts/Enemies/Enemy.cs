@@ -61,6 +61,10 @@ public abstract class Enemy : Character
         {
             CollisionWithWall();
         }
+        else if (other.CompareTag(Tags.Sword))
+        {
+            CollisionWithSword();
+        }
         else if (other.CompareTag(Tags.Player))
         {
             CollisionWithPlayer();
@@ -171,6 +175,16 @@ public abstract class Enemy : Character
             return;
         }
         Player.TownReceiveDamage();
+        Die();
+    }
+
+    void CollisionWithSword()
+    {
+        if (CompareTag(Tags.Boss))
+        {
+            //Sword Broke 
+            PermanentPowerUpsSettings.instance.DestroySword();
+        }
         Die();
     }
 
