@@ -12,6 +12,8 @@ TagManager:
   - Boss
   - Top
   - Front
+  - Sword
+  - BackCannon
   layers:
   - Default
   - TransparentFX

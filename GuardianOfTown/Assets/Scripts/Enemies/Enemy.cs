@@ -182,9 +182,10 @@ public abstract class Enemy : Character
     {
         if (CompareTag(Tags.Boss))
         {
-            //Sword Broke 
-            PermanentPowerUpsSettings.instance.DestroySword();
+            PermanentPowerUpsSettings.Instance.DestroySword();//Sword Breaks 
         }
+        Player.shieldParticleSystem.Play();//Change to a sword particle or something
+        Player.Exp += Exp;
         Die();
     }
 
@@ -197,10 +198,6 @@ public abstract class Enemy : Character
         {
             Player.shieldParticleSystem.Play();
             Player.Exp += Exp;
-            //if (Player.Exp > 20)
-            //{
-            //    Player.LevelUp();
-            //}
             Die();
         }
     }
