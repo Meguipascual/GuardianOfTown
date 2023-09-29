@@ -93,8 +93,8 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(ShowStageText());
         }
-        PermanentPowerUpsSettings.Instance.CreateSword();
-        PermanentPowerUpsSettings.Instance.CreateBackCannon();
+        //PermanentPowerUpsSettings.Instance.CreateSword();
+        //PermanentPowerUpsSettings.Instance.CreateBackCannon();
     }
 
     // Update is called once per frame

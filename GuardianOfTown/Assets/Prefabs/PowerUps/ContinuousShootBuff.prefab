@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6685055771686232653}
   - component: {fileID: 6929640276454066026}
   - component: {fileID: 266170576153402113}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ContinuousShootBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,6 +137,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 198928334385227375, guid: a3225ba88f0d5c54382064e1b9d77989, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3048553550134709270, guid: a3225ba88f0d5c54382064e1b9d77989, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -253,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -425565630206218756, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -425565630206218756, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -261,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
     - target: {fileID: -264430861247414160, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -264430861247414160, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -275,9 +279,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866621852552652557, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3566390031902043909, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3566390031902043909, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -287,6 +303,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
+    - target: {fileID: 3779745573541866595, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
 --- !u!4 &3016608445875714031 stripped

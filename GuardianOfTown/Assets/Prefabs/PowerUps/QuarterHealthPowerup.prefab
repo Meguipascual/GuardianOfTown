@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8924997712602561841}
   - component: {fileID: 3770950446269229527}
   - component: {fileID: 3725875457477260366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QuarterHealthPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3796410681894490311}
+  - {fileID: 376315582465984277}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,7 +74,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3112024, y: 0.43300948, z: 1.2489619}
   m_Center: {x: -0.010373414, y: -0.0035885423, z: -0.020746827}
---- !u!1001 &3685411363379525420
+--- !u!1001 &194297423674810622
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -138,29 +138,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
+      objectReference: {fileID: 8529481535521766085, guid: cd6f6ff09e2e4f14c9e2f859bd34eec9, type: 3}
     - target: {fileID: -7511558181221131132, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 6271573414225017425, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
-    - target: {fileID: -7511558181221131132, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 6271573414225017425, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
     - target: {fileID: 919132149155446097, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
       propertyPath: m_Name
-      value: HealthPowerup
+      value: HealthPowerup (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
---- !u!4 &3796410681894490311 stripped
+--- !u!4 &376315582465984277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 925fbf7f508af044f9b0bb6c88102e2a, type: 3}
-  m_PrefabInstance: {fileID: 3685411363379525420}
+  m_PrefabInstance: {fileID: 194297423674810622}
   m_PrefabAsset: {fileID: 0}

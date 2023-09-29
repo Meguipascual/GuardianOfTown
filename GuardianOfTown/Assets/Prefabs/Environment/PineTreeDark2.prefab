@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 448147812604015521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PineTreeDark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5314446791645720048}
   - component: {fileID: 6276558695807617717}
   - component: {fileID: 8911087793827838390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 79f0210858da73544bfa77ce227f2aa5, type: 2}
-  - {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,7 +125,7 @@ GameObject:
   - component: {fileID: 687658372757747235}
   - component: {fileID: 1980058127390034035}
   - component: {fileID: 3516398321094622031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +174,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e093ba5594c2edb4e91b81e3f14041c8, type: 2}
-  - {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,7 +206,7 @@ GameObject:
   - component: {fileID: 2132682988269800597}
   - component: {fileID: 97579487672945859}
   - component: {fileID: 2474698130143053463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +255,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 79f0210858da73544bfa77ce227f2aa5, type: 2}
-  - {fileID: 2100000, guid: c85de851dab91ed4aa6bded635ff0bf0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
