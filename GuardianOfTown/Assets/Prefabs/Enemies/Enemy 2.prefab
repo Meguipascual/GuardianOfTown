@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7153471390892561501}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6343631569892433133}
   - component: {fileID: 7814975853563926788}
   - component: {fileID: 1093665282457193723}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 938417033629893764}
   - component: {fileID: 13784680249974124}
   - component: {fileID: 6622904357126569009}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 2212081943057063769}
   - component: {fileID: 6787455442743960200}
   - component: {fileID: 582849893363594927}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 3832288166344258774}
   - component: {fileID: 1719758129433996425}
   - component: {fileID: 8776581724951519807}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: CanvasTop
   m_TagString: Top
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 2760746194537982064}
   - component: {fileID: 1913858421152595845}
   - component: {fileID: 2911473834222927442}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: CanvasFront
   m_TagString: Front
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 3699992513307241089}
   - component: {fileID: 2456174685101160081}
   - component: {fileID: 2340776469317312800}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2214122286610503791}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 5749818720318245941}
   - component: {fileID: 3441572111968793109}
   - component: {fileID: 1601075678223616846}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 3012112569108261786}
   - component: {fileID: 7536156370125186387}
   - component: {fileID: 1546157237620201439}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,15 +980,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6974886340694776108, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3731140003635945839, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3451857101136726456, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3451857101136726456, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1004,11 +1004,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3661417378021405889, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3661417378021405889, guid: ed740fbf5222675499490510ee6db805, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1130,7 +1130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4840225011187687922, guid: d48e7af85ea12894c8535f182e5c3339, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48e7af85ea12894c8535f182e5c3339, type: 3}
