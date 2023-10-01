@@ -63,13 +63,13 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerLevel = 1;
         SavedPlayerHP = 15;
         SavedPlayerHpMax = SavedPlayerHP;
-        SavedPlayerAttack = 30;
+        SavedPlayerAttack = 15;
         SavedPlayerDefense = 10;
         SavedPlayerSpeed = 15f;
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 1.0f;
-        SavedPlayerExp = 705;
+        SavedPlayerExp = 0;
         SavedPlayerLevelPoints = 0;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };

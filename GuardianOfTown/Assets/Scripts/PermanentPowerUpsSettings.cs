@@ -38,8 +38,6 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         AreTownRecoveryWasted = new bool[3];
         AreAreaOfEffectActive = new bool[3];
         AreShootSpeedWasted = new bool[5];
-        IsABulletModifierActive = true;
-        IsDoubleShootActive = true;
     }
 
     public void CreateSword()

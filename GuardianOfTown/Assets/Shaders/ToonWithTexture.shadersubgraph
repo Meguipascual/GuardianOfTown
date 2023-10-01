@@ -452,7 +452,7 @@
         "m_GuidSerialized": "ece55a6f-863e-4c86-ba28-db2674efe05f"
     },
     "m_Name": "LitColor",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Vector4_0f3ff74731e54570bf1ff1f692b1bc70",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
@@ -652,7 +652,7 @@
         "m_GuidSerialized": "14f4aaf8-dc60-4e56-b27e-be8da67bb411"
     },
     "m_Name": "FresnelThreshold",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Vector1_2b28e9a574a44b1ea4e63536a67e367e",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
@@ -1898,7 +1898,7 @@
         "m_GuidSerialized": "e52c23c6-3623-40c1-b433-09408d1c48e2"
     },
     "m_Name": "FresnelPower",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Vector1_bb9b8708d1a249a4bf6e8458f8945fcd",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
@@ -2065,7 +2065,7 @@
         "m_GuidSerialized": "f00ba213-2050-4124-9ece-7b514a45113e"
     },
     "m_Name": "DiffuseTexture",
-    "m_DefaultReferenceName": "",
+    "m_DefaultReferenceName": "Texture2D_ca4ac71b0b454cb3bf4b498ed68722f6",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
@@ -2092,7 +2092,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"45644cf5e1ee47b4aac29e4d1eb34722\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"884113e31be82be47b8d7c81931b6532\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_DefaultType": 0
