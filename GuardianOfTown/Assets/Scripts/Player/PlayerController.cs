@@ -11,12 +11,9 @@ public class PlayerController : Character
     private float _horizontalInput;
     private FillHealthBar _fillHealthBar;
     private ChangeGateManager _changeGateManager;
+    private ShootingManager _shootingManager;
     public ParticleSystem shieldParticleSystem;
-    [SerializeField]private Vector3 offset = new Vector3(0, 0, 1);
-    [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
-    [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting
-    private KeyCode _shoot;
-    private KeyCode _alternateShoot;
+    
     private KeyCode _rightGateButton;
     private KeyCode _leftGateButton;
 
@@ -30,15 +27,12 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()    
     {
-        _bulletTimer = 0;
-        _bulletDelay = 0.2f;
-        _shoot = ControlButtons._shoot;
-        _alternateShoot = ControlButtons._alterShoot;
         _rightGateButton = ControlButtons._rightGateButton;
         _leftGateButton = ControlButtons._leftGateButton;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
+        _shootingManager = GetComponentInChildren<ShootingManager>();
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
         _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
@@ -54,23 +48,6 @@ public class PlayerController : Character
 
         TryToMove();
 
-        if (GameSettings.Instance.IsEasyModeActive)
-        {
-            ShootEasyMode();
-        }
-        else
-        {
-            if(OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
-            {
-                OverHeatedManager.Instance.CoolCannon();
-            }
-
-            if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
-            {
-                Shoot();
-            }
-        }
-
         if (Input.GetKeyDown(_rightGateButton))
         {
             _changeGateManager.RightButtonClicked();
@@ -81,41 +58,6 @@ public class PlayerController : Character
         }
     }
 
-    private void ShootEasyMode()
-    {
-        if (OverHeatedManager.Instance.IsOverheatedCannon())
-        {
-            OverHeatedManager.Instance.CoolCannon();
-            return;
-        }
-        if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
-        {
-            OverHeatedManager.Instance.HeatCannon();
-            _bulletTimer += Time.deltaTime;
-            if(_bulletTimer >= _bulletDelay)
-            {
-                Shoot();
-                _bulletTimer = 0;
-            }
-        }
-        else
-        {
-            OverHeatedManager.Instance.CoolCannon();
-        }
-    }
-
-    private void Shoot()
-    {
-        // Get an object object from the pool
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
-        if (pooledProjectile != null)
-        {
-            pooledProjectile.SetActive(true); // activate it
-            pooledProjectile.transform.position = transform.position + offset; // position it at player
-            ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-        }
-    }
 
     public override void Die()
     {
@@ -172,55 +114,7 @@ public class PlayerController : Character
         }
     }
 
-    public override void LevelUp() 
-    {
-        //Deprecated
-        int randomUpgrade;
-        if (Exp > 10*Level)
-        {
-            LevelPoints += 2;
-            HP = HpMax;
-            //GameManager.SharedInstance.playerLevelPointsText.text = $"LP: {LevelPoints}";
-
-            //This part of the code are going to change to a method that openned when player will be going to levelup
-            for (int i = 0; i < LevelPoints; i++)
-            {
-                HP += 5;
-                if(CriticalRate >= 100)
-                {
-                    randomUpgrade = Random.Range(0, 3);
-                }
-                else
-                {
-                    randomUpgrade = Random.Range(0, 4);
-                }
-                
-                switch (randomUpgrade)
-                {
-                    case 0: Attack += 5; break;
-                    case 1: Defense += 4; break;
-                    case 2: CriticalDamage += 0.1f; break;
-                    case 3: CriticalRate += 5; break;
-                }
-                LevelPoints--;
-            }
-            HpMax = HP;
-            Level++;
-            _fillHealthBar.ModifySliderMaxValue(1);
-            FillSliderValue();
-            Exp = 0;
-            GameManager.SharedInstance._playerLevelText.text = $"Lvl: {Level}";
-            GameManager.SharedInstance._menuPlayerHPText.text = $"HP Max: {HpMax}";
-            GameManager.SharedInstance._menuPlayerLevelText.text = $"Level: {Level}";
-            GameManager.SharedInstance._menuPlayerAttackText.text = $"Attack: {Attack}";
-            GameManager.SharedInstance._menuPlayerDefenseText.text = $"Defense: {Defense}";
-            GameManager.SharedInstance._menuPlayerSpeedText.text = $"Speed: {Speed}";
-            GameManager.SharedInstance._menuPlayerCriticalRateText.text = $"Critical Rate: {CriticalRate}%";
-            GameManager.SharedInstance._menuPlayerCriticalDamageText.text = $"Critical Damage: {CriticalDamage * 100}%";
-            //GameManager.SharedInstance.menuPlayerLevelPointsText.text = $"LP: {LevelPoints}"; 
-        }
-    }
-
+    
     public bool IsCritical()
     {
         var isCritical = false;

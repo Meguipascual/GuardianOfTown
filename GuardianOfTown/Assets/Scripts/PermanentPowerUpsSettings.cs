@@ -5,6 +5,7 @@ using UnityEngine;
 public class PermanentPowerUpsSettings : MonoBehaviour
 {
     public static PermanentPowerUpsSettings Instance;
+    public bool IsABulletModifierActive {  get; set; }
     public bool IsOverHeatingUnactive { get; set; }
     public bool IsFrontSwordActive { get; set; }
     public bool IsBackShootActive { get; set; }
@@ -37,6 +38,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         AreTownRecoveryWasted = new bool[3];
         AreAreaOfEffectActive = new bool[3];
         AreShootSpeedWasted = new bool[5];
+        IsABulletModifierActive = true;
+        IsDoubleShootActive = true;
     }
 
     public void CreateSword()
