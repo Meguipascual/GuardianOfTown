@@ -24,7 +24,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public Button _speedButton;
     public Button _nextLevelButton;
     private int _increment;
-    private float _critDamageIncrement;
+    private int _critDamageIncrement;
     private int _levelPoints;
     private int _currentLevelPoints;
     private float[] _increments;
@@ -37,7 +37,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _increments = new float[6];
         _playerStatsCopy = new float[6];
         _increment = 5;
-        _critDamageIncrement = 0.1f;
+        _critDamageIncrement = 10;
         _currentLevelPoints = 0; 
         _levelPoints = _playerController.LevelPoints;
         CopyPlayerStats();
@@ -47,7 +47,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerAttackText.text = $"Attack: {_playerStatsCopy[1]}";
         _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]}";
         _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]}";
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]*100}";
+        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}";
         _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]}";
         TryToDisableButtons();
     }
@@ -66,12 +66,13 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     {
         if (_levelPoints <=_currentLevelPoints)
         {
-            _hpButton.enabled = false;
-            _attackButton.enabled = false;
-            _defenseButton.enabled = false;
-            _critRateButton.enabled = false;
-            _critDamageButton.enabled = false;
-            _speedButton.enabled = false;
+            _hpButton.interactable = false;
+            _hpButton.interactable = false;
+            _attackButton.interactable = false;
+            _defenseButton.interactable = false;
+            _critRateButton.interactable = false;
+            _critDamageButton.interactable = false;
+            _speedButton.interactable = false;
         }
     }
 
@@ -85,16 +86,16 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerAttackText.text = $"Attack: {_playerStatsCopy[1]}";
         _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]}";
         _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]}";
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4] * 100}";
+        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}";
         _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]}";
-        if (!_hpButton.enabled && (_levelPoints>0))
+        if (!_hpButton.interactable && (_levelPoints>0))
         {
-            _hpButton.enabled = true;
-            _attackButton.enabled = true;
-            _defenseButton.enabled = true;
-            _critRateButton.enabled = true;
-            _critDamageButton.enabled = true;
-            _speedButton.enabled = true;
+            _hpButton.interactable = true;
+            _attackButton.interactable = true;
+            _defenseButton.interactable = true;
+            _critRateButton.interactable = true;
+            _critDamageButton.interactable = true;
+            _speedButton.interactable = true;
         }
     }
 
@@ -135,7 +136,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[4] += _critDamageIncrement;
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4] * 100}+{_increments[4]*100}";
+        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}+{_increments[4]}";
         TryToDisableButtons();
     }
     public void increaseSpeed()
@@ -159,7 +160,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerController.Attack += (int)_increments[1];
         _playerController.Defense += (int)_increments[2];
         _playerController.CriticalRate += (int)_increments[3];
-        _playerController.CriticalDamage += _increments[4];
+        _playerController.CriticalDamage += (int)_increments[4];
         _playerController.Speed += _increments[5];
         _playerController.LevelPoints -= _currentLevelPoints;
     }

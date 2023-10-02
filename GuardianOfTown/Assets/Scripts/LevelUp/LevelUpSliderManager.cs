@@ -53,15 +53,14 @@ public class LevelUpSliderManager : MonoBehaviour
         var spentExp = 0;
         StopAllCoroutines();
 
-        while (_playerController.Exp - spentExp > 20 * _currentLevel)
+        while ((_playerController.Exp - spentExp) >= (20 * _currentLevel))
         {
-            spentExp += 20 * _currentLevel;
+            spentExp += (20 * _currentLevel);
             _playerController.LevelPoints += 2;
             _currentLevel++;
         }
 
         _slider.value = 0;
-        _currentLevel--;
         _playerController.Level = _currentLevel;
         _playerController.Exp -= spentExp;
         _playerLevelText.text = $"Level: {_currentLevel}";
@@ -83,20 +82,19 @@ public class LevelUpSliderManager : MonoBehaviour
         while (_playerController.Exp > 20 * _currentLevel)
         {
             _slider.value = 0;
-            _currentLevel ++;
             _slider.maxValue = 20 * _currentLevel;
 
-            do
+            while (_slider.value < _slider.maxValue)
             {
                 exp --;
                 _playerObtainedExpText.text = $"Exp: {exp}";
                 _slider.value ++;
-                yield return new WaitForSeconds(1/_slider.maxValue);//modificate time in order to be shorter when bigger the max value
+                yield return new WaitForSeconds(0.5f / (_slider.maxValue + 50));//modificate time in order to be shorter when bigger the max value 
             }
-            while (_slider.value < _slider.maxValue);
 
             _playerController.LevelPoints += 2;
             _slider.value = 0;
+            _currentLevel++;
             _playerController.Level = _currentLevel;
             _playerLevelText.text = $"Level: {_currentLevel}";
             _playerController.Exp -= (int) _slider.maxValue;

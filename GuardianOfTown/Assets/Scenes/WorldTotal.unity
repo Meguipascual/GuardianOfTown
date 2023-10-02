@@ -1330,7 +1330,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4196,7 +4196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306777110}
   m_Layer: 0
-  m_Name: Gate1
+  m_Name: Gate1(Bridge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7173,7 +7173,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -9272,7 +9272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 578458844}
   m_Layer: 0
-  m_Name: Gate4
+  m_Name: Gate4(Fog)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13301,7 +13301,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -13578,7 +13578,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -14275,7 +14275,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -15017,7 +15017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842547214}
   m_Layer: 0
-  m_Name: Gate3
+  m_Name: Gate3(mountains)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24965,7 +24965,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.99607843, g: 0.9607843, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.11320752, g: 0.11043073, b: 0.11043073, a: 1}
+    m_DisabledColor: {r: 0.6509434, g: 0.62883586, b: 0.5182983, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -28327,7 +28327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1808917195
 MonoBehaviour:
   m_ObjectHideFlags: 0

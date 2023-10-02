@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tree_Leaf
-  m_Shader: {fileID: -6465566751694194690, guid: a88b4b1c4137d614dbfc40bd41c3bba7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 16ae17c3f8d72ec45b1befbdab3aa737, type: 3}
   m_ShaderKeywords: _METALLICSPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +32,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_430e1ad0590c4e77889f9895819228c5:
+        m_Texture: {fileID: 2800000, guid: 45644cf5e1ee47b4aac29e4d1eb34722, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_d338d1e5c09b4d308e77cdeb76009362:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}

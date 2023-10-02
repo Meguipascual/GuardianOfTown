@@ -22,7 +22,7 @@ public class PlayerController : Character
     public int LevelPoints { get; set; }
     public int CriticalRate { get; set; }
     public int Damage { get; set; }
-    public float CriticalDamage { get; set; }
+    public int CriticalDamage { get; set; }
 
     // Start is called before the first frame update
     void Start()    
@@ -122,7 +122,7 @@ public class PlayerController : Character
         if (CriticalRate > random)
         {
             isCritical = true;
-            Damage = (int)(Attack * CriticalDamage);
+            Damage = (int)(Attack * (CriticalDamage/100));
         }
         else
         {
