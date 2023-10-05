@@ -95,6 +95,8 @@ public class GameManager : MonoBehaviour
         }
         PermanentPowerUpsSettings.Instance.CreateSword();
         PermanentPowerUpsSettings.Instance.CreateBackCannon();
+        PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
+        PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
     }
 
     // Update is called once per frame
@@ -189,5 +191,6 @@ public class GameManager : MonoBehaviour
     {
         _generalCanvas.SetActive(false);
         _levelEndCanvas.SetActive(true);
+        //TODO-revert Powerups  
     }
 }

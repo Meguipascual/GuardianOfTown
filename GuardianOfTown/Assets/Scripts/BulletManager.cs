@@ -16,6 +16,8 @@ public class BulletManager : MonoBehaviour
     private float _rotationY;
     private float _rotationZ;
     public ParticleSystem criticalParticles;
+    public bool IsLeftBullet {  get; set; }
+    public bool IsRightBullet { get; set; }
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,15 @@ public class BulletManager : MonoBehaviour
             }
             else
             {
+                if (IsLeftBullet)
+                {
+                    transform.position += new Vector3(-.3f, 0, .05f) * Time.deltaTime * proyectileSpeed;
+                    transform.Rotate(_rotationX, _rotationY, _rotationZ);
+                }else if (IsRightBullet)
+                {
+                    transform.position += new Vector3(.3f, 0,.05f) * Time.deltaTime * proyectileSpeed;
+                    transform.Rotate(_rotationX, _rotationY, _rotationZ);
+                }
                 transform.position += Vector3.forward * Time.deltaTime * proyectileSpeed;
                 transform.Rotate(_rotationX, _rotationY, _rotationZ);
             }
@@ -63,5 +74,11 @@ public class BulletManager : MonoBehaviour
         _rotateXAxisRandom = Random.value;
         _rotateYAxisRandom = Random.value;
         _rotateZAxisRandom = Random.value;
+    }
+
+    public void ResetStartPositionInTripleShoot()
+    {
+        IsLeftBullet = false;
+        IsRightBullet = false;
     }
 }

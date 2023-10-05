@@ -10,7 +10,8 @@ public class ShootingManager : MonoBehaviour
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
     [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting(Fire Rate)
     [SerializeField] private Vector3 _centerBulletOffset;
-    [SerializeField] private Vector3[] _doubleBulletOffset;
+    [SerializeField] private Vector3[] _doubleBulletOffset = {new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1)};
+    [SerializeField] private Vector3[] _tripleBulletOffset = {new Vector3(0.0f, 0, 1), new Vector3(0.8f, 0, 1), new Vector3(1.6f, 0, 1)}; 
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +22,8 @@ public class ShootingManager : MonoBehaviour
         _bulletTimer = 0;
         _bulletDelay = 0.2f;
         _centerBulletOffset = new Vector3(0.8f, 0, 1);
-        _doubleBulletOffset = new Vector3[2] ;
-        _doubleBulletOffset[0] = new Vector3(0.4f, 0, 1);
-        _doubleBulletOffset[1] = new Vector3(1.2f, 0, 1);
-        //PermanentPowerUpsSettings.Instance.IsDoubleShootActive = true;
-        //PermanentPowerUpsSettings.Instance.IsABulletModifierActive = true;
+        PermanentPowerUpsSettings.Instance.IsDoubleShootActive = true;
+        PermanentPowerUpsSettings.Instance.IsABulletModifierActive = true;
     }
 
     // Update is called once per frame
@@ -97,18 +95,27 @@ public class ShootingManager : MonoBehaviour
 
     private void ShootTriple()
     {
-        
-
-        // Get an object object from the pool
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
-        if (pooledProjectile != null)
+        for (int i = 0; i < 3; i++)
         {
-            pooledProjectile.SetActive(true); // activate it
-            pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
-            ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-            Debug.Log($"TripleShooting");
+            // Get an object object from the pool
+            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            if (pooledProjectile != null)
+            {
+                var bullet = pooledProjectile.GetComponent<BulletManager>();
+                bullet.ResetStartPositionInTripleShoot();
+
+                switch (i)
+                {
+                    case 0: bullet.IsLeftBullet = true; break;
+                    case 2: bullet.IsRightBullet = true;break; 
+                }
+                pooledProjectile.transform.position = _playerController.transform.position + _tripleBulletOffset[i]; // position bullet
+                pooledProjectile.SetActive(true); // activate it
+                
+                ObjectPooler.ProjectileCount--;
+            }
         }
+        GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
     }
 
     private void ShootEasyMode()

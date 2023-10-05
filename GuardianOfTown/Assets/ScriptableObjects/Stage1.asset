@@ -13,17 +13,10 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: 
   _wavesData:
-  - NumberOfEnemiesToCreate: 10
-    NumberOfBossesToCreate: 2
+  - NumberOfEnemiesToCreate: 1
+    NumberOfBossesToCreate: 0
     LevelOfEnemies: 1
     LevelOfBosses: 1
     NumberOfEnemiesByGate: 0
     Gate: 1
-    IsRandomized: 0
-  - NumberOfEnemiesToCreate: 15
-    NumberOfBossesToCreate: 0
-    LevelOfEnemies: 2
-    LevelOfBosses: 0
-    NumberOfEnemiesByGate: 0
-    Gate: 2
     IsRandomized: 0

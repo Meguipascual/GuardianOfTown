@@ -40,6 +40,28 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         AreShootSpeedWasted = new bool[5];
     }
 
+    public void ActivateDoubleShoot()
+    {
+        IsABulletModifierActive = true;
+        IsDoubleShootActive = true;
+    }
+
+    public void ActivateTripleShoot()
+    {
+        IsABulletModifierActive = true;
+        IsTripleShootActive = true;
+    }
+
+    public void ActivateBackShoot()
+    {
+        IsBackShootActive = true;
+    }
+
+    public void UnactiveOverHeating() 
+    {
+        IsOverHeatingUnactive = true;
+    }
+
     public void CreateSword()
     {
         foreach (var component in _playerComponents)
