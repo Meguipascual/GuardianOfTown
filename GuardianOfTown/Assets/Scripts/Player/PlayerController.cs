@@ -119,10 +119,11 @@ public class PlayerController : Character
     {
         var isCritical = false;
         var random = Random.Range(0, 100);
+        float criticalDamageFloat = (float)CriticalDamage / 100;
         if (CriticalRate > random)
         {
             isCritical = true;
-            Damage = (int)(Attack * (CriticalDamage/100));
+            Damage = (int)(Attack * (criticalDamageFloat));
         }
         else
         {

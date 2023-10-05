@@ -2198,7 +2198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 43a67116d88667f419e3dbd0602a507a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 43a67116d88667f419e3dbd0602a507a, type: 3}
       propertyPath: m_TagString
@@ -2272,8 +2272,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.853819, z: 13.670637}
-  m_Center: {x: 0, y: -0.7880815, z: 6.2842784}
+  m_Size: {x: 1, y: 3.853819, z: 11.431898}
+  m_Center: {x: 0, y: -0.7880815, z: 5.164909}
 --- !u!1001 &6042553756774656401
 PrefabInstance:
   m_ObjectHideFlags: 0
