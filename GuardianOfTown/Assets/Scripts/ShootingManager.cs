@@ -21,9 +21,11 @@ public class ShootingManager : MonoBehaviour
         _bulletTimer = 0;
         _bulletDelay = 0.2f;
         _centerBulletOffset = new Vector3(0.8f, 0, 1);
-        _doubleBulletOffset = new Vector3[2];
+        _doubleBulletOffset = new Vector3[2] ;
         _doubleBulletOffset[0] = new Vector3(0.4f, 0, 1);
         _doubleBulletOffset[1] = new Vector3(1.2f, 0, 1);
+        //PermanentPowerUpsSettings.Instance.IsDoubleShootActive = true;
+        //PermanentPowerUpsSettings.Instance.IsABulletModifierActive = true;
     }
 
     // Update is called once per frame
@@ -50,7 +52,19 @@ public class ShootingManager : MonoBehaviour
             OverHeatedManager.Instance.CoolCannon();
         }  
     }
-
+    private void DecideShoot()
+    {
+        if (PermanentPowerUpsSettings.Instance.IsTripleShootActive)
+        {
+            ShootTriple();
+            return;
+        }
+        else if (PermanentPowerUpsSettings.Instance.IsDoubleShootActive)
+        {
+            ShootDouble();
+            return;
+        }
+    }
 
     private void Shoot()
     {
@@ -62,6 +76,38 @@ public class ShootingManager : MonoBehaviour
             pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
             ObjectPooler.ProjectileCount--;
             GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+        }
+    }
+
+    private void ShootDouble()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            // Get an object object from the pool
+            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            if (pooledProjectile != null)
+            {
+                pooledProjectile.SetActive(true); // activate it
+                pooledProjectile.transform.position = _playerController.transform.position + _doubleBulletOffset[i]; // position bullet
+                ObjectPooler.ProjectileCount--;
+            }
+        }
+        GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+    }
+
+    private void ShootTriple()
+    {
+        
+
+        // Get an object object from the pool
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.SetActive(true); // activate it
+            pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
+            ObjectPooler.ProjectileCount--;
+            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            Debug.Log($"TripleShooting");
         }
     }
 
@@ -98,47 +144,8 @@ public class ShootingManager : MonoBehaviour
         }
     }
 
-    private void DecideShoot()
-    {
-        if (PermanentPowerUpsSettings.Instance.IsTripleShootActive)
-        {
-            ShootTriple();
-            return;
-        }
-        else if (PermanentPowerUpsSettings.Instance.IsDoubleShootActive)
-        {
-            ShootDouble();
-            return;
-        }
-    }
 
-    private void ShootTriple()
-    {
-        // Get an object object from the pool
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
-        if (pooledProjectile != null)
-        {
-            pooledProjectile.SetActive(true); // activate it
-            pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
-            ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-            Debug.Log($"TripleShooting");
-        }
-    }
+    
 
-    private void ShootDouble()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            // Get an object object from the pool
-            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
-            if (pooledProjectile != null)
-            {
-                pooledProjectile.SetActive(true); // activate it
-                pooledProjectile.transform.position = _playerController.transform.position + _doubleBulletOffset[i]; // position bullet
-                ObjectPooler.ProjectileCount--;
-            }
-        }
-        GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-    }
+   
 }

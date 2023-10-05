@@ -21,11 +21,22 @@ public class StagesData : MonoBehaviour
 
         for (int i = 0; i < numberOfWaves; i++)
         {
-            NumberOfEnemiesToCreate = Random.Range(0, 16);
-            NumberOfBossesToCreate = Random.Range(0, 5);
+            NumberOfEnemiesToCreate = Random.Range(0, 31);
+            if (NumberOfEnemiesToCreate == 0)
+            {
+                NumberOfBossesToCreate = Random.Range(1, 10);
+            }
+            else
+            {
+                NumberOfBossesToCreate = Random.Range(0, 10);
+            }
+            
+            
             LevelOfEnemies = LevelOfBosses = Random.Range(0, (5 * currentStage));
 
-            if (Random.Range(0, 4) == 0) 
+            var isRandom = Random.Range(0, 4);
+
+            if (isRandom != 0) 
             {
                 IsRandomized = false;
                 Gate = Random.Range(0, 4);

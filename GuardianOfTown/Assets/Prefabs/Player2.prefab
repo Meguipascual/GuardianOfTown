@@ -404,7 +404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletTimer: 0
   _bulletDelay: 0
-  _offset: {x: 0, y: 0, z: 0}
+  _centerBulletOffset: {x: 0, y: 0, z: 0}
+  _doubleBulletOffset: []
 --- !u!1 &706843349400995309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,8 +2259,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.622133, y: 3.8171978, z: 1.7204381}
-  m_Center: {x: 0.014125722, y: -0.75188047, z: 14.506803}
+  m_Size: {x: 6.622133, y: 3.8171978, z: 1.2247798}
+  m_Center: {x: 0.014125722, y: -0.7518806, z: 14.25899}
 --- !u!65 &4571464929134396903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2271,8 +2272,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.853819, z: 15.902225}
-  m_Center: {x: 0, y: -0.7880815, z: 7.400072}
+  m_Size: {x: 1, y: 3.853819, z: 13.670637}
+  m_Center: {x: 0, y: -0.7880815, z: 6.2842784}
 --- !u!1001 &6042553756774656401
 PrefabInstance:
   m_ObjectHideFlags: 0

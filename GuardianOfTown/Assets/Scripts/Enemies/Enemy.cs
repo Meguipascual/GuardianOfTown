@@ -64,10 +64,12 @@ public abstract class Enemy : Character
         else if (other.CompareTag(Tags.Sword))
         {
             CollisionWithSword();
+            Debug.Log($"Sword");
         }
         else if (other.CompareTag(Tags.Player))
         {
             CollisionWithPlayer();
+            Debug.Log($"Player");
         }
     }
 
@@ -167,7 +169,7 @@ public abstract class Enemy : Character
         }
     }
 
-    void CollisionWithWall()
+    private void CollisionWithWall()
     {
         if (CompareTag(Tags.Boss))
         {
@@ -178,13 +180,13 @@ public abstract class Enemy : Character
         Die();
     }
 
-    void CollisionWithSword()
+    private void CollisionWithSword()
     {
         if (CompareTag(Tags.Boss))
         {
             PermanentPowerUpsSettings.Instance.DestroySword();//Sword Breaks 
         }
-        Player.shieldParticleSystem.Play();//Change to a sword particle or something
+        //Player.shieldParticleSystem.Play();//Change to a sword particle or something
         Player.Exp += Exp;
         Die();
     }
