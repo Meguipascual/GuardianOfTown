@@ -18,9 +18,30 @@ public class ObjectPooler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InstantiatePool();
+        GameManager.SharedInstance._projectileText.text = $"{ProjectileCount}";
+    }
+
+    public void InstantiatePool()
+    {
         ProjectileCount = amountToPool;
         // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
+        for (int i = 0; i < amountToPool; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(objectToPool);
+            obj.SetActive(false);
+            pooledObjects.Add(obj);
+            obj.transform.SetParent(this.transform); // set as children of Spawn Manager
+        }
+    }
+
+    public void InstantiatePool(int newNumberOfBullets)
+    {
+        ProjectileCount = amountToPool = newNumberOfBullets;
+        // Loop through list of pooled objects,deactivating them and adding them to the list 
+        pooledObjects = new List<GameObject>();
+        GameManager.SharedInstance._projectileText.text = $"{ProjectileCount}";
         for (int i = 0; i < amountToPool; i++)
         {
             GameObject obj = (GameObject)Instantiate(objectToPool);

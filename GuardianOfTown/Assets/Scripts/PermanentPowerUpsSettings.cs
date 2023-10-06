@@ -19,6 +19,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public bool[] AreAreaOfEffectActive { get; set; }
     private PlayerController _playerController;
     private Component[] _playerComponents;
+    private ObjectPooler _objectPooler;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();
+        _objectPooler = FindObjectOfType<ObjectPooler>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
         AreMoreBulletsWasted = new bool[3];
         AreTownRecoveryWasted = new bool[3];
@@ -110,5 +112,19 @@ public class PermanentPowerUpsSettings : MonoBehaviour
                 Debug.Log($"BackCannon found to Deactivate");
             }
         }
+    }
+
+    public void WasteMoreBullets()
+    {
+        for (int i = 0; i < AreMoreBulletsWasted.Length; i++)
+        {
+            if (!AreMoreBulletsWasted[i])
+            {
+                AreMoreBulletsWasted[i] = true;
+                _objectPooler.InstantiatePool(_objectPooler.amountToPool+10);
+                return;
+            }
+        }
+        Debug.Log($"All 'MoreBullets' improvements wasted");
     }
 }

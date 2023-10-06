@@ -10,8 +10,8 @@ public class ShootingManager : MonoBehaviour
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
     [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting(Fire Rate)
     [SerializeField] private Vector3 _centerBulletOffset;
-    [SerializeField] private Vector3[] _doubleBulletOffset = {new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1)};
-    [SerializeField] private Vector3[] _tripleBulletOffset = {new Vector3(0.0f, 0, 1), new Vector3(0.8f, 0, 1), new Vector3(1.6f, 0, 1)}; 
+    [SerializeField] private Vector3[] _doubleBulletOffset;
+    [SerializeField] private Vector3[] _tripleBulletOffset; 
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +21,9 @@ public class ShootingManager : MonoBehaviour
         _shoot = ControlButtons._shoot;
         _bulletTimer = 0;
         _bulletDelay = 0.2f;
+        _doubleBulletOffset = new Vector3[] { new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1) };
+        _tripleBulletOffset = new Vector3[] { new Vector3(0.0f, 0, 1), new Vector3(0.8f, 0, 1), new Vector3(1.6f, 0, 1) };
         _centerBulletOffset = new Vector3(0.8f, 0, 1);
-        PermanentPowerUpsSettings.Instance.IsDoubleShootActive = true;
-        PermanentPowerUpsSettings.Instance.IsABulletModifierActive = true;
     }
 
     // Update is called once per frame

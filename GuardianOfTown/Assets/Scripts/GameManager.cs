@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviour
     public List<Image> TownDamagedShieldImages;
     public TextMeshProUGUI _townHpText;
     public TextMeshProUGUI _stageText;
-    public TextMeshProUGUI _stagePopUpText;
+    public TextMeshProUGUI _stagePopUpText; 
     public TextMeshProUGUI _wavePopUpText;
     public TextMeshProUGUI _playerLevelText;
     public TextMeshProUGUI _playerLevelPointsText;
-    public TextMeshProUGUI _enemiesLeftText;
+    public TextMeshProUGUI _enemiesLeftText;    
     public TextMeshProUGUI _projectileText;
     public TextMeshProUGUI _menuPlayerLevelText;
-    public TextMeshProUGUI _menuPlayerHPText;
+    public TextMeshProUGUI _menuPlayerHPText;       
     public TextMeshProUGUI _menuPlayerAttackText;
     public TextMeshProUGUI _menuPlayerDefenseText;
     public TextMeshProUGUI _menuPlayerSpeedText;
@@ -96,7 +96,12 @@ public class GameManager : MonoBehaviour
         PermanentPowerUpsSettings.Instance.CreateSword();
         PermanentPowerUpsSettings.Instance.CreateBackCannon();
         PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
-        PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
+        //PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
+        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
+        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
+        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
+        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
+        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
     }
 
     // Update is called once per frame
