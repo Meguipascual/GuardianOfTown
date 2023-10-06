@@ -102,6 +102,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     }
 
 
+
+
     public void ActivateBackCannon()
     {
         foreach (var component in _playerComponents)
@@ -128,6 +130,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     }
 
 
+
+
     public void ActivateInfiniteContinuousShoot()
     {
         IsInfiniteContinuousShootActive = true;
@@ -144,6 +148,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     public void ActivateTripleShoot()
     {
+        if (!IsDoubleShootActive)
+        {
+            Debug.Log($"Double Shoot is needed");
+            return;
+        }
         ActivateABulletModifier();
         IsTripleShootActive = true;
     }

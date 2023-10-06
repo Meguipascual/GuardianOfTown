@@ -96,19 +96,19 @@ public class GameManager : MonoBehaviour
         //PermanentPowerUpsSettings.Instance.ActivateSword();
         //PermanentPowerUpsSettings.Instance.ActivateBackCannon();
         //PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
-        PermanentPowerUpsSettings.Instance.ActivateInfiniteContinuousShoot();
+        //PermanentPowerUpsSettings.Instance.ActivateInfiniteContinuousShoot();
         //PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
-        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
-        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
-        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
-        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
-        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
-        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        //PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        //PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        //PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        //PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        //PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
     }
 
     // Update is called once per frame
