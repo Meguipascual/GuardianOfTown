@@ -13432,7 +13432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20
+  m_text: 5000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 802e4ddd978b19241b62f9e590079a3b, type: 2}
   m_sharedMaterial: {fileID: -4958003579673459978, guid: 802e4ddd978b19241b62f9e590079a3b, type: 2}
@@ -13855,6 +13855,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4197971480403492624, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197971480403492624, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197971480403492624, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4406318906657779507, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -14001,6 +14013,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5647337592078074959, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986094209935457428, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: _tripleBulletOffset.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994905557785023177, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}

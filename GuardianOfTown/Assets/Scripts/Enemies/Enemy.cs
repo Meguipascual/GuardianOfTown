@@ -184,7 +184,7 @@ public abstract class Enemy : Character
     {
         if (CompareTag(Tags.Boss))
         {
-            PermanentPowerUpsSettings.Instance.DestroySword();
+            PermanentPowerUpsSettings.Instance.DeactivateSword();
         }
         //Player.shieldParticleSystem.Play();//Change to a sword particle or something
         Player.Exp += Exp;

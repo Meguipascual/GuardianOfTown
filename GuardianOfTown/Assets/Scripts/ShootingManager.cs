@@ -8,10 +8,11 @@ public class ShootingManager : MonoBehaviour
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
-    [SerializeField] private float _bulletDelay;//Time between bullets in continuous shooting(Fire Rate)
     [SerializeField] private Vector3 _centerBulletOffset;
     [SerializeField] private Vector3[] _doubleBulletOffset;
-    [SerializeField] private Vector3[] _tripleBulletOffset; 
+    [SerializeField] private Vector3[] _tripleBulletOffset;
+    public float BulletDelay { get; set; }//Time between bullets in continuous shooting(Fire Rate)
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class ShootingManager : MonoBehaviour
         _alternateShoot = ControlButtons._alterShoot;
         _shoot = ControlButtons._shoot;
         _bulletTimer = 0;
-        _bulletDelay = 0.2f;
+        BulletDelay = 0.2f;
         _doubleBulletOffset = new Vector3[] { new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1) };
         _tripleBulletOffset = new Vector3[] { new Vector3(0.0f, 0, 1), new Vector3(0.8f, 0, 1), new Vector3(1.6f, 0, 1) };
         _centerBulletOffset = new Vector3(0.8f, 0, 1);
@@ -132,7 +133,7 @@ public class ShootingManager : MonoBehaviour
                 OverHeatedManager.Instance.HeatCannon();
             }
             _bulletTimer += Time.deltaTime;
-            if (_bulletTimer >= _bulletDelay)
+            if (_bulletTimer >= BulletDelay)
             {
                 _bulletTimer = 0;
                 if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)

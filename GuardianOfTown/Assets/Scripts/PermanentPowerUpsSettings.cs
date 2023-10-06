@@ -5,20 +5,23 @@ using UnityEngine;
 public class PermanentPowerUpsSettings : MonoBehaviour
 {
     public static PermanentPowerUpsSettings Instance;
-    public bool IsABulletModifierActive {  get; set; }
+    public bool IsABulletModifierActive {  get; private set; }
     public bool IsOverHeatingUnactive { get; set; }
     public bool IsFrontSwordActive { get; set; }
     public bool IsBackShootActive { get; set; }
-    public bool IsInfiniteContinuousShootActive { get; set; }
+    public bool IsInfiniteContinuousShootActive { get; private set; }
     public bool IsDoubleShootActive { get; set; }
     public bool IsTripleShootActive { get; set; }
     public bool IsTownBarrierActive { get; set; }
     public bool [] AreMoreBulletsWasted { get; set; }
-    public bool [] AreShootSpeedWasted { get; set; }
+    public bool [] AreFireRateIncrementsWasted { get; set; }
     public bool[] AreTownRecoveryWasted { get; set; }
     public bool[] AreAreaOfEffectActive { get; set; }
     private PlayerController _playerController;
+    private ShootingManager _shootingManager;
     private Component[] _playerComponents;
+    private GameObject _sword;
+    private GameObject _backCannon;
     private ObjectPooler _objectPooler;
 
     private void Awake()
@@ -35,49 +38,59 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     {
         _playerController = FindObjectOfType<PlayerController>();
         _objectPooler = FindObjectOfType<ObjectPooler>();
+        _shootingManager = FindObjectOfType<ShootingManager>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
         AreMoreBulletsWasted = new bool[3];
         AreTownRecoveryWasted = new bool[3];
         AreAreaOfEffectActive = new bool[3];
-        AreShootSpeedWasted = new bool[5];
+        AreFireRateIncrementsWasted = new bool[5];
     }
 
-    public void ActivateDoubleShoot()
+    public void ActivateABulletModifier()
     {
         IsABulletModifierActive = true;
-        IsDoubleShootActive = true;
     }
-
-    public void ActivateTripleShoot()
+    public void DeactivateABulletModifier()
     {
         IsABulletModifierActive = true;
-        IsTripleShootActive = true;
     }
 
-    public void ActivateBackShoot()
-    {
-        IsBackShootActive = true;
-    }
 
-    public void UnactiveOverHeating() 
+
+    public void DeactivateOverHeating()
     {
         IsOverHeatingUnactive = true;
     }
 
-    public void CreateSword()
+
+
+    public void ActivateSword()
     {
+        if (_sword != null)
+        {
+            IsFrontSwordActive = true;
+            _sword.SetActive(true);
+            return;
+        }
         foreach (var component in _playerComponents)
         {
             if (component.gameObject.CompareTag(Tags.Sword))
             {
                 IsFrontSwordActive = true;
-                component.gameObject.SetActive(true);//activate Player's sword
+                _sword = component.gameObject;
+                _sword.SetActive(true);
             }
         }
     }
 
-    public void DestroySword()
+    public void DeactivateSword()
     {
+        if (_sword != null)
+        {
+            _sword.SetActive(false);
+            IsFrontSwordActive = false;
+            return;
+        }
         foreach (var component in _playerComponents)
         {
             if (component.gameObject.CompareTag(Tags.Sword))
@@ -88,7 +101,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         }
     }
 
-    public void CreateBackCannon()
+
+    public void ActivateBackCannon()
     {
         foreach (var component in _playerComponents)
         {
@@ -96,12 +110,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             {
                 IsBackShootActive = true;
                 component.gameObject.SetActive(true);//Activate Player's BackCannon
-                Debug.Log($"BackCannon found to activate");
             }
         }
     }
 
-    public void DestroyBackCannon()
+    public void DeactivateBackCannon()
     {
         foreach (var component in _playerComponents)
         {
@@ -114,7 +127,31 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         }
     }
 
-    public void WasteMoreBullets()
+
+    public void ActivateInfiniteContinuousShoot()
+    {
+        IsInfiniteContinuousShootActive = true;
+    }
+
+
+
+
+    public void ActivateDoubleShoot()
+    {
+        ActivateABulletModifier();
+        IsDoubleShootActive = true;
+    }
+
+    public void ActivateTripleShoot()
+    {
+        ActivateABulletModifier();
+        IsTripleShootActive = true;
+    }
+
+
+    
+
+    public void ActivateMoreBullets()
     {
         for (int i = 0; i < AreMoreBulletsWasted.Length; i++)
         {
@@ -126,5 +163,19 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             }
         }
         Debug.Log($"All 'MoreBullets' improvements wasted");
+    }
+
+    public void ActivateFireRateIncrement()
+    {
+        for (int i = 0; i < AreFireRateIncrementsWasted.Length; i++)
+        {
+            if (!AreFireRateIncrementsWasted[i])
+            {
+                AreFireRateIncrementsWasted[i] = true;
+                _shootingManager.BulletDelay -= 0.025f;
+                return;
+            }
+        }
+        Debug.Log($"All 'FireRate' increments wasted");
     }
 }

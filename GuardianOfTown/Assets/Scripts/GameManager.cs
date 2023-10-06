@@ -93,15 +93,22 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(ShowStageText());
         }
-        PermanentPowerUpsSettings.Instance.CreateSword();
-        PermanentPowerUpsSettings.Instance.CreateBackCannon();
-        PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
+        //PermanentPowerUpsSettings.Instance.ActivateSword();
+        //PermanentPowerUpsSettings.Instance.ActivateBackCannon();
+        //PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
+        PermanentPowerUpsSettings.Instance.ActivateInfiniteContinuousShoot();
         //PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
-        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
-        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
-        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
-        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
-        PermanentPowerUpsSettings.Instance.WasteMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateMoreBullets();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
+        PermanentPowerUpsSettings.Instance.ActivateFireRateIncrement();
     }
 
     // Update is called once per frame
