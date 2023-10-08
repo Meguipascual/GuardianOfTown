@@ -39,7 +39,7 @@ public class DataPersistantManager : MonoBehaviour
             return;
         }
         Instance = this;
-        Initialice();
+        Initialize();
         DontDestroyOnLoad(gameObject); 
     }
     
@@ -54,7 +54,7 @@ public class DataPersistantManager : MonoBehaviour
         _stagesData = FindObjectOfType<StagesData>();
     }
 
-    private void Initialice()
+    private void Initialize()
     {
         SavedTownHpShields = new List<Image>();
         Stage = 0;

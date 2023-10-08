@@ -6,7 +6,6 @@ public class DoubleShootPowerUp : PoweupEffect
     public override void Apply(GameObject target){}
     public void Apply()
     {
-        var permanentPowerUpsSettings = FindObjectOfType<PermanentPowerUpsSettings>();
-        permanentPowerUpsSettings.ActivateDoubleShoot();
+        PermanentPowerUpsSettings.Instance.ActivateDoubleShoot();
     }
 }

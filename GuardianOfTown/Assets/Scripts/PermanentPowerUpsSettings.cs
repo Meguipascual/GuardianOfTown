@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PermanentPowerUpsSettings : MonoBehaviour
 {
@@ -32,7 +33,22 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _playerController = FindObjectOfType<PlayerController>();
+        _objectPooler = FindObjectOfType<ObjectPooler>();
+        _shootingManager = FindObjectOfType<ShootingManager>();
+        _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

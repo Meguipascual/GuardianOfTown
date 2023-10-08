@@ -12,6 +12,7 @@ public class PlayerController : Character
     private FillHealthBar _fillHealthBar;
     private ChangeGateManager _changeGateManager;
     private ShootingManager _shootingManager;
+    private PermanentPowerUpsSettings _permanentPowerUpsSettings;
     public ParticleSystem shieldParticleSystem;
     
     private KeyCode _rightGateButton;
@@ -36,6 +37,18 @@ public class PlayerController : Character
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
         _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
+        _permanentPowerUpsSettings = PermanentPowerUpsSettings.Instance;
+
+        if (_permanentPowerUpsSettings.IsFrontSwordActive)
+        {
+            _permanentPowerUpsSettings.ActivateSword();
+        }
+        if (_permanentPowerUpsSettings.IsBackShootActive)
+        {
+            _permanentPowerUpsSettings.ActivateBackCannon();
+        }
+
+
     }
 
     // Update is called once per frame

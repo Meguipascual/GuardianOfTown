@@ -6,7 +6,6 @@ public class InfiniteContinuousShootPowerUp : PoweupEffect
     public override void Apply(GameObject target){}
     public void Apply()
     {
-        var permanentPowerUpsSettings = FindObjectOfType<PermanentPowerUpsSettings>();
-        permanentPowerUpsSettings.ActivateInfiniteContinuousShoot();
+        PermanentPowerUpsSettings.Instance.ActivateInfiniteContinuousShoot();
     }
 }

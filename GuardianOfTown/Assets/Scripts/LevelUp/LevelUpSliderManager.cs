@@ -15,6 +15,7 @@ public class LevelUpSliderManager : MonoBehaviour
     [SerializeField] private int _previousLevel;
     public GameObject _LevelUpPanel;
     public GameObject _levelPointsAssignPanel;
+    public GameObject _powerUpsPanel;
     private bool _isLevelingUp;
     public Button _skipButton;
     public Button _continueButton;
@@ -69,10 +70,16 @@ public class LevelUpSliderManager : MonoBehaviour
         _continueButton.gameObject.SetActive(true);
     }
 
-    public void ContinueButton()
+    public void ContinueToLevelPointsButton()
+    {
+        _powerUpsPanel.SetActive(false);
+        _levelPointsAssignPanel.SetActive(true);
+    }
+
+    public void ContinueToPowerUpsButton()
     {
         _LevelUpPanel.gameObject.SetActive(false);
-        _levelPointsAssignPanel.SetActive(true);
+        _powerUpsPanel.SetActive(true);
     }
 
     IEnumerator LevelUp()
