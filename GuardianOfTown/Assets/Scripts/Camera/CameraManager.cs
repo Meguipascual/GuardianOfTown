@@ -10,7 +10,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject[] _camerasTopViewPrefab;
     [SerializeField] private GameObject[] _camerasFrontViewPrefab;
     private Camera [] _camerasToDestroy;
-    private bool _isTopViewActive;
 
     private void Awake()
     {
@@ -31,7 +30,6 @@ public class CameraManager : MonoBehaviour
     {
         if (GameSettings.Instance.IsTopViewModeActive)
         {
-            _isTopViewActive = true;
             CamerasGameObject = new GameObject[_camerasTopViewPrefab.Length];
             for (int i = 0; i < _camerasTopViewPrefab.Length; i++)
             {
@@ -42,7 +40,6 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            _isTopViewActive = false;
             CamerasGameObject = new GameObject[_camerasFrontViewPrefab.Length];
             for (int i = 0; i < _camerasFrontViewPrefab.Length; i++)
             {
