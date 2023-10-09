@@ -19,7 +19,7 @@ MonoBehaviour:
     LevelOfBosses: 2
     NumberOfEnemiesByGate: 0
     Gate: 3
-    IsRandomized: 0
+    IsRandomized: 1
   - NumberOfEnemiesToCreate: 10
     NumberOfBossesToCreate: 3
     LevelOfEnemies: 4
