@@ -11,20 +11,9 @@ public class PermanentPowerUpManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _powerUpOffset = new Vector3 [] { new Vector3(-460, 18, 0), new Vector3(0, 18, 0), new Vector3(460, 18, 0) };
+        _powerUpOffset = new Vector3 [] { new Vector3(-505, 18, 0), new Vector3(0, 18, 0), new Vector3(505, 18, 0) };
         _numberOfPowerUps = 3;
         InstantiateNumberOfPowerUps();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void EliminatePowerUp(int powerUpToEliminate)
-    {
-
     }
 
     public void InstantiateNumberOfPowerUps()
@@ -33,9 +22,9 @@ public class PermanentPowerUpManager : MonoBehaviour
         {
             var randomIndex = Random.Range(0, _powerUpPrefabs.Count);
             var powerUp = Instantiate(_powerUpPrefabs[randomIndex], gameObject.transform.position + _powerUpOffset[i], Quaternion.identity, gameObject.transform);
+            //powerUp.transform.position = _powerUpOffset[i];
             _powerUpPrefabs.RemoveAt(randomIndex);
             Debug.Log($"Transform position {gameObject.transform.position}");
-            //_powerUpOffset[i]
         }
     }
 }

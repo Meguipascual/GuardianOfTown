@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a68f9bc9d0d00a44962e9602a0679e7, type: 3}
   m_Name: Triple Shoot Power Up
   m_EditorClassIdentifier: 
+  _id: 5

@@ -11035,9 +11035,13 @@ MonoBehaviour:
   _powerUpPrefabs:
   - {fileID: 349647710239535921, guid: 1e25e7a008976184ea4753e45c7ec6b7, type: 3}
   - {fileID: 349647710239535921, guid: 9fdcc9f3aac8788498d2250202eccda5, type: 3}
+  - {fileID: 349647710239535921, guid: 9fdcc9f3aac8788498d2250202eccda5, type: 3}
+  - {fileID: 349647710239535921, guid: 9fdcc9f3aac8788498d2250202eccda5, type: 3}
   - {fileID: 349647710239535921, guid: db4adb70f4eb37642bc0b598280132c2, type: 3}
   - {fileID: 349647710239535921, guid: ebcc6645874951a488d239769a068b86, type: 3}
   - {fileID: 349647710239535921, guid: 40955caaf6c19c7488a38bb1347ea3e2, type: 3}
+  - {fileID: 349647710239535921, guid: ebcc6645874951a488d239769a068b86, type: 3}
+  - {fileID: 349647710239535921, guid: ebcc6645874951a488d239769a068b86, type: 3}
   _numberOfPowerUps: 0
   _powerUpOffset: []
 --- !u!1001 &636766979

@@ -7,17 +7,17 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 {
     public static PermanentPowerUpsSettings Instance;
     public bool IsABulletModifierActive {  get; private set; }
-    public bool IsOverHeatingUnactive { get; set; }
-    public bool IsFrontSwordActive { get; set; }
-    public bool IsBackShootActive { get; set; }
-    public bool IsInfiniteContinuousShootActive { get; private set; }
-    public bool IsDoubleShootActive { get; set; }
-    public bool IsTripleShootActive { get; set; }
-    public bool IsTownBarrierActive { get; set; }
-    public bool [] AreMoreBulletsWasted { get; set; }
-    public bool [] AreFireRateIncrementsWasted { get; set; }
-    public bool[] AreTownRecoveryWasted { get; set; }
-    public bool[] AreAreaOfEffectActive { get; set; }
+    public bool IsOverHeatingUnactive { get; set; }//ID = 0
+    public bool IsFrontSwordActive { get; set; }//ID = 1
+    public bool IsBackShootActive { get; set; }//ID = 2
+    public bool IsInfiniteContinuousShootActive { get; private set; }//ID = 3
+    public bool IsDoubleShootActive { get; set; }//ID = 4
+    public bool IsTripleShootActive { get; set; }//ID = 5
+    public bool IsTownBarrierActive { get; set; }//ID = 6
+    public bool [] AreMoreBulletsWasted { get; set; }//ID = 7
+    public bool [] AreFireRateIncrementsWasted { get; set; }//ID = 8
+    public bool[] AreTownRecoveryWasted { get; set; }//ID = 9
+    public bool[] AreAreaOfEffectActive { get; set; }//ID = 10
     private PlayerController _playerController;
     private ShootingManager _shootingManager;
     private Component[] _playerComponents;

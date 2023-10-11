@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9364406032c7aa4192223851b4c7ec3, type: 3}
   m_Name: Double Shoot Power Up
   m_EditorClassIdentifier: 
+  _id: 4
