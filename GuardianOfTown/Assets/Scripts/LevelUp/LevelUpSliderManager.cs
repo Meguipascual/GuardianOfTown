@@ -78,8 +78,17 @@ public class LevelUpSliderManager : MonoBehaviour
 
     public void ContinueToPowerUpsButton()
     {
-        _LevelUpPanel.gameObject.SetActive(false);
-        _powerUpsPanel.SetActive(true);
+        if (DataPersistantManager.Instance.Stage % 2 == 0)
+        {
+            _LevelUpPanel.gameObject.SetActive(false);
+            _levelPointsAssignPanel.SetActive(true);
+        }
+        else
+        {
+            _LevelUpPanel.gameObject.SetActive(false);
+            _powerUpsPanel.SetActive(true);
+        }
+        
     }
 
     IEnumerator LevelUp()
