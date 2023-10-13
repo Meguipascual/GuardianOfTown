@@ -13,7 +13,7 @@ public class PermanentPowerup : MonoBehaviour
     public int Id => _id;
     public int Index { get; set; }
 
-    protected void Start()
+    protected void Initialize()
     {
         _sliderManager = FindObjectOfType<LevelUpSliderManager>();
         _permanentPowerUpsSettings = FindObjectOfType<PermanentPowerUpsSettings>();

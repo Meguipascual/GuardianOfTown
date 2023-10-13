@@ -6,7 +6,7 @@ public class FrontSwordPowerUp : PermanentPowerup
     private void Start()
     {
         _id = 1;
-        base.Start();
+        base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
         if (_permanentPowerUpsSettings.IsFrontSwordActive)
         {

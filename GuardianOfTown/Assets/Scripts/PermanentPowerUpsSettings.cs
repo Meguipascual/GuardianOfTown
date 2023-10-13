@@ -43,6 +43,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.name == "Menu")
+        {
+            Destroy(gameObject);
+            return;
+        }
         _playerController = FindObjectOfType<PlayerController>();
         _objectPooler = FindObjectOfType<ObjectPooler>();
         _shootingManager = FindObjectOfType<ShootingManager>();

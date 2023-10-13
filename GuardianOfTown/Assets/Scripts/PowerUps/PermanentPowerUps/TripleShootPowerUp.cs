@@ -6,7 +6,7 @@ public class TripleShootPowerUp : PermanentPowerup
     private void Start()
     {
         _id = 0;
-        base.Start();
+        base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
         if (_permanentPowerUpsSettings.IsTripleShootActive || !_permanentPowerUpsSettings.IsDoubleShootActive)
         {
