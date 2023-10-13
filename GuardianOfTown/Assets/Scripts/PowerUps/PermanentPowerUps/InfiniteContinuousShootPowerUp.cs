@@ -1,16 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/PermanentPowerUps/InfiniteContinuousShoot")]
-public class InfiniteContinuousShootPowerUp : PoweupEffect
+public class InfiniteContinuousShootPowerUp : PermanentPowerup
 {
-    private LevelUpSliderManager _sliderManager;
-    [SerializeField] private int _id;
-    public int Id => _id;
-    public override void Apply(GameObject target){}
+    private void Start()
+    {
+        _id = 3;
+        base.Start();
+        _thisButton = gameObject.GetComponent<Button>();
+        if (_permanentPowerUpsSettings.IsInfiniteContinuousShootActive)
+        {
+            _thisButton.interactable = false;
+        }
+        else
+        {
+            _thisButton.interactable = true;
+        }
+    }
     public void Apply()
     {
-        _sliderManager = FindObjectOfType<LevelUpSliderManager>();
-        PermanentPowerUpsSettings.Instance.ActivateInfiniteContinuousShoot();
+        _permanentPowerUpsSettings.ActivateInfiniteContinuousShoot();
+        _permanentPowerUpManager._notUsedPowerUpPrefabs.RemoveAt(Index);
         _sliderManager.ContinueToLevelPointsButton();
     }
 }

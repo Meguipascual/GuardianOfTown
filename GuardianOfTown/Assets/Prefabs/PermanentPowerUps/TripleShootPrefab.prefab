@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 5769540871187685930}
   - component: {fileID: 1164289567708437210}
   - component: {fileID: 3354940965413994177}
+  - component: {fileID: 1872303212204790247}
   m_Layer: 5
   m_Name: TripleShoot
   m_TagString: Untagged
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 8f98cb4430b563646a9a84901d25554a, type: 2}
+      - m_Target: {fileID: 1872303212204790247}
         m_TargetAssemblyTypeName: TripleShootPowerUp, Assembly-CSharp
         m_MethodName: Apply
         m_Mode: 1
@@ -380,6 +381,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1872303212204790247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731810591629779536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a68f9bc9d0d00a44962e9602a0679e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7215684212433299184
 GameObject:
   m_ObjectHideFlags: 0

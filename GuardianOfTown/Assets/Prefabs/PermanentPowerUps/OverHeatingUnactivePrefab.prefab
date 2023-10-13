@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 6449476081369923033}
   - component: {fileID: 5655113203382592245}
   - component: {fileID: 4922082127836238520}
+  - component: {fileID: 2851036419613447639}
   m_Layer: 5
   m_Name: DeactivateOverHeating
   m_TagString: Untagged
@@ -291,7 +292,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: e96a9fab23af59949a4e6b1aa8a1609d, type: 2}
+      - m_Target: {fileID: 2851036419613447639}
         m_TargetAssemblyTypeName: OverHeatingUnactivePowerUp, Assembly-CSharp
         m_MethodName: Apply
         m_Mode: 1
@@ -303,6 +304,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2851036419613447639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3139059347961515343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f812813f55fe94a9a3927c7f4ea3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
 --- !u!1 &5882971862733086723
 GameObject:
   m_ObjectHideFlags: 0

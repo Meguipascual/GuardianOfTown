@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 7905380423488230834}
   - component: {fileID: 2813131977966101412}
   - component: {fileID: 6768510890523111553}
+  - component: {fileID: 9096622403679603031}
   m_Layer: 5
   m_Name: DoubleShoot
   m_TagString: Untagged
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 65ed35f07ccdc014f8664dc997078fee, type: 2}
+      - m_Target: {fileID: 9096622403679603031}
         m_TargetAssemblyTypeName: DoubleShootPowerUp, Assembly-CSharp
         m_MethodName: Apply
         m_Mode: 1
@@ -380,6 +381,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9096622403679603031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7161617470999707158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9364406032c7aa4192223851b4c7ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
 --- !u!1 &7215684212433299184
 GameObject:
   m_ObjectHideFlags: 0

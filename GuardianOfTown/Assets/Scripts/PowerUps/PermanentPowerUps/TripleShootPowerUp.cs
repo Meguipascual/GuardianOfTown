@@ -1,16 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/PermanentPowerUps/TripleShoot")]
-public class TripleShootPowerUp : PoweupEffect
+public class TripleShootPowerUp : PermanentPowerup
 {
-    private LevelUpSliderManager _sliderManager;
-    [SerializeField] private int _id;
-    public int Id => _id;
-    public override void Apply(GameObject target){}
+    private void Start()
+    {
+        _id = 0;
+        base.Start();
+        _thisButton = gameObject.GetComponent<Button>();
+        if (_permanentPowerUpsSettings.IsTripleShootActive || !_permanentPowerUpsSettings.IsDoubleShootActive)
+        {
+            _thisButton.interactable = false;
+        }
+        else
+        {
+            _thisButton.interactable = true;
+        }
+    }
     public void Apply()
     {
-        _sliderManager = FindObjectOfType<LevelUpSliderManager>();
-        PermanentPowerUpsSettings.Instance.ActivateTripleShoot();
+        _permanentPowerUpsSettings.ActivateTripleShoot();
+        _permanentPowerUpManager._notUsedPowerUpPrefabs.RemoveAt(Index);
         _sliderManager.ContinueToLevelPointsButton();
     }
 }
