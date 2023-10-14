@@ -19,11 +19,9 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public bool[] AreTownRecoveryWasted { get; set; }//ID = 9
     public bool[] AreAreaOfEffectActive { get; set; }//ID = 10
     private PlayerController _playerController;
-    private ShootingManager _shootingManager;
     private Component[] _playerComponents;
     private GameObject _sword;
     private GameObject _backCannon;
-    private ObjectPooler _objectPooler;
 
     private void Awake()
     {
@@ -49,8 +47,6 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             return;
         }
         _playerController = FindObjectOfType<PlayerController>();
-        _objectPooler = FindObjectOfType<ObjectPooler>();
-        _shootingManager = FindObjectOfType<ShootingManager>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
     }
 
@@ -58,8 +54,6 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();
-        _objectPooler = FindObjectOfType<ObjectPooler>();
-        _shootingManager = FindObjectOfType<ShootingManager>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
         AreMoreBulletsWasted = new bool[3];
         AreTownRecoveryWasted = new bool[3];
@@ -202,7 +196,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             if (!AreFireRateIncrementsWasted[i])
             {
                 AreFireRateIncrementsWasted[i] = true;
-                _shootingManager.BulletDelay -= 0.025f;
+                DataPersistantManager.Instance.SavedPlayerBulletsRate -= 0.025f;
                 return;
             }
         }
