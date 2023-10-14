@@ -7,7 +7,7 @@ public class ObjectPooler : MonoBehaviour
     public static ObjectPooler SharedInstance;
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
-    public int amountToPool;
+    public int AmountToPool {  get; private set; }
     public static int ProjectileCount { get; set; }
 
     void Awake()
@@ -24,10 +24,10 @@ public class ObjectPooler : MonoBehaviour
 
     public void InstantiatePool()
     {
-        ProjectileCount = amountToPool;
+        ProjectileCount = AmountToPool = DataPersistantManager.Instance.SavedPlayerBullets;
         // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < AmountToPool; i++)
         {
             GameObject obj = (GameObject)Instantiate(objectToPool);
             obj.SetActive(false);
@@ -38,11 +38,11 @@ public class ObjectPooler : MonoBehaviour
 
     public void InstantiatePool(int newNumberOfBullets)
     {
-        ProjectileCount = amountToPool = newNumberOfBullets;
+        ProjectileCount = AmountToPool = newNumberOfBullets;
         // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
         GameManager.SharedInstance._projectileText.text = $"{ProjectileCount}";
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < AmountToPool; i++)
         {
             GameObject obj = (GameObject)Instantiate(objectToPool);
             obj.SetActive(false);

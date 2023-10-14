@@ -24,6 +24,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedTownHpShieldsDamaged {  get; set; }
     public int SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
+    public int SavedPlayerBullets { get; set; }
     public int SavedPlayerLevelPoints {  get; set; }
     public Vector3 SavedPlayerPosition { get; set; }
     public List<Image> SavedTownHpShields;
@@ -71,6 +72,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalDamage = 100;
         SavedPlayerExp = 0;
         SavedPlayerLevelPoints = 0;
+        SavedPlayerBullets = 20;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 

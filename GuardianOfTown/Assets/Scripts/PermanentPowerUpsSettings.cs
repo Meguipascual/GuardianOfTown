@@ -188,7 +188,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             if (!AreMoreBulletsWasted[i])
             {
                 AreMoreBulletsWasted[i] = true;
-                _objectPooler.InstantiatePool(_objectPooler.amountToPool+10);
+                DataPersistantManager.Instance.SavedPlayerBullets += 10;
                 return;
             }
         }
