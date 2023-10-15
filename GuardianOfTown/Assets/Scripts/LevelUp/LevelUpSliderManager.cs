@@ -52,7 +52,6 @@ public class LevelUpSliderManager : MonoBehaviour
     public void SkipButton()
     {
         var spentExp = 0;
-        StopAllCoroutines();
 
         while ((_playerController.Exp - spentExp) >= (20 * _currentLevel))
         {
@@ -72,23 +71,24 @@ public class LevelUpSliderManager : MonoBehaviour
 
     public void ContinueToLevelPointsButton()
     {
+        ForcePowerUpsStop();
         _powerUpsPanel.SetActive(false);
         _levelPointsAssignPanel.SetActive(true);
     }
 
     public void ContinueToPowerUpsButton()
     {
-        //if (DataPersistantManager.Instance.Stage % 2 == 0)
-        //{
-        //    _LevelUpPanel.gameObject.SetActive(false);
-        //    _levelPointsAssignPanel.SetActive(true);
-        //}
-        //else
-        //{
+        if (DataPersistantManager.Instance.Stage % 2 == 0)
+        {
+            _LevelUpPanel.gameObject.SetActive(false);
+            _levelPointsAssignPanel.SetActive(true);
+        }
+        else
+        {
             _LevelUpPanel.gameObject.SetActive(false);
             _powerUpsPanel.SetActive(true);
             PermanentPowerUpManager.Instance.ControlNumberOfPowerUps();
-        //}
+        }
 
     }
 
@@ -119,5 +119,14 @@ public class LevelUpSliderManager : MonoBehaviour
         }
         _skipButton.gameObject.SetActive(false);
         _continueButton.gameObject.SetActive(true);
+    }
+
+    private void ForcePowerUpsStop() 
+    {
+        StopAllCoroutines();
+        PowerUpSettings.Instance.IsContinuousShootInUse = false;//Forces powerUp finalization
+        PowerUpSettings.Instance.IsSpeedIncreased = false;
+        _playerController.Speed = PowerUpSettings.Instance.PreviousPlayerSpeed;
+        PowerUpSettings.Instance.SpeedAmount = 0;
     }
 }

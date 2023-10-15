@@ -30,7 +30,7 @@ public class ShootingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
+        if(GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse)
         {
             ShootEasyMode();
             return;

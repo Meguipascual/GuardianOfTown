@@ -9,11 +9,11 @@ public class ContinuousShootBuff : PoweupEffect
     private MonoBehaviour m_MonoBehaviour;
     public override void Apply(GameObject target)
     {
-        if (!GameSettings.Instance.IsEasyModeActive)
+        if (!PowerUpSettings.Instance.IsContinuousShootInUse)
         {
             m_MonoBehaviour = FindObjectOfType<PlayerController>();
             var player = target.GetComponent<PlayerController>();
-            GameSettings.Instance.IsEasyModeActive = true;
+            PowerUpSettings.Instance.IsContinuousShootInUse = true;
             m_MonoBehaviour.StartCoroutine(ActivateEffect(player));
         }
         else
@@ -27,6 +27,6 @@ public class ContinuousShootBuff : PoweupEffect
         Debug.Log($"deactivate easy mode in {amount} seconds");
         yield return new WaitForSeconds(amount);
         Debug.Log($"deactivate easy mode");
-        GameSettings.Instance.IsEasyModeActive = false;
+        PowerUpSettings.Instance.IsContinuousShootInUse = false;
     }
 }

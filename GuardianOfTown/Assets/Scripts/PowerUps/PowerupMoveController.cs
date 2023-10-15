@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PowerupMoveController : MonoBehaviour
 {
-
     [SerializeField] private float speed;
     [SerializeField] private string movementType;
     private PlayerController playerController;
