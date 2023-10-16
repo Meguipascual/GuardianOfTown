@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a459b644b21120f4c8e3a31abeece509, type: 3}
   m_Name: GreatSpeedBuff
   m_EditorClassIdentifier: 
-  amount: 15
+  _amount: 20
+  _duration: 5

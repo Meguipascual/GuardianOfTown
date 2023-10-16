@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082d774e360fd224fa5d0015ec673004, type: 3}
   m_Name: ContinuousShootBuff
   m_EditorClassIdentifier: 
-  amount: 25
+  amount: 10

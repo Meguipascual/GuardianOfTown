@@ -72,7 +72,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 100;
         SavedPlayerExp = 0;
-        SavedPlayerLevelPoints = 0;
+        SavedPlayerLevelPoints = 10;
         SavedPlayerBullets = 20;
         SavedPlayerBulletsRate = 0.2f;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };

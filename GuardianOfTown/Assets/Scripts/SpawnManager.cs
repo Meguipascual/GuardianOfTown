@@ -157,7 +157,7 @@ public class SpawnManager : MonoBehaviour
         
         while (!_playerController.IsDead && !GameManager.SharedInstance.IsGamePaused)
         {
-            if (GameSettings.Instance.IsEasyModeActive)
+            if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
             {
                 powerupType = Random.Range(1, _powerupPrefab.Length);//the first position is continuous shoot powerUp, in easy mode is not needed
             }

@@ -125,8 +125,12 @@ public class LevelUpSliderManager : MonoBehaviour
     {
         StopAllCoroutines();
         PowerUpSettings.Instance.IsContinuousShootInUse = false;//Forces powerUp finalization
-        PowerUpSettings.Instance.IsSpeedIncreased = false;
-        _playerController.Speed = PowerUpSettings.Instance.PreviousPlayerSpeed;
-        PowerUpSettings.Instance.SpeedAmount = 0;
+        if (PowerUpSettings.Instance.IsSpeedIncreased)
+        {
+            PowerUpSettings.Instance.IsSpeedIncreased = false;
+            _playerController.Speed = PowerUpSettings.Instance.PreviousPlayerSpeed;
+            PowerUpSettings.Instance.SpeedAmount = 0;
+        }
+        
     }
 }
