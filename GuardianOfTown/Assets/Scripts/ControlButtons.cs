@@ -7,4 +7,5 @@ public static class ControlButtons
     public static KeyCode _rightGateButton = KeyCode.E;
     public static KeyCode _leftGateButton = KeyCode.Q;
     public static KeyCode _menu = KeyCode.Escape;
+    public static KeyCode _accelerateTimeButton = KeyCode.T;
 }

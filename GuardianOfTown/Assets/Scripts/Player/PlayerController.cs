@@ -16,20 +16,22 @@ public class PlayerController : Character
     public ParticleSystem shieldParticleSystem;
     
     private KeyCode _rightGateButton;
-    private KeyCode _leftGateButton;
-
+    private KeyCode _leftGateButton; 
+    private KeyCode _accelerateTimeButton;
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int LevelPoints { get; set; }
     public int CriticalRate { get; set; }
     public int Damage { get; set; }
     public int CriticalDamage { get; set; }
+    public int TimeScale { get; set; }
 
     // Start is called before the first frame update
     void Start()    
     {
         _rightGateButton = ControlButtons._rightGateButton;
         _leftGateButton = ControlButtons._leftGateButton;
+        _accelerateTimeButton = ControlButtons._accelerateTimeButton;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
@@ -69,12 +71,15 @@ public class PlayerController : Character
         {
             _changeGateManager.LeftButtonClicked();
         }
+        if (Input.GetKeyDown(_accelerateTimeButton))
+        {
+            AccelerateTime();
+        }
     }
 
 
     public override void Die()
     {
-        
         Debug.Log("GameOver");
         IsDead = true;
         //GameOver
@@ -113,14 +118,11 @@ public class PlayerController : Character
         var shields = GameManager.SharedInstance._townHpText.GetComponentsInChildren(
             GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
             );
-        //shields[shields.Length - 1].gameObject.SetActive(false);
-
 
         GameManager.SharedInstance.TownHpShieldsDamaged++;
         shields[shields.Length - GameManager.SharedInstance.TownHpShieldsDamaged].GetComponent<Image>().sprite 
             = GameManager.SharedInstance.TownDamagedShieldImages[0].GetComponent<Image>().sprite;
-        //GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count-1].gameObject.SetActive(false);
-        //GameManager.SharedInstance.TownHpShields.RemoveAt(GameManager.SharedInstance.TownHpShields.Count - 1);
+
         if(GameManager.SharedInstance.TownHpShields.Count == GameManager.SharedInstance.TownHpShieldsDamaged)
         {
             Die();
@@ -148,5 +150,21 @@ public class PlayerController : Character
     public void FillSliderValue()
     {
         _fillHealthBar.FillSliderValue();
+    }
+
+    public void AccelerateTime()
+    {
+        if (TimeScale < 20)
+        {
+            TimeScale *= 2;
+            Time.timeScale = TimeScale;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            TimeScale = 1;
+        }
+        var text = $"TimeScale x{TimeScale}";
+        GameManager.SharedInstance.ChangeAndShowDevText(text);
     }
 }

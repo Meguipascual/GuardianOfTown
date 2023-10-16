@@ -173,7 +173,19 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     }
 
 
-    
+    public void ActivateTownRecovery()
+    {
+        for (int i = 0; i < AreTownRecoveryWasted.Length; i++)
+        {
+            if (!AreTownRecoveryWasted[i])
+            {
+                AreTownRecoveryWasted[i] = true;
+                GameManager.SharedInstance.TownHpShieldsDamaged --;
+                return;
+            }
+        }
+        Debug.Log($"All 'Town Recovery' improvements wasted");
+    }
 
     public void ActivateMoreBullets()
     {

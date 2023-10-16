@@ -24,6 +24,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedTownHpShieldsDamaged {  get; set; }
     public int SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
+    public int SavedPlayerTimeScale { get; set; }
     public int SavedPlayerBullets { get; set; }
     public float SavedPlayerBulletsRate { get; set; }
     public int SavedPlayerLevelPoints {  get; set; }
@@ -75,6 +76,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerLevelPoints = 10;
         SavedPlayerBullets = 20;
         SavedPlayerBulletsRate = 0.2f;
+        SavedPlayerTimeScale = 1;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
 
@@ -144,6 +146,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = playerController.transform.position;
         SavedPlayerExp = playerController.Exp;
         SavedPlayerLevelPoints = playerController.LevelPoints;
+        SavedPlayerTimeScale = playerController.TimeScale;
         SaveTownHp();
     }
 
@@ -191,6 +194,7 @@ public class DataPersistantManager : MonoBehaviour
         playerController.Speed = SavedPlayerSpeed;
         playerController.transform.position = SavedPlayerPosition;
         playerController.Exp = SavedPlayerExp;
+        playerController.TimeScale = SavedPlayerTimeScale;
         playerController.LevelPoints = SavedPlayerLevelPoints;
     }
 

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private GameObject dataPersistantManagerGameObject;
     public List<Image> TownHpShields;
     public List<Image> TownDamagedShieldImages;
+    public TextMeshProUGUI _devText;
     public TextMeshProUGUI _townHpText;
     public TextMeshProUGUI _stageText;
     public TextMeshProUGUI _stagePopUpText; 
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     public GameObject _levelEndCanvas;
     public GameObject _gameOverCanvas;
     public GameObject _WinCanvas;
+    private Coroutine _previousCoroutine;
     private string _cameraQuake = "CameraQuake";
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
@@ -101,6 +103,10 @@ public class GameManager : MonoBehaviour
         if(playerController.IsDead)
         {
             _gameOverCanvas.gameObject.SetActive(true);
+            _generalCanvas.gameObject.SetActive(true);
+            _menuCanvas.gameObject.SetActive(false);
+            _levelEndCanvas.gameObject.SetActive(false);
+            _WinCanvas.gameObject.SetActive(false);
         }
 
         if (Input.GetKeyDown(ControlButtons._menu))
@@ -187,6 +193,22 @@ public class GameManager : MonoBehaviour
     {
         _generalCanvas.SetActive(false);
         _levelEndCanvas.SetActive(true);
-        //TODO-revert Powerups  
+    }
+
+    public void ChangeAndShowDevText(string Text)
+    {
+        _devText.text = Text;
+        if(_previousCoroutine != null)
+        {
+            StopCoroutine(_previousCoroutine);
+        }
+        _previousCoroutine = StartCoroutine(ShowDevText());
+    }
+
+    IEnumerator ShowDevText()
+    {
+        _devText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        _devText.gameObject.SetActive(false);
     }
 }
