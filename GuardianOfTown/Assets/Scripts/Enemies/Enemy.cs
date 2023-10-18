@@ -61,6 +61,10 @@ public abstract class Enemy : Character
         {
             CollisionWithWall();
         }
+        else if (other.CompareTag(Tags.Barrier))
+        {
+            CollisionWithBarrier();
+        }
         else if (other.CompareTag(Tags.Sword))
         {
             CollisionWithSword();
@@ -177,6 +181,12 @@ public abstract class Enemy : Character
             return;
         }
         Player.TownReceiveDamage();
+        Die();
+    }
+
+    private void CollisionWithBarrier()
+    {
+        PermanentPowerUpsSettings.Instance.DeactivateTownBarrier();
         Die();
     }
 

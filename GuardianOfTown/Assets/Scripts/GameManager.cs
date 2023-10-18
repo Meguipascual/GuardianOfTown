@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage}%";
         _playerLevelPointsText.text = $": {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
-        
+
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
             DataPersistantManager.Instance.LoadTownHp();

@@ -22,6 +22,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     private Component[] _playerComponents;
     private GameObject _sword;
     private GameObject _backCannon;
+    private GameObject[] _townBarriers;
 
     private void Awake()
     {
@@ -55,6 +56,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     {
         _playerController = FindObjectOfType<PlayerController>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
+        _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
+        DeactivateTownBarrier();
         AreMoreBulletsWasted = new bool[3];
         AreTownRecoveryWasted = new bool[3];
         AreAreaOfEffectActive = new bool[3];
@@ -171,6 +174,41 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         ActivateABulletModifier();
         IsTripleShootActive = true;
     }
+
+
+    public void ActivateTownBarrier()
+    {
+        if(_townBarriers.Length == 0)
+        {
+            Debug.LogError("Barrier not found");
+            return;
+        }
+
+        IsTownBarrierActive = true;
+        //TODO - animation for Construction and sound maybe
+        foreach (var component in _townBarriers)
+        {
+            component.gameObject.SetActive(true);
+        }
+        
+    }
+
+    public void DeactivateTownBarrier()
+    {
+        if (_townBarriers.Length == 0)
+        {
+            Debug.LogError("Barrier not found");
+            return;
+        }
+
+        IsTownBarrierActive = false;
+        //TODO - animation for destruction and sound maybe
+        foreach (var component in _townBarriers)
+        {
+            component.gameObject.SetActive(false);
+        }
+    }
+
 
 
     public void ActivateTownRecovery()
