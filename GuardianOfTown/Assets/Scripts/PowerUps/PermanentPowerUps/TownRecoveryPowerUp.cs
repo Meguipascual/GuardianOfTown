@@ -5,7 +5,7 @@ public class TownRecoveryPowerUp : PermanentPowerup
 {
     private void Start()
     {
-        _id = 0;
+        _id = 9;
         base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
         if (GameManager.SharedInstance.TownHpShieldsDamaged > 0)

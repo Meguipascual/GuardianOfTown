@@ -49,15 +49,20 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         }
         _playerController = FindObjectOfType<PlayerController>();
         _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
+        _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
+        if(!IsTownBarrierActive)
+        {
+            DeactivateTownBarrier();
+        }
+        else
+        {
+            ActivateTownBarrier();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = FindObjectOfType<PlayerController>();
-        _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
-        _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
-        DeactivateTownBarrier();
         AreMoreBulletsWasted = new bool[3];
         AreTownRecoveryWasted = new bool[3];
         AreAreaOfEffectActive = new bool[3];

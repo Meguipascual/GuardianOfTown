@@ -157,7 +157,7 @@ public abstract class Enemy : Character
         if (HP <= 0)
         {
             Player.Exp += Exp;
-            //Player.LevelUp();
+            //TODO - calculate if player levelup only for show it in the player panel 
             if(EnemyDeath != null)
             {
                 IsDying = true;
@@ -187,7 +187,11 @@ public abstract class Enemy : Character
     private void CollisionWithBarrier()
     {
         PermanentPowerUpsSettings.Instance.DeactivateTownBarrier();
-        Die();
+        IsDying = true;
+        _collider.enabled = false;
+        _fillEnemyHealthBar.slider.gameObject.SetActive(false);
+        StartCoroutine(DieInSeconds(DeathDelay));
+        _animator.Play(EnemyDeath);
     }
 
     private void CollisionWithSword()

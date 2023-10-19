@@ -5,7 +5,7 @@ public class FireRatePowerUp : PermanentPowerup
 {
     private void Start()
     {
-        _id = 0;
+        _id = 8;
         base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
 

@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject _gameOverCanvas;
     public GameObject _WinCanvas;
     private Coroutine _previousCoroutine;
+    private int _stageToActivateRedFog;
     private string _cameraQuake = "CameraQuake";
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        _stageToActivateRedFog = 6;
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         MainCamera = FindObjectOfType<Camera>();
@@ -94,6 +96,12 @@ public class GameManager : MonoBehaviour
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
             StartCoroutine(ShowStageText());
+        }
+
+        if (DataPersistantManager.Instance.Stage >= _stageToActivateRedFog)
+        {
+            UnityEngine.RenderSettings.fog = true;
+            UnityEngine.RenderSettings.fogColor = new Color(0.49f,0,0.06f);
         }
     }
 

@@ -5,7 +5,7 @@ public class MoreBulletsPowerUp : PermanentPowerup
 {
     private void Start()
     {
-        _id = 0;
+        _id = 7;
         base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
 

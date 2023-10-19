@@ -17,6 +17,7 @@ public class LevelUpSliderManager : MonoBehaviour
     public GameObject _levelPointsAssignPanel;
     public GameObject _powerUpsPanel;
     private bool _isLevelingUp;
+    private Coroutine _slideLevelingUpCoroutine;
     public Button _skipButton;
     public Button _continueButton;
 
@@ -37,7 +38,7 @@ public class LevelUpSliderManager : MonoBehaviour
         if(gameObject.activeInHierarchy && !_isLevelingUp)
         {
             WriteInitialText();
-            StartCoroutine(LevelUp());
+            _slideLevelingUpCoroutine = StartCoroutine(LevelUp());
             _isLevelingUp = true;
         }   
     }
@@ -51,6 +52,7 @@ public class LevelUpSliderManager : MonoBehaviour
 
     public void SkipButton()
     {
+        StopCoroutine(_slideLevelingUpCoroutine);
         var spentExp = 0;
 
         while ((_playerController.Exp - spentExp) >= (20 * _currentLevel))
