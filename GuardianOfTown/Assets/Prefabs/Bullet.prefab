@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   proyectileSpeed: 10
   _proyectileRotationSpeed: 10
+  _explosionPrefab: {fileID: 8779622473125909448, guid: 6a0cf8b9e17dbb548be6c4239a8eea02, type: 3}
   criticalParticles: {fileID: 0}
 --- !u!1001 &5705966952152087748
 PrefabInstance:
@@ -128,6 +129,10 @@ PrefabInstance:
     - target: {fileID: 198928334385227375, guid: a3225ba88f0d5c54382064e1b9d77989, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 198928334385227375, guid: a3225ba88f0d5c54382064e1b9d77989, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3048553550134709270, guid: a3225ba88f0d5c54382064e1b9d77989, type: 3}
       propertyPath: m_RootOrder
@@ -306,6 +311,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
+      propertyPath: m_TagString
+      value: Bomb
       objectReference: {fileID: 0}
     - target: {fileID: 1507767883509144192, guid: 4db16ca86db5d884ba551cfa22e37a3a, type: 3}
       propertyPath: m_Layer

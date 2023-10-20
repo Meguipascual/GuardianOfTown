@@ -8,7 +8,9 @@ public class BulletManager : MonoBehaviour
     private float topBound = 30;
     [SerializeField] private float proyectileSpeed = 10.0f;
     [SerializeField] private float _proyectileRotationSpeed = 1.0f;
+    [SerializeField] private GameObject _explosionPrefab;
     private PlayerController playerController;
+    private bool _isExploding;
     private float _rotateXAxisRandom;
     private float _rotateYAxisRandom;
     private float _rotateZAxisRandom;
@@ -61,6 +63,7 @@ public class BulletManager : MonoBehaviour
 
     public void DestroyBullet(GameObject gameObject)
     {
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
         ObjectPooler.ProjectileCount++;
         GameManager.SharedInstance._projectileText.text = $"{ObjectPooler.ProjectileCount}";

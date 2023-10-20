@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShootingManager : MonoBehaviour
 {
     private PlayerController _playerController;
+    private Animator _animator;
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
@@ -17,7 +18,8 @@ public class ShootingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = FindObjectOfType<PlayerController>();
+        _playerController = GetComponent<PlayerController>();
+        _animator = GetComponentInChildren<Animator>();
         _alternateShoot = ControlButtons._alterShoot;
         _shoot = ControlButtons._shoot;
         _bulletTimer = 0;
@@ -75,6 +77,7 @@ public class ShootingManager : MonoBehaviour
             pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
             ObjectPooler.ProjectileCount--;
             GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            AnimateCannonRotation();
         }
     }
 
@@ -91,6 +94,7 @@ public class ShootingManager : MonoBehaviour
                 ObjectPooler.ProjectileCount--;
             }
         }
+        AnimateCannonRotation();
         GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
     }
 
@@ -116,6 +120,7 @@ public class ShootingManager : MonoBehaviour
                 ObjectPooler.ProjectileCount--;
             }
         }
+        AnimateCannonRotation();
         GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
     }
 
@@ -152,8 +157,25 @@ public class ShootingManager : MonoBehaviour
         }
     }
 
-
-    
-
-   
+    private void AnimateCannonRotation()
+    {
+        if (_animator.GetBool("Shoot1"))
+        {
+            _animator.SetBool("Shoot1", false);
+            _animator.SetBool("Shoot2", true);
+            _animator.SetBool("Shoot3", false);
+        }
+        else if (_animator.GetBool("Shoot2"))
+        {
+            _animator.SetBool("Shoot1", false);
+            _animator.SetBool("Shoot2", false);
+            _animator.SetBool("Shoot3", true);
+        }
+        else 
+        {
+            _animator.SetBool("Shoot1", true); 
+            _animator.SetBool("Shoot2", false);
+            _animator.SetBool("Shoot3", false);
+        }
+    }
 }

@@ -72,7 +72,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerPosition = new Vector3(0.85f, 0.9f, -10f);
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 100;
-        SavedPlayerExp = 1000;
+        SavedPlayerExp = 0;
         SavedPlayerLevelPoints = 0;
         SavedPlayerBullets = 20;
         SavedPlayerBulletsRate = 0.2f;

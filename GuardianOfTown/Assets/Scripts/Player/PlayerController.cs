@@ -13,6 +13,7 @@ public class PlayerController : Character
     private ChangeGateManager _changeGateManager;
     private ShootingManager _shootingManager;
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
+    private Animator _animator;
     public ParticleSystem shieldParticleSystem;
     
     private KeyCode _rightGateButton;
@@ -39,6 +40,7 @@ public class PlayerController : Character
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
         _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
+        _animator = GetComponentInChildren<Animator>();
         _permanentPowerUpsSettings = PermanentPowerUpsSettings.Instance;
 
         if (_permanentPowerUpsSettings.IsFrontSwordActive)

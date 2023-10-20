@@ -15,6 +15,7 @@ TagManager:
   - Sword
   - BackCannon
   - Barrier
+  - Bomb
   layers:
   - Default
   - TransparentFX
