@@ -63,7 +63,8 @@ public class BulletManager : MonoBehaviour
 
     public void DestroyBullet(GameObject gameObject)
     {
-        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        ActivateExplosion();
+        //Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
         ObjectPooler.ProjectileCount++;
         GameManager.SharedInstance._projectileText.text = $"{ObjectPooler.ProjectileCount}";
@@ -83,5 +84,15 @@ public class BulletManager : MonoBehaviour
     {
         IsLeftBullet = false;
         IsRightBullet = false;
+    }
+    private void ActivateExplosion()
+    {
+        GameObject pooledExplosion = ObjectPoolerExplosion.SharedInstance.GetPooledObject();
+        if (pooledExplosion != null)
+        {
+            pooledExplosion.SetActive(true); // activate it
+            pooledExplosion.transform.position = gameObject.transform.position; // position it at bullet
+            ObjectPoolerExplosion.ProjectileCount--;
+        }
     }
 }
