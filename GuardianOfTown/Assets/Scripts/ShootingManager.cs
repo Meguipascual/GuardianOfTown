@@ -26,7 +26,7 @@ public class ShootingManager : MonoBehaviour
         BulletDelay = DataPersistantManager.Instance.SavedPlayerBulletsRate;
         _doubleBulletOffset = new Vector3[] { new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1) };
         _tripleBulletOffset = new Vector3[] { new Vector3(0.0f, 0, 1), new Vector3(0.8f, 0, 1), new Vector3(1.6f, 0, 1) };
-        _centerBulletOffset = new Vector3(0.8f, 0, 1);
+        _centerBulletOffset = new Vector3(0.8f, 2, 1);
     }
 
     // Update is called once per frame

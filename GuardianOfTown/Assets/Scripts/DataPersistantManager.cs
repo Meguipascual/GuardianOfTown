@@ -79,7 +79,6 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerTimeScale = 1;
         SpawnBoundariesRight = new float[] { 23, 1528, 3028, 4528 };
         SpawnBoundariesLeft = new float[] { -23, 1482, 2982, 4482 };
-
     }
 
     public void ChangeWave(bool isFirstWave, bool isNextWaveRandom, int gate) 

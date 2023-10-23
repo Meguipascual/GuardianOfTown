@@ -159,7 +159,11 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenuButton()
     {
         Time.timeScale = 1;
+        PermanentPowerUpsSettings.Instance.ActivateTownBarrier();
+
+        Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
+        Destroy(PermanentPowerUpManager.Instance.gameObject);
         SceneManager.LoadScene(0);
     }
     

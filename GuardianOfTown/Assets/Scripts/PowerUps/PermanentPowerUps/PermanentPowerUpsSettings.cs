@@ -42,21 +42,19 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "Menu")
+        if(scene.buildIndex != 0)
         {
-            Destroy(gameObject);
-            return;
-        }
-        _playerController = FindObjectOfType<PlayerController>();
-        _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
-        _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
-        if(!IsTownBarrierActive)
-        {
-            DeactivateTownBarrier();
-        }
-        else
-        {
-            ActivateTownBarrier();
+            _playerController = FindObjectOfType<PlayerController>();
+            _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
+            _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
+            if (!IsTownBarrierActive)
+            {
+                DeactivateTownBarrier();
+            }
+            else
+            {
+                ActivateTownBarrier();
+            }
         }
     }
 

@@ -32,12 +32,10 @@ public class PermanentPowerUpManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Menu")
+        if (scene.buildIndex != 0) 
         {
-            Destroy(gameObject);
-            return;
+            _parentGameObject = FindObjectOfType<PermanentPowerUpParent>(true).gameObject;
         }
-        _parentGameObject = FindObjectOfType<PermanentPowerUpParent>(true).gameObject;
     }
 
     // Start is called before the first frame update

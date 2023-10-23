@@ -64,7 +64,6 @@ public class BulletManager : MonoBehaviour
     public void DestroyBullet(GameObject gameObject)
     {
         ActivateExplosion();
-        //Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
         ObjectPooler.ProjectileCount++;
         GameManager.SharedInstance._projectileText.text = $"{ObjectPooler.ProjectileCount}";
