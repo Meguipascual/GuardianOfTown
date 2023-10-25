@@ -14680,6 +14680,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 874532503870620051, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132147793866736, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0

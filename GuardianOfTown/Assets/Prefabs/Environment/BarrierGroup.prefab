@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1586185721854083310}
   - component: {fileID: 7576755725269765394}
+  - component: {fileID: 1373193161309134767}
   m_Layer: 0
   m_Name: BarrierGroup
   m_TagString: Barrier
@@ -51,6 +52,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 77.104965, y: 18.659025, z: 8.54092}
   m_Center: {x: 0.24172974, y: 8.829513, z: -16.816729}
+--- !u!95 &1373193161309134767
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586185721854083309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba4a60a721a70f14db3b2715258c29b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1240676833816952606
 PrefabInstance:
   m_ObjectHideFlags: 0

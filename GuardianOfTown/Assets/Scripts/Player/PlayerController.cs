@@ -13,7 +13,7 @@ public class PlayerController : Character
     private ChangeGateManager _changeGateManager;
     private ShootingManager _shootingManager;
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
-    private Animator _animator;
+    private Animator [] _animators;
     public ParticleSystem shieldParticleSystem;
     
     private KeyCode _rightGateButton;
@@ -40,7 +40,7 @@ public class PlayerController : Character
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
         _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
-        _animator = GetComponentInChildren<Animator>();
+        _animators = GetComponentsInChildren<Animator>();
         _permanentPowerUpsSettings = PermanentPowerUpsSettings.Instance;
 
         if (_permanentPowerUpsSettings.IsFrontSwordActive)
@@ -61,6 +61,15 @@ public class PlayerController : Character
         if (IsDead || GameManager.SharedInstance.IsGamePaused)
         {
             return;
+        }
+
+        for (int i = 0; i < _animators.Length; i++)
+        {
+            if (!_animators[i].name.Equals("Cannon"))
+            {
+                _animators[i].SetBool("Right", false);
+                _animators[i].SetBool("Left", false);
+            }
         }
 
         TryToMove();
@@ -103,7 +112,21 @@ public class PlayerController : Character
         // Player movement left to right
         _horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
-        
+
+        for (int i = 0; i < _animators.Length; i++)
+        {
+            if (!_animators[i].name.Equals("Cannon"))
+            {
+                if(_horizontalInput > 0)
+                {
+                    _animators[i].SetBool("Right", true); 
+                }
+                else if (_horizontalInput < 0)
+                {
+                    _animators[i].SetBool("Left", true);
+                }
+            }
+        }
     }
 
     public void ComprobateLifeRemaining ()
