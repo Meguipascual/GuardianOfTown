@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Tags
 {
     public const string Orc = nameof(Orc);
@@ -10,4 +12,9 @@ public class Tags
     public const string Sword = nameof(Sword);
     public const string BackCannon = nameof(BackCannon);
     public const string Bullet = nameof(Bullet);
+
+    public static Color RedLight = new Color(0.94f, 0.24f, 0);
+    public static Color BlueLight = new Color(0, 0.59f, 0.55f);
+    public static Color Yellow = new Color(0.89f, 0.75f, 0.13f);
+    public static Color GreenLight = new Color(255, 255, 255);
 }
