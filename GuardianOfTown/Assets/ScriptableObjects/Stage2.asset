@@ -12,18 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56b8b1544fa56642b62e3a9eca1536b, type: 3}
   m_Name: Stage2
   m_EditorClassIdentifier: 
-  _wavesData:
-  - NumberOfEnemiesToCreate: 12
-    NumberOfBossesToCreate: 1
-    LevelOfEnemies: 2
-    LevelOfBosses: 2
-    NumberOfEnemiesByGate: 0
-    Gate: 3
-    IsRandomized: 0
-  - NumberOfEnemiesToCreate: 8
-    NumberOfBossesToCreate: 1
-    LevelOfEnemies: 2
-    LevelOfBosses: 2
-    NumberOfEnemiesByGate: 0
-    Gate: 2
-    IsRandomized: 0
+  _wavesData: []
