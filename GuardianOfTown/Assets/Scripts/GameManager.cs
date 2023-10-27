@@ -35,11 +35,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI _menuPlayerSpeedText;
     public TextMeshProUGUI _menuPlayerCriticalRateText;
     public TextMeshProUGUI _menuPlayerCriticalDamageText;
+    private Image[] _powerUpIcons; 
     public GameObject _menuCanvas;
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
     public GameObject _gameOverCanvas;
     public GameObject _WinCanvas;
+    public GameObject _powerUpIconsPanel;
     private Coroutine _previousCoroutine;
     private int _stageToActivateRedFog;
     private string _cameraQuake = "CameraQuake";
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         MainCamera = FindObjectOfType<Camera>();
+        _powerUpIcons = _powerUpIconsPanel.GetComponentsInChildren<Image>(true);
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         _playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
         _stageText.text = "Stage\n" + (DataPersistantManager.Instance.Stage + 1);
@@ -222,5 +225,28 @@ public class GameManager : MonoBehaviour
         _devText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
         _devText.gameObject.SetActive(false);
+    }
+
+    public void ShowPowerUpIcon(int icon)
+    {
+        _powerUpIcons[icon].gameObject.SetActive(true);
+    }
+
+    public void ShowPowerUpIcon(int icon, int index)
+    {
+        var amount = 0;
+        switch (index)
+        {
+            case 0: amount = 10; break;
+            case 1: amount = 20; break;
+            case 2: amount = 30; break;
+        }
+        _powerUpIcons[icon].gameObject.SetActive(true);
+        _powerUpIcons[icon].GetComponentInChildren<TextMeshProUGUI>().text = $"+{amount}";
+    }
+
+    public void HidePowerUpIcon(int icon)
+    {
+        _powerUpIcons[icon].gameObject.SetActive(false);
     }
 }
