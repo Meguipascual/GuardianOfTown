@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PermanentPowerUpsSettings : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public bool [] AreFireRateIncrementsWasted { get; set; }//ID = 8
     public bool[] AreTownRecoveryWasted { get; set; }//ID = 9
     public bool[] AreAreaOfEffectActive { get; set; }//ID = 10
+    public int PowerUpIconsActivated {  get; set; }
+    public List<Image> PowerUpIcons;
     private PlayerController _playerController;
     private Component[] _playerComponents;
     private GameObject _sword;
@@ -55,6 +58,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             {
                 ActivateTownBarrier();
             }
+            GameManager.Instance.ShowSavedIcons(PowerUpIcons);
         }
     }
 
@@ -81,7 +85,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public void DeactivateOverHeating()
     {
         IsOverHeatingUnactive = true;
-        GameManager.SharedInstance.ShowPowerUpIcon(0);
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[0]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[0]);
+        }
+        //GameManager.Instance.ShowPowerUpIcon(0);
     }
 
 
@@ -100,9 +108,14 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             {
                 IsFrontSwordActive = true;
                 _sword = component.gameObject;
-                _sword.SetActive(true);
-                GameManager.SharedInstance.ShowPowerUpIcon(1);
+                _sword.SetActive(true); 
+                
+                //GameManager.Instance.ShowPowerUpIcon(1);
             }
+        }
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[1]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[1]);
         }
     }
 
@@ -120,8 +133,13 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             {
                 IsFrontSwordActive = false;
                 component.gameObject.SetActive(false);//Deactivate Player's sword
-                GameManager.SharedInstance.ShowPowerUpIcon(1);
+                
+                //GameManager.Instance.HidePowerUpIcon(1);
             }
+        }
+        if (PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[1]))
+        {
+            PowerUpIcons.Remove(GameManager.Instance._powerUpIcons[1]);
         }
     }
 
@@ -159,7 +177,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public void ActivateInfiniteContinuousShoot()
     {
         IsInfiniteContinuousShootActive = true;
-        GameManager.SharedInstance.ShowPowerUpIcon(2);
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[2]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[2]);
+        }
+        //GameManager.Instance.ShowPowerUpIcon(2);
     }
 
 
@@ -169,7 +191,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     {
         ActivateABulletModifier();
         IsDoubleShootActive = true;
-        GameManager.SharedInstance.ShowPowerUpIcon(3);
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[3]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[3]);
+        }
+        //GameManager.Instance.ShowPowerUpIcon(3);
     }
 
     public void ActivateTripleShoot()
@@ -180,9 +206,15 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             return;
         }
         ActivateABulletModifier();
-        IsTripleShootActive = true;
-        GameManager.SharedInstance.HidePowerUpIcon(3);
-        GameManager.SharedInstance.ShowPowerUpIcon(4);
+        IsTripleShootActive = true; 
+        
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[4]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[4]);
+            PowerUpIcons.Remove(GameManager.Instance._powerUpIcons[3]);
+        }
+        //GameManager.Instance.HidePowerUpIcon(3);
+        //GameManager.Instance.ShowPowerUpIcon(4);
     }
 
 
@@ -199,9 +231,12 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         foreach (var component in _townBarriers)
         {
             component.gameObject.SetActive(true);
-            GameManager.SharedInstance.ShowPowerUpIcon(5);
         }
-        
+
+        if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[5]))
+        {
+            PowerUpIcons.Add(GameManager.Instance._powerUpIcons[5]);
+        }
     }
 
     public void DeactivateTownBarrier()
@@ -217,7 +252,11 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         foreach (var component in _townBarriers)
         {
             component.gameObject.SetActive(false);
-            //GameManager.SharedInstance.HidePowerUpIcon(5);
+            //GameManager.Instance.HidePowerUpIcon(5);
+        }
+        if (PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[5]))
+        {
+            PowerUpIcons.Remove(GameManager.Instance._powerUpIcons[5]);
         }
     }
 
@@ -230,7 +269,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             if (!AreTownRecoveryWasted[i])
             {
                 AreTownRecoveryWasted[i] = true;
-                GameManager.SharedInstance.TownHpShieldsDamaged --;
+                GameManager.Instance.TownHpShieldsDamaged --;
                 return;
             }
         }
@@ -244,8 +283,14 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             if (!AreMoreBulletsWasted[i])
             {
                 AreMoreBulletsWasted[i] = true;
-                GameManager.SharedInstance.ShowPowerUpIcon(6);
+
+                if (i == 0)
+                {
+                    PowerUpIcons.Add(GameManager.Instance._powerUpIcons[6]);
+                }
+
                 DataPersistantManager.Instance.SavedPlayerBullets += 10;
+                GameManager.Instance.ShowPowerUpIcon(6, $"+{(i+1) * 10}");
                 return;
             }
         }
@@ -259,7 +304,13 @@ public class PermanentPowerUpsSettings : MonoBehaviour
             if (!AreFireRateIncrementsWasted[i])
             {
                 AreFireRateIncrementsWasted[i] = true;
-                GameManager.SharedInstance.ShowPowerUpIcon(7);
+
+                if (i == 0) 
+                {
+                    PowerUpIcons.Add(GameManager.Instance._powerUpIcons[7]);
+                } 
+
+                GameManager.Instance.ShowPowerUpIcon(7, $"{i + 1}");
                 DataPersistantManager.Instance.SavedPlayerBulletsRate -= 0.025f;
                 return;
             }

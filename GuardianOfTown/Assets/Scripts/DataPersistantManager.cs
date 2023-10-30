@@ -85,7 +85,7 @@ public class DataPersistantManager : MonoBehaviour
     {
         if (isNextWaveRandom)
         {
-            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"They are attacking all our gates"));
+            StartCoroutine(GameManager.Instance.ShowWaveText($"They are attacking all our gates"));
         }
         else
         {
@@ -97,7 +97,7 @@ public class DataPersistantManager : MonoBehaviour
                 case 2: Gate = "South";break;
                 case 3: Gate = "West";break;
             }
-            StartCoroutine(GameManager.SharedInstance.ShowWaveText($"New enemies' wave incoming at {Gate} Gate "));
+            StartCoroutine(GameManager.Instance.ShowWaveText($"New enemies' wave incoming at {Gate} Gate "));
         }
 
         if(!isFirstWave)
@@ -110,12 +110,12 @@ public class DataPersistantManager : MonoBehaviour
     {
         StopAllCoroutines();
         SaveNextStage();
-        GameManager.SharedInstance.IsGamePaused = true;
+        GameManager.Instance.IsGamePaused = true;
 
         if ((Stage >= _stagesData.StagesDataList.Count))
         {
             Debug.Log("you win, son?");
-            GameManager.SharedInstance._WinCanvas.SetActive(true);
+            GameManager.Instance._WinCanvas.SetActive(true);
             return;
         }
 
@@ -128,7 +128,7 @@ public class DataPersistantManager : MonoBehaviour
             Debug.Log($"Number of waves that have been created random {_stagesData.StagesDataList[Stage]._wavesData.Count}");
         }
         
-        GameManager.SharedInstance.LevelUp();
+        GameManager.Instance.LevelUp();
     }
 
     public void SavePlayerStats()
@@ -152,7 +152,7 @@ public class DataPersistantManager : MonoBehaviour
     public void InitializeTownHp()
     {
         SavedTownHpShields = new List<Image>();
-        foreach (Image image in GameManager.SharedInstance.TownHpShields)
+        foreach (Image image in GameManager.Instance.TownHpShields)
         {
             SavedTownHpShields.Add(image);
         }
@@ -160,22 +160,22 @@ public class DataPersistantManager : MonoBehaviour
 
     public void SaveTownHp()
     {
-        SavedTownHpShieldsDamaged = GameManager.SharedInstance.TownHpShieldsDamaged;
+        SavedTownHpShieldsDamaged = GameManager.Instance.TownHpShieldsDamaged;
     }
 
     public void LoadTownHp()
     {
-        GameManager.SharedInstance.TownHpShieldsDamaged = SavedTownHpShieldsDamaged;
-        GameManager.SharedInstance.TownHpShields = new List<Image>(SavedTownHpShields.Count);
+        GameManager.Instance.TownHpShieldsDamaged = SavedTownHpShieldsDamaged;
+        GameManager.Instance.TownHpShields = new List<Image>(SavedTownHpShields.Count);
         for (int i = 0; i < SavedTownHpShields.Count; i++)
         {
             if (i < (SavedTownHpShields.Count - SavedTownHpShieldsDamaged))
             {
-                GameManager.SharedInstance.TownHpShields.Add(SavedTownHpShields[i].GetComponent<Image>());
+                GameManager.Instance.TownHpShields.Add(SavedTownHpShields[i].GetComponent<Image>());
             }
             else
             {
-                GameManager.SharedInstance.TownHpShields.Add(SavedTownDamagedShield[i]);
+                GameManager.Instance.TownHpShields.Add(SavedTownDamagedShield[i]);
             }
         }
     }

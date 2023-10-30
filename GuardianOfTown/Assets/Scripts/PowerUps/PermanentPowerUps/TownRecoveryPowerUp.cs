@@ -8,7 +8,7 @@ public class TownRecoveryPowerUp : PermanentPowerup
         _id = 9;
         base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
-        if (GameManager.SharedInstance.TownHpShieldsDamaged > 0)
+        if (GameManager.Instance.TownHpShieldsDamaged > 0)
         {
             for (int i = 0; i < _permanentPowerUpsSettings.AreTownRecoveryWasted.Length; i++)
             {

@@ -11,7 +11,7 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager SharedInstance;
+    public static GameManager Instance;
     public Camera MainCamera {get; set;}
     private Quaternion cameraStartRotation;
     private PlayerController playerController;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI _menuPlayerSpeedText;
     public TextMeshProUGUI _menuPlayerCriticalRateText;
     public TextMeshProUGUI _menuPlayerCriticalDamageText;
-    private Image[] _powerUpIcons; 
+    public Image[] _powerUpIcons; 
     public GameObject _menuCanvas;
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public GameObject _powerUpIconsPanel;
     private Coroutine _previousCoroutine;
     private int _stageToActivateRedFog;
+    private float[] _iconsOffsetX;
+    private Vector3 _iconLocalScale;
     private string _cameraQuake = "CameraQuake";
     public bool IsGamePaused {  get; set; }
     public int NumberOfEnemiesAndBosses { get; set; }
@@ -52,7 +54,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        SharedInstance = this;
+        Instance = this;
+        _iconsOffsetX = new float[] { -700, -500, -300, -100, 100, 300, 500, 700 };
+        _iconLocalScale = new Vector3(6.3f, 1.6f, 1.6f);
     }
 
     // Start is called before the first frame update
@@ -66,7 +70,6 @@ public class GameManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         MainCamera = FindObjectOfType<Camera>();
-        _powerUpIcons = _powerUpIconsPanel.GetComponentsInChildren<Image>(true);
         dataPersistantManagerGameObject = DataPersistantManager.Instance.GetComponent<GameObject>();
         _playerLevelText.text = "Lvl: " + DataPersistantManager.Instance.SavedPlayerLevel;
         _stageText.text = "Stage\n" + (DataPersistantManager.Instance.Stage + 1);
@@ -226,23 +229,28 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         _devText.gameObject.SetActive(false);
     }
+    public void ShowSavedIcons(List <Image> PowerUpIcons)
+    {
+        Image icons;
+        for (int i = 0; i < PowerUpIcons.Count; i++)
+        {
+            icons = Instantiate(PowerUpIcons[i], _powerUpIconsPanel.gameObject.transform);
+            icons.transform.localScale = _iconLocalScale;
+            icons.transform.localPosition = new Vector3(_iconsOffsetX[i], 30, 0);
+            icons.gameObject.SetActive(true);
+            //if (icons.name == "FireRateIcon(Clone)") else if (icons.name == "MoreBulletsIcon(Clone)")
+        }
+    }
 
     public void ShowPowerUpIcon(int icon)
     {
         _powerUpIcons[icon].gameObject.SetActive(true);
     }
 
-    public void ShowPowerUpIcon(int icon, int index)
+    public void ShowPowerUpIcon(int icon, String text)
     {
-        var amount = 0;
-        switch (index)
-        {
-            case 0: amount = 10; break;
-            case 1: amount = 20; break;
-            case 2: amount = 30; break;
-        }
         _powerUpIcons[icon].gameObject.SetActive(true);
-        _powerUpIcons[icon].GetComponentInChildren<TextMeshProUGUI>().text = $"+{amount}";
+        _powerUpIcons[icon].GetComponentInChildren<TextMeshProUGUI>().text = text;
     }
 
     public void HidePowerUpIcon(int icon)

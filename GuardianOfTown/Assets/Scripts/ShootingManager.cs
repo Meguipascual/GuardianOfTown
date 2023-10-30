@@ -76,7 +76,7 @@ public class ShootingManager : MonoBehaviour
             pooledProjectile.SetActive(true); // activate it
             pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
             ObjectPooler.ProjectileCount--;
-            GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
             AnimateCannonRotation();
         }
     }
@@ -95,7 +95,7 @@ public class ShootingManager : MonoBehaviour
             }
         }
         AnimateCannonRotation();
-        GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+        GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
     }
 
     private void ShootTriple()
@@ -121,7 +121,7 @@ public class ShootingManager : MonoBehaviour
             }
         }
         AnimateCannonRotation();
-        GameManager.SharedInstance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+        GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
     }
 
     private void ShootEasyMode()

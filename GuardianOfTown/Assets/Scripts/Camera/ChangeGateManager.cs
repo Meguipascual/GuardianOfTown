@@ -40,7 +40,7 @@ public class ChangeGateManager : MonoBehaviour
             _cameraManager.ActivateCamera(newCameraIndex);
             _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
             _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
-            GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
+            GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex], playerY, playerZ);
@@ -55,7 +55,7 @@ public class ChangeGateManager : MonoBehaviour
             _cameraManager.ActivateCamera(0);
             _gateCompassImages[0].gameObject.SetActive(true);
             _gateDirectionalLights[0].gameObject.SetActive(true);
-            GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[0].GetComponent<Camera>();
+            GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[0].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[0], playerY, playerZ);
@@ -78,7 +78,7 @@ public class ChangeGateManager : MonoBehaviour
             _cameraManager.ActivateCamera(3);
             _gateCompassImages[3].gameObject.SetActive(true);
             _gateDirectionalLights[3].gameObject.SetActive(true);
-            GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[3].GetComponent<Camera>();
+            GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[3].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[3];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[3];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[3] + 46, playerY, playerZ);
@@ -88,7 +88,7 @@ public class ChangeGateManager : MonoBehaviour
             _cameraManager.ActivateCamera(newCameraIndex);
             _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
             _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
-            GameManager.SharedInstance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
+            GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex], playerY, playerZ);

@@ -40,7 +40,7 @@ public class ObjectPoolerExplosion : MonoBehaviour
         ProjectileCount = AmountToPool = newNumberOfBullets;
         // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
-        GameManager.SharedInstance._projectileText.text = $"{ProjectileCount}";
+        GameManager.Instance._projectileText.text = $"{ProjectileCount}";
         for (int i = 0; i < AmountToPool; i++)
         {
             GameObject obj = (GameObject)Instantiate(objectToPool);

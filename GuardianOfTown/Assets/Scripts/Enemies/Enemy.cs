@@ -79,7 +79,7 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
-        GameManager.SharedInstance.DecreaseNumberOfEnemies();
+        GameManager.Instance.DecreaseNumberOfEnemies();
         Destroy(gameObject);
     }
 
@@ -91,7 +91,7 @@ public abstract class Enemy : Character
 
     public override void TryToMove()
     {
-        if (IsDying || GameManager.SharedInstance.IsGamePaused) return;
+        if (IsDying || GameManager.Instance.IsGamePaused) return;
 
         if (IsResting)
         {
@@ -143,7 +143,7 @@ public abstract class Enemy : Character
         if (Player.IsCritical())
         {
             _criticalHitParticleSystem.Play();
-            GameManager.SharedInstance.ShakeCamera();
+            GameManager.Instance.ShakeCamera();
             critical = true;
         }
 

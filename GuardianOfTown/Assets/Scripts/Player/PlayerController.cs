@@ -58,7 +58,7 @@ public class PlayerController : Character
     // Update is called once per frame
     void Update()
     {
-        if (IsDead || GameManager.SharedInstance.IsGamePaused)
+        if (IsDead || GameManager.Instance.IsGamePaused)
         {
             return;
         }
@@ -140,15 +140,15 @@ public class PlayerController : Character
 
     public void TownReceiveDamage()
     {
-        var shields = GameManager.SharedInstance._townHpText.GetComponentsInChildren(
-            GameManager.SharedInstance.TownHpShields[GameManager.SharedInstance.TownHpShields.Count - 1].GetType()
+        var shields = GameManager.Instance._townHpText.GetComponentsInChildren(
+            GameManager.Instance.TownHpShields[GameManager.Instance.TownHpShields.Count - 1].GetType()
             );
 
-        GameManager.SharedInstance.TownHpShieldsDamaged++;
-        shields[shields.Length - GameManager.SharedInstance.TownHpShieldsDamaged].GetComponent<Image>().sprite 
-            = GameManager.SharedInstance.TownDamagedShieldImages[0].GetComponent<Image>().sprite;
+        GameManager.Instance.TownHpShieldsDamaged++;
+        shields[shields.Length - GameManager.Instance.TownHpShieldsDamaged].GetComponent<Image>().sprite 
+            = GameManager.Instance.TownDamagedShieldImages[0].GetComponent<Image>().sprite;
 
-        if(GameManager.SharedInstance.TownHpShields.Count == GameManager.SharedInstance.TownHpShieldsDamaged)
+        if(GameManager.Instance.TownHpShields.Count == GameManager.Instance.TownHpShieldsDamaged)
         {
             Die();
         }
@@ -190,6 +190,6 @@ public class PlayerController : Character
             TimeScale = 1;
         }
         var text = $"TimeScale x{TimeScale}";
-        GameManager.SharedInstance.ChangeAndShowDevText(text);
+        GameManager.Instance.ChangeAndShowDevText(text);
     }
 }

@@ -16,7 +16,7 @@ public class PowerupMoveController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (playerController.IsDead || GameManager.SharedInstance.IsGamePaused)
+        if (playerController.IsDead || GameManager.Instance.IsGamePaused)
         {
             return;
         }

@@ -24,7 +24,7 @@ public class SpeedBuff : PoweupEffect
         PowerUpSettings.Instance.PreviousPlayerSpeed = _player.Speed;
         _player.Speed += _amount;
         Debug.Log("Speed Augmented");
-        GameManager.SharedInstance._menuPlayerSpeedText.text = $"Speed: {_player.Speed}";
+        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_player.Speed}";
         yield return new WaitForSeconds(_duration);
         DeactivateEffect();
     } 
@@ -34,7 +34,7 @@ public class SpeedBuff : PoweupEffect
         _player.Speed -= _amount;
         PowerUpSettings.Instance.IsSpeedIncreased = false;
         PowerUpSettings.Instance.SpeedAmount = 0;
-        GameManager.SharedInstance._menuPlayerSpeedText.text = $"Speed: {_player.Speed}";
+        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_player.Speed}";
         Debug.Log("Speed Reverted");
     }
 }

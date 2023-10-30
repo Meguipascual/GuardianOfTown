@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                GameManager.SharedInstance.NumberOfEnemiesAndBosses = 600;
+                GameManager.Instance.NumberOfEnemiesAndBosses = 600;
             }
         }
         else
@@ -63,9 +63,9 @@ public class SpawnManager : MonoBehaviour
 
     private void LoadNumberOfEnemies()
     {
-        GameManager.SharedInstance.NumberOfEnemiesAndBosses = _stagesDataList [CurrentStage]._wavesData [CurrentWave].NumberOfEnemiesToCreate + _stagesDataList [CurrentStage]._wavesData [CurrentWave].NumberOfBossesToCreate;
-        GameManager.SharedInstance.NumberOfStagesLeft = _stagesDataList.Count - CurrentStage;
-        GameManager.SharedInstance._enemiesLeftText.text = $": {GameManager.SharedInstance.NumberOfEnemiesAndBosses}";
+        GameManager.Instance.NumberOfEnemiesAndBosses = _stagesDataList [CurrentStage]._wavesData [CurrentWave].NumberOfEnemiesToCreate + _stagesDataList [CurrentStage]._wavesData [CurrentWave].NumberOfBossesToCreate;
+        GameManager.Instance.NumberOfStagesLeft = _stagesDataList.Count - CurrentStage;
+        GameManager.Instance._enemiesLeftText.text = $": {GameManager.Instance.NumberOfEnemiesAndBosses}";
     }
 
     private void Update()
@@ -155,7 +155,7 @@ public class SpawnManager : MonoBehaviour
         int powerupType;
         float powerupX;
         
-        while (!_playerController.IsDead && !GameManager.SharedInstance.IsGamePaused)
+        while (!_playerController.IsDead && !GameManager.Instance.IsGamePaused)
         {
             if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
             {
@@ -221,7 +221,7 @@ public class SpawnManager : MonoBehaviour
         else
         {
             CurrentStage++;
-            GameManager.SharedInstance.NumberOfStagesLeft = _stagesDataList.Count - CurrentStage;
+            GameManager.Instance.NumberOfStagesLeft = _stagesDataList.Count - CurrentStage;
             Debug.Log($"there are'nt any waves left");
             DataPersistantManager.Instance.ChangeStage();
         }
