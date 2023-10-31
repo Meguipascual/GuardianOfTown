@@ -23,8 +23,10 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public Button _critDamageButton;
     public Button _speedButton;
     public Button _nextLevelButton;
-    private int _increment;
-    private int _critDamageIncrement;
+    private int _increment1;
+    private int _increment2;
+    private int _increment5;
+    private int _increment10;
     private int _levelPoints;
     private int _currentLevelPoints;
     private float[] _increments;
@@ -36,8 +38,10 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         _increments = new float[6];
         _playerStatsCopy = new float[6];
-        _increment = 5;
-        _critDamageIncrement = 10;
+        _increment1 = 1;
+        _increment2 = 2; 
+        _increment5 = 5;
+        _increment10 = 10;
         _currentLevelPoints = 0; 
         _levelPoints = _playerController.LevelPoints;
         CopyPlayerStats();
@@ -103,48 +107,87 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[0] += _increment;
-        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]}+{_increments[0]}";
+        _increments[0] += _increment10;
+        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]} +{_increments[0]}";
         TryToDisableButtons();
     }
     public void increaseAttack()
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[1] += _increment;
-        _playerAttackText.text = $"Attack: {_playerStatsCopy[1]}+{_increments[1]}";
+        _increments[1] += _increment5;
+        _increments[5] -= _increment1;
+        _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
+        if (_increments[5]<0) 
+        {
+            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} {_increments[5]}";
+        }
+        else
+        {
+            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
+        }
+        
         TryToDisableButtons();
     }
     public void increaseDefense()
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[2] += _increment;
-        _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]}+{_increments[2]}";
+        _increments[2] += _increment5; 
+        _increments[0] += _increment1;
+        _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} +{_increments[2]}";
+        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]} +{_increments[0]}";
         TryToDisableButtons();
     }
     public void increaseCritRate()
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[3] += _increment;
-        _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]}+{_increments[3]}";
+        _increments[3] += _increment5;
+        _increments[2] -= _increment1;
+        _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
+        if (_increments[2] < 0)
+        {
+            _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} {_increments[2]}";
+        }
+        else
+        {
+            _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} +{_increments[2]}";
+        }
         TryToDisableButtons();
     }
     public void increaseCritDamage()
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[4] += _critDamageIncrement;
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}+{_increments[4]}";
+        _increments[4] += _increment10;
+        _increments[1] -= _increment1;
+        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} +{_increments[4]}";
+        if (_increments[1] < 0)
+        {
+            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} {_increments[1]}";
+        }
+        else
+        {
+            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
+        }
         TryToDisableButtons();
     }
     public void increaseSpeed()
     {
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
-        _increments[5] += _increment;
-        _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]}+{_increments[5]}";
+        _increments[5] += _increment2;
+        _increments[3] -= _increment1;
+        _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
+        if (_increments[3] < 0)
+        {
+            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} {_increments[3]}";
+        }
+        else
+        {
+            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
+        }
         TryToDisableButtons();
     }
     public void NextStage()
