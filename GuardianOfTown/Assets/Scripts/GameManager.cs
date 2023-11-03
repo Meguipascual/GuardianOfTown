@@ -162,11 +162,19 @@ public class GameManager : MonoBehaviour
         IsGamePaused = !IsGamePaused;
     }
 
+    public void RetryButton()
+    {
+        Time.timeScale = 1;
+        Destroy(PermanentPowerUpsSettings.Instance.gameObject);
+        Destroy(DataPersistantManager.Instance.gameObject);
+        Destroy(PermanentPowerUpManager.Instance.gameObject);
+        SceneManager.LoadScene(1);
+    }
+
+
     public void ReturnToMainMenuButton()
     {
         Time.timeScale = 1;
-        PermanentPowerUpsSettings.Instance.ActivateTownBarrier();
-
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);

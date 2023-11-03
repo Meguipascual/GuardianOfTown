@@ -25,7 +25,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     private Component[] _playerComponents;
     private GameObject _sword;
     private GameObject _backCannon;
-    private GameObject[] _townBarriers;
+    private BarrierGroupLocator[] _townBarriers;
 
     private void Awake()
     {
@@ -49,14 +49,14 @@ public class PermanentPowerUpsSettings : MonoBehaviour
         {
             _playerController = FindObjectOfType<PlayerController>();
             _playerComponents = _playerController.GetComponentsInChildren<Component>(true);
-            _townBarriers = GameObject.FindGameObjectsWithTag("Barrier");
+            _townBarriers = FindObjectsOfType<BarrierGroupLocator>(true);
             if (!IsTownBarrierActive)
             {
-                DeactivateTownBarrier();
+                HideTownBarrier();
             }
             else
             {
-                ActivateTownBarrier();
+                ShowTownBarrier();
             }
             GameManager.Instance.ShowSavedIcons(PowerUpIcons);
         }
@@ -220,40 +220,48 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     public void ActivateTownBarrier()
     {
-        if(_townBarriers.Length == 0)
-        {
-            Debug.LogError("Barrier not found");
-            return;
-        }
-
+        ShowTownBarrier();
         IsTownBarrierActive = true;
         //TODO - animation for Construction and sound maybe
-        foreach (var component in _townBarriers)
-        {
-            component.gameObject.SetActive(true);
-        }
-
         if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[5]))
         {
             PowerUpIcons.Add(GameManager.Instance._powerUpIcons[5]);
         }
     }
 
-    public void DeactivateTownBarrier()
+    public void ShowTownBarrier()
     {
         if (_townBarriers.Length == 0)
         {
-            Debug.LogError("Barrier not found");
+            Debug.LogError($"Barrier not found {_townBarriers}");
             return;
         }
 
-        IsTownBarrierActive = false;
-        //TODO - animation for destruction and sound maybe
+        foreach (var component in _townBarriers)
+        {
+            component.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideTownBarrier()
+    {
+        if (_townBarriers.Length == 0)
+        {
+            Debug.LogError($"Barrier not found {_townBarriers}");
+            return;
+        }
+
         foreach (var component in _townBarriers)
         {
             component.gameObject.SetActive(false);
-            //GameManager.Instance.HidePowerUpIcon(5);
         }
+    }
+
+    public void DeactivateTownBarrier()
+    {
+        HideTownBarrier();
+        IsTownBarrierActive = false;
+        //TODO - animation for destruction and sound maybe
         if (PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[5]))
         {
             PowerUpIcons.Remove(GameManager.Instance._powerUpIcons[5]);
