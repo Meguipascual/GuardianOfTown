@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShootingManager : MonoBehaviour
 {
     private PlayerController _playerController;
+    private AudioSource _popAudioClip;
     private Animator[] _animators;
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
@@ -19,6 +20,7 @@ public class ShootingManager : MonoBehaviour
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _popAudioClip = GetComponentInChildren<AudioSource>();
         _animators = GetComponentsInChildren<Animator>();
         _alternateShoot = ControlButtons._alterShoot;
         _shoot = ControlButtons._shoot;
@@ -77,6 +79,9 @@ public class ShootingManager : MonoBehaviour
             pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
             ObjectPooler.ProjectileCount--;
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            //Debug.Log(_popAudioClip.pitch);
+            //_popAudioClip.pitch = Random.Range(.95f, 1.05f);
+            _popAudioClip.Play();
             AnimateCannonRotation();
         }
     }
