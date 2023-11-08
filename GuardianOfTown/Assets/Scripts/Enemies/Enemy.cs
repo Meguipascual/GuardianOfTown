@@ -10,6 +10,7 @@ public abstract class Enemy : Character
     private ParticleSystem _criticalHitParticleSystem;
     private Animator _animator;
     private Collider _collider;
+    private EnemySoundsManager _soundManager;
     [SerializeField] private GameObject _enemyPanelTop;
     [SerializeField] private GameObject _enemyPanelFront;
     protected DataPersistantManager DataPersistentManager { get; set; }
@@ -48,6 +49,7 @@ public abstract class Enemy : Character
         _criticalHitParticleSystem = GetComponentInChildren<ParticleSystem>();
         _animator = GetComponentInChildren<Animator>();
         _collider = GetComponent<Collider>();
+        _soundManager = GetComponent<EnemySoundsManager>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
         
     }
@@ -165,12 +167,14 @@ public abstract class Enemy : Character
                 _fillEnemyHealthBar.slider.gameObject.SetActive(false);
                 StartCoroutine(DieInSeconds(DeathDelay));
                 _animator.Play(EnemyDeath);
+                //_soundManager.PlayRandomHurtSound(); PlayDeathSound instead
             }
             else
             {
                 Die();
             } 
         }
+        _soundManager.PlayRandomHurtSound();
     }
 
     private void CollisionWithWall()
