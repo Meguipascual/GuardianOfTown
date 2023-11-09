@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
+        PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
         SceneManager.LoadScene(1);
     }
 
@@ -178,6 +179,7 @@ public class GameManager : MonoBehaviour
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
+        PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
         SceneManager.LoadScene(0);
     }
     
@@ -246,7 +248,6 @@ public class GameManager : MonoBehaviour
             icons.transform.localScale = _iconLocalScale;
             icons.transform.localPosition = new Vector3(_iconsOffsetX[i], 30, 0);
             icons.gameObject.SetActive(true);
-            //if (icons.name == "FireRateIcon(Clone)") else if (icons.name == "MoreBulletsIcon(Clone)")
         }
     }
 

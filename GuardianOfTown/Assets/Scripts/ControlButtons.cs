@@ -8,6 +8,7 @@ public static class ControlButtons
     public static KeyCode _leftGateButton = KeyCode.Q;
     public static KeyCode _menu = KeyCode.Escape;
     public static KeyCode _accelerateTimeButton = KeyCode.T;
+    public static KeyCode _decelerateTimeButton = KeyCode.R;
     public static KeyCode _doubleShootButton = KeyCode.Z;
     public static KeyCode _tripleShootButton = KeyCode.X;
 }

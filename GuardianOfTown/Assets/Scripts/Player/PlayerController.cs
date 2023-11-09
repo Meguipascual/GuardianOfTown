@@ -22,6 +22,7 @@ public class PlayerController : Character
     private KeyCode _rightGateButton;
     private KeyCode _leftGateButton; 
     private KeyCode _accelerateTimeButton;
+    private KeyCode _decelerateTimeButton;
     private KeyCode _doubleShootButton;
     private KeyCode _tripleShootButton;
     public bool IsDead { get; set; }
@@ -38,6 +39,7 @@ public class PlayerController : Character
         _rightGateButton = ControlButtons._rightGateButton;
         _leftGateButton = ControlButtons._leftGateButton;
         _accelerateTimeButton = ControlButtons._accelerateTimeButton;
+        _decelerateTimeButton = ControlButtons._decelerateTimeButton;
         _doubleShootButton = ControlButtons._doubleShootButton;
         _tripleShootButton = ControlButtons._tripleShootButton;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
@@ -94,6 +96,10 @@ public class PlayerController : Character
         if (Input.GetKeyDown(_accelerateTimeButton))
         {
             AccelerateTime();
+        }
+        if (Input.GetKeyDown(_decelerateTimeButton))
+        {
+            DecelerateTime();
         }
         if (Input.GetKeyDown(_doubleShootButton))
         {
@@ -205,10 +211,16 @@ public class PlayerController : Character
             TimeScale *= 2;
             Time.timeScale = TimeScale;
         }
-        else
+        var text = $"TimeScale x{TimeScale}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+    }
+
+    public void DecelerateTime()
+    {
+        if (TimeScale > 1)
         {
-            Time.timeScale = 1;
-            TimeScale = 1;
+            TimeScale /= 2;
+            Time.timeScale = TimeScale;
         }
         var text = $"TimeScale x{TimeScale}";
         GameManager.Instance.ChangeAndShowDevText(text);
