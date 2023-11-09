@@ -80,7 +80,7 @@ public class ShootingManager : MonoBehaviour
             ObjectPooler.ProjectileCount--;
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
             //Debug.Log(_popAudioClip.pitch);
-            //_popAudioClip.pitch = Random.Range(.95f, 1.05f);
+            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
             _popAudioClip.Play();
             AnimateCannonRotation();
         }
@@ -88,29 +88,38 @@ public class ShootingManager : MonoBehaviour
 
     private void ShootDouble()
     {
+        var shooting = false;
         for (int i = 0; i < 2; i++)
         {
             // Get an object object from the pool
             GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
             if (pooledProjectile != null)
             {
+                shooting = true;
                 pooledProjectile.SetActive(true); // activate it
                 pooledProjectile.transform.position = _playerController.transform.position + _doubleBulletOffset[i]; // position bullet
                 ObjectPooler.ProjectileCount--;
             }
         }
-        AnimateCannonRotation();
-        GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+        if (shooting)
+        {
+            GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
+            _popAudioClip.Play();
+            AnimateCannonRotation();
+        }
     }
 
     private void ShootTriple()
     {
+        var shooting = false;   
         for (int i = 0; i < 3; i++)
         {
             // Get an object object from the pool
             GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
             if (pooledProjectile != null)
             {
+                shooting = true;
                 var bullet = pooledProjectile.GetComponent<BulletManager>();
                 bullet.ResetStartPositionInTripleShoot();
 
@@ -121,12 +130,16 @@ public class ShootingManager : MonoBehaviour
                 }
                 pooledProjectile.transform.position = _playerController.transform.position + _tripleBulletOffset[i]; // position bullet
                 pooledProjectile.SetActive(true); // activate it
-                
                 ObjectPooler.ProjectileCount--;
             }
         }
-        AnimateCannonRotation();
-        GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+        if (shooting)
+        {
+            GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
+            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
+            _popAudioClip.Play();
+            AnimateCannonRotation();
+        }
     }
 
     private void ShootEasyMode()

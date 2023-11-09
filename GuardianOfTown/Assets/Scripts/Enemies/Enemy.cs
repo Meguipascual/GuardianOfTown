@@ -158,6 +158,7 @@ public abstract class Enemy : Character
 
         if (HP <= 0)
         {
+            Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
             //TODO - calculate if player levelup only for show it in the player panel 
             if(EnemyDeath != null)
@@ -174,7 +175,10 @@ public abstract class Enemy : Character
                 Die();
             } 
         }
-        _soundManager.PlayRandomHurtSound();
+        if (Random.Range(0, 100) > 50) 
+        {
+            _soundManager.PlayRandomHurtSound();
+        }
     }
 
     private void CollisionWithWall()
@@ -205,6 +209,7 @@ public abstract class Enemy : Character
             PermanentPowerUpsSettings.Instance.DeactivateSword();
         }
         //Player.shieldParticleSystem.Play();//Change to a sword particle or something
+        Player.RealTimeLevelUp(Exp);
         Player.Exp += Exp;
         Die();
     }
@@ -217,6 +222,7 @@ public abstract class Enemy : Character
         if (!Player.IsDead)
         {
             Player.shieldParticleSystem.Play();
+            Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
             Die();
         }

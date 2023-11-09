@@ -6,6 +6,9 @@ public class EnemySoundsManager : MonoBehaviour
 {
     public AudioClip[] _hurtSounds;
     public AudioClip[] _deathSounds;
+    public AudioClip[] _stepSounds;
+    [SerializeField] private float _pitchMin;
+    [SerializeField] private float _pitchMax;
     private AudioSource _source;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,7 @@ public class EnemySoundsManager : MonoBehaviour
         if (_hurtSounds.Length != 0)
         {
             _source.clip = _hurtSounds[Random.Range(0, _hurtSounds.Length)];
+            _source.pitch = Random.Range(_pitchMin, _pitchMax);
             _source.Play();
         }
     }
@@ -27,6 +31,17 @@ public class EnemySoundsManager : MonoBehaviour
         if (_deathSounds.Length != 0)
         {
             _source.clip = _deathSounds[Random.Range(0, _deathSounds.Length)];
+            _source.pitch = Random.Range(_pitchMin, _pitchMax);
+            _source.Play();
+        }
+    }
+
+    public void PlayRandomStepSound()
+    {
+        if (_stepSounds.Length != 0)
+        {
+            _source.clip = _stepSounds[Random.Range(0, _stepSounds.Length)];
+            _source.pitch = Random.Range(_pitchMin, _pitchMax);
             _source.Play();
         }
     }

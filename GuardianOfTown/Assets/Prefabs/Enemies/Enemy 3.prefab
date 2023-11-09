@@ -893,7 +893,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2870082569c27b4da09edb257bfccf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hurtAudios: []
+  _hurtSounds:
+  - {fileID: 8300000, guid: 3374d8b5757188940bdcb146e9c6c015, type: 3}
+  - {fileID: 8300000, guid: aec0f03663f7ac949b68da16aaaba0b6, type: 3}
+  - {fileID: 8300000, guid: a80cefe2cc3252848bd3d094d7add917, type: 3}
+  - {fileID: 8300000, guid: 6d56043004cab4f4dbad4494bcad4919, type: 3}
+  _deathSounds: []
+  _stepSounds: []
+  _pitchMin: 1.3
+  _pitchMax: 1.7
 --- !u!82 &-4042073616251929036
 AudioSource:
   m_ObjectHideFlags: 0

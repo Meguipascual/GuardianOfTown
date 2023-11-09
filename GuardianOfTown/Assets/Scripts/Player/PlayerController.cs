@@ -9,6 +9,9 @@ public class PlayerController : Character
     public float XLeftBound { get; set; }
     public float XRightBound { get; set; }
     private float _horizontalInput;
+    private int _realTimeLevel;
+    private int _realTimeLVP;
+    private int _realTimeEXP;
     private FillHealthBar _fillHealthBar;
     private ChangeGateManager _changeGateManager;
     private ShootingManager _shootingManager;
@@ -19,6 +22,8 @@ public class PlayerController : Character
     private KeyCode _rightGateButton;
     private KeyCode _leftGateButton; 
     private KeyCode _accelerateTimeButton;
+    private KeyCode _doubleShootButton;
+    private KeyCode _tripleShootButton;
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int LevelPoints { get; set; }
@@ -33,6 +38,8 @@ public class PlayerController : Character
         _rightGateButton = ControlButtons._rightGateButton;
         _leftGateButton = ControlButtons._leftGateButton;
         _accelerateTimeButton = ControlButtons._accelerateTimeButton;
+        _doubleShootButton = ControlButtons._doubleShootButton;
+        _tripleShootButton = ControlButtons._tripleShootButton;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
@@ -51,9 +58,11 @@ public class PlayerController : Character
         {
             _permanentPowerUpsSettings.ActivateBackCannon();
         }
+        _realTimeLevel = Level;
+        _realTimeLVP = LevelPoints;
+        _realTimeEXP = Exp;
 
-
-    }
+}
 
     // Update is called once per frame
     void Update()
@@ -85,6 +94,14 @@ public class PlayerController : Character
         if (Input.GetKeyDown(_accelerateTimeButton))
         {
             AccelerateTime();
+        }
+        if (Input.GetKeyDown(_doubleShootButton))
+        {
+            _permanentPowerUpsSettings.ActivateDoubleShoot();
+        }
+        if (Input.GetKeyDown(_tripleShootButton))
+        {
+            _permanentPowerUpsSettings.ActivateTripleShoot();
         }
     }
 
@@ -191,5 +208,19 @@ public class PlayerController : Character
         }
         var text = $"TimeScale x{TimeScale}";
         GameManager.Instance.ChangeAndShowDevText(text);
+    }
+
+    public void RealTimeLevelUp(int exp)
+    {
+        _realTimeEXP += exp;
+
+        if (_realTimeEXP > 20 * _realTimeLevel)
+        {
+            _realTimeEXP -= 20 * _realTimeLevel;
+            _realTimeLVP += 2;
+            _realTimeLevel++;
+            GameManager.Instance._playerLevelPointsText.text = $": {_realTimeLVP}"; 
+            GameManager.Instance._playerLevelText.text = $"Lvl: {_realTimeLevel}";
+        }
     }
 }
