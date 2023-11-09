@@ -31,7 +31,7 @@ public class PlayerController : Character
     public int CriticalRate { get; set; }
     public int Damage { get; set; }
     public int CriticalDamage { get; set; }
-    public int TimeScale { get; set; }
+    public float TimeScale { get; set; }
 
     // Start is called before the first frame update
     void Start()    
@@ -217,7 +217,7 @@ public class PlayerController : Character
 
     public void DecelerateTime()
     {
-        if (TimeScale > 1)
+        if (TimeScale > .25f)
         {
             TimeScale /= 2;
             Time.timeScale = TimeScale;

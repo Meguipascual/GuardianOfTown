@@ -24,7 +24,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedTownHpShieldsDamaged {  get; set; }
     public int SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
-    public int SavedPlayerTimeScale { get; set; }
+    public float SavedPlayerTimeScale { get; set; }
     public int SavedPlayerBullets { get; set; }
     public float SavedPlayerBulletsRate { get; set; }
     public int SavedPlayerLevelPoints {  get; set; }
