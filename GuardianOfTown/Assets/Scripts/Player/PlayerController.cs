@@ -98,10 +98,14 @@ public class PlayerController : Character
         if (Input.GetKeyDown(_doubleShootButton))
         {
             _permanentPowerUpsSettings.ActivateDoubleShoot();
+            var text = $"Double Shoot Activated";
+            GameManager.Instance.ChangeAndShowDevText(text);
         }
         if (Input.GetKeyDown(_tripleShootButton))
         {
             _permanentPowerUpsSettings.ActivateTripleShoot();
+            var text = $"Triple Shoot Activated";
+            GameManager.Instance.ChangeAndShowDevText(text);
         }
     }
 
