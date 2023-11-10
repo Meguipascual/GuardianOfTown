@@ -118,6 +118,7 @@ public abstract class Enemy : Character
         }
         else
         {
+            _soundManager.PlayRandomStepSound();
             IsResting = true;
             MovementTimer = TimeToMove;
         }

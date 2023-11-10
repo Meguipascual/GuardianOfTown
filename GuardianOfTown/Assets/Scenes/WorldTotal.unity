@@ -24256,6 +24256,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7722748132924799833, guid: c6933de727c0787458b99c6cece97500, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7722748132924799835, guid: c6933de727c0787458b99c6cece97500, type: 3}
       propertyPath: m_Name
       value: (Front) Door 1 Camera
