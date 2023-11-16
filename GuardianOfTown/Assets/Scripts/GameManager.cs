@@ -148,8 +148,19 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator ShowLevelUpText()
     {
+        float levelUpTimer = 0;
+        var speed = 200;
+        var initialPosition = _levelUpPanel.transform.localPosition;
         _levelUpPanel.gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
+
+        while (levelUpTimer < .5f)
+        {
+            var pos =_levelUpPanel.transform.position += Vector3.up * speed * Time.deltaTime;
+            levelUpTimer += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        _levelUpPanel.transform.localPosition = initialPosition;
         _levelUpPanel.gameObject.SetActive(false);
     }
 
