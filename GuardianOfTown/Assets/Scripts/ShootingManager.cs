@@ -5,14 +5,16 @@ using UnityEngine;
 public class ShootingManager : MonoBehaviour
 {
     private PlayerController _playerController;
-    private AudioSource _popAudioClip;
     private Animator[] _animators;
     private KeyCode _shoot;
     private KeyCode _alternateShoot;
+    [SerializeField] private float _pitchMin;
+    [SerializeField] private float _pitchMax;
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
     [SerializeField] private Vector3 _centerBulletOffset;
     [SerializeField] private Vector3[] _doubleBulletOffset;
     [SerializeField] private Vector3[] _tripleBulletOffset;
+    [SerializeField] private AudioSource _popAudioClip;
     public float BulletDelay { get; set; }//Time between bullets in continuous shooting(Fire Rate)
 
 
@@ -20,7 +22,6 @@ public class ShootingManager : MonoBehaviour
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
-        _popAudioClip = GetComponentInChildren<AudioSource>();
         _animators = GetComponentsInChildren<Animator>();
         _alternateShoot = ControlButtons._alterShoot;
         _shoot = ControlButtons._shoot;
@@ -80,7 +81,7 @@ public class ShootingManager : MonoBehaviour
             ObjectPooler.ProjectileCount--;
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
             //Debug.Log(_popAudioClip.pitch);
-            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
+            _popAudioClip.pitch = Random.Range(_pitchMin, _pitchMax);
             _popAudioClip.Play();
             AnimateCannonRotation();
         }
@@ -104,7 +105,7 @@ public class ShootingManager : MonoBehaviour
         if (shooting)
         {
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
+            _popAudioClip.pitch = Random.Range(_pitchMin, _pitchMax);
             _popAudioClip.Play();
             AnimateCannonRotation();
         }
@@ -136,7 +137,7 @@ public class ShootingManager : MonoBehaviour
         if (shooting)
         {
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-            _popAudioClip.pitch = Random.Range(.9f, 1.1f);
+            _popAudioClip.pitch = Random.Range(_pitchMin, _pitchMax);
             _popAudioClip.Play();
             AnimateCannonRotation();
         }

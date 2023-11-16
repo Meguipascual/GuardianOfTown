@@ -176,7 +176,7 @@ public abstract class Enemy : Character
                 Die();
             } 
         }
-        if (Random.Range(0, 100) > 50) 
+        if (Random.Range(0, 100) > 70) 
         {
             _soundManager.PlayRandomHurtSound();
         }

@@ -8,6 +8,10 @@ public class PlayerController : Character
 {
     public float XLeftBound { get; set; }
     public float XRightBound { get; set; }
+    [SerializeField] private AudioSource _moveAudioSource;
+    [SerializeField] private AudioSource _leveUpAudioSource;
+    [SerializeField] private AudioSource _powerUpAudioSource;
+    [SerializeField] private float _pitch;
     private float _horizontalInput;
     private int _realTimeLevel;
     private int _realTimeLVP;
@@ -63,8 +67,8 @@ public class PlayerController : Character
         _realTimeLevel = Level;
         _realTimeLVP = LevelPoints;
         _realTimeEXP = Exp;
-
-}
+        _leveUpAudioSource.volume = .5f;
+    }
 
     // Update is called once per frame
     void Update()
@@ -138,7 +142,16 @@ public class PlayerController : Character
 
         // Player movement left to right
         _horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
+
+        if (_horizontalInput != 0)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
+            PlayMoveSound();
+        }
+        else
+        {
+            _moveAudioSource.Stop();
+        }
 
         for (int i = 0; i < _animators.Length; i++)
         {
@@ -235,8 +248,32 @@ public class PlayerController : Character
             _realTimeEXP -= 20 * _realTimeLevel;
             _realTimeLVP += 2;
             _realTimeLevel++;
+            PlayLevelUpSound();
+            StartCoroutine(GameManager.Instance.ShowLevelUpText());
             GameManager.Instance._playerLevelPointsText.text = $": {_realTimeLVP}"; 
             GameManager.Instance._playerLevelText.text = $"Lvl: {_realTimeLevel}";
         }
+    }
+
+    
+
+    public void PlayMoveSound()
+    {
+        if (!_moveAudioSource.isPlaying)
+        {
+            _moveAudioSource.pitch = _pitch;
+            _moveAudioSource.Play();
+        }
+    }
+
+    public void PlayLevelUpSound()
+    {
+        _leveUpAudioSource.Play();
+    }
+
+    public void PlayPowerUpSound()
+    {
+        _powerUpAudioSource.pitch = .9f;
+        _powerUpAudioSource.Play();
     }
 }

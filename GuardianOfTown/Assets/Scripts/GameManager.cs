@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public GameObject _gameOverCanvas;
     public GameObject _WinCanvas;
     public GameObject _powerUpIconsPanel;
+    public GameObject _levelUpPanel;
     private Coroutine _previousCoroutine;
     private int _stageToActivateRedFog;
     private float[] _iconsOffsetX;
@@ -143,6 +144,13 @@ public class GameManager : MonoBehaviour
         _stagePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         _stagePopUpText.gameObject.SetActive(false);
+    }
+
+    public IEnumerator ShowLevelUpText()
+    {
+        _levelUpPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        _levelUpPanel.gameObject.SetActive(false);
     }
 
     private void ToggleMenu()
