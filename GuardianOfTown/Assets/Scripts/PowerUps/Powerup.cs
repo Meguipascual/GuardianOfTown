@@ -9,17 +9,15 @@ public class Powerup : MonoBehaviour
     {
         if (other.CompareTag(Tags.Player))
         {
-            Destroy(gameObject);
-            other.GetComponent<PlayerController>().PlayPowerUpSound();
+            var player = other.GetComponent<PlayerController>();
+            player.PlayPowerUpSound();
+            player.ShowYeiiImageInSeconds(.5f);
             powerupEffect.Apply(other.gameObject);
-        }else if(other.CompareTag(Tags.Wall))
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag(Tags.Wall))
         {
             Destroy(gameObject);
         }
-    }
-
-    private void PlayPowerUpSound()
-    {
-
     }
 }

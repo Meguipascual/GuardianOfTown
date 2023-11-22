@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerController : Character
 {
-    public float XLeftBound { get; set; }
-    public float XRightBound { get; set; }
     [SerializeField] private AudioSource _moveAudioSource;
     [SerializeField] private AudioSource _leveUpAudioSource;
     [SerializeField] private AudioSource _powerUpAudioSource;
@@ -22,7 +20,9 @@ public class PlayerController : Character
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
     private Animator [] _animators;
     public ParticleSystem shieldParticleSystem;
-    
+    public Image wiiImage;
+    public Image yeiiImage;
+    public Image ouchImage;
     private KeyCode _rightGateButton;
     private KeyCode _leftGateButton; 
     private KeyCode _accelerateTimeButton;
@@ -36,6 +36,8 @@ public class PlayerController : Character
     public int Damage { get; set; }
     public int CriticalDamage { get; set; }
     public float TimeScale { get; set; }
+    public float XLeftBound { get; set; }
+    public float XRightBound { get; set; }
 
     // Start is called before the first frame update
     void Start()    
@@ -275,5 +277,41 @@ public class PlayerController : Character
     {
         _powerUpAudioSource.pitch = .9f;
         _powerUpAudioSource.Play();
+    }
+
+    public void ShowWiiImageInSeconds(float seconds)
+    {
+        StartCoroutine(ShowWiiImage(seconds));
+    }
+
+    public void ShowYeiiImageInSeconds(float seconds)
+    {
+        StartCoroutine(ShowYeiiImage(seconds));
+    }
+
+    public void ShowOuchImageInSeconds(float seconds)
+    {
+        StartCoroutine(ShowOuchImage(seconds));
+    }
+
+    private IEnumerator ShowWiiImage(float seconds)
+    {
+        wiiImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        wiiImage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShowYeiiImage(float seconds)
+    {
+        yeiiImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        yeiiImage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShowOuchImage(float seconds)
+    {
+        ouchImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        ouchImage.gameObject.SetActive(false);
     }
 }

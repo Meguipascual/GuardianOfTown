@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
         var speed = 200;
         var initialPosition = _levelUpPanel.transform.localPosition;
         _levelUpPanel.gameObject.SetActive(true);
+        playerController.ShowWiiImageInSeconds(.5f);
 
         while (levelUpTimer < .5f)
         {

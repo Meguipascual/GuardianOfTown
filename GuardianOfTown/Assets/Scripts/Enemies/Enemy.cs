@@ -222,6 +222,7 @@ public abstract class Enemy : Character
 
         if (!Player.IsDead)
         {
+            Player.ShowOuchImageInSeconds(.5f);
             Player.shieldParticleSystem.Play();
             Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
