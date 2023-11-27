@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MenuVolume : MonoBehaviour
+public class MenuPauseVolume : MonoBehaviour
 {
-    public static MenuVolume Instance;
+    public static MenuPauseVolume Instance;
     [SerializeField] private AudioMixer _masterMixer;
     [SerializeField] private Slider _masterSlider;
     [SerializeField] private Slider _musicSlider;
@@ -16,7 +16,16 @@ public class MenuVolume : MonoBehaviour
 
     // Start is called before the first frame update
 
-    
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
