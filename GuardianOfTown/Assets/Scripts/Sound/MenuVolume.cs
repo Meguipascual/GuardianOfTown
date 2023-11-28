@@ -16,7 +16,6 @@ public class MenuVolume : MonoBehaviour
 
     // Start is called before the first frame update
 
-    
     void Start()
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
