@@ -9,6 +9,7 @@ public class PlayerController : Character
     [SerializeField] private AudioSource _moveAudioSource;
     [SerializeField] private AudioSource _leveUpAudioSource;
     [SerializeField] private AudioSource _powerUpAudioSource;
+    [SerializeField] private AudioSource _damageReceivedSource;
     [SerializeField] private float _pitch;
     private float _horizontalInput;
     private int _realTimeLevel;
@@ -271,6 +272,11 @@ public class PlayerController : Character
     public void PlayLevelUpSound()
     {
         _leveUpAudioSource.Play();
+    }
+
+    public void PlayDamageReceivedSound()
+    {
+        _damageReceivedSource.Play();
     }
 
     public void PlayPowerUpSound()
