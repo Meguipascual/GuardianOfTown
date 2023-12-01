@@ -41,13 +41,13 @@ public class PermanentPowerUpManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _powerUpOffset = new Vector3 [] { new Vector3(-230, 12, 0), new Vector3(0, 12, 0), new Vector3(230, 12, 0) };
+        _powerUpOffset = new Vector3 [] { new Vector3(-300, 12, 0), new Vector3(0, 12, 0), new Vector3(300, 12, 0) };
         _numberOfPowerUps = 3;
     }
 
     public void ControlNumberOfPowerUps()
     {
-        if (_powerUpPrefabs.Count > 3)
+        if (_powerUpPrefabs.Count >= 3)
         {
             InstantiateNumberOfPowerUps();
         }

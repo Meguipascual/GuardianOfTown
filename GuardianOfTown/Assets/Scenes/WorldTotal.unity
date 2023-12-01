@@ -16109,6 +16109,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4260167803517506114, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4872738921003439062, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -36345,7 +36349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9490196, g: 0.24313726, b: 0.007843138, a: 1}
+  m_Color: {r: 0.754717, g: 0.20683514, b: 0.024207853, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -36361,7 +36365,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.7
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1976826114
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38467,7 +38471,7 @@ RectTransform:
   m_GameObject: {fileID: 2097159814}
   m_LocalRotation: {x: 0, y: 0, z: 0.0073303473, w: 0.9999731}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 1.5549191, y: 1.5549191, z: 1.5549191}
   m_Children:
   - {fileID: 119632149}
   - {fileID: 1540521053}
@@ -38476,8 +38480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.84}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.0000043, y: 2.1723}
-  m_SizeDelta: {x: 195.9149, y: 34.5319}
+  m_AnchoredPosition: {x: 0.000005722, y: -6.8685}
+  m_SizeDelta: {x: 332.2647, y: 40.9189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097159816
 MonoBehaviour:
@@ -38518,7 +38522,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1976826112}
   m_HandleRect: {fileID: 0}
