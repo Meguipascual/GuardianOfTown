@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pitchMin: 0.7
-  _pitchMax: 0.7
+  _pitchMax: 0.8
   _bulletTimer: 0
   _centerBulletOffset: {x: 0, y: 0, z: 0}
   _doubleBulletOffset: []

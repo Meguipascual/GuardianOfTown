@@ -30,6 +30,8 @@ public class PlayerController : Character
     private KeyCode _decelerateTimeButton;
     private KeyCode _doubleShootButton;
     private KeyCode _tripleShootButton;
+    private KeyCode _shoot;
+    private KeyCode _alternateShoot;
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int LevelPoints { get; set; }
@@ -49,6 +51,8 @@ public class PlayerController : Character
         _decelerateTimeButton = ControlButtons._decelerateTimeButton;
         _doubleShootButton = ControlButtons._doubleShootButton;
         _tripleShootButton = ControlButtons._tripleShootButton;
+        _alternateShoot = ControlButtons._alterShoot;
+        _shoot = ControlButtons._shoot;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
@@ -90,7 +94,7 @@ public class PlayerController : Character
             }
         }
 
-        TryToMove();
+        TryToMove(); 
 
         if (Input.GetKeyDown(_rightGateButton))
         {
@@ -119,6 +123,15 @@ public class PlayerController : Character
             _permanentPowerUpsSettings.ActivateTripleShoot();
             var text = $"Triple Shoot Activated";
             GameManager.Instance.ChangeAndShowDevText(text);
+        }
+        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse)
+        {
+            _shootingManager.ShootEasyMode();
+            return;
+        }
+        if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
+        {
+            _shootingManager.TryToShoot();
         }
     }
 

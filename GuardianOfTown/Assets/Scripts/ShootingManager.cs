@@ -33,15 +33,11 @@ public class ShootingManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void TryToShoot()
     {
-        if(GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse)
-        {
-            ShootEasyMode();
-            return;
-        }
-        if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
-        {
+        
+        //if ((Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot)) && !GameManager.Instance.IsGamePaused)
+        //{
             if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
             {
                 DecideShoot();
@@ -50,7 +46,7 @@ public class ShootingManager : MonoBehaviour
             {
                 Shoot();
             }
-        }
+        //}
         if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
         {
             OverHeatedManager.Instance.CoolCannon();
@@ -143,7 +139,7 @@ public class ShootingManager : MonoBehaviour
         }
     }
 
-    private void ShootEasyMode()
+    public void ShootEasyMode()
     {
         if ((OverHeatedManager.Instance.IsOverheatedCannon() && !PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive) || ObjectPooler.ProjectileCount == 0)
         {
