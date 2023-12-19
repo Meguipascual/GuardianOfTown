@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -39,6 +38,7 @@ public class MenuTitleManager : MonoBehaviour
 
     public void StartGameButton()
     {
+        Debug.Log($"Device Type: {SystemInfo.deviceType}");
         if (_isPrologueSkipped)
         {
             SceneManager.LoadScene(1);

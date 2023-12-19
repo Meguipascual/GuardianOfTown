@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : Character
 {
-    [SerializeField] private AudioSource _moveAudioSource;
+    public AudioSource moveAudioSource;
     [SerializeField] private AudioSource _leveUpAudioSource;
     [SerializeField] private AudioSource _powerUpAudioSource;
     [SerializeField] private AudioSource _damageReceivedSource;
@@ -19,7 +19,7 @@ public class PlayerController : Character
     private ChangeGateManager _changeGateManager;
     private ShootingManager _shootingManager;
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
-    private Animator [] _animators;
+    public Animator [] _animators {  get; private set; }
     public ParticleSystem shieldParticleSystem;
     public Image wiiImage;
     public Image yeiiImage;
@@ -85,16 +85,16 @@ public class PlayerController : Character
             return;
         }
 
-        for (int i = 0; i < _animators.Length; i++)
-        {
-            if (!_animators[i].name.Equals("Cannon"))
-            {
-                _animators[i].SetBool("Right", false);
-                _animators[i].SetBool("Left", false);
-            }
-        }
+        //for (int i = 0; i < _animators.Length; i++)
+        //{
+        //    if (!_animators[i].name.Equals("Cannon"))
+        //    {
+        //        _animators[i].SetBool("Right", false);
+        //        _animators[i].SetBool("Left", false);
+        //    }
+        //}
 
-        TryToMove(); 
+        //TryToMove(); 
 
         if (Input.GetKeyDown(_rightGateButton))
         {
@@ -104,6 +104,14 @@ public class PlayerController : Character
         {
             _changeGateManager.LeftButtonClicked();
         }
+
+
+        if(SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            return;
+        }
+
+
         if (Input.GetKeyDown(_accelerateTimeButton))
         {
             AccelerateTime();
@@ -145,6 +153,11 @@ public class PlayerController : Character
 
     public override void TryToMove()
     {
+        throw new System.NotImplementedException();
+    }
+
+    /*public override void TryToMove()
+    {
         // Check for left and right bounds
         if (transform.position.x < XLeftBound)
         {
@@ -166,7 +179,7 @@ public class PlayerController : Character
         }
         else
         {
-            _moveAudioSource.Stop();
+            moveAudioSource.Stop();
         }
 
         for (int i = 0; i < _animators.Length; i++)
@@ -183,7 +196,7 @@ public class PlayerController : Character
                 }
             }
         }
-    }
+    }*/
 
     public void ComprobateLifeRemaining ()
     {
@@ -275,10 +288,10 @@ public class PlayerController : Character
 
     public void PlayMoveSound()
     {
-        if (!_moveAudioSource.isPlaying)
+        if (!moveAudioSource.isPlaying)
         {
-            _moveAudioSource.pitch = _pitch;
-            _moveAudioSource.Play();
+            moveAudioSource.pitch = _pitch;
+            moveAudioSource.Play();
         }
     }
 

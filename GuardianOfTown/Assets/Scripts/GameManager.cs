@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         _stageToActivateRedFog = 6;
+
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         MainCamera = FindObjectOfType<Camera>();
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
 
         spawnManager.ControlWavesSpawn();
         cameraStartRotation = MainCamera.transform.rotation;
-        
+
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
             StartCoroutine(ShowStageText());
@@ -153,7 +154,7 @@ public class GameManager : MonoBehaviour
         var initialPosition = _levelUpPanel.transform.localPosition;
         _levelUpPanel.gameObject.SetActive(true);
         playerController.ShowWiiImageInSeconds(.5f);
-
+        
         while (levelUpTimer < .5f)
         {
             var pos =_levelUpPanel.transform.position += Vector3.up * speed * Time.deltaTime;
