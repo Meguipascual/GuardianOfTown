@@ -85,17 +85,6 @@ public class PlayerController : Character
             return;
         }
 
-        //for (int i = 0; i < _animators.Length; i++)
-        //{
-        //    if (!_animators[i].name.Equals("Cannon"))
-        //    {
-        //        _animators[i].SetBool("Right", false);
-        //        _animators[i].SetBool("Left", false);
-        //    }
-        //}
-
-        //TryToMove(); 
-
         if (Input.GetKeyDown(_rightGateButton))
         {
             _changeGateManager.RightButtonClicked();
@@ -155,48 +144,6 @@ public class PlayerController : Character
     {
         throw new System.NotImplementedException();
     }
-
-    /*public override void TryToMove()
-    {
-        // Check for left and right bounds
-        if (transform.position.x < XLeftBound)
-        {
-            transform.position = new Vector3(XLeftBound, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.x > XRightBound)
-        {
-            transform.position = new Vector3(XRightBound, transform.position.y, transform.position.z);
-        }
-
-        // Player movement left to right
-        _horizontalInput = Input.GetAxis("Horizontal");
-
-        if (_horizontalInput != 0)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * Speed * _horizontalInput);
-            PlayMoveSound();
-        }
-        else
-        {
-            moveAudioSource.Stop();
-        }
-
-        for (int i = 0; i < _animators.Length; i++)
-        {
-            if (!_animators[i].name.Equals("Cannon"))
-            {
-                if(_horizontalInput > 0)
-                {
-                    _animators[i].SetBool("Right", true); 
-                }
-                else if (_horizontalInput < 0)
-                {
-                    _animators[i].SetBool("Left", true);
-                }
-            }
-        }
-    }*/
 
     public void ComprobateLifeRemaining ()
     {

@@ -35,18 +35,15 @@ public class ShootingManager : MonoBehaviour
     // Update is called once per frame
     public void TryToShoot()
     {
-        
-        //if ((Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot)) && !GameManager.Instance.IsGamePaused)
-        //{
-            if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
-            {
-                DecideShoot();
-            }
-            else
-            {
-                Shoot();
-            }
-        //}
+        if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
+        {
+            DecideShoot();
+        }
+        else
+        {
+            Shoot();
+        }
+
         if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
         {
             OverHeatedManager.Instance.CoolCannon();
@@ -76,7 +73,6 @@ public class ShootingManager : MonoBehaviour
             pooledProjectile.transform.position = _playerController.transform.position + _centerBulletOffset; // position it at player
             ObjectPooler.ProjectileCount--;
             GameManager.Instance._projectileText.text = "" + ObjectPooler.ProjectileCount;
-            //Debug.Log(_popAudioClip.pitch);
             _popAudioClip.pitch = Random.Range(_pitchMin, _pitchMax);
             _popAudioClip.Play();
             AnimateCannonRotation();
@@ -146,7 +142,8 @@ public class ShootingManager : MonoBehaviour
             OverHeatedManager.Instance.CoolCannon();
             return;
         }
-        if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
+
+        if (SystemInfo.deviceType == DeviceType.Handheld)
         {
             if (!PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive)
             {
@@ -168,7 +165,30 @@ public class ShootingManager : MonoBehaviour
         }
         else
         {
-            OverHeatedManager.Instance.CoolCannon();
+            if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
+            {
+                if (!PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive)
+                {
+                    OverHeatedManager.Instance.HeatCannon();
+                }
+                _bulletTimer += Time.deltaTime;
+                if (_bulletTimer >= BulletDelay)
+                {
+                    _bulletTimer = 0;
+                    if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
+                    {
+                        DecideShoot();
+                    }
+                    else
+                    {
+                        Shoot();
+                    }
+                }
+            }
+            else
+            {
+                OverHeatedManager.Instance.CoolCannon();
+            }
         }
     }
 

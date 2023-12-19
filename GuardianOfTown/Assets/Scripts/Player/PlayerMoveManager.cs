@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class PlayerMoveManager : MonoBehaviour
 {
@@ -58,40 +59,54 @@ public class PlayerMoveManager : MonoBehaviour
 
     private void TouchMove()
     {
-        if (Input.touchCount > 0)
+        for(int i=0;i < Input.touchCount; i++)
         {
-            _theTouch = Input.GetTouch(0);
+            _theTouch = Input.GetTouch(i);
+
             if (_theTouch.phase == TouchPhase.Began)
             {
                 _touchStartPosition = _theTouch.position;
             }
-            else if (_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Stationary)
-            {
-                _touchEndPosition = _theTouch.position;
-                _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x)/500;
 
-                if (_horizontalInput < -1)
-                {
-                    _horizontalInput = -1;
-                }else if (_horizontalInput > 1)
-                {
-                    _horizontalInput = 1;
-                }
-                
-                var text = $"H.Input: {_horizontalInput}";
-                GameManager.Instance.ChangeAndShowDevText(text);
-                if (_horizontalInput != 0)
-                {
-                    transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
-                    _playerController.PlayMoveSound();
-                }
-                else if(_theTouch.phase == TouchPhase.Ended)
-                {
-                    _touchStartPosition = _theTouch.position;
-                    _playerController.moveAudioSource.Stop();
-                }
+            if(_touchStartPosition.x < Screen.width/2)
+            {
+                TouchMoving();
+                return;
             }
         }
+    }
+
+
+    private void TouchMoving()
+    {
+        if (_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Stationary)
+        {
+            _touchEndPosition = _theTouch.position;
+            _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / 500;
+
+            if (_horizontalInput < -1)
+            {
+                _horizontalInput = -1;
+            }
+            else if (_horizontalInput > 1)
+            {
+                _horizontalInput = 1;
+            }
+
+            var text = $"H.Input: {_theTouch.position}";
+            GameManager.Instance.ChangeAndShowDevText(text);
+            if (_horizontalInput != 0)
+            {
+                transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
+                _playerController.PlayMoveSound();
+            }
+            else if (_theTouch.phase == TouchPhase.Ended)
+            {
+                _touchStartPosition = _theTouch.position;
+                _playerController.moveAudioSource.Stop();
+            }
+        }
+    
         for (int i = 0; i < _playerController._animators.Length; i++)
         {
             if (!_playerController._animators[i].name.Equals("Cannon"))
