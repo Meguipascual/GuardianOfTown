@@ -20,7 +20,7 @@ public class PlayerMoveManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
         {
@@ -60,72 +60,62 @@ public class PlayerMoveManager : MonoBehaviour
 
 
     private void TouchMove()
-    {  
-        var text = $"touch: {_theTouch} id: {_theTouch.fingerId}";
-        GameManager.Instance.ChangeAndShowDevText(text);
+    {
+        if (Input.touchCount == 0) { return; }
 
-        foreach (var touch in Input.touches)
+        _isTouching = false;
+        if(_theTouch.phase == TouchPhase.Ended || _theTouch.phase == TouchPhase.Canceled)
         {
-            if (touch.fingerId == 99)
-            {
-                _isTouching = true;
-                _theTouch = touch;
-                TouchMoving();
-                return;
-            }
-            else
-            {
-                text = $"no valid touch: {touch} id: {touch.fingerId}";
-                GameManager.Instance.ChangeAndShowDevText(text);
-                _isTouching = false;
-            }
+            _touchStartPosition = new Vector2(Screen.width, Screen.height);
         }
 
         foreach (var touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began) 
             {
-                _touchStartPosition = touch.position;
+                if (touch.position.x < Screen.width / 2)
+                {
+                    _touchStartPosition = touch.position;
+                    _theTouch = touch;
+                    _isTouching = true;
+                }    
             }
-            if (_touchStartPosition.x < Screen.width / 2)
+            else if (touch.position.x < (Screen.width / 3) * 2)
             {
                 _theTouch = touch;
-                _theTouch.fingerId = 99;
-                TouchMoving();
-                return;
+                _isTouching = true;
             }
-        }        
+        }
+        if (_isTouching)
+        {
+            TouchMoving();
+        }    
     }
 
 
     private void TouchMoving()
     {
-        if ((_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Stationary) && _theTouch.fingerId == 99)
+        
+        _touchEndPosition = _theTouch.position;
+        _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / 4);
+
+        if (_horizontalInput < -1)
         {
-            _touchEndPosition = _theTouch.position;
-            _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / 4);
+            _horizontalInput = -1;
+        }
+        else if (_horizontalInput > 1)
+        {
+            _horizontalInput = 1;
+        }
 
-            if (_horizontalInput < -1)
-            {
-                _horizontalInput = -1;
-            }
-            else if (_horizontalInput > 1)
-            {
-                _horizontalInput = 1;
-            }
-
-            
-
-            if (_horizontalInput != 0)
-            {
-                transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
-                _playerController.PlayMoveSound();
-            }
-            else
-            {
-                
-                _playerController.moveAudioSource.Stop();
-            }
+        if (_horizontalInput != 0)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
+            _playerController.PlayMoveSound();
+        }
+        else
+        {
+            _playerController.moveAudioSource.Stop();
         }
     
         for (int i = 0; i < _playerController._animators.Length; i++)
