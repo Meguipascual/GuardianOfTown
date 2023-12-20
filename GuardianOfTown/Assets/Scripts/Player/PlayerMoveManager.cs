@@ -9,12 +9,14 @@ public class PlayerMoveManager : MonoBehaviour
     private Vector2 _touchStartPosition, _touchEndPosition;
     private PlayerController _playerController;
     private float _horizontalInput;
+    private bool _isTouching;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _isTouching = false;
     }
 
     // Update is called once per frame
@@ -58,31 +60,50 @@ public class PlayerMoveManager : MonoBehaviour
 
 
     private void TouchMove()
-    {
-        for(int i=0;i < Input.touchCount; i++)
+    {  
+        var text = $"touch: {_theTouch} id: {_theTouch.fingerId}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+
+        foreach (var touch in Input.touches)
         {
-            _theTouch = Input.GetTouch(i);
-
-            if (_theTouch.phase == TouchPhase.Began)
+            if (touch.fingerId == 99)
             {
-                _touchStartPosition = _theTouch.position;
-            }
-
-            if(_touchStartPosition.x < Screen.width/2)
-            {
+                _isTouching = true;
+                _theTouch = touch;
                 TouchMoving();
                 return;
             }
+            else
+            {
+                text = $"no valid touch: {touch} id: {touch.fingerId}";
+                GameManager.Instance.ChangeAndShowDevText(text);
+                _isTouching = false;
+            }
         }
+
+        foreach (var touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                _touchStartPosition = touch.position;
+            }
+            if (_touchStartPosition.x < Screen.width / 2)
+            {
+                _theTouch = touch;
+                _theTouch.fingerId = 99;
+                TouchMoving();
+                return;
+            }
+        }        
     }
 
 
     private void TouchMoving()
     {
-        if (_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Stationary)
+        if ((_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Stationary) && _theTouch.fingerId == 99)
         {
             _touchEndPosition = _theTouch.position;
-            _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / 500;
+            _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / 4);
 
             if (_horizontalInput < -1)
             {
@@ -93,16 +114,16 @@ public class PlayerMoveManager : MonoBehaviour
                 _horizontalInput = 1;
             }
 
-            var text = $"H.Input: {_theTouch.position}";
-            GameManager.Instance.ChangeAndShowDevText(text);
+            
+
             if (_horizontalInput != 0)
             {
                 transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
                 _playerController.PlayMoveSound();
             }
-            else if (_theTouch.phase == TouchPhase.Ended)
+            else
             {
-                _touchStartPosition = _theTouch.position;
+                
                 _playerController.moveAudioSource.Stop();
             }
         }
