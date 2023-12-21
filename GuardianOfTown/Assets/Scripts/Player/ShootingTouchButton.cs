@@ -23,7 +23,8 @@ public class ShootingTouchButton : MonoBehaviour
         {
             return;
         }
-        if (Input.touchCount == 0) { return; }
+
+        if (Input.touchCount == 0) { OverHeatedManager.Instance.CoolCannon(); return; }
 
         isPressed = false;
 

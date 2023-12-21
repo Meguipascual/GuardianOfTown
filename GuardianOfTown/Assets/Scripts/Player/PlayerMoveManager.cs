@@ -10,6 +10,7 @@ public class PlayerMoveManager : MonoBehaviour
     private PlayerController _playerController;
     private float _horizontalInput;
     private bool _isTouching;
+    [SerializeField] private int _aceleration;//The higher the faster reach max velocity (between 4 and maybe 10 it could work) 
 
 
     // Start is called before the first frame update
@@ -97,7 +98,7 @@ public class PlayerMoveManager : MonoBehaviour
     {
         
         _touchEndPosition = _theTouch.position;
-        _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / 4);
+        _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / _aceleration);
 
         if (_horizontalInput < -1)
         {
