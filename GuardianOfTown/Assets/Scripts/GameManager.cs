@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
             _WinCanvas.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyDown(ControlButtons._menu))
+        if (Input.GetKeyDown(ControlButtons._menu) || Input.GetButtonDown("Pause"))
         {
             ToggleMenu();
         }

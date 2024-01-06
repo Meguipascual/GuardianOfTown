@@ -165,7 +165,7 @@ public class ShootingManager : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot))
+            if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot) || Input.GetButton("Fire1"))
             {
                 if (!PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive)
                 {

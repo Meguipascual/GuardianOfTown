@@ -85,11 +85,11 @@ public class PlayerController : Character
             return;
         }
 
-        if (Input.GetKeyDown(_rightGateButton))
+        if (Input.GetKeyDown(_rightGateButton) || Input.GetButtonDown("RightGateButton"))
         {
             _changeGateManager.RightButtonClicked();
         }
-        if (Input.GetKeyDown(_leftGateButton))
+        if (Input.GetKeyDown(_leftGateButton) || Input.GetButtonDown("LeftGateButton"))
         {
             _changeGateManager.LeftButtonClicked();
         }
@@ -126,7 +126,7 @@ public class PlayerController : Character
             _shootingManager.ShootEasyMode();
             return;
         }
-        if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot))
+        if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot) || Input.GetButtonDown("Fire1"))
         {
             _shootingManager.TryToShoot();
         }
