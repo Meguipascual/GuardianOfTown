@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
         _levelUpPanel.gameObject.SetActive(false);
     }
 
-    private void ToggleMenu()
+    public void ToggleMenu()
     {
         if (playerController.IsDead) { return; }
 
