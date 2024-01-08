@@ -125,10 +125,10 @@ public class GameManager : MonoBehaviour
             _WinCanvas.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyDown(ControlButtons._menu) || Input.GetButtonDown("Pause"))
+        /*if (Input.GetKeyDown(ControlButtons._menu) || Input.GetButtonDown("Pause"))
         {
             ToggleMenu();
-        }
+        }*/
     }
 
     public IEnumerator ShowWaveText(string text)
@@ -206,9 +206,7 @@ public class GameManager : MonoBehaviour
     
     public void ResumeButton()
     {
-        Time.timeScale = 1;
-        _menuCanvas.SetActive(false);
-        IsGamePaused = !IsGamePaused;
+        ToggleMenu();
     }
 
     public void ExitButton()

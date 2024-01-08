@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ChangeGateManager : MonoBehaviour
@@ -27,8 +28,31 @@ public class ChangeGateManager : MonoBehaviour
         _gateCompassImages[0].gameObject.SetActive(true);
     }
 
+    public void RightInputButton(InputAction.CallbackContext context)
+    {
+        if(context.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+        RightButtonClicked();
+    }
+
+    public void LeftInputButton(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+        LeftButtonClicked();
+    }
+
     public void RightButtonClicked()
     {
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
         var cameraIndex = _cameraManager.ActiveCameraIndex;
         var newCameraIndex = cameraIndex + 1;
         var playerY = _playerController.transform.position.y;
@@ -67,6 +91,10 @@ public class ChangeGateManager : MonoBehaviour
 
     public void LeftButtonClicked()
     {
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
+        {
+            return;
+        }
         var cameraIndex = _cameraManager.ActiveCameraIndex;
         var newCameraIndex = cameraIndex - 1;
         var playerY = _playerController.transform.position.y;

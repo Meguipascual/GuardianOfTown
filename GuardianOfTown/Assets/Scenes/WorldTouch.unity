@@ -611,6 +611,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5247998238691232108, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
   m_PrefabInstance: {fileID: 41923943}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &27560672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7068004282946345643, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
+  m_PrefabInstance: {fileID: 41923943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27560666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c98c93592086145a183f1ee1cb11ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &27560673 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 85517959509943669, guid: 5b99aec811a3bc0448cf67d4d0a84b29, type: 3}
@@ -649,10 +660,10 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 664932972}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: TryToMove
-        m_Mode: 1
+      - m_Target: {fileID: 27560672}
+        m_TargetAssemblyTypeName: PlayerMoveManager, Assembly-CSharp
+        m_MethodName: SelectMovementType
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -668,7 +679,7 @@ MonoBehaviour:
       - m_Target: {fileID: 27560673}
         m_TargetAssemblyTypeName: ShootingManager, Assembly-CSharp
         m_MethodName: TryToShoot
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -683,8 +694,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 833782037}
         m_TargetAssemblyTypeName: ChangeGateManager, Assembly-CSharp
-        m_MethodName: RightButtonClicked
-        m_Mode: 1
+        m_MethodName: RightInputButton
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -699,8 +710,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 833782037}
         m_TargetAssemblyTypeName: ChangeGateManager, Assembly-CSharp
-        m_MethodName: LeftButtonClicked
-        m_Mode: 1
+        m_MethodName: LeftInputButton
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -784,7 +795,7 @@ MonoBehaviour:
     m_ActionId: ea783c09-2c2d-43c1-8dd4-333bb241abaa
     m_ActionName: Player/FireHold[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/Keyboard/w,/Keyboard/upArrow]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1561,17 +1572,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1607355137}
+    m_SelectOnDown: {fileID: 2016162340}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_HighlightedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.9490196, g: 0.24313726, b: 0.007843138, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3580,7 +3591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 2
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -18163,7 +18174,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_HighlightedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.9490196, g: 0.24313726, b: 0.007843138, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -24650,7 +24661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 2
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -30378,10 +30389,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1290390061}
+    m_SelectOnDown: {fileID: 79272285}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -37369,7 +37380,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0, g: 0.59607846, b: 0.5529412, a: 1}
     m_HighlightedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.003921569, g: 0.21568628, b: 0.3137255, a: 0.92941177}
     m_SelectedColor: {r: 0.9490196, g: 0.24313726, b: 0.007843138, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1

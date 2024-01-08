@@ -80,7 +80,7 @@ public class PlayerController : Character
     // Update is called once per frame
     void Update()
     {
-        if (IsDead || GameManager.Instance.IsGamePaused)
+        /*if (IsDead || GameManager.Instance.IsGamePaused)
         {
             return;
         }
@@ -128,8 +128,8 @@ public class PlayerController : Character
         }
         if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot) || Input.GetButtonDown("Fire1"))
         {
-            _shootingManager.TryToShoot();
-        }
+            //_shootingManager.TryToShoot();
+        }*/
     }
 
 

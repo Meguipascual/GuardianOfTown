@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
+using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerMoveManager : MonoBehaviour
 {
     private Touch _theTouch;
     private Vector2 _touchStartPosition, _touchEndPosition;
+    private CallbackContext _callback;
     private PlayerController _playerController;
     private float _horizontalInput;
     private bool _isTouching;
@@ -49,16 +54,24 @@ public class PlayerMoveManager : MonoBehaviour
             transform.position = new Vector3(_playerController.XRightBound, transform.position.y, transform.position.z);
         }
 
-        if (SystemInfo.deviceType == DeviceType.Handheld)
+        if (_callback.ReadValue<Vector2>().x != 0) 
         {
-            TouchMove();
+            if (SystemInfo.deviceType == DeviceType.Handheld)
+            {
+                TouchMove();
+            }
+            else
+            {
+                KeyBoardMove(_callback);
+            }
         }
-        else
-        {
-            KeyMove();
-        }
+        
     }
 
+    public void SelectMovementType(InputAction.CallbackContext context)
+    {
+        _callback = context;
+    }
 
     private void TouchMove()
     {
@@ -96,7 +109,9 @@ public class PlayerMoveManager : MonoBehaviour
 
     private void TouchMoving()
     {
-        
+        //var text = $"H.Input: {context}";
+        //GameManager.Instance.ChangeAndShowDevText(text);
+
         _touchEndPosition = _theTouch.position;
         _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / _aceleration);
 
@@ -135,12 +150,9 @@ public class PlayerMoveManager : MonoBehaviour
         }
     }
 
-    private void KeyMove()
+    private void KeyBoardMove(InputAction.CallbackContext context)
     {
-        _horizontalInput = Input.GetAxis("Horizontal");
-
-        var text = $"H.Input: {_horizontalInput}";
-        GameManager.Instance.ChangeAndShowDevText(text);
+        _horizontalInput = context.ReadValue<Vector2>().x;
 
         if (_horizontalInput != 0)
         {

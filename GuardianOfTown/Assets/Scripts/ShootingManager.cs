@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,8 +32,13 @@ public class ShootingManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void TryToShoot()
+    public void TryToShoot(InputAction.CallbackContext context)
     {
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+
         if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
         {
             DecideShoot();
@@ -138,6 +141,11 @@ public class ShootingManager : MonoBehaviour
 
     public void ShootEasyMode()
     {
+        if (!GameSettings.Instance.IsEasyModeActive && !PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive && !PowerUpSettings.Instance.IsContinuousShootInUse)
+        { 
+            return; 
+        }
+
         if ((OverHeatedManager.Instance.IsOverheatedCannon() && !PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive) || ObjectPooler.ProjectileCount == 0)
         {
             OverHeatedManager.Instance.CoolCannon();

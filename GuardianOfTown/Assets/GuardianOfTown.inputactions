@@ -20,8 +20,8 @@
                     "id": "2e0c99f0-938a-4af1-9b37-2e48d75342f7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
+                    "interactions": "Tap",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "FireHold",
@@ -38,7 +38,7 @@
                     "id": "7010769d-2f51-43ad-b255-dc3e5fefbea8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -47,7 +47,7 @@
                     "id": "c32d0e82-fcea-405b-b9bc-d988591a8909",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -296,7 +296,7 @@
                     "name": "",
                     "id": "e74a104f-27d7-46c3-a4be-b297c9805f84",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "FireHold",
@@ -307,7 +307,7 @@
                     "name": "",
                     "id": "96c1ce9c-08c6-4f11-8a18-5a886f1fbb2f",
                     "path": "<Keyboard>/w",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "FireHold",
@@ -318,7 +318,7 @@
                     "name": "",
                     "id": "1e4bf204-ec31-43f6-b138-6f3b2dd69106",
                     "path": "<Keyboard>/upArrow",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "FireHold",
@@ -329,7 +329,7 @@
                     "name": "",
                     "id": "9d8a7465-c961-4cbb-bf60-71c3de46539b",
                     "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "XR",
                     "action": "FireHold",
