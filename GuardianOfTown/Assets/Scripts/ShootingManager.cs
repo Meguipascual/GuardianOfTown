@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class ShootingManager : MonoBehaviour
 {
     private PlayerController _playerController;
     private Animator[] _animators;
-    private KeyCode _shoot;
-    private KeyCode _alternateShoot;
+    private CallbackContext _callback;
     [SerializeField] private float _pitchMin;
     [SerializeField] private float _pitchMax;
     [SerializeField] private float _bulletTimer;//Timer to know when to shoot again
@@ -22,8 +22,6 @@ public class ShootingManager : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _animators = GetComponentsInChildren<Animator>();
-        _alternateShoot = ControlButtons._alterShoot;
-        _shoot = ControlButtons._shoot;
         _bulletTimer = 0;
         BulletDelay = DataPersistantManager.Instance.SavedPlayerBulletsRate;
         _doubleBulletOffset = new Vector3[] { new Vector3(0.4f, 0, 1), new Vector3(1.2f, 0, 1) };
@@ -32,13 +30,36 @@ public class ShootingManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        GameManager.Instance.ChangeAndShowDevText("Heating: " + OverHeatedManager.Instance._cannonOverHeatedTimer);
+        if (_callback.phase == InputActionPhase.Started || _callback.phase == InputActionPhase.Performed) 
+        { 
+            ShootEasyMode(); 
+        }else 
+        {
+            if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
+            {
+                OverHeatedManager.Instance.CoolCannon();
+            }
+        }
+    }
+
+    public void FireButtonHold(InputAction.CallbackContext context)
+    {
+        _callback = context;
+    }
+
     public void TryToShoot(InputAction.CallbackContext context)
     {
         if (_playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
         {
             return;
         }
-
+        if (GameSettings.Instance.IsEasyModeActive || PowerUpSettings.Instance.IsContinuousShootInUse)
+        {
+            return;
+        }
         if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
         {
             DecideShoot();
@@ -47,11 +68,6 @@ public class ShootingManager : MonoBehaviour
         {
             Shoot();
         }
-
-        if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
-        {
-            OverHeatedManager.Instance.CoolCannon();
-        }  
     }
     private void DecideShoot()
     {
@@ -142,7 +158,11 @@ public class ShootingManager : MonoBehaviour
     public void ShootEasyMode()
     {
         if (!GameSettings.Instance.IsEasyModeActive && !PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive && !PowerUpSettings.Instance.IsContinuousShootInUse)
-        { 
+        {
+            if (OverHeatedManager.Instance._cannonOverHeatedTimer >= 0)
+            {
+                OverHeatedManager.Instance.CoolCannon();
+            }
             return; 
         }
 
@@ -174,7 +194,7 @@ public class ShootingManager : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(_shoot) || Input.GetKey(_alternateShoot) || Input.GetButton("Fire1"))
+            if (_callback.phase == InputActionPhase.Performed || _callback.phase == InputActionPhase.Started)
             {
                 if (!PermanentPowerUpsSettings.Instance.IsOverHeatingUnactive)
                 {

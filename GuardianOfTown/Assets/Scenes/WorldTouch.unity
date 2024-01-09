@@ -782,8 +782,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 27560673}
         m_TargetAssemblyTypeName: ShootingManager, Assembly-CSharp
-        m_MethodName: ShootEasyMode
-        m_Mode: 1
+        m_MethodName: FireButtonHold
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -794,6 +794,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ea783c09-2c2d-43c1-8dd4-333bb241abaa
     m_ActionName: Player/FireHold[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/Keyboard/w,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 664932972}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: AccelerateTime
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fbc44f66-d252-422d-8f56-e924150fa3b5
+    m_ActionName: Player/AccelerateTime[/DualShock4GamepadHID/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 664932972}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DecelerateTime
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20086628-bd88-4f3f-9ac1-64c29b05c1da
+    m_ActionName: Player/DecelerateTime[/DualShock4GamepadHID/leftTrigger,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

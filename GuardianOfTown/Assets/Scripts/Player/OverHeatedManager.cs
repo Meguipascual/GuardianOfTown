@@ -38,6 +38,7 @@ public class OverHeatedManager : MonoBehaviour
 
     public void CoolCannon()
     {
+        //Debug.Log("cooling");
         _cannonOverHeatedTimer -= Time.deltaTime;
         if(_cannonOverHeatedTimer < 0) { _cannonOverHeatedTimer = 0;}
 

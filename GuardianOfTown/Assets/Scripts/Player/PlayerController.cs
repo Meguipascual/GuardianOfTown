@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerController : Character
 {
@@ -24,14 +25,6 @@ public class PlayerController : Character
     public Image wiiImage;
     public Image yeiiImage;
     public Image ouchImage;
-    private KeyCode _rightGateButton;
-    private KeyCode _leftGateButton; 
-    private KeyCode _accelerateTimeButton;
-    private KeyCode _decelerateTimeButton;
-    private KeyCode _doubleShootButton;
-    private KeyCode _tripleShootButton;
-    private KeyCode _shoot;
-    private KeyCode _alternateShoot;
     public bool IsDead { get; set; }
     public int Exp { get; set; }
     public int LevelPoints { get; set; }
@@ -45,14 +38,6 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Start()    
     {
-        _rightGateButton = ControlButtons._rightGateButton;
-        _leftGateButton = ControlButtons._leftGateButton;
-        _accelerateTimeButton = ControlButtons._accelerateTimeButton;
-        _decelerateTimeButton = ControlButtons._decelerateTimeButton;
-        _doubleShootButton = ControlButtons._doubleShootButton;
-        _tripleShootButton = ControlButtons._tripleShootButton;
-        _alternateShoot = ControlButtons._alterShoot;
-        _shoot = ControlButtons._shoot;
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
@@ -193,8 +178,10 @@ public class PlayerController : Character
         _fillHealthBar.FillSliderValue();
     }
 
-    public void AccelerateTime()
+    public void AccelerateTime(InputAction.CallbackContext context)
     {
+        if(context.phase != InputActionPhase.Started) {  return; }
+
         if (TimeScale < 20)
         {
             TimeScale *= 2;
@@ -204,8 +191,10 @@ public class PlayerController : Character
         GameManager.Instance.ChangeAndShowDevText(text);
     }
 
-    public void DecelerateTime()
+    public void DecelerateTime(InputAction.CallbackContext context)
     {
+        if (context.phase != InputActionPhase.Started) { return; }
+
         if (TimeScale > .25f)
         {
             TimeScale /= 2;

@@ -19,6 +19,11 @@ public class ShootingTouchButton : MonoBehaviour
 
     private void Update()
     {
+        if (SystemInfo.deviceType != DeviceType.Handheld)
+        {
+            return;
+        }
+
         if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
         {
             return;
