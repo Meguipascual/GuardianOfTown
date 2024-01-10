@@ -116,6 +116,7 @@ public class DataPersistantManager : MonoBehaviour
         {
             Debug.Log("you win, son?");
             GameManager.Instance._WinCanvas.SetActive(true);
+            GameManager.Instance._winMainMenuButton.Select();
             return;
         }
 

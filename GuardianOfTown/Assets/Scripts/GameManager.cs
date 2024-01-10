@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject _WinCanvas;
     public GameObject _powerUpIconsPanel;
     public GameObject _levelUpPanel;
+    public Button _retryButton, _winMainMenuButton;
     private Coroutine _previousCoroutine;
     private int _stageToActivateRedFog;
     private float[] _iconsOffsetX;
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
             _menuCanvas.gameObject.SetActive(false);
             _levelEndCanvas.gameObject.SetActive(false);
             _WinCanvas.gameObject.SetActive(false);
+            _retryButton.Select();
         }
 
         /*if (Input.GetKeyDown(ControlButtons._menu) || Input.GetButtonDown("Pause"))

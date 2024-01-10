@@ -19,7 +19,8 @@ public class LevelUpSliderManager : MonoBehaviour
     private bool _isLevelingUp;
     private Coroutine _slideLevelingUpCoroutine;
     public Button _skipButton;
-    public Button _continueButton;
+    public Button _continueToPowerUpsButton;
+    public Button _nextLevelButton;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +69,8 @@ public class LevelUpSliderManager : MonoBehaviour
         _playerLevelText.text = $"Level: {_currentLevel}";
         _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
         _skipButton.gameObject.SetActive(false);
-        _continueButton.gameObject.SetActive(true);
+        _continueToPowerUpsButton.gameObject.SetActive(true);
+        _continueToPowerUpsButton.Select();
     }
 
     public void ContinueToLevelPointsButton()
@@ -76,6 +78,7 @@ public class LevelUpSliderManager : MonoBehaviour
         ForcePowerUpsStop();
         _powerUpsPanel.SetActive(false);
         _levelPointsAssignPanel.SetActive(true);
+        _nextLevelButton.Select();
     }
 
     public void ContinueToPowerUpsButton()
@@ -97,7 +100,7 @@ public class LevelUpSliderManager : MonoBehaviour
     IEnumerator LevelUp()
     {
         var exp = _playerController.Exp;
-
+        _skipButton.Select();
         while (_playerController.Exp > 20 * _currentLevel)
         {
             _slider.value = 0;
@@ -120,7 +123,8 @@ public class LevelUpSliderManager : MonoBehaviour
             _playerObtainedExpText.text = $"Exp: {_playerController.Exp}";
         }
         _skipButton.gameObject.SetActive(false);
-        _continueButton.gameObject.SetActive(true);
+        _continueToPowerUpsButton.gameObject.SetActive(true);
+        _continueToPowerUpsButton.Select();
     }
 
     private void ForcePowerUpsStop() 

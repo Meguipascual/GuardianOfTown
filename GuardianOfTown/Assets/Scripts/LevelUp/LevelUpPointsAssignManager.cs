@@ -22,6 +22,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     public Button _critRateButton; 
     public Button _critDamageButton;
     public Button _speedButton;
+    public Button _undoButton;
     public Button _nextLevelButton;
     private int _increment1;
     private int _increment2;
@@ -77,6 +78,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
             _critRateButton.interactable = false;
             _critDamageButton.interactable = false;
             _speedButton.interactable = false;
+            _undoButton.Select();
         }
     }
 
