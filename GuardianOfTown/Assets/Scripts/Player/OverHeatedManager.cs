@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OverHeatedManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class OverHeatedManager : MonoBehaviour
     [SerializeField] private float _coolDownDelay;
     private PlayerController _playerController;
     public static bool _isCannonOverheated;
+    public Slider _cannonHeatSlider;
+    public Image _cannonOverHeatingImage;
     
     // Start is called before the first frame update
     void Start()
@@ -24,9 +27,6 @@ public class OverHeatedManager : MonoBehaviour
             Debug.Log($"PlayerController not Found");
             return;
         }
-        _cannonOverHeatedLimit = 30f;
-        _cannonOverHeatedTimer = 0;
-        _coolDownDelay = 5f;
     }
 
     public void ChangeCannonMaterial(float heatPercentage)
@@ -34,6 +34,19 @@ public class OverHeatedManager : MonoBehaviour
         if(heatPercentage < 0) { heatPercentage = 0; }
 
         _cannonMaterial.Lerp(_cannonColdMaterial, _overheatedCannonMaterial, heatPercentage);
+    }
+
+    private void FillHeatSlider(float heatPercentage)
+    {
+        if(heatPercentage <= 0)
+        {
+            _cannonHeatSlider.gameObject.SetActive(false);
+        }
+        else
+        {
+            _cannonHeatSlider.gameObject.SetActive(true);
+            _cannonHeatSlider.value = heatPercentage;
+        }
     }
 
     public void CoolCannon()
@@ -45,10 +58,12 @@ public class OverHeatedManager : MonoBehaviour
         if (IsOverheatedCannon())
         {
             ChangeCannonMaterial(_cannonOverHeatedTimer / _coolDownDelay);
+            FillHeatSlider(_cannonOverHeatedTimer / _coolDownDelay);
         }
         else
         {
             ChangeCannonMaterial(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
+            FillHeatSlider(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
         }
             
         
@@ -58,6 +73,7 @@ public class OverHeatedManager : MonoBehaviour
     {
         _cannonOverHeatedTimer += Time.deltaTime;
         ChangeCannonMaterial(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
+        FillHeatSlider(_cannonOverHeatedTimer / _cannonOverHeatedLimit);
         IsOverheatedCannon();
     }
 
@@ -66,11 +82,13 @@ public class OverHeatedManager : MonoBehaviour
         if(_cannonOverHeatedTimer >= _cannonOverHeatedLimit)
         {
             _isCannonOverheated = true;
+            _cannonOverHeatingImage.gameObject.SetActive(true);
             _cannonOverHeatedTimer = _coolDownDelay;
         }
         if (_cannonOverHeatedTimer <= 0)
         {
             _isCannonOverheated = false;
+            _cannonOverHeatingImage.gameObject.SetActive(false);
         }
         return _isCannonOverheated;
     }
