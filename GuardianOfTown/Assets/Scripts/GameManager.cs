@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        _stageToActivateRedFog = 6;
+        _stageToActivateRedFog = 0;
 
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
