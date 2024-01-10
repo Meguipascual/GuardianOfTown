@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public List<Image> TownHpShields;
     public List<Image> TownDamagedShieldImages;
     public TextMeshProUGUI _devText;
+    public TextMeshProUGUI _gateText;
     public TextMeshProUGUI _townHpText;
     public TextMeshProUGUI _stageText;
     public TextMeshProUGUI _stagePopUpText; 
@@ -109,8 +110,9 @@ public class GameManager : MonoBehaviour
 
         if (DataPersistantManager.Instance.Stage >= _stageToActivateRedFog)
         {
-            UnityEngine.RenderSettings.fog = true;
-            UnityEngine.RenderSettings.fogColor = new Color(0.49f,0,0.06f);
+            RenderSettings.fog = true;
+            RenderSettings.fogColor = new Color(0.49f,0,0.06f);
+            //Maybe increase the difficulty
         }
     }
 
@@ -126,11 +128,6 @@ public class GameManager : MonoBehaviour
             _WinCanvas.gameObject.SetActive(false);
             _retryButton.Select();
         }
-
-        /*if (Input.GetKeyDown(ControlButtons._menu) || Input.GetButtonDown("Pause"))
-        {
-            ToggleMenu();
-        }*/
     }
 
     public IEnumerator ShowWaveText(string text)

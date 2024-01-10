@@ -9,8 +9,9 @@ public class ChangeGateManager : MonoBehaviour
     private CameraManager _cameraManager;
     private PlayerController _playerController;
     public GameObject _gateOrientationPanel;
-    [SerializeField] private Image [] _gateCompassImages;
-    [SerializeField] private Light [] _gateDirectionalLights;
+    [SerializeField] private Image[] _gateCompassImages;
+    [SerializeField] private Light[] _gateDirectionalLights;
+    [SerializeField] private string[] _gateText;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class ChangeGateManager : MonoBehaviour
 
         _gateDirectionalLights[0].gameObject.SetActive(true);
         _gateCompassImages[0].gameObject.SetActive(true);
+        GameManager.Instance._gateText.text = _gateText[0];
     }
 
     public void RightInputButton(InputAction.CallbackContext context)
@@ -63,6 +65,7 @@ public class ChangeGateManager : MonoBehaviour
         { 
             _cameraManager.ActivateCamera(newCameraIndex);
             _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
+            GameManager.Instance._gateText.text = _gateText[newCameraIndex];
             _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
             GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
@@ -78,6 +81,7 @@ public class ChangeGateManager : MonoBehaviour
         {
             _cameraManager.ActivateCamera(0);
             _gateCompassImages[0].gameObject.SetActive(true);
+            GameManager.Instance._gateText.text = _gateText[0];
             _gateDirectionalLights[0].gameObject.SetActive(true);
             GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[0].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
@@ -105,6 +109,7 @@ public class ChangeGateManager : MonoBehaviour
         {
             _cameraManager.ActivateCamera(3);
             _gateCompassImages[3].gameObject.SetActive(true);
+            GameManager.Instance._gateText.text = _gateText[3];
             _gateDirectionalLights[3].gameObject.SetActive(true);
             GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[3].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[3];
@@ -115,6 +120,7 @@ public class ChangeGateManager : MonoBehaviour
         {
             _cameraManager.ActivateCamera(newCameraIndex);
             _gateCompassImages[newCameraIndex].gameObject.SetActive(true);
+            GameManager.Instance._gateText.text = _gateText[newCameraIndex];
             _gateDirectionalLights[newCameraIndex].gameObject.SetActive(true);
             GameManager.Instance.MainCamera = _cameraManager.CamerasGameObject[newCameraIndex].GetComponent<Camera>();
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];

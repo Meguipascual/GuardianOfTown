@@ -32,7 +32,6 @@ public class ShootingManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        GameManager.Instance.ChangeAndShowDevText("Heating: " + OverHeatedManager.Instance._cannonOverHeatedTimer);
         if (_callback.phase == InputActionPhase.Started || _callback.phase == InputActionPhase.Performed) 
         { 
             ShootEasyMode(); 
