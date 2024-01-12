@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class ChangeGateManager : MonoBehaviour
 {  
+    public static ChangeGateManager instance;
     private CameraManager _cameraManager;
     private PlayerController _playerController;
     public GameObject _gateOrientationPanel;
     [SerializeField] private Image[] _gateCompassImages;
+    [SerializeField] public Image[] _gateWarningImages;
     [SerializeField] private Light[] _gateDirectionalLights;
     [SerializeField] private string[] _gateText;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;    
         _cameraManager = FindObjectOfType<CameraManager>();
         _playerController = FindObjectOfType<PlayerController>();
 
@@ -23,6 +26,7 @@ public class ChangeGateManager : MonoBehaviour
         {
             _gateCompassImages[i].gameObject.SetActive(false);
             _gateDirectionalLights[i].gameObject.SetActive(false);
+            _gateWarningImages[i].gameObject.SetActive(false);
         }
 
         _gateDirectionalLights[0].gameObject.SetActive(true);
@@ -132,6 +136,20 @@ public class ChangeGateManager : MonoBehaviour
         DeactivateDirectionalLight(cameraIndex);
     }
 
+    public void ActivateWarningImage(int imageIndex)
+    {
+        DeactivateAllWarningImages();
+        _gateWarningImages[imageIndex].gameObject.SetActive(true);
+    }
+
+    public void ActivateAllWarningImages()
+    {
+        for (int i = 0; i < _gateWarningImages.Length; i++)
+        {
+            _gateWarningImages[i].gameObject.SetActive(true);
+        }
+    }
+
     private void DeactivateCompassImage(int imageIndex)
     {
         _gateCompassImages[imageIndex].gameObject.SetActive(false);
@@ -139,7 +157,19 @@ public class ChangeGateManager : MonoBehaviour
 
     private void DeactivateDirectionalLight(int lightIndex)
     {
-
         _gateDirectionalLights[lightIndex].gameObject.SetActive(false);
+    }
+
+    private void DeactivateWarningImage(int imageIndex)
+    {
+        _gateWarningImages[imageIndex].gameObject.SetActive(false);
+    }
+
+    public void DeactivateAllWarningImages()
+    {
+        for (int i=0; i< _gateWarningImages.Length; i++)
+        {
+            _gateWarningImages[i].gameObject.SetActive(false);
+        }
     }
 }

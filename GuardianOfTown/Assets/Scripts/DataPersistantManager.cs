@@ -9,7 +9,7 @@ public class DataPersistantManager : MonoBehaviour
 {
     public static DataPersistantManager Instance;
     private StagesData _stagesData;
-    private PlayerController playerController;
+    private PlayerController _playerController;
     
     public int Stage { get; set; }
     public int Wave { get; set; }
@@ -86,16 +86,29 @@ public class DataPersistantManager : MonoBehaviour
         if (isNextWaveRandom)
         {
             StartCoroutine(GameManager.Instance.ShowWaveText($"They are attacking all our gates"));
+            ChangeGateManager.instance.ActivateAllWarningImages();
         }
         else
         {
             string Gate = "";
             switch (gate)
             {
-                case 0: Gate = "North";break;
-                case 1: Gate = "East";break;
-                case 2: Gate = "South";break;
-                case 3: Gate = "West";break;
+                case 0: Gate = "North";
+                    //Activate image 0, deactivate all the rest;
+                    ChangeGateManager.instance.ActivateWarningImage(gate);
+                    break;
+                case 1: Gate = "East";
+                    //Activate image 1, deactivate all the rest;
+                    ChangeGateManager.instance.ActivateWarningImage(gate);
+                    break;
+                case 2: Gate = "South";
+                    //Activate image 2, deactivate all the rest;
+                    ChangeGateManager.instance.ActivateWarningImage(gate);
+                    break;
+                case 3: Gate = "West";
+                    //Activate image 3, deactivate all the rest;
+                    ChangeGateManager.instance.ActivateWarningImage(gate);
+                    break;
             }
             StartCoroutine(GameManager.Instance.ShowWaveText($"New enemies' wave incoming at {Gate} Gate "));
         }
@@ -134,19 +147,19 @@ public class DataPersistantManager : MonoBehaviour
 
     public void SavePlayerStats()
     {
-        playerController = FindObjectOfType<PlayerController>();
-        SavedPlayerLevel = playerController.Level;
-        SavedPlayerHP = playerController.HP;
-        SavedPlayerHpMax = playerController.HpMax;
-        SavedPlayerAttack = playerController.Attack;
-        SavedPlayerDefense = playerController.Defense;
-        SavedPlayerCriticalRate = playerController.CriticalRate;
-        SavedPlayerCriticalDamage = playerController.CriticalDamage;
-        SavedPlayerSpeed = playerController.Speed;
-        SavedPlayerPosition = playerController.transform.position;
-        SavedPlayerExp = playerController.Exp;
-        SavedPlayerLevelPoints = playerController.LevelPoints;
-        SavedPlayerTimeScale = playerController.TimeScale;
+        _playerController = FindObjectOfType<PlayerController>();
+        SavedPlayerLevel = _playerController.Level;
+        SavedPlayerHP = _playerController.HP;
+        SavedPlayerHpMax = _playerController.HpMax;
+        SavedPlayerAttack = _playerController.Attack;
+        SavedPlayerDefense = _playerController.Defense;
+        SavedPlayerCriticalRate = _playerController.CriticalRate;
+        SavedPlayerCriticalDamage = _playerController.CriticalDamage;
+        SavedPlayerSpeed = _playerController.Speed;
+        SavedPlayerPosition = _playerController.transform.position;
+        SavedPlayerExp = _playerController.Exp;
+        SavedPlayerLevelPoints = _playerController.LevelPoints;
+        SavedPlayerTimeScale = _playerController.TimeScale;
         SaveTownHp();
     }
 
@@ -183,19 +196,19 @@ public class DataPersistantManager : MonoBehaviour
 
     public void LoadPlayerStats()
     {
-        playerController = FindObjectOfType<PlayerController>();
-        playerController.Level = SavedPlayerLevel;
-        playerController.HP = SavedPlayerHP;
-        playerController.HpMax = SavedPlayerHpMax;
-        playerController.Attack = SavedPlayerAttack;
-        playerController.Defense = SavedPlayerDefense;
-        playerController.CriticalRate = SavedPlayerCriticalRate;
-        playerController.CriticalDamage = SavedPlayerCriticalDamage;
-        playerController.Speed = SavedPlayerSpeed;
-        playerController.transform.position = SavedPlayerPosition;
-        playerController.Exp = SavedPlayerExp;
-        playerController.TimeScale = SavedPlayerTimeScale;
-        playerController.LevelPoints = SavedPlayerLevelPoints;
+        _playerController = FindObjectOfType<PlayerController>();
+        _playerController.Level = SavedPlayerLevel;
+        _playerController.HP = SavedPlayerHP;
+        _playerController.HpMax = SavedPlayerHpMax;
+        _playerController.Attack = SavedPlayerAttack;
+        _playerController.Defense = SavedPlayerDefense;
+        _playerController.CriticalRate = SavedPlayerCriticalRate;
+        _playerController.CriticalDamage = SavedPlayerCriticalDamage;
+        _playerController.Speed = SavedPlayerSpeed;
+        _playerController.transform.position = SavedPlayerPosition;
+        _playerController.Exp = SavedPlayerExp;
+        _playerController.TimeScale = SavedPlayerTimeScale;
+        _playerController.LevelPoints = SavedPlayerLevelPoints;
     }
 
     public void SaveNextStage()

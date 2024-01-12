@@ -44,21 +44,23 @@ public class ShootingManager : MonoBehaviour
         }
     }
 
-    public void FireButtonHold(InputAction.CallbackContext context)
+    public void FireButtonHold(CallbackContext context)
     {
         _callback = context;
     }
 
-    public void TryToShoot(InputAction.CallbackContext context)
+    public void TryToShoot(CallbackContext context)
     {
         if (_playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
         {
             return;
         }
-        if (GameSettings.Instance.IsEasyModeActive || PowerUpSettings.Instance.IsContinuousShootInUse)
+
+        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
         {
             return;
         }
+
         if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
         {
             DecideShoot();
