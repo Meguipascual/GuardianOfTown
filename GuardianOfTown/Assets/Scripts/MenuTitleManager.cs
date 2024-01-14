@@ -21,8 +21,6 @@ public class MenuTitleManager : MonoBehaviour
         
         if (skipToggle == null) { return; }
 
-        Debug.Log($"skipToggle: {skipToggle}");
-
         if (PlayerPrefs.GetString("IsSkipped") == "False")
         {
             _isPrologueSkipped = false;
