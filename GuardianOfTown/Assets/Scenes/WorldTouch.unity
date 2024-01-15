@@ -45543,6 +45543,42 @@ PrefabInstance:
       propertyPath: _songTitleText
       value: 
       objectReference: {fileID: 922154550}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _songTitles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _songTitles.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _songTitles.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogAudioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogSongTitles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ab34c37dba81fdb418703e947ba81faf, type: 3}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogAudioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b3fbd1871e1d7f4aa2c85d84e80f6dc, type: 3}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogSongTitles.Array.data[0]
+      value: Winter Song
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099782575, guid: 117d17861f4d795428b06b244857479e, type: 3}
+      propertyPath: _redFogSongTitles.Array.data[1]
+      value: Broken Silence
+      objectReference: {fileID: 0}
     - target: {fileID: 2799620908545333040, guid: 117d17861f4d795428b06b244857479e, type: 3}
       propertyPath: _sfxSlider
       value: 

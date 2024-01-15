@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     public GameObject _levelUpPanel;
     public Button _retryButton, _winMainMenuButton;
     private Coroutine _previousCoroutine;
-    private int _stageToActivateRedFog;
     private float[] _iconsOffsetX;
     private Vector3 _iconLocalScale;
     private string _cameraQuake = "CameraQuake";
@@ -54,12 +53,14 @@ public class GameManager : MonoBehaviour
     public int NumberOfEnemiesAndBosses { get; set; }
     public int NumberOfStagesLeft { get; set; }
     public int TownHpShieldsDamaged { get; set; }
+    public int StageToActivateRedFog { get; set; }
 
     private void Awake()
     {
         Instance = this;
         _iconsOffsetX = new float[] { -700, -500, -300, -100, 100, 300, 500, 700 };
         _iconLocalScale = new Vector3(6.3f, 1.6f, 1.6f);
+        StageToActivateRedFog = 6;
     }
 
     // Start is called before the first frame update
@@ -69,7 +70,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        _stageToActivateRedFog = 6;
 
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(ShowStageText());
         }
 
-        if (DataPersistantManager.Instance.Stage >= _stageToActivateRedFog)
+        if (DataPersistantManager.Instance.Stage >= StageToActivateRedFog)
         {
             RenderSettings.fog = true;
             RenderSettings.fogColor = new Color(0.49f,0,0.06f);
