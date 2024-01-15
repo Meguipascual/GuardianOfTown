@@ -34,7 +34,7 @@ public class BulletManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!playerController.IsDead)
+        if (!playerController.IsDead && !DataPersistantManager.Instance.IsStageEnded)
         {
             _rotationX += _rotateXAxisRandom * Time.deltaTime * _proyectileRotationSpeed;
             _rotationY += _rotateYAxisRandom * Time.deltaTime * _proyectileRotationSpeed;

@@ -7,18 +7,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Character
 {
+    public delegate void DieAction();
+    public static event DieAction OnDie;
     public AudioSource moveAudioSource;
     [SerializeField] private AudioSource _leveUpAudioSource;
     [SerializeField] private AudioSource _powerUpAudioSource;
     [SerializeField] private AudioSource _damageReceivedSource;
     [SerializeField] private float _pitch;
-    private float _horizontalInput;
     private int _realTimeLevel;
     private int _realTimeLVP;
     private int _realTimeEXP;
     private FillHealthBar _fillHealthBar;
-    private ChangeGateManager _changeGateManager;
-    private ShootingManager _shootingManager;
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
     public Animator [] _animators {  get; private set; }
     public ParticleSystem shieldParticleSystem;
@@ -41,9 +40,7 @@ public class PlayerController : Character
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
         shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
-        _shootingManager = GetComponentInChildren<ShootingManager>();
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
-        _changeGateManager = FindObjectOfType<ChangeGateManager>();
         DataPersistantManager.Instance.LoadPlayerStats();
         _animators = GetComponentsInChildren<Animator>();
         _permanentPowerUpsSettings = PermanentPowerUpsSettings.Instance;
@@ -62,66 +59,11 @@ public class PlayerController : Character
         _leveUpAudioSource.volume = .5f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*if (IsDead || GameManager.Instance.IsGamePaused)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(_rightGateButton) || Input.GetButtonDown("RightGateButton"))
-        {
-            _changeGateManager.RightButtonClicked();
-        }
-        if (Input.GetKeyDown(_leftGateButton) || Input.GetButtonDown("LeftGateButton"))
-        {
-            _changeGateManager.LeftButtonClicked();
-        }
-
-
-        if(SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            return;
-        }
-
-
-        if (Input.GetKeyDown(_accelerateTimeButton))
-        {
-            AccelerateTime();
-        }
-        if (Input.GetKeyDown(_decelerateTimeButton))
-        {
-            DecelerateTime();
-        }
-        if (Input.GetKeyDown(_doubleShootButton))
-        {
-            _permanentPowerUpsSettings.ActivateDoubleShoot();
-            var text = $"Double Shoot Activated";
-            GameManager.Instance.ChangeAndShowDevText(text);
-        }
-        if (Input.GetKeyDown(_tripleShootButton))
-        {
-            _permanentPowerUpsSettings.ActivateTripleShoot();
-            var text = $"Triple Shoot Activated";
-            GameManager.Instance.ChangeAndShowDevText(text);
-        }
-        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse)
-        {
-            _shootingManager.ShootEasyMode();
-            return;
-        }
-        if (Input.GetKeyDown(_shoot) || Input.GetKeyDown(_alternateShoot) || Input.GetButtonDown("Fire1"))
-        {
-            //_shootingManager.TryToShoot();
-        }*/
-    }
-
-
     public override void Die()
     {
         Debug.Log("GameOver");
         IsDead = true;
+        if (OnDie != null) { OnDie(); }
         //GameOver
     }
 

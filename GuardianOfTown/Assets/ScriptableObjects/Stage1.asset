@@ -21,7 +21,7 @@ MonoBehaviour:
     Gate: 0
     IsRandomized: 0
   - NumberOfEnemiesToCreate: 0
-    NumberOfBossesToCreate: 3
+    NumberOfBossesToCreate: 2
     LevelOfEnemies: 1
     LevelOfBosses: 1
     NumberOfEnemiesByGate: 0
@@ -32,5 +32,5 @@ MonoBehaviour:
     LevelOfEnemies: 1
     LevelOfBosses: 1
     NumberOfEnemiesByGate: 0
-    Gate: 0
+    Gate: 2
     IsRandomized: 1

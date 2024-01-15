@@ -51,7 +51,7 @@ public class ShootingManager : MonoBehaviour
 
     public void TryToShoot(CallbackContext context)
     {
-        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
+        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
         {
             return;
         }

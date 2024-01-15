@@ -86,6 +86,9 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage}%";
         _playerLevelPointsText.text = $": {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
+        PlayerController.OnDie += ShowGameOverPanel;
+        DataPersistantManager.OnWin += ShowWinPanel;
+        DataPersistantManager.Instance.IsStageEnded = false;
 
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
@@ -116,10 +119,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ShowWinPanel()
     {
-        if(playerController.IsDead)
+        Debug.Log("you win, son?");
+        _WinCanvas.SetActive(true);
+        _winMainMenuButton.Select();
+        _gameOverCanvas.gameObject.SetActive(false);
+        _generalCanvas.gameObject.SetActive(true);
+        _menuCanvas.gameObject.SetActive(false); 
+        _levelEndCanvas.gameObject.SetActive(false);
+        DataPersistantManager.OnWin -= ShowWinPanel;
+    }
+
+    private void ShowGameOverPanel()
+    {
+        if (playerController.IsDead)
         {
             _gameOverCanvas.gameObject.SetActive(true);
             _generalCanvas.gameObject.SetActive(true);
@@ -127,6 +141,7 @@ public class GameManager : MonoBehaviour
             _levelEndCanvas.gameObject.SetActive(false);
             _WinCanvas.gameObject.SetActive(false);
             _retryButton.Select();
+            PlayerController.OnDie -= ShowGameOverPanel;
         }
     }
 
@@ -167,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleMenu()
     {
-        if (playerController.IsDead) { return; }
+        if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }
 
         if (IsGamePaused)
         {

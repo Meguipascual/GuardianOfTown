@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class DataPersistantManager : MonoBehaviour
 {
     public static DataPersistantManager Instance;
+    public delegate void WinAction();
+    public static event WinAction OnWin;
     private StagesData _stagesData;
     private PlayerController _playerController;
     
@@ -33,6 +35,7 @@ public class DataPersistantManager : MonoBehaviour
     public List<Image> SavedTownDamagedShield;
     public float[] SpawnBoundariesLeft { get; private set; }
     public float[] SpawnBoundariesRight { get; private set; }
+    public bool IsStageEnded { get; set; }
 
     private void Awake()
     {
@@ -124,12 +127,14 @@ public class DataPersistantManager : MonoBehaviour
         StopAllCoroutines();
         SaveNextStage();
         GameManager.Instance.IsGamePaused = true;
+        IsStageEnded = true;
 
-        if ((Stage >= _stagesData.StagesDataList.Count))
+        if (Stage >= _stagesData.StagesDataList.Count)
         {
-            Debug.Log("you win, son?");
-            GameManager.Instance._WinCanvas.SetActive(true);
-            GameManager.Instance._winMainMenuButton.Select();
+            if (OnWin != null)
+            {
+                OnWin();
+            }
             return;
         }
 
