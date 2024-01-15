@@ -7,10 +7,13 @@ public class SongSelectionManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _audioClips;
     [SerializeField] private string[] _songTitles;
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _titlePanel;
     [SerializeField] private TextMeshProUGUI _songTitleText;
+    [SerializeField] private TextMeshProUGUI _songLinkText;
+    [SerializeField] private float _secondsToShowMessage;
     public AudioSource _audioSource;
     private int _index;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +21,16 @@ public class SongSelectionManager : MonoBehaviour
         _index = Random.Range(0, _audioClips.Length);
         Debug.Log($"Audio: {_audioClips[_index]}, Index: {_index}, Song: {_songTitles[_index]}");
         _audioSource.clip = _audioClips[_index];
-        //_songTitleText.text = $"Song title: {_songTitles[_index]}\nMusic from: https://www.fiftysounds.com";
+        _songTitleText.text = $"{_songTitles[_index]}";
+        _songLinkText.text = $"From: https://www.fiftysounds.com";
         _audioSource.Play();
-        //StartCoroutine(ShowSongTitleInSeconds());
+        StartCoroutine(ShowSongTitleInSeconds(_secondsToShowMessage));
     }
 
-    IEnumerator ShowSongTitleInSeconds()
+    IEnumerator ShowSongTitleInSeconds(float seconds)
     {
-        _canvas.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        _canvas.SetActive(false);
+        _titlePanel.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        _titlePanel.SetActive(false);
     }
 }

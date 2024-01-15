@@ -10,9 +10,9 @@ public class MenuVolume : MonoBehaviour
     [SerializeField] private Slider _masterSlider;
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _sfxSlider;
-    [SerializeField] private TextMeshProUGUI _masterVolumeText;
-    [SerializeField] private TextMeshProUGUI _musicVolumeText;
-    [SerializeField] private TextMeshProUGUI _sfxVolumeText;
+    [SerializeField] private TextMeshProUGUI _masterVolumeNumberText;
+    [SerializeField] private TextMeshProUGUI _musicVolumeNumberText;
+    [SerializeField] private TextMeshProUGUI _sfxVolumeNumberText;
 
     // Start is called before the first frame update
 
@@ -46,7 +46,7 @@ public class MenuVolume : MonoBehaviour
         int volumeInt = (int) (volume * 100);
         _masterMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("MasterVolume", volume);
-        _masterVolumeText.text = volumeInt.ToString();
+        _masterVolumeNumberText.text = volumeInt.ToString();
     }
 
     public void SetMusicVolume()
@@ -55,7 +55,7 @@ public class MenuVolume : MonoBehaviour
         int volumeInt = (int)(volume * 100);
         _masterMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("MusicVolume", volume);
-        _musicVolumeText.text = volumeInt.ToString();
+        _musicVolumeNumberText.text = volumeInt.ToString();
     }
 
     public void SetSFXVolume()
@@ -64,7 +64,7 @@ public class MenuVolume : MonoBehaviour
         int volumeInt = (int)(volume * 100);
         _masterMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("SFXVolume", volume);
-        _sfxVolumeText.text = volumeInt.ToString();
+        _sfxVolumeNumberText.text = volumeInt.ToString();
     }
 
     private void LoadVolume()
