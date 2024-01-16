@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GreatSpeedBuff
   m_EditorClassIdentifier: 
   _amount: 20
-  _duration: 5
+  _timerLimit: 5

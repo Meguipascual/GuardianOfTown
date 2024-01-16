@@ -5,28 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/PowerUps/ContinuousShootBuff")]
 public class ContinuousShootBuff : PoweupEffect
 {
-    [SerializeField] private float amount;
-    private MonoBehaviour m_MonoBehaviour;
+    [SerializeField] private float _timerLimit;//10
     public override void Apply(GameObject target)
     {
-        if (!PowerUpSettings.Instance.IsContinuousShootInUse)
-        {
-            m_MonoBehaviour = FindObjectOfType<PlayerController>();
-            var player = target.GetComponent<PlayerController>();
-            PowerUpSettings.Instance.IsContinuousShootInUse = true;
-            m_MonoBehaviour.StartCoroutine(ActivateEffect(player));
-        }
-        else
-        {
-            Debug.Log("Already in use");
-        }
+        ActivateEffect();
     }
 
-    IEnumerator ActivateEffect(PlayerController player)
+    private void ActivateEffect()
     {
-        Debug.Log($"deactivate easy mode in {amount} seconds");
-        yield return new WaitForSeconds(amount);
-        Debug.Log($"deactivate easy mode");
-        PowerUpSettings.Instance.IsContinuousShootInUse = false;
+        PowerUpSettings.Instance.ActivateBulletTimer(_timerLimit);
     }
 }

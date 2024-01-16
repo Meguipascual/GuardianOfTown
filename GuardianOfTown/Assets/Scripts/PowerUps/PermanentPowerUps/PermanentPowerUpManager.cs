@@ -71,7 +71,7 @@ public class PermanentPowerUpManager : MonoBehaviour
             else
             {
                 Debug.LogError("Message should exist");
-                Instantiate(_noPowerUpsText, _parentGameObject.transform.position + (_powerUpOffset[2] + new Vector3(-500,0,0)), Quaternion.identity, _parentGameObject.transform);
+                Instantiate(_noPowerUpsText, _parentGameObject.transform.position + (new Vector3(0,0,0)), Quaternion.identity, _parentGameObject.transform);
             }
             
         }
@@ -82,7 +82,8 @@ public class PermanentPowerUpManager : MonoBehaviour
         for (int i = 0; i < _numberOfPowerUps; i++)
         {
             var randomIndex = Random.Range(0, _powerUpPrefabs.Count);
-            var powerUp = Instantiate(_powerUpPrefabs[randomIndex], _parentGameObject.transform.position + _powerUpOffset[i], Quaternion.identity, _parentGameObject.transform);
+            var powerUp = Instantiate(_powerUpPrefabs[randomIndex], _parentGameObject.transform);
+            powerUp.gameObject.transform.localPosition += _powerUpOffset[i];
             _notUsedPowerUpPrefabs.Add(_powerUpPrefabs[randomIndex]);
             powerUp.GetComponentInChildren<PermanentPowerup>().Index = _notUsedPowerUpPrefabs.IndexOf(_powerUpPrefabs[randomIndex]);
             _powerUpPrefabs.RemoveAt(randomIndex);

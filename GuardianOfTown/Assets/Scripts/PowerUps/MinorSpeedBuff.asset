@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MinorSpeedBuff
   m_EditorClassIdentifier: 
   _amount: 10
-  _duration: 5
+  _timerLimit: 10

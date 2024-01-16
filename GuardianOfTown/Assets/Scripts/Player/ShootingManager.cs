@@ -32,6 +32,11 @@ public class ShootingManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
         if (_callback.phase == InputActionPhase.Started || _callback.phase == InputActionPhase.Performed) 
         { 
             ShootEasyMode(); 
