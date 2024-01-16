@@ -37,9 +37,9 @@ public class PowerUpSettings : MonoBehaviour
     {
         if (IsContinuousShootInUse) 
         {
-            if(_bulletTimer < BulletTimerMax)
+            if(_bulletTimer > 0)
             {
-                _bulletTimer += Time.deltaTime;
+                _bulletTimer -= Time.deltaTime;
                 _bulletSlider.value = _bulletTimer / BulletTimerMax;
             }
             else
@@ -51,9 +51,9 @@ public class PowerUpSettings : MonoBehaviour
 
         if (IsSpeedIncreased)
         {
-            if (_speedTimer < SpeedTimerMax)
+            if (_speedTimer > 0)
             {
-                _speedTimer += Time.deltaTime;
+                _speedTimer -= Time.deltaTime;
                 _speedSlider.value = _speedTimer / SpeedTimerMax;
             }
             else
@@ -65,8 +65,9 @@ public class PowerUpSettings : MonoBehaviour
 
     public void ActivateBulletTimer(float timerLimit)
     {
-        if (IsContinuousShootInUse) { Debug.Log("Already in use");_bulletTimer = 0; return; }
+        if (IsContinuousShootInUse) { Debug.Log("Already in use");_bulletTimer = timerLimit; return; }
         IsContinuousShootInUse = true;
+        _bulletTimer = timerLimit;
         BulletTimerMax = timerLimit;
         _bulletSliderGameobject = PowerUpTimerSliderManager.Instance.InstantiatePowerUpSliderTimer(0);
         _bulletSlider = _bulletSliderGameobject.GetComponentInChildren<Slider>();
@@ -77,6 +78,7 @@ public class PowerUpSettings : MonoBehaviour
     {
         Debug.Log($"deactivate easy mode");
         _bulletTimer = 0;
+        BulletTimerMax = 0;
         IsContinuousShootInUse = false;
         PowerUpTimerSliderManager.Instance.RemoveSlider(_bulletSliderGameobject);
         Destroy(_bulletSliderGameobject);
@@ -89,6 +91,7 @@ public class PowerUpSettings : MonoBehaviour
         _playerController.Speed = PreviousPlayerSpeed;
         SpeedAmount = 0;
         _speedTimer = 0;
+        SpeedTimerMax = 0;
         PowerUpTimerSliderManager.Instance.RemoveSlider(_speedSliderGameobject);
         GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_playerController.Speed}";
         Debug.Log("Speed Reverted");
@@ -102,7 +105,7 @@ public class PowerUpSettings : MonoBehaviour
         {
             if (amount == SpeedAmount)
             {
-                _speedTimer = 0;
+                _speedTimer = timerLimit;
             }
             return; 
         }
@@ -110,6 +113,7 @@ public class PowerUpSettings : MonoBehaviour
         IsSpeedIncreased = true;
         SpeedAmount = amount;
         SpeedTimerMax = timerLimit;
+        _speedTimer = timerLimit;
         PreviousPlayerSpeed = _playerController.Speed;
         _playerController.Speed += SpeedAmount;
         Debug.Log("Speed Augmented");
