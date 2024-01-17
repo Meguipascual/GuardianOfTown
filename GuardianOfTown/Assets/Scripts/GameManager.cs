@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject _generalCanvas;
     public GameObject _levelEndCanvas;
     public GameObject _gameOverCanvas;
-    public GameObject _WinCanvas;
+    public GameObject _winCanvas;
     public GameObject _powerUpIconsPanel;
     public GameObject _levelUpPanel;
     public Button _retryButton, _winMainMenuButton;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        
         playerController = FindObjectOfType<PlayerController>();
         spawnManager = FindObjectOfType<SpawnManager>();
         MainCamera = FindObjectOfType<Camera>();
@@ -121,13 +121,33 @@ public class GameManager : MonoBehaviour
 
     private void ShowWinPanel()
     {
+        if(_winCanvas == null)
+        {
+            Debug.Log($"win canvas null");
+        }
         Debug.Log("you win, son?");
-        _WinCanvas.SetActive(true);
+       
+        _generalCanvas.gameObject.SetActive(true);
         _winMainMenuButton.Select();
         _gameOverCanvas.gameObject.SetActive(false);
-        _generalCanvas.gameObject.SetActive(true);
         _menuCanvas.gameObject.SetActive(false); 
-        _levelEndCanvas.gameObject.SetActive(false);
+        _levelEndCanvas.gameObject.SetActive(false); 
+        _winCanvas.gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    public void Unsubscribe()
+    {
+        PlayerController.OnDie -= ShowGameOverPanel;
         DataPersistantManager.OnWin -= ShowWinPanel;
     }
 
@@ -139,9 +159,8 @@ public class GameManager : MonoBehaviour
             _generalCanvas.gameObject.SetActive(true);
             _menuCanvas.gameObject.SetActive(false);
             _levelEndCanvas.gameObject.SetActive(false);
-            _WinCanvas.gameObject.SetActive(false);
+            _winCanvas.gameObject.SetActive(false);
             _retryButton.Select();
-            PlayerController.OnDie -= ShowGameOverPanel;
         }
     }
 

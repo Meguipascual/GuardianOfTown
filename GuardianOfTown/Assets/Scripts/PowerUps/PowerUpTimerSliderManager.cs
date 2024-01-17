@@ -37,12 +37,11 @@ public class PowerUpTimerSliderManager : MonoBehaviour
         
         if (slider.GetComponentInChildren<Slider>() != null)
         {
-            Debug.Log(slider);
             return slider;
         }
         else 
         {
-            Debug.Log("SliderNull");
+            Debug.LogError("SliderNull");
             return null; 
         }
     }

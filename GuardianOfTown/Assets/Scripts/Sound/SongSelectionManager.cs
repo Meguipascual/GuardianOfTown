@@ -23,7 +23,6 @@ public class SongSelectionManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 1 && DataPersistantManager.Instance.Stage >= GameManager.Instance.StageToActivateRedFog)
         {
-            Debug.Log($"Why are you here?{DataPersistantManager.Instance.Stage}, {GameManager.Instance.StageToActivateRedFog}");
             RedFogSongsPlay();
         }
         else
