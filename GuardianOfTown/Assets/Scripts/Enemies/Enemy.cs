@@ -10,7 +10,9 @@ public abstract class Enemy : Character
     private ParticleSystem _criticalHitParticleSystem;
     private Animator _animator;
     private Collider _collider;
-    private EnemySoundsManager _soundManager;
+    private EnemySoundsManager _soundManager; 
+    public delegate void EnemyDieAction(int gate);
+    public static event EnemyDieAction OnEnemyDie;
     [SerializeField] private GameObject _enemyPanelTop;
     [SerializeField] private GameObject _enemyPanelFront;
     protected DataPersistantManager DataPersistentManager { get; set; }
@@ -24,7 +26,7 @@ public abstract class Enemy : Character
     protected float TimeToRest { get; set; }
     protected float DeathDelay { get; set; }
     protected float TimeToMove { get; set; }
-
+    public int Gate { get; set; }
     private float MovementTimer { get; set; }
     private float RestingTimer { get; set; }
     private bool IsResting { get; set; }
@@ -81,7 +83,13 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
-        GameManager.Instance.DecreaseNumberOfEnemies();
+        //GameManager.Instance.DecreaseNumberOfEnemies();
+
+        if (OnEnemyDie != null)
+        {
+            OnEnemyDie(Gate);
+        }
+
         Destroy(gameObject);
     }
 

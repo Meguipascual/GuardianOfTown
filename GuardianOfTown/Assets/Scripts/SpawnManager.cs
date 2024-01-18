@@ -8,11 +8,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] _bossPrefab;
     [SerializeField] private GameObject [] _powerupPrefab;
     [SerializeField] private StagesData _stagesData;
-    private List<StageWavesScriptableObjects> _stagesDataList;
     [SerializeField] private float _spawnDistanceZ;
+    private List<StageWavesScriptableObjects> _stagesDataList;
     private PlayerController _playerController;
     private float _spawnSpeed = 1f;//the higher the speed the slower the spawn
-    private float _spawnPoweupSpeed = 9; 
+    private float _spawnPoweupSpeed = 9;
+    private int[] _enemiesByGate;
     public int CurrentStage { get; private set; }
     public int CurrentWave { get; private set; }
     public int LevelOfEnemies { get; private set; }
@@ -59,6 +60,22 @@ public class SpawnManager : MonoBehaviour
             CurrentStage = 0;
             Debug.Log("data persistant error ");
         }
+        Enemy.OnEnemyDie += DecreaseEnemiesByGate;
+        _enemiesByGate = new int[] { 0, 0, 0, 0 };
+    }
+
+    private void OnDestroy()
+    {
+        Unsuscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsuscribe();
+    }
+    private void Unsuscribe()
+    {
+        Enemy.OnEnemyDie -= DecreaseEnemiesByGate;
     }
 
     private void LoadNumberOfEnemies()
@@ -91,7 +108,10 @@ public class SpawnManager : MonoBehaviour
                 bossX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[gate], DataPersistantManager.Instance.SpawnBoundariesRight[gate]);
                 bossY = _bossPrefab[bossPrefab].transform.localScale.y;
                 enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
-                Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+                var enemy = Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+                enemy.GetComponent<Enemy>().Gate = gate;
+                _enemiesByGate[gate]++;
+                ChangeGateManager.instance.ActivateWarningImage(gate);
                 yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
             }
         }
@@ -99,15 +119,27 @@ public class SpawnManager : MonoBehaviour
         {
             for (int i = 0; i < spawnSettings.NumberOfBossesToCreate; i++)
             {
+                var gate = _stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate;
                 bossPrefab = Random.Range(0, _bossPrefab.Length);
-                bossX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate],
-                    DataPersistantManager.Instance.SpawnBoundariesRight[_stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate]);
+                bossX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[gate], DataPersistantManager.Instance.SpawnBoundariesRight[gate]);
                 bossY = _bossPrefab[bossPrefab].transform.localScale.y;
                 enemyPosition = new Vector3(bossX, bossY, _spawnDistanceZ);
-                Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+                var enemy = Instantiate(_bossPrefab[bossPrefab], enemyPosition, gameObject.transform.rotation);
+                enemy.GetComponent<Enemy>().Gate = gate;
+                _enemiesByGate[gate]++;
+                ChangeGateManager.instance.ActivateWarningImage(gate);
                 yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
             }
         }
+    }
+
+    private void DecreaseEnemiesByGate(int gate)
+    {
+        _enemiesByGate[gate] -= 1;
+        if (_enemiesByGate[gate] <= 0)
+        {
+            ChangeGateManager.instance.DeactivateWarningImage(gate);
+        } 
     }
 
     IEnumerator SpawnAmountOfEnemies(WaveData spawnSettings)
@@ -121,13 +153,16 @@ public class SpawnManager : MonoBehaviour
         {
             for (int i = 0; i < spawnSettings.NumberOfEnemiesToCreate; i++)
             {
+                var gate = _stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate;
                 enemyType = Random.Range(0, _enemyPrefab.Length);
-                enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[_stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate],
-                    DataPersistantManager.Instance.SpawnBoundariesRight[_stagesDataList[CurrentStage]._wavesData[CurrentWave].Gate]);
+                enemyX = Random.Range(DataPersistantManager.Instance.SpawnBoundariesLeft[gate], DataPersistantManager.Instance.SpawnBoundariesRight[gate]);
                 enemyY = _enemyPrefab[enemyType].transform.localScale.y;
                 enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
                 yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
-                Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+                var enemy = Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+                enemy.GetComponent<Enemy>().Gate = gate;
+                _enemiesByGate[gate]++;
+                ChangeGateManager.instance.ActivateWarningImage(gate);
             }
         }
         else
@@ -140,7 +175,10 @@ public class SpawnManager : MonoBehaviour
                 enemyY = _enemyPrefab[enemyType].transform.localScale.y;
                 enemyPosition = new Vector3(enemyX, enemyY, _spawnDistanceZ);
                 yield return new WaitForSeconds(_spawnSpeed / (CurrentStage + 1));
-                Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+                var enemy = Instantiate(_enemyPrefab[enemyType], enemyPosition, gameObject.transform.rotation);
+                enemy.GetComponent<Enemy>().Gate = gate;
+                _enemiesByGate[gate]++;
+                ChangeGateManager.instance.ActivateWarningImage(gate);
             }
         }
 

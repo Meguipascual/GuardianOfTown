@@ -138,10 +138,9 @@ public class ChangeGateManager : MonoBehaviour
 
     public void ActivateWarningImage(int imageIndex)
     {
-        DeactivateAllWarningImages();
         _gateWarningImages[imageIndex].gameObject.SetActive(true);
     }
-
+    
     public void ActivateAllWarningImages()
     {
         for (int i = 0; i < _gateWarningImages.Length; i++)
@@ -160,7 +159,7 @@ public class ChangeGateManager : MonoBehaviour
         _gateDirectionalLights[lightIndex].gameObject.SetActive(false);
     }
 
-    private void DeactivateWarningImage(int imageIndex)
+    public void DeactivateWarningImage(int imageIndex)
     {
         _gateWarningImages[imageIndex].gameObject.SetActive(false);
     }

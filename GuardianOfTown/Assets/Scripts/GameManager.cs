@@ -86,9 +86,11 @@ public class GameManager : MonoBehaviour
         _menuPlayerCriticalDamageText.text = $"Critical Damage: {DataPersistantManager.Instance.SavedPlayerCriticalDamage}%";
         _playerLevelPointsText.text = $": {DataPersistantManager.Instance.SavedPlayerLevelPoints}";
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
+        DataPersistantManager.Instance.IsStageEnded = false;
+
         PlayerController.OnDie += ShowGameOverPanel;
         DataPersistantManager.OnWin += ShowWinPanel;
-        DataPersistantManager.Instance.IsStageEnded = false;
+        Enemy.OnEnemyDie += DecreaseNumberOfEnemies;
 
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
@@ -149,6 +151,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.OnDie -= ShowGameOverPanel;
         DataPersistantManager.OnWin -= ShowWinPanel;
+        Enemy.OnEnemyDie -= DecreaseNumberOfEnemies;
     }
 
     private void ShowGameOverPanel()
@@ -259,8 +262,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DecreaseNumberOfEnemies()
+    /*public void DecreaseNumberOfEnemies()
     {
+        NumberOfEnemiesAndBosses--;
+        _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
+        if (NumberOfEnemiesAndBosses == 0)
+        {
+            spawnManager.ChangeWave();
+        }
+    }*/
+
+    public void DecreaseNumberOfEnemies(int gate)
+    {
+        Debug.Log($"Die in gate: {gate}");
         NumberOfEnemiesAndBosses--;
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         if (NumberOfEnemiesAndBosses == 0)

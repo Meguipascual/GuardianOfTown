@@ -89,7 +89,6 @@ public class DataPersistantManager : MonoBehaviour
         if (isNextWaveRandom)
         {
             StartCoroutine(GameManager.Instance.ShowWaveText($"They are attacking all our gates"));
-            ChangeGateManager.instance.ActivateAllWarningImages();
         }
         else
         {
@@ -97,20 +96,12 @@ public class DataPersistantManager : MonoBehaviour
             switch (gate)
             {
                 case 0: Gate = "North";
-                    //Activate image 0, deactivate all the rest;
-                    ChangeGateManager.instance.ActivateWarningImage(gate);
                     break;
                 case 1: Gate = "East";
-                    //Activate image 1, deactivate all the rest;
-                    ChangeGateManager.instance.ActivateWarningImage(gate);
                     break;
                 case 2: Gate = "South";
-                    //Activate image 2, deactivate all the rest;
-                    ChangeGateManager.instance.ActivateWarningImage(gate);
                     break;
                 case 3: Gate = "West";
-                    //Activate image 3, deactivate all the rest;
-                    ChangeGateManager.instance.ActivateWarningImage(gate);
                     break;
             }
             StartCoroutine(GameManager.Instance.ShowWaveText($"New enemies' wave incoming at {Gate} Gate "));
