@@ -10,12 +10,14 @@ public class PlayerMoveManager : MonoBehaviour
 {
     private Touch _theTouch;
     private Vector2 _touchStartPosition, _touchEndPosition;
-    private CallbackContext _callback;
+    private CallbackContext _moveCallback;
+    private CallbackContext _brakeCallback;
     private PlayerController _playerController;
     private float _horizontalInput;
     private bool _isTouching;
     [SerializeField] private int _aceleration;//The higher the faster reach max velocity (between 4 and maybe 10 it could work) 
-
+    [SerializeField] private float _slowMovementSpeed;
+    public bool IsPlayerBrakeOn {  get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class PlayerMoveManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
         {
             return;
@@ -41,6 +44,19 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
 
+        var text = $"Speed: {_playerController.Speed}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+
+        if (_brakeCallback.phase == InputActionPhase.Started || _brakeCallback.phase == InputActionPhase.Performed)
+        {
+            _playerController.Speed = _slowMovementSpeed;
+            IsPlayerBrakeOn = true;
+        }
+        else
+        {
+            _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed;
+            IsPlayerBrakeOn = false;
+        }
 
         // Check for left and right bounds
         if (transform.position.x < _playerController.XLeftBound)
@@ -53,7 +69,7 @@ public class PlayerMoveManager : MonoBehaviour
             transform.position = new Vector3(_playerController.XRightBound, transform.position.y, transform.position.z);
         }
 
-        if (_callback.ReadValue<Vector2>().x != 0) 
+        if (_moveCallback.ReadValue<Vector2>().x != 0) 
         {
             if (SystemInfo.deviceType == DeviceType.Handheld)
             {
@@ -61,7 +77,7 @@ public class PlayerMoveManager : MonoBehaviour
             }
             else
             {
-                KeyBoardMove(_callback);
+                KeyBoardMove(_moveCallback);
             }
         }
         
@@ -69,7 +85,7 @@ public class PlayerMoveManager : MonoBehaviour
 
     public void SelectMovementType(InputAction.CallbackContext context)
     {
-        _callback = context;
+        _moveCallback = context;
     }
 
     private void TouchMove()
@@ -147,6 +163,11 @@ public class PlayerMoveManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void BrakeMovement(InputAction.CallbackContext context)
+    {
+        _brakeCallback = context;
     }
 
     private void KeyBoardMove(InputAction.CallbackContext context)

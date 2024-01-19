@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ExitPause",
+                    "type": "Button",
+                    "id": "a9c85505-addc-453c-8330-4a4e6bb7db1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PauseToggle",
                     "type": "Button",
                     "id": "a35f9b33-1e1d-4cb6-8b9f-f588794a250a",
@@ -75,6 +84,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Brake",
+                    "type": "Button",
+                    "id": "4185a645-daaf-441b-bcbf-34ad586dd7f5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -174,6 +192,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5c3f4f3-9f3c-4ac1-9250-19b7341a0164",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -323,6 +352,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4b48d696-0c03-49ad-88b3-f2f6ff2fa580",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "FireHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "96c1ce9c-08c6-4f11-8a18-5a886f1fbb2f",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -395,6 +435,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "DecelerateTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7168ee21-f796-4e23-901d-603a23fb5020",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab123ff4-ad77-4150-866b-41308c99120a",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f55967d1-e5ad-41a4-9235-254b4288e37b",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ExitPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

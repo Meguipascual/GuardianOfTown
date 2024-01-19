@@ -83,8 +83,6 @@ public abstract class Enemy : Character
 
     public override void Die()
     {
-        //GameManager.Instance.DecreaseNumberOfEnemies();
-
         if (OnEnemyDie != null)
         {
             OnEnemyDie(Gate);

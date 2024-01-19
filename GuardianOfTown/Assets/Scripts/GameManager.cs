@@ -219,6 +219,14 @@ public class GameManager : MonoBehaviour
         IsGamePaused = !IsGamePaused;
     }
 
+    public void ResumeGame()
+    {
+        if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }
+        Time.timeScale = 1;
+        _menuCanvas.SetActive(false);
+        IsGamePaused = false;
+    }
+
     public void RetryButton()
     {
         Time.timeScale = 1;
@@ -262,19 +270,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*public void DecreaseNumberOfEnemies()
-    {
-        NumberOfEnemiesAndBosses--;
-        _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
-        if (NumberOfEnemiesAndBosses == 0)
-        {
-            spawnManager.ChangeWave();
-        }
-    }*/
-
     public void DecreaseNumberOfEnemies(int gate)
     {
-        Debug.Log($"Die in gate: {gate}");
         NumberOfEnemiesAndBosses--;
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         if (NumberOfEnemiesAndBosses == 0)

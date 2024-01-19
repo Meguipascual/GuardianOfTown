@@ -7,6 +7,7 @@ public class PowerUpSettings : MonoBehaviour
 {
     public static PowerUpSettings Instance;
     private PlayerController _playerController;
+    private PlayerMoveManager _moveManager;
     private GameObject _bulletSliderGameobject;
     private Slider _bulletSlider;
     private GameObject _speedSliderGameobject;
@@ -30,6 +31,7 @@ public class PowerUpSettings : MonoBehaviour
     private void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();
+        _moveManager = _playerController.GetComponentInChildren<PlayerMoveManager>();
     }
 
     private void Update()
@@ -50,8 +52,11 @@ public class PowerUpSettings : MonoBehaviour
 
         if (IsSpeedIncreased)
         {
-            if (_speedTimer > 0)
+            if (_moveManager.IsPlayerBrakeOn) { return; }
+
+            if (_speedTimer > 0 )
             {
+                _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed + SpeedAmount;
                 _speedTimer -= Time.deltaTime;
                 _speedSlider.value = _speedTimer / SpeedTimerMax;
             }
@@ -87,12 +92,12 @@ public class PowerUpSettings : MonoBehaviour
     private void DeactivateSpeedTimer()
     {
         IsSpeedIncreased = false;
-        _playerController.Speed = PreviousPlayerSpeed;
+        _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed;
         SpeedAmount = 0;
         _speedTimer = 0;
         SpeedTimerMax = 0;
         PowerUpTimerSliderManager.Instance.RemoveSlider(_speedSliderGameobject);
-        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_playerController.Speed}";
+        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
         Debug.Log("Speed Reverted");
         Destroy(_speedSlider);
         Destroy(_speedSliderGameobject);
@@ -113,10 +118,9 @@ public class PowerUpSettings : MonoBehaviour
         SpeedAmount = amount;
         SpeedTimerMax = timerLimit;
         _speedTimer = timerLimit;
-        PreviousPlayerSpeed = _playerController.Speed;
-        _playerController.Speed += SpeedAmount;
+        _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed + SpeedAmount;
         Debug.Log("Speed Augmented");
-        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_playerController.Speed}";
+        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed + SpeedAmount}";
         _speedSliderGameobject = PowerUpTimerSliderManager.Instance.InstantiatePowerUpSliderTimer(1);
         _speedSlider = _speedSliderGameobject.GetComponentInChildren<Slider>();
     }
