@@ -44,9 +44,6 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
 
-        var text = $"Speed: {_playerController.Speed}";
-        GameManager.Instance.ChangeAndShowDevText(text);
-
         if (_brakeCallback.phase == InputActionPhase.Started || _brakeCallback.phase == InputActionPhase.Performed)
         {
             _playerController.Speed = _slowMovementSpeed;

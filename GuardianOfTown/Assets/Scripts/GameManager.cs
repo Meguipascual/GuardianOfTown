@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
     public GameObject _winCanvas;
     public GameObject _powerUpIconsPanel;
     public GameObject _levelUpPanel;
-    public Button _retryButton, _winMainMenuButton;
+    public GameObject _keyboardControlsPanel;
+    public GameObject _gamepadControlsPanel;
+    public Button _retryButton, _winMainMenuButton, _resumeButton;
     private Coroutine _previousCoroutine;
     private float[] _iconsOffsetX;
     private Vector3 _iconLocalScale;
@@ -210,12 +212,15 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
             _menuCanvas.SetActive(false);
+            _keyboardControlsPanel.SetActive(false);
+            _gamepadControlsPanel.SetActive(false);
         }
         else
         {
             Time.timeScale = 0;
             _menuCanvas.SetActive(true);
         }
+        _resumeButton.Select();
         IsGamePaused = !IsGamePaused;
     }
 
@@ -224,6 +229,9 @@ public class GameManager : MonoBehaviour
         if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }
         Time.timeScale = 1;
         _menuCanvas.SetActive(false);
+        _keyboardControlsPanel.SetActive(false);
+        _gamepadControlsPanel.SetActive(false);
+        _resumeButton.Select();
         IsGamePaused = false;
     }
 
