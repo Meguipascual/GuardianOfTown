@@ -28,11 +28,6 @@ public class MenuVolume : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void SetAllVolume()
     {
         SetMasterVolume();
