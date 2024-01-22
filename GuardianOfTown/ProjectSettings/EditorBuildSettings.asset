@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PrologueTouch.unity
     guid: fefd359b871fa914eb0c53fe82fe4a3a
+  - enabled: 0
+    path: Assets/Scenes/Ranking.unity
+    guid: 22c007f7ae139ed43bd6f3ceb2d86e55
   m_configObjects: {}

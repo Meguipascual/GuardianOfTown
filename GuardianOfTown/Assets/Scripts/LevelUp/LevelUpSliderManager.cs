@@ -31,6 +31,7 @@ public class LevelUpSliderManager : MonoBehaviour
         _previousLevel = _currentLevel = _playerController.Level;
         _slider.minValue = 0;
         _isLevelingUp = false;
+        DataPersistantManager.Instance.SavedTotalPlayerExp += _playerController.Exp; 
     }
 
     // Update is called once per frame
@@ -82,19 +83,10 @@ public class LevelUpSliderManager : MonoBehaviour
     }
 
     public void ContinueToPowerUpsButton()
-    {
-        //if (DataPersistantManager.Instance.Stage % 2 == 0)
-        //{
-        //    _LevelUpPanel.gameObject.SetActive(false);
-        //    _levelPointsAssignPanel.SetActive(true);
-        //}
-        //else
-        //{
-            _LevelUpPanel.gameObject.SetActive(false);
-            _powerUpsPanel.SetActive(true);
-            PermanentPowerUpManager.Instance.ControlNumberOfPowerUps();
-        //}
-
+    {   
+        _LevelUpPanel.gameObject.SetActive(false);
+        _powerUpsPanel.SetActive(true);
+        PermanentPowerUpManager.Instance.ControlNumberOfPowerUps();
     }
 
     IEnumerator LevelUp()

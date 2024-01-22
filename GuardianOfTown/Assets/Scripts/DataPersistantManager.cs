@@ -23,6 +23,7 @@ public class DataPersistantManager : MonoBehaviour
     public int SavedPlayerDefense { get; set; }
     public int SavedPlayerCriticalRate { get; set; }
     public int SavedPlayerExp { get; set; }
+    public int SavedTotalPlayerExp { get; set; }
     public int SavedTownHpShieldsDamaged {  get; set; }
     public int SavedPlayerCriticalDamage { get; set; }
     public float SavedPlayerSpeed { get; set; }
@@ -76,6 +77,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalRate = 10;
         SavedPlayerCriticalDamage = 100;
         SavedPlayerExp = 0;
+        SavedTotalPlayerExp = 0;    
         SavedPlayerLevelPoints = 0;
         SavedPlayerBullets = 20;
         SavedPlayerBulletsRate = 0.2f;
