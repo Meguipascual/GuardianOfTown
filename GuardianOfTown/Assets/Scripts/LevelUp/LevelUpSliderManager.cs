@@ -31,7 +31,6 @@ public class LevelUpSliderManager : MonoBehaviour
         _previousLevel = _currentLevel = _playerController.Level;
         _slider.minValue = 0;
         _isLevelingUp = false;
-        DataPersistantManager.Instance.SavedTotalPlayerExp += _playerController.Exp; 
     }
 
     // Update is called once per frame

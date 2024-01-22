@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
         PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Tags.WorldTouch);
     }
 
 
@@ -253,9 +253,14 @@ public class GameManager : MonoBehaviour
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
         PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Tags.Menu);
     }
     
+    public void ContinueToRankingButton()
+    {
+        SceneManager.LoadScene(Tags.Ranking);
+    }
+
     public void ResumeButton()
     {
         ToggleMenu();

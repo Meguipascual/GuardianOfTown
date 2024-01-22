@@ -167,6 +167,7 @@ public abstract class Enemy : Character
         {
             Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
+            DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
             //TODO - calculate if player levelup only for show it in the player panel 
             if(EnemyDeath != null)
             {
@@ -218,6 +219,7 @@ public abstract class Enemy : Character
         //Player.shieldParticleSystem.Play();//Change to a sword particle or something
         Player.RealTimeLevelUp(Exp);
         Player.Exp += Exp;
+        DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
         Die();
     }
 
@@ -233,6 +235,7 @@ public abstract class Enemy : Character
             Player.shieldParticleSystem.Play();
             Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
+            DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
             Die();
         }
     }
