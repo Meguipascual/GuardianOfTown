@@ -4,17 +4,13 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerMoveManager : MonoBehaviour
 {
-    private Touch _theTouch;
-    private Vector2 _touchStartPosition, _touchEndPosition;
     private CallbackContext _moveCallback;
     private CallbackContext _brakeCallback;
     private PlayerController _playerController;
     private float _horizontalInput;
-    private bool _isTouching;
     [SerializeField] private int _aceleration;//The higher the faster reach max velocity (between 4 and maybe 10 it could work) 
     [SerializeField] private float _slowMovementSpeed;
     public bool IsPlayerBrakeOn {  get; set; }
@@ -23,7 +19,6 @@ public class PlayerMoveManager : MonoBehaviour
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
-        _isTouching = false;
     }
 
     // Update is called once per frame
@@ -65,12 +60,14 @@ public class PlayerMoveManager : MonoBehaviour
         {
             transform.position = new Vector3(_playerController.XRightBound, transform.position.y, transform.position.z);
         }
-
-        if (_moveCallback.ReadValue<Vector2>().x != 0) 
+        if (_moveCallback.ReadValue<Vector2>().x != 0)
         {
             KeyBoardMove(_moveCallback);
         }
-        
+        else
+        {
+            _playerController.moveAudioSource.Stop();
+        }
     }
 
     public void SelectMovementType(InputAction.CallbackContext context)
@@ -78,67 +75,19 @@ public class PlayerMoveManager : MonoBehaviour
         _moveCallback = context;
     }
 
-    private void TouchMove()
+    public void BrakeMovement(InputAction.CallbackContext context)
     {
-        if (Input.touchCount == 0) { return; }
-
-        _isTouching = false;
-        if(_theTouch.phase == TouchPhase.Ended || _theTouch.phase == TouchPhase.Canceled)
-        {
-            _touchStartPosition = new Vector2(Screen.width, Screen.height);
-        }
-
-        foreach (var touch in Input.touches)
-        {
-            if (touch.phase == TouchPhase.Began) 
-            {
-                if (touch.position.x < Screen.width / 2)
-                {
-                    _touchStartPosition = touch.position;
-                    _theTouch = touch;
-                    _isTouching = true;
-                }    
-            }
-            else if (touch.position.x < (Screen.width / 3) * 2)
-            {
-                _theTouch = touch;
-                _isTouching = true;
-            }
-        }
-        if (_isTouching)
-        {
-            TouchMoving();
-        }    
+        _brakeCallback = context;
     }
 
-
-    private void TouchMoving()
+    private void KeyBoardMove(InputAction.CallbackContext context)
     {
-        //var text = $"H.Input: {context}";
-        //GameManager.Instance.ChangeAndShowDevText(text);
+        _horizontalInput = context.ReadValue<Vector2>().x;
+        var text = $"H.Input: {context.ReadValue<Vector2>()}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+        transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
+        _playerController.PlayMoveSound();
 
-        _touchEndPosition = _theTouch.position;
-        _horizontalInput = (_touchEndPosition.x - _touchStartPosition.x) / (Screen.width / _aceleration);
-
-        if (_horizontalInput < -1)
-        {
-            _horizontalInput = -1;
-        }
-        else if (_horizontalInput > 1)
-        {
-            _horizontalInput = 1;
-        }
-
-        if (_horizontalInput != 0)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
-            _playerController.PlayMoveSound();
-        }
-        else
-        {
-            _playerController.moveAudioSource.Stop();
-        }
-    
         for (int i = 0; i < _playerController._animators.Length; i++)
         {
             if (!_playerController._animators[i].name.Equals("Cannon"))
@@ -154,38 +103,13 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
     }
-
-    public void BrakeMovement(InputAction.CallbackContext context)
+    public void TouchMove(int horizontalInput)
     {
-        _brakeCallback = context;
-    }
-
-    private void KeyBoardMove(InputAction.CallbackContext context)
-    {
-        if (context.ReadValue<Vector2>().x < 0)
-        {
-            _horizontalInput = -1;
-        }else if (context.ReadValue<Vector2>().x > 0)
-        {
-            _horizontalInput = 1;
-        }
-
-        //_horizontalInput = context.ReadValue<Vector2>().x;
-
-        var text = $"H.Input: {_horizontalInput}";
-        GameManager.Instance.ChangeAndShowDevText(text);
-
         
-
-        if (_horizontalInput != 0)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
-            _playerController.PlayMoveSound();
-        }
-        else
-        {
-            _playerController.moveAudioSource.Stop();
-        }
+        var text = $"H.Input: {horizontalInput}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+        transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * horizontalInput);
+        _playerController.PlayMoveSound();
 
         for (int i = 0; i < _playerController._animators.Length; i++)
         {

@@ -7,7 +7,7 @@ public class ShootingTouchButton : MonoBehaviour
 {
     public bool isPressed;
     private ShootingManager _shootingManager;
-    private Touch _theTouch;
+    private UnityEngine.InputSystem.EnhancedTouch.Touch _theTouch;
     private Vector2 _touchStartPosition, _touchEndPosition;
     private PlayerController _playerController;
 
@@ -19,23 +19,17 @@ public class ShootingTouchButton : MonoBehaviour
 
     private void Update()
     {
-        if (SystemInfo.deviceType != DeviceType.Handheld)
-        {
-            return;
-        }
+        if (SystemInfo.deviceType != DeviceType.Handheld) { return; }
 
-        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
-        {
-            return;
-        }
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused) { return; }
 
-        if (Input.touchCount == 0) { OverHeatedManager.Instance.CoolCannon(); return; }
+        if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count <= 0) { OverHeatedManager.Instance.CoolCannon(); return; }
 
         isPressed = false;
 
-        foreach (var touch in Input.touches)
+        foreach (UnityEngine.InputSystem.EnhancedTouch.Touch touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
-            if (touch.position.x > (Screen.width / 3) * 2 && touch.position.y < Screen.height/3) 
+            if (touch.screenPosition.x > (Screen.width / 3) * 2 && touch.screenPosition.y < Screen.height / 3)
             {
                 _theTouch = touch;
                 isPressed = true;

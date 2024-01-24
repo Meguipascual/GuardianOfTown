@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662587595}
   - component: {fileID: 6840263897952136102}
+  - component: {fileID: 1869032071}
   m_Layer: 6
   m_Name: OverHeatedManager
   m_TagString: Untagged
@@ -151,11 +152,111 @@ MonoBehaviour:
   _cannonMaterial: {fileID: 2100000, guid: 68c655f38c9af1b4cabfa5add1c87ccb, type: 2}
   _cannonColdMaterial: {fileID: 2100000, guid: ca007613edd6a564d928d4256d5d8df8, type: 2}
   _overheatedCannonMaterial: {fileID: 2100000, guid: 5fc2d0535b1cd8941a6720192462f5a7, type: 2}
+  _overHeatSounds:
+  - {fileID: 8300000, guid: 0658e1fafedc6cb448ceea58417ce8bf, type: 3}
+  - {fileID: 8300000, guid: 0d7fd7734e0f6d34c8338f7193da1781, type: 3}
+  - {fileID: 8300000, guid: 758bfa4357f4311419672fd8ff608ff5, type: 3}
   _cannonOverHeatedTimer: 0
   _cannonOverHeatedLimit: 10
   _coolDownDelay: 5
   _cannonHeatSlider: {fileID: 845757296442285668}
   _cannonOverHeatingImage: {fileID: 5370202448215849458}
+--- !u!82 &1869032071
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662587594}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 5671596081108813222, guid: 2978b64d5504d9f458103701018f5054, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &311381730206824124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,6 +1519,7 @@ GameObject:
   - component: {fileID: 1983670783}
   - component: {fileID: 180158708790639309}
   - component: {fileID: 27560680}
+  - component: {fileID: 5564938799496619985}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1685,6 +1787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aceleration: 4
+  _slowMovementSpeed: 10
 --- !u!82 &399356272
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2327,26 +2430,18 @@ MonoBehaviour:
     m_ActionId: ea783c09-2c2d-43c1-8dd4-333bb241abaa
     m_ActionName: Player/FireHold[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/Keyboard/w,/Keyboard/upArrow]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5098718294862859261}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: AccelerateTime
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: fbc44f66-d252-422d-8f56-e924150fa3b5
     m_ActionName: Player/AccelerateTime[/DualShock4GamepadHID/dpad/up]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20086628-bd88-4f3f-9ac1-64c29b05c1da
+    m_ActionName: Player/DecelerateTime[/DualShock4GamepadHID/leftTrigger,/Keyboard/r]
+  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5098718294862859261}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: DecelerateTime
+      - m_Target: {fileID: 7068004282946345643}
+        m_TargetAssemblyTypeName: PlayerMoveManager, Assembly-CSharp
+        m_MethodName: BrakeMovement
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2356,13 +2451,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 20086628-bd88-4f3f-9ac1-64c29b05c1da
-    m_ActionName: Player/DecelerateTime[/DualShock4GamepadHID/leftTrigger,/Keyboard/r]
+    m_ActionId: 4185a645-daaf-441b-bcbf-34ad586dd7f5
+    m_ActionName: Player/Brake
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a9c85505-addc-453c-8330-4a4e6bb7db1b
+    m_ActionName: Player/ExitPause[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5564938799496619985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247998238691232108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956eabe3ee95fe841b4fc837998f14ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5282934238839693924
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,14 +4261,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed470ecc6394024aaf97fb73b327418, type: 3}
---- !u!1 &6177995532229306352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ed470ecc6394024aaf97fb73b327418, type: 3}
-  m_PrefabInstance: {fileID: 6448538826711718561}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6843068557656997194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ed470ecc6394024aaf97fb73b327418, type: 3}
+  m_PrefabInstance: {fileID: 6448538826711718561}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6177995532229306352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ed470ecc6394024aaf97fb73b327418, type: 3}
   m_PrefabInstance: {fileID: 6448538826711718561}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &7937082654211236212
