@@ -68,14 +68,7 @@ public class PlayerMoveManager : MonoBehaviour
 
         if (_moveCallback.ReadValue<Vector2>().x != 0) 
         {
-            if (SystemInfo.deviceType == DeviceType.Handheld)
-            {
-                TouchMove();
-            }
-            else
-            {
-                KeyBoardMove(_moveCallback);
-            }
+            KeyBoardMove(_moveCallback);
         }
         
     }
@@ -169,7 +162,20 @@ public class PlayerMoveManager : MonoBehaviour
 
     private void KeyBoardMove(InputAction.CallbackContext context)
     {
-        _horizontalInput = context.ReadValue<Vector2>().x;
+        if (context.ReadValue<Vector2>().x < 0)
+        {
+            _horizontalInput = -1;
+        }else if (context.ReadValue<Vector2>().x > 0)
+        {
+            _horizontalInput = 1;
+        }
+
+        //_horizontalInput = context.ReadValue<Vector2>().x;
+
+        var text = $"H.Input: {_horizontalInput}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+
+        
 
         if (_horizontalInput != 0)
         {
