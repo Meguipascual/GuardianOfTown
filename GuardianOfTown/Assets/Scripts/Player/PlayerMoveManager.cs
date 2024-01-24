@@ -11,7 +11,6 @@ public class PlayerMoveManager : MonoBehaviour
     private CallbackContext _brakeCallback;
     private PlayerController _playerController;
     private float _horizontalInput;
-    [SerializeField] private int _aceleration;//The higher the faster reach max velocity (between 4 and maybe 10 it could work) 
     [SerializeField] private float _slowMovementSpeed;
     public bool IsPlayerBrakeOn {  get; set; }
 
@@ -103,7 +102,7 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
     }
-    public void TouchMove(int horizontalInput)
+    public void TouchMove(float horizontalInput)
     {
         
         var text = $"H.Input: {horizontalInput}";
