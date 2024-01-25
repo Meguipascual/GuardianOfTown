@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wavesData:
   - NumberOfEnemiesToCreate: 10
-    NumberOfBossesToCreate: 0
+    NumberOfBossesToCreate: 50
     LevelOfEnemies: 1
     LevelOfBosses: 1
     NumberOfEnemiesByGate: 0

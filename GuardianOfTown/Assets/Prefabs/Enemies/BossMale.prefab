@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 953638355881884121}
   - component: {fileID: -2988894414211089006}
   m_Layer: 3
-  m_Name: BossMale
+  m_Name: BossMale 1
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
