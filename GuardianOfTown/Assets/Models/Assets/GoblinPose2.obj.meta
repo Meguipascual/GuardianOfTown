@@ -3,7 +3,77 @@ guid: cd6f6ff09e2e4f14c9e2f859bd34eec9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GoblinLowPoly2_MeshMat
+    second: {fileID: 2100000, guid: 5242925fa39a7c44a9b76f40b85fa614, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PeanaTorre_pCylinder1Mat
+    second: {fileID: 2100000, guid: de0d074839f75e949b7593783da56d08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrollLowPoly_lambert2SG
+    second: {fileID: 2100000, guid: 5242925fa39a7c44a9b76f40b85fa614, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn1SG
+    second: {fileID: 2100000, guid: 5242925fa39a7c44a9b76f40b85fa614, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder1Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder2Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder3Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder4Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder5Mat
+    second: {fileID: 2100000, guid: 586a60d09cb05a749adc4f30af56be0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCylinder6Mat
+    second: {fileID: 2100000, guid: ccaa9f1ad4afdd54894fda01a126f6b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pSphere1Mat
+    second: {fileID: 2100000, guid: 2f8ac67d169c92a40abce3cb51784090, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pSphere2Mat
+    second: {fileID: 2100000, guid: 2f8ac67d169c92a40abce3cb51784090, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pTorus1Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pTorus2Mat
+    second: {fileID: 2100000, guid: f3cefc3cdb31e0b4fa4997dc87ded1da, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
