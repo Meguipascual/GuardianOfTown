@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b3064b9875b6a4dbdad5244005aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: -9196596143800972909}
+  _enemy: {fileID: -9196596143800972909}
   fillImage: {fileID: 1093665282457193723}
   slider: {fileID: 2456174685101160081}
 --- !u!1 &6058976586680612809
@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b3064b9875b6a4dbdad5244005aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: -9196596143800972909}
+  _enemy: {fileID: -9196596143800972909}
   fillImage: {fileID: 1546157237620201439}
   slider: {fileID: 3441572111968793109}
 --- !u!1 &7216642079548208398

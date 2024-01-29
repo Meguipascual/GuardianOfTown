@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b3064b9875b6a4dbdad5244005aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7011047767993667393}
+  _enemy: {fileID: 7011047767993667393}
   fillImage: {fileID: 2718284384889358849}
   slider: {fileID: 6520461872000480380}
 --- !u!1 &2321357970715456998
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b3064b9875b6a4dbdad5244005aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7011047767993667393}
+  _enemy: {fileID: 7011047767993667393}
   fillImage: {fileID: 3560083287177107802}
   slider: {fileID: 3363982236211868397}
 --- !u!1 &6877177997538606340

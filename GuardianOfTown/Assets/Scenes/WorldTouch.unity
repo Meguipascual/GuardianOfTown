@@ -5609,6 +5609,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68abd3ff4e829aa43a09fcc36a318242, type: 3}
   m_PrefabInstance: {fileID: 2068845265}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &260360905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1136239616363345667, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+  m_PrefabInstance: {fileID: 1136239617222931099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &260360907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260360905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbec490d92225245b2ec1b9775b75fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 0.5
 --- !u!4 &268367797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7b6e9891945da2245b4f6dc62a55f476, type: 3}
@@ -33023,7 +33041,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1136239616363345666, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
   m_PrefabInstance: {fileID: 1136239617222931099}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 260360905}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a53b693fab4d1c549b39bd31ccfc0861, type: 3}
@@ -51051,6 +51069,14 @@ PrefabInstance:
       propertyPath: _stagesData
       value: 
       objectReference: {fileID: 1068828790}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _bossPrefab.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597599847727287060, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
+      propertyPath: _bossPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1694062514575109753, guid: 92a865a6c7e4780449b2f45e1f418734, type: 3}
     - target: {fileID: 2597599847727287062, guid: 10cfaba5854087448980b3173476b7b0, type: 3}
       propertyPath: m_Name
       value: SpawnManager

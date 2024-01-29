@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2291211499166527028}
   - component: {fileID: 4009426143531422365}
   - component: {fileID: 7186456410500477941}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: CriticalHitParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4840225011187687922}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49094352, y: 0.4909436, z: 0.4909436}
+  m_LocalScale: {x: 0.0006542219, y: 0.00065422186, z: 0.00065422186}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
