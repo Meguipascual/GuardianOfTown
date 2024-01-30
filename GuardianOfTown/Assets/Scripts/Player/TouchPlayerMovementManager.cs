@@ -45,11 +45,6 @@ public class TouchPlayerMovementManager : MonoBehaviour
                     _currentAcceleration = _accelerationDelay;
                     _moveManager.TouchMove(0);
                 }
-
-                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began || (touch.phase == UnityEngine.InputSystem.TouchPhase.Stationary && touch.phase != UnityEngine.InputSystem.TouchPhase.Moved))
-                {
-
-                }
             }
             else
             {

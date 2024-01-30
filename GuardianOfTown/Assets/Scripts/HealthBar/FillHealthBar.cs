@@ -10,11 +10,11 @@ public class FillHealthBar : MonoBehaviour
     public Slider slider;
 
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         slider.maxValue = 1;
         FillSliderValue();
-    }
+    }*/
     
     public void FillSliderValue()
     {

@@ -82,8 +82,8 @@ public class PlayerMoveManager : MonoBehaviour
     private void KeyBoardMove(InputAction.CallbackContext context)
     {
         _horizontalInput = context.ReadValue<Vector2>().x;
-        var text = $"H.Input: {context.ReadValue<Vector2>()}";
-        GameManager.Instance.ChangeAndShowDevText(text);
+        //var text = $"H.Input: {context.ReadValue<Vector2>()}";
+        //GameManager.Instance.ChangeAndShowDevText(text);
         transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * _horizontalInput);
         _playerController.PlayMoveSound();
 
@@ -105,8 +105,8 @@ public class PlayerMoveManager : MonoBehaviour
     public void TouchMove(float horizontalInput)
     {
         
-        var text = $"H.Input: {horizontalInput}";
-        GameManager.Instance.ChangeAndShowDevText(text);
+        //var text = $"H.Input: {horizontalInput}";
+        //GameManager.Instance.ChangeAndShowDevText(text);
         transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * horizontalInput);
         _playerController.PlayMoveSound();
 

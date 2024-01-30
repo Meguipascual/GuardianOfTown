@@ -36,13 +36,14 @@ public class ShootingTouchButton : MonoBehaviour
             }
         }
 
-        if (isPressed)
+        if (!isPressed) 
         {
-            _shootingManager.ShootEasyMode();
+            OverHeatedManager.Instance.CoolCannon();
+            return;
         }
         else
         {
-            OverHeatedManager.Instance.CoolCannon();
+            _shootingManager.ShootEasyMode();
         }
     }
 }

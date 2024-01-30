@@ -37,6 +37,8 @@ public class ShootingManager : MonoBehaviour
             return;
         }
 
+        if (SystemInfo.deviceType == DeviceType.Handheld) { return; }
+
         if (_callback.phase == InputActionPhase.Started || _callback.phase == InputActionPhase.Performed) 
         { 
             ShootEasyMode(); 
@@ -45,6 +47,7 @@ public class ShootingManager : MonoBehaviour
             if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
             {
                 OverHeatedManager.Instance.CoolCannon();
+                GameManager.Instance.ChangeAndShowDevText("Bad Cooling ");
             }
         }
     }
