@@ -12,14 +12,13 @@ public class FillHealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slider.maxValue = playerController.HP / playerController.HpMax;
+        slider.maxValue = 1;
         FillSliderValue();
     }
     
     public void FillSliderValue()
     {
         float fillValue = (float)playerController.HP / (float)playerController.HpMax;
-        Debug.Log($"Slider Value: {fillValue}, Slider max: {slider.maxValue}");
         slider.value = fillValue;
         if (slider.value <= slider.minValue)
         {
@@ -28,16 +27,16 @@ public class FillHealthBar : MonoBehaviour
 
         if(slider.value <= slider.maxValue * 0.2f)
         {
-            fillImage.color = new Color(0.94f, 0.24f, 0f);
+            fillImage.color = Tags.RedLight;
         }
         else if (slider.value <= slider.maxValue * 0.5f)
         {
-            fillImage.color = new Color(0.89f, 0.75f, 0.13f);
+            fillImage.color = Tags.Yellow;
         }
         else
         {
             //Azul claro
-            fillImage.color = new Color(0, 0.59f, 0.55f);
+            fillImage.color = Tags.BlueLight;
         }
     }
 

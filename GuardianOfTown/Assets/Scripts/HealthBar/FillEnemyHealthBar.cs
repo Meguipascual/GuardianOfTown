@@ -13,10 +13,7 @@ public class FillEnemyHealthBar : MonoBehaviour
     {
         fillImage.enabled = true;
         float fillValue = (float)_enemy.HP / _enemy.HpMax;
-        Debug.Log(fillImage.isActiveAndEnabled);
         slider.value = fillValue;
-
-        Debug.Log($"Slider Actual value: {slider.value}");
 
         if (slider.value <= slider.minValue)
         {
@@ -25,21 +22,16 @@ public class FillEnemyHealthBar : MonoBehaviour
 
         if (slider.value <= slider.maxValue * 0.2f)
         {
-            //fillImage.color = Tags.RedLight;
             fillImage.color = Color.red;
-            Debug.Log("Rojo");
         }
         else if (slider.value <= slider.maxValue * 0.5f)
         {
-            //fillImage.color = Tags.Yellow;
             fillImage.color = Color.yellow;
-            Debug.Log("Amarillo");
         }
         else
         {
-            //fillImage.color = Tags.BlueLight;
-            fillImage.color = Color.green;
-            Debug.Log("Verde");
+            fillImage.color = Tags.BlueLight;
+            //fillImage.color = Color.green;
         }
     }
 

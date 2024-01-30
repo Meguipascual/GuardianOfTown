@@ -16,7 +16,7 @@ public class Tags
 
     //Colours
     public static Color RedLight = new Color(0.94f, 0.24f, 0);
-    public static Color BlueLight = new Color(0, 0.59f, 0.55f);
+    public static Color BlueLight = new Color(0, 0.59f, 0.55f, 1f);
     public static Color Yellow = new Color(0.89f, 0.75f, 0.13f);
     public static Color GreenLight = new Color(255, 255, 255);
 

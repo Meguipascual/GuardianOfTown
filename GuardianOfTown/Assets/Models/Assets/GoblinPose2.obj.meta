@@ -58,12 +58,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pSphere1Mat
-    second: {fileID: 2100000, guid: 2f8ac67d169c92a40abce3cb51784090, type: 2}
+    second: {fileID: 2100000, guid: 7d28d6e5213d43a499c228a5b4881ff7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pSphere2Mat
-    second: {fileID: 2100000, guid: 2f8ac67d169c92a40abce3cb51784090, type: 2}
+    second: {fileID: 2100000, guid: 7d28d6e5213d43a499c228a5b4881ff7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
