@@ -241,6 +241,7 @@ public class GameManager : MonoBehaviour
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
+        Destroy(FindObjectOfType<DontDestroyOnLoad>());
         PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
         SceneManager.LoadScene(Tags.WorldTouch);
     }
@@ -252,6 +253,7 @@ public class GameManager : MonoBehaviour
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
+        Destroy(FindObjectOfType<DontDestroyOnLoad>().gameObject);
         PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
         SceneManager.LoadScene(Tags.Menu);
     }

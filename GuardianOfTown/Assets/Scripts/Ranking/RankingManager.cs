@@ -169,10 +169,18 @@ public class RankingManager : MonoBehaviour
             PlayerPrefs.DeleteKey($"{i}Name");
             PlayerPrefs.DeleteKey($"{i}Score");
         }
+        PlayerPrefs.SetInt("RankingCount", 0);
+        _rankingCount = 0;
     }
 
     public void FinishButton()
     {
+        Time.timeScale = 1;
+        Destroy(PermanentPowerUpsSettings.Instance.gameObject);
+        Destroy(DataPersistantManager.Instance.gameObject);
+        Destroy(PermanentPowerUpManager.Instance.gameObject);
+        Destroy(FindObjectOfType<DontDestroyOnLoad>());
+        PermanentPowerUpsSettings.Instance.PowerUpIcons.Clear();
         SceneManager.LoadScene(Tags.Menu);
     }
 
