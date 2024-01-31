@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
     {
         NumberOfEnemiesAndBosses--;
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
-        if (NumberOfEnemiesAndBosses == 0)
+        if (NumberOfEnemiesAndBosses == 0 && !playerController.IsDead)
         {
             spawnManager.ChangeWave();
         }

@@ -10,6 +10,7 @@ public class TouchPlayerMovementManager : MonoBehaviour
     [SerializeField] private float _currentAcceleration;
     private int _direction;//negative left , positive right
     private PlayerMoveManager _moveManager;
+    private bool _outOfFocus;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,8 @@ public class TouchPlayerMovementManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_outOfFocus) { return; }
+
         foreach (UnityEngine.InputSystem.EnhancedTouch.Touch touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
             if (touch.startScreenPosition.x > (Screen.width / 3) * 2 || touch.startScreenPosition.y > (Screen.height / 3) * 2) { continue; }
@@ -53,37 +56,29 @@ public class TouchPlayerMovementManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        _outOfFocus = pause;
+        if (pause) 
+        { 
+            GameManager.Instance.ToggleMenu();
+            EnhancedTouchSupport.Disable();
+        }
+        else
+        {
+            EnhancedTouchSupport.Enable();
+        }
+        _direction = 0;
+    }
+
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
-        TouchSimulation.Enable();
-        //UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += FingerDown;
 
     }
 
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
-        TouchSimulation.Disable();
-        //UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown -= FingerDown;
-    }
-
-    private void FingerDown(Finger finger)
-    {
-        if(finger.currentTouch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-        {
-            if(finger.currentTouch.startScreenPosition.x < finger.currentTouch.screenPosition.x)
-            {
-                var text = $"H.Input: {finger}";
-                GameManager.Instance.ChangeAndShowDevText(text);
-                //1
-            }
-            else if(finger.currentTouch.startScreenPosition.x > finger.currentTouch.screenPosition.x)
-            {
-                var text = $"H.Input: {finger}";
-                GameManager.Instance.ChangeAndShowDevText(text);
-                //-1
-            }
-        }
     }
 }
