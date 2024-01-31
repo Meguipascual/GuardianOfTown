@@ -8,22 +8,24 @@ using UnityEngine.UI;
 public class LevelUpPointsAssignManager : MonoBehaviour
 {
     private PlayerController _playerController;
-    public TextMeshProUGUI _levelPointsText;
-    public TextMeshProUGUI _playerLevelText;
-    public TextMeshProUGUI _playerHPText;
-    public TextMeshProUGUI _playerAttackText;
-    public TextMeshProUGUI _playerDefenseText;
-    public TextMeshProUGUI _playerCritRateText;
-    public TextMeshProUGUI _playerCritDamageText;
-    public TextMeshProUGUI _playerSpeedText;
-    public Button _hpButton;
-    public Button _attackButton;
-    public Button _defenseButton;
-    public Button _critRateButton; 
-    public Button _critDamageButton;
-    public Button _speedButton;
-    public Button _undoButton;
-    public Button _nextLevelButton;
+    [SerializeField] private GameObject _warningPanel;
+    [SerializeField] private TextMeshProUGUI _levelPointsText;
+    [SerializeField] private TextMeshProUGUI _playerLevelText;
+    [SerializeField] private TextMeshProUGUI _playerHPText;
+    [SerializeField] private TextMeshProUGUI _playerAttackText;
+    [SerializeField] private TextMeshProUGUI _playerDefenseText;
+    [SerializeField] private TextMeshProUGUI _playerCritRateText;
+    [SerializeField] private TextMeshProUGUI _playerCritDamageText;
+    [SerializeField] private TextMeshProUGUI _playerSpeedText;
+    [SerializeField] private Button _hpButton;
+    [SerializeField] private Button _attackButton;
+    [SerializeField] private Button _defenseButton;
+    [SerializeField] private Button _critRateButton;
+    [SerializeField] private Button _critDamageButton;
+    [SerializeField] private Button _speedButton;
+    [SerializeField] private Button _undoButton;
+    [SerializeField] private Button _nextLevelButton;
+    [SerializeField] private Button _warningNoButton;
     private int _increment1;
     private int _increment2;
     private int _increment5;
@@ -192,6 +194,20 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         }
         TryToDisableButtons();
     }
+
+    public void TryToNextStage()
+    {
+        if (_levelPoints > _currentLevelPoints) 
+        { 
+            _warningPanel.gameObject.SetActive(true);
+            _warningNoButton.Select();
+        }
+        else
+        {
+            NextStage();
+        }
+    }
+
     public void NextStage()
     {
         ConfirmIncrements();
