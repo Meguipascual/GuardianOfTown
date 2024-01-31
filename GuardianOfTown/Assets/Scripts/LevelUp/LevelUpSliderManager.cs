@@ -125,7 +125,7 @@ public class LevelUpSliderManager : MonoBehaviour
         if (PowerUpSettings.Instance.IsSpeedIncreased)
         {
             PowerUpSettings.Instance.IsSpeedIncreased = false;
-            _playerController.Speed = PowerUpSettings.Instance.PreviousPlayerSpeed;
+            _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed;
             PowerUpSettings.Instance.SpeedAmount = 0;
         }
         

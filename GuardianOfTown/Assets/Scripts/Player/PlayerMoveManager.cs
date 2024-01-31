@@ -11,6 +11,7 @@ public class PlayerMoveManager : MonoBehaviour
     private CallbackContext _brakeCallback;
     private PlayerController _playerController;
     private float _horizontalInput;
+    public float CurrentSpeed { get; set; }
     [SerializeField] private float _slowMovementSpeed;
     public bool IsPlayerBrakeOn {  get; set; }
 
@@ -18,6 +19,7 @@ public class PlayerMoveManager : MonoBehaviour
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        CurrentSpeed = DataPersistantManager.Instance.SavedPlayerSpeed;
     }
 
     // Update is called once per frame
@@ -40,15 +42,18 @@ public class PlayerMoveManager : MonoBehaviour
 
         if (_brakeCallback.phase == InputActionPhase.Started || _brakeCallback.phase == InputActionPhase.Performed)
         {
+            if (IsPlayerBrakeOn){ _playerController.Speed = _slowMovementSpeed; goto Movement; }
+            CurrentSpeed = _playerController.Speed;
             _playerController.Speed = _slowMovementSpeed;
             IsPlayerBrakeOn = true;
         }
         else
         {
-            _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed;
+            _playerController.Speed = CurrentSpeed;
             IsPlayerBrakeOn = false;
         }
 
+        Movement:
         // Check for left and right bounds
         if (transform.position.x < _playerController.XLeftBound)
         {

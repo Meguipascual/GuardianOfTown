@@ -47,7 +47,6 @@ public class ShootingManager : MonoBehaviour
             if (OverHeatedManager.Instance._cannonOverHeatedTimer > 0)
             {
                 OverHeatedManager.Instance.CoolCannon();
-                GameManager.Instance.ChangeAndShowDevText("Bad Cooling ");
             }
         }
     }

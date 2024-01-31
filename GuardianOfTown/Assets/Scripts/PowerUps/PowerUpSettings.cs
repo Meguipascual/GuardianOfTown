@@ -17,7 +17,6 @@ public class PowerUpSettings : MonoBehaviour
     public float SpeedAmount {  get; set; }
     public float SpeedTimerMax { get; set; }
     public float BulletTimerMax {  get; set; }
-    public float PreviousPlayerSpeed {  get; set; }
 
     private float _speedTimer;
     private float _bulletTimer;
@@ -96,8 +95,9 @@ public class PowerUpSettings : MonoBehaviour
         SpeedAmount = 0;
         _speedTimer = 0;
         SpeedTimerMax = 0;
+        _moveManager.CurrentSpeed = _playerController.Speed;
         PowerUpTimerSliderManager.Instance.RemoveSlider(_speedSliderGameobject);
-        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed}";
+        GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {_playerController.Speed}";
         Debug.Log("Speed Reverted");
         Destroy(_speedSlider);
         Destroy(_speedSliderGameobject);
@@ -119,6 +119,7 @@ public class PowerUpSettings : MonoBehaviour
         SpeedTimerMax = timerLimit;
         _speedTimer = timerLimit;
         _playerController.Speed = DataPersistantManager.Instance.SavedPlayerSpeed + SpeedAmount;
+        _moveManager.CurrentSpeed = _playerController.Speed;
         Debug.Log("Speed Augmented");
         GameManager.Instance._menuPlayerSpeedText.text = $"Speed: {DataPersistantManager.Instance.SavedPlayerSpeed + SpeedAmount}";
         _speedSliderGameobject = PowerUpTimerSliderManager.Instance.InstantiatePowerUpSliderTimer(1);
