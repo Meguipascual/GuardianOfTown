@@ -42,10 +42,17 @@ public class PlayerMoveManager : MonoBehaviour
 
         if (_brakeCallback.phase == InputActionPhase.Started || _brakeCallback.phase == InputActionPhase.Performed)
         {
-            if (IsPlayerBrakeOn){ _playerController.Speed = _slowMovementSpeed; goto Movement; }
-            CurrentSpeed = _playerController.Speed;
-            _playerController.Speed = _slowMovementSpeed;
-            IsPlayerBrakeOn = true;
+            if (IsPlayerBrakeOn)
+            { 
+                _playerController.Speed = _slowMovementSpeed; 
+            } 
+            else
+            {
+                CurrentSpeed = _playerController.Speed;
+                _playerController.Speed = _slowMovementSpeed;
+                IsPlayerBrakeOn = true;
+            }
+            
         }
         else
         {
@@ -53,7 +60,6 @@ public class PlayerMoveManager : MonoBehaviour
             IsPlayerBrakeOn = false;
         }
 
-        Movement:
         // Check for left and right bounds
         if (transform.position.x < _playerController.XLeftBound)
         {
