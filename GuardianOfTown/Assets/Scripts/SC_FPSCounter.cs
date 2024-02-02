@@ -19,7 +19,7 @@ public class SC_FPSCounter : MonoBehaviour
     void Start()
     {
         timeleft = updateInterval;
-
+        textStyle.fontSize = 18;
         textStyle.fontStyle = FontStyle.Bold;
         textStyle.normal.textColor = Color.white;
     }
@@ -45,6 +45,6 @@ public class SC_FPSCounter : MonoBehaviour
     void OnGUI()
     {
         //Display the fps and round to 2 decimals
-        GUI.Label(new Rect(300, 15, 200, 50), fps.ToString("F2") + "FPS", textStyle);
+        GUI.Label(new Rect(300, 15, 400, 100), fps.ToString("F2") + "FPS", textStyle);
     }
 }

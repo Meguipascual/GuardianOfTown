@@ -11,6 +11,12 @@ public class GameSettings : MonoBehaviour
     public bool IsFrontViewModeActive { get; set; } //activate the 3 person perspective camera and pannels
     public bool IsTopViewModeActive { get; set; } //activate top view
 
+    public delegate void FrameRateChangeAction();
+    public static event FrameRateChangeAction OnChangeFrameRate;
+
+    [SerializeField] private int _frameRate;
+    private int _previousFPS;
+
     private void Awake()
     {
         if (Instance != null)
@@ -20,7 +26,17 @@ public class GameSettings : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        _frameRate = 30;
+        ChangeFrameRate();  
     }
 
-    
+    private void Update()
+    {
+        if (_previousFPS != _frameRate) { ChangeFrameRate(); }
+    }
+
+    public void ChangeFrameRate()
+    {
+        Application.targetFrameRate = _previousFPS = _frameRate;
+    }
 }

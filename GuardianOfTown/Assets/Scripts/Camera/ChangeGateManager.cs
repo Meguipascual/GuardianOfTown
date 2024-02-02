@@ -32,6 +32,7 @@ public class ChangeGateManager : MonoBehaviour
         _gateDirectionalLights[0].gameObject.SetActive(true);
         _gateCompassImages[0].gameObject.SetActive(true);
         GameManager.Instance._gateText.text = _gateText[0];
+        RenderSettings.fog = true;
     }
 
     public void RightInputButton(InputAction.CallbackContext context)
@@ -80,6 +81,14 @@ public class ChangeGateManager : MonoBehaviour
             {
                 _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex] + 46, playerY, playerZ);
             }
+            if(newCameraIndex == 3 || DataPersistantManager.Instance.Stage >= GameManager.Instance.StageToActivateRedFog)
+            {
+                RenderSettings.fog = true;
+            }
+            else
+            {
+                RenderSettings.fog = false;
+            }
         }
         else
         {
@@ -91,6 +100,7 @@ public class ChangeGateManager : MonoBehaviour
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[0], playerY, playerZ);
+            RenderSettings.fog = true;
         }
         _cameraManager.DeactivateCamera(cameraIndex);
         DeactivateDirectionalLight(cameraIndex);
@@ -119,6 +129,7 @@ public class ChangeGateManager : MonoBehaviour
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[3];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[3];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[3] + 46, playerY, playerZ);
+            RenderSettings.fog = true;
         }
         else
         {
@@ -130,6 +141,15 @@ public class ChangeGateManager : MonoBehaviour
             _playerController.XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[newCameraIndex];
             _playerController.XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex];
             _playerController.transform.position = new Vector3(playerX + DataPersistantManager.Instance.SpawnBoundariesLeft[newCameraIndex], playerY, playerZ);
+           
+            if (newCameraIndex == 0 || DataPersistantManager.Instance.Stage >= GameManager.Instance.StageToActivateRedFog) 
+            { 
+                RenderSettings.fog = true; 
+            }
+            else 
+            {  
+                RenderSettings.fog = false; 
+            }
         }
         _cameraManager.DeactivateCamera(cameraIndex);
         DeactivateCompassImage(cameraIndex);
