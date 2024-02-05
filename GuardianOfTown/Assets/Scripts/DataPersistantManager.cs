@@ -124,6 +124,7 @@ public class DataPersistantManager : MonoBehaviour
 
         if (Stage >= _stagesData.StagesDataList.Count)
         {
+            SavePlayerStats();
             if (OnWin != null)
             {
                 OnWin();
