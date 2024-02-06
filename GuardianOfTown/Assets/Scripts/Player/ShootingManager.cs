@@ -77,6 +77,29 @@ public class ShootingManager : MonoBehaviour
             Shoot();
         }
     }
+
+    public void TryToShoot()
+    {
+        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
+        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
+        {
+            return;
+        }
+
+        if (PermanentPowerUpsSettings.Instance.IsABulletModifierActive)
+        {
+            DecideShoot();
+        }
+        else
+        {
+            Shoot();
+        }
+    }
+
     private void DecideShoot()
     {
         if (PermanentPowerUpsSettings.Instance.IsTripleShootActive)

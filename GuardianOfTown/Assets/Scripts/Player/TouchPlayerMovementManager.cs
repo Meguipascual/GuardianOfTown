@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -25,7 +22,7 @@ public class TouchPlayerMovementManager : MonoBehaviour
 
         foreach (UnityEngine.InputSystem.EnhancedTouch.Touch touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
-            if (touch.startScreenPosition.x > (Screen.width / 3) * 2 || touch.startScreenPosition.y > (Screen.height / 3) * 2) { continue; }
+            if (touch.startScreenPosition.x > (Screen.width / 3) * 2 || touch.startScreenPosition.y > (Screen.height / 3)) { continue; }
             if (touch.phase != UnityEngine.InputSystem.TouchPhase.Ended)
             {
                 if (touch.startScreenPosition.x < touch.screenPosition.x)

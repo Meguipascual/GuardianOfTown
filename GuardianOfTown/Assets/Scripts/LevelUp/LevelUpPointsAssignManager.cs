@@ -121,8 +121,17 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[1] += _increment5;
         _increments[5] -= _increment1;
-        _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
-        if (_increments[5]<0) 
+
+        if (_increments[1] <= 0)
+        {
+            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} {_increments[1]}";
+        }
+        else
+        {
+            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
+        }
+
+        if (_increments[5] <= 0)  
         {
             _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} {_increments[5]}";
         }
@@ -149,8 +158,17 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[3] += _increment5;
         _increments[2] -= _increment1;
-        _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
-        if (_increments[2] < 0)
+
+        if (_increments[3] <= 0)
+        {
+            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} {_increments[3]}";
+        }
+        else
+        {
+            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
+        }
+
+        if (_increments[2] <= 0)
         {
             _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} {_increments[2]}";
         }
@@ -166,8 +184,17 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[4] += _increment10;
         _increments[1] -= _increment1;
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} +{_increments[4]}";
-        if (_increments[1] < 0)
+
+        if (_increments[4] <= 0)
+        {
+            _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} {_increments[4]}";
+        }
+        else
+        {
+            _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} +{_increments[4]}";
+        }
+
+        if (_increments[1] <= 0)
         {
             _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} {_increments[1]}";
         }
@@ -183,8 +210,17 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[5] += _increment2;
         _increments[3] -= _increment1;
-        _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
-        if (_increments[3] < 0)
+        
+        if (_increments[5] <= 0)
+        {
+            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} {_increments[5]}";
+        }
+        else
+        {
+            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
+        }
+
+        if (_increments[3] <= 0)
         {
             _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} {_increments[3]}";
         }

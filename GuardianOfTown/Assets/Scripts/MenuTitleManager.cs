@@ -35,7 +35,7 @@ public class MenuTitleManager : MonoBehaviour
 
     public void SkipPrologueButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Tags.WorldTouch);
     }
 
     public void StartGameButton()
@@ -43,11 +43,11 @@ public class MenuTitleManager : MonoBehaviour
         Debug.Log($"Device Type: {SystemInfo.deviceType}");
         if (_isPrologueSkipped)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(Tags.WorldTouch);
         }
         else
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(Tags.Prologue);
         }
     }
 
