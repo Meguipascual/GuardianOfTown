@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject _powerUpIconsPanel;
     public GameObject _levelUpPanel;
     public GameObject _keyboardControlsPanel;
+    public GameObject _touchControlsInGamePanel;
     public GameObject _gamepadControlsPanel;
     public Button _retryButton, _winMainMenuButton, _resumeButton;
     private Coroutine _previousCoroutine;
@@ -113,6 +114,10 @@ public class GameManager : MonoBehaviour
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
             StartCoroutine(ShowStageText());
+            if(SystemInfo.deviceType == DeviceType.Handheld && DataPersistantManager.Instance.Stage == 0)
+            {
+                StartCoroutine(ShowControls());
+            }
         }
 
         if (DataPersistantManager.Instance.Stage >= StageToActivateRedFog)
@@ -183,6 +188,13 @@ public class GameManager : MonoBehaviour
         _stagePopUpText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         _stagePopUpText.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowControls()
+    {
+        _touchControlsInGamePanel.SetActive(true);
+        yield return new WaitForSeconds(1.5f); 
+        _touchControlsInGamePanel.SetActive(false);
     }
 
     public IEnumerator ShowLevelUpText()
