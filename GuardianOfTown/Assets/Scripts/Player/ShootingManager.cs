@@ -63,7 +63,7 @@ public class ShootingManager : MonoBehaviour
             return;
         }
 
-        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
+        if (PermanentPowerUpsSettings.Instance.IsContinuousShootActive)
         {
             return;
         }
@@ -85,7 +85,7 @@ public class ShootingManager : MonoBehaviour
             return;
         }
 
-        if (GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive)
+        if (PermanentPowerUpsSettings.Instance.IsContinuousShootActive)
         {
             return;
         }
@@ -188,7 +188,7 @@ public class ShootingManager : MonoBehaviour
 
     public void ShootEasyMode()
     {
-        if (!GameSettings.Instance.IsEasyModeActive && !PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive && !PowerUpSettings.Instance.IsContinuousShootInUse)
+        if (!PermanentPowerUpsSettings.Instance.IsContinuousShootActive && !PowerUpSettings.Instance.IsContinuousShootInUse)
         {
             if (OverHeatedManager.Instance._cannonOverHeatedTimer >= 0)
             {

@@ -23,17 +23,17 @@ public class SettingsButtonManager : MonoBehaviour
         StartCoroutine(ShowOptionChangeMessage($"Top viewpoint activated"));
     }
 
-    public void ToggleEasyMode()
+    public void ActivateEasyMode()
     {
-        GameSettings.Instance.IsEasyModeActive = !GameSettings.Instance.IsEasyModeActive;
-        GameSettings.Instance.IsDeveloperModeActive = false;
+        GameSettings.Instance.IsEasyModeActive = true;
+        //GameSettings.Instance.IsDeveloperModeActive = false;
         StopAllCoroutines();
         StartCoroutine(ShowOptionChangeMessage($"Easy Gamemode activated"));
     }
     public void ToggleDeveloperMode()
     {
-        GameSettings.Instance.IsDeveloperModeActive = !GameSettings.Instance.IsDeveloperModeActive;
-        GameSettings.Instance.IsEasyModeActive = false;
+        //GameSettings.Instance.IsDeveloperModeActive = !GameSettings.Instance.IsDeveloperModeActive;
+        //GameSettings.Instance.IsEasyModeActive = false;
         StopAllCoroutines();
         StartCoroutine(ShowOptionChangeMessage($"Dev Gamemode activated" +
             $"(not developed yet)"));
@@ -41,7 +41,7 @@ public class SettingsButtonManager : MonoBehaviour
     public void ActivateNormalMode()
     {
         GameSettings.Instance.IsEasyModeActive = false;
-        GameSettings.Instance.IsDeveloperModeActive = false;
+        //GameSettings.Instance.IsDeveloperModeActive = false;
         StopAllCoroutines();
         StartCoroutine(ShowOptionChangeMessage($"Normal Gamemode activated"));
     }

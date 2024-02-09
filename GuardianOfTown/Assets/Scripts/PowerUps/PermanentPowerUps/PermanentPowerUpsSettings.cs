@@ -11,7 +11,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     public bool IsOverHeatingUnactive { get; set; }//ID = 0
     public bool IsFrontSwordActive { get; set; }//ID = 1
     public bool IsBackShootActive { get; set; }//ID = 2
-    public bool IsInfiniteContinuousShootActive { get; private set; }//ID = 3
+    public bool IsContinuousShootActive { get; private set; }//ID = 3
     public bool IsDoubleShootActive { get; set; }//ID = 4
     public bool IsTripleShootActive { get; set; }//ID = 5
     public bool IsTownBarrierActive { get; set; }//ID = 6
@@ -24,7 +24,6 @@ public class PermanentPowerUpsSettings : MonoBehaviour
     private PlayerController _playerController;
     private Component[] _playerComponents;
     private GameObject _sword;
-    private GameObject _backCannon;
     private BarrierGroupLocator[] _townBarriers;
 
     private void Awake()
@@ -176,7 +175,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     public void ActivateInfiniteContinuousShoot()
     {
-        IsInfiniteContinuousShootActive = true;
+        IsContinuousShootActive = true;
         if (!PowerUpIcons.Contains(GameManager.Instance._powerUpIcons[2]))
         {
             PowerUpIcons.Add(GameManager.Instance._powerUpIcons[2]);

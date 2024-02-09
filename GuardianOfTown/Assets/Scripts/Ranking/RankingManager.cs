@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 public class RankingManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _peopleText;
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private GameObject _peopleTextPrefab;
+    [SerializeField] private GameObject _scoreTextPrefab;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private TextMeshProUGUI _devText;
     [SerializeField] private GameObject _rankInputPanel;
     [SerializeField] private GameObject _rankDataPanel;
+    [SerializeField] private GameObject _namesColumnText;
+    [SerializeField] private GameObject _scoresColumnText;
     [SerializeField] private Button _confirmButton;
     [SerializeField] private Button _finishButton;
     private DataPersistantManager _persistantManager;
@@ -22,13 +24,38 @@ public class RankingManager : MonoBehaviour
     private int _rankingCountMax;
     private List<RankingData> _rankings;
     private RankingData _currentRanking;
+    private bool _isCurrentRank; 
 
     // Start is called before the first frame update
     void Start()
     {
         _rankingCountMax = 10;
         _rankings = new List<RankingData>();
-        
+        if (GameSettings.Instance.IsEasyModeActive)
+        {
+            if (PlayerPrefs.HasKey("0Name"))
+            {
+                Debug.Log("That key Exists");
+                LoadRanking();
+                ShowRankingData();
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
+                {
+                    _rankInputPanel.SetActive(false);
+                    _rankDataPanel.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.Log("That key Doesn't Exists");
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
+                {
+                    _rankInputPanel.SetActive(false);
+                    _rankDataPanel.SetActive(true);
+                }
+            }
+            return;
+        }
+
         if (PlayerPrefs.HasKey("0Name"))
         {
             Debug.Log("That key Exists");
@@ -41,13 +68,35 @@ public class RankingManager : MonoBehaviour
 
         if (DataPersistantManager.Instance != null)
         {
-            ChangeAndShowDevText($"Exp Total: {DataPersistantManager.Instance.SavedTotalPlayerExp}");
             _persistantManager = DataPersistantManager.Instance;
+            ChangeAndShowDevText($"Exp Total: {_persistantManager.SavedTotalPlayerExp}");
             CalculateScore();
+            Debug.Log($"score: {_currentScore}");
+            if (_currentScore <= _rankings[_rankingCountMax - 1].Score)
+            {
+                ShowRankingData();
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
+                {
+                    _rankInputPanel.SetActive(false);
+                    _rankDataPanel.SetActive(true);
+                }
+            }
         }
         else
         {
             _currentScore = 0;
+            if (_rankingCount >= _rankingCountMax)
+            {
+                if (_currentScore <= _rankings[_rankingCountMax - 1].Score)
+                {
+                    ShowRankingData(); 
+                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
+                    {
+                        _rankInputPanel.SetActive(false);
+                        _rankDataPanel.SetActive(true);
+                    }
+                }
+            }
         }
     }
 
@@ -110,7 +159,8 @@ public class RankingManager : MonoBehaviour
     public void LoadRanking()
     {
         _rankings.Clear();
-        if(PlayerPrefs.GetInt("RankingCount") <= 10)
+
+        if(PlayerPrefs.GetInt("RankingCount") < _rankingCountMax)
         {
             _rankingCount = PlayerPrefs.GetInt("RankingCount");
             Debug.Log($"RankingSize: {_rankingCount}");
@@ -118,13 +168,14 @@ public class RankingManager : MonoBehaviour
         else
         {
             _rankingCount = _rankingCountMax;
+            _rankingCount = PlayerPrefs.GetInt("RankingCount");
+            Debug.Log($"RankingSize: {_rankingCount}");
         }
         
-
         for (int i = 0; i < _rankingCount; i++)
         {
-            var name = PlayerPrefs.GetString($"{i.ToString()}Name");
-            var score = PlayerPrefs.GetInt($"{i.ToString()}Score");
+            var name = PlayerPrefs.GetString($"{i}Name");
+            var score = PlayerPrefs.GetInt($"{i}Score");
             RankingData rankingData = new RankingData(name,score);
             _rankings.Add(rankingData);
         } 
@@ -136,9 +187,9 @@ public class RankingManager : MonoBehaviour
         var count = 0;
         foreach (var value in _rankings)
         {
-            Debug.Log($"{count.ToString()}Name String: {value.Name} Value: {value.Score}");
-            PlayerPrefs.SetString($"{count.ToString()}Name", value.Name);
-            PlayerPrefs.SetInt($"{count.ToString()}Score", value.Score);
+            Debug.Log($"{count} Name String: {value.Name} Value: {value.Score}");
+            PlayerPrefs.SetString($"{count}Name", value.Name);
+            PlayerPrefs.SetInt($"{count}Score", value.Score);
             count++;
         }
         PlayerPrefs.SetInt("RankingCount", count);
@@ -146,30 +197,72 @@ public class RankingManager : MonoBehaviour
 
     public void ShowRankingData()
     {
-        var peopleText = "";
-        var score = "";
         var count = 0;
+        _isCurrentRank = false;
 
         foreach (var value in _rankings)
         {
-            if (count >= 10) { continue; }
-            count++;
-            peopleText += $"{count}. {value.Name}\n";
-            score += $"{value.Score}\n";
-        }
+            if (count >= 10) 
+            {
+                PlayerPrefs.DeleteKey($"{count}Name");
+                PlayerPrefs.DeleteKey($"{count}Score");
+                count++;
+                continue; 
+            }
 
-        _peopleText.text = peopleText;
-        _scoreText.text = score;
+            if(_currentRanking.Name != null && _currentRanking.Name != "")
+            {
+                if (value.Equals(_currentRanking) && !_isCurrentRank)
+                {
+                    count++;
+                    _isCurrentRank = true;
+                    _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
+                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                    var name = Instantiate(_peopleTextPrefab, _namesColumnText.transform);
+                    var score = Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
+                    name.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                    score.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                }
+                else
+                {
+                    count++;
+                    _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
+                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                    Instantiate(_peopleTextPrefab, _namesColumnText.transform);
+                    Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
+                }
+            }
+            else
+            {
+                count++;
+                _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
+                _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                Instantiate(_peopleTextPrefab, _namesColumnText.transform);
+                Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
+            }
+        }
     }
 
     public void EraseSavedData()
     {
-        for (int i = 0; i < _rankingCountMax; i++) 
+        
+        foreach (var prefab in _namesColumnText.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            Destroy(prefab.gameObject);
+        }
+
+        foreach (var prefab in _scoresColumnText.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            Destroy(prefab.gameObject);
+        }
+
+        for (int i = 0; i < PlayerPrefs.GetInt("RankingCount") - 1; i++) 
         {
             PlayerPrefs.DeleteKey($"{i}Name");
             PlayerPrefs.DeleteKey($"{i}Score");
         }
         PlayerPrefs.SetInt("RankingCount", 0);
+        //PlayerPrefs.DeleteAll(); Only if you need to clean all the stored options and registers
         _rankingCount = 0;
     }
 

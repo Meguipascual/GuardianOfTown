@@ -8,7 +8,7 @@ public class InfiniteContinuousShootPowerUp : PermanentPowerup
         _id = 3;
         base.Initialize();
         _thisButton = gameObject.GetComponent<Button>();
-        if (_permanentPowerUpsSettings.IsInfiniteContinuousShootActive)
+        if (_permanentPowerUpsSettings.IsContinuousShootActive)
         {
             _thisButton.interactable = false;
         }

@@ -35,7 +35,7 @@ public class ShootingTouchButton : MonoBehaviour
 
         if (isPressed) 
         {
-            if(GameSettings.Instance.IsEasyModeActive || PermanentPowerUpsSettings.Instance.IsInfiniteContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse) 
+            if(PermanentPowerUpsSettings.Instance.IsContinuousShootActive || PowerUpSettings.Instance.IsContinuousShootInUse) 
             {
                 _shootingManager.ShootEasyMode();
             }

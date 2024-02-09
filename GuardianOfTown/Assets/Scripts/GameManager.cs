@@ -113,10 +113,13 @@ public class GameManager : MonoBehaviour
 
         if (DataPersistantManager.Instance.Wave == 0 && !playerController.IsDead)
         {
-            StartCoroutine(ShowStageText());
             if(SystemInfo.deviceType == DeviceType.Handheld && DataPersistantManager.Instance.Stage == 0)
             {
-                StartCoroutine(ShowControls());
+                ShowControls();
+            }
+            else
+            {
+                StartCoroutine(ShowStageText());
             }
         }
 
@@ -190,11 +193,19 @@ public class GameManager : MonoBehaviour
         _stagePopUpText.gameObject.SetActive(false);
     }
 
-    IEnumerator ShowControls()
+    public void ShowControls()
     {
+        IsGamePaused = true;
+        Time.timeScale = 0;
         _touchControlsInGamePanel.SetActive(true);
-        yield return new WaitForSeconds(1.5f); 
+    }
+
+    public void HideControls()
+    {
+        IsGamePaused = false;
+        Time.timeScale = 1;
         _touchControlsInGamePanel.SetActive(false);
+        StartCoroutine(ShowStageText());
     }
 
     public IEnumerator ShowLevelUpText()
