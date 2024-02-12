@@ -9167,6 +9167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingButtonsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2852455192923589144, guid: 16685bf665c33124f9b537733b60bd74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2852455192923589146, guid: 16685bf665c33124f9b537733b60bd74, type: 3}
       propertyPath: m_RootOrder
       value: 3

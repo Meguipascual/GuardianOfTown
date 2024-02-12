@@ -6,7 +6,9 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance;
-    public bool IsEasyModeActive { get; set; } //easy mode with autoshooting
+    public bool IsEasyModeActive { get; set; } //easy mode 
+    public bool IsNormalModeActive { get; set; } //Normal mode 
+    public bool IsHardModeActive { get; set; } //Hard mode 
     public bool IsDeveloperModeActive { get; set; } //activate buttons that can create any enemy, powerup or wave
     public bool IsFrontViewModeActive { get; set; } //activate the 3 person perspective camera and pannels
     public bool IsTopViewModeActive { get; set; } //activate top view

@@ -20,15 +20,27 @@ public class StagesData : MonoBehaviour
             _maxOfWaves = 3;
             _maxOfEnemies = 20;
             _maxOfBosses = 8;
-            _maxLevelMultiplier = 6;
+            _maxLevelMultiplier = 3;
         }
-        else
+        else if(GameSettings.Instance.IsNormalModeActive)
         {
             Debug.Log($"Normal Stage Generated");
+            _maxOfWaves = 3;
+            _maxOfEnemies = 20;
+            _maxOfBosses = 8;
+            _maxLevelMultiplier = 6;
+        }
+        else if(GameSettings.Instance.IsHardModeActive) 
+        {
+            Debug.Log($"Hard Stage Generated");
             _maxOfWaves = 5;
             _maxOfEnemies = 31;
             _maxOfBosses = 10;
-            _maxLevelMultiplier = 10; 
+            _maxLevelMultiplier = 10;
+        }
+        else
+        {
+            Debug.Log($"Something Gone wrong, none difficulty activated");
         }
 
         var numberOfWaves = Random.Range(1, _maxOfWaves);

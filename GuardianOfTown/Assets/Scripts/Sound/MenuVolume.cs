@@ -20,6 +20,7 @@ public class MenuVolume : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
+
             LoadVolume();
         }
         else

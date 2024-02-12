@@ -31,72 +31,41 @@ public class RankingManager : MonoBehaviour
     {
         _rankingCountMax = 10;
         _rankings = new List<RankingData>();
-        if (GameSettings.Instance.IsEasyModeActive)
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Menu))
         {
-            if (PlayerPrefs.HasKey("0Name"))
-            {
-                Debug.Log("That key Exists");
-                LoadRanking();
-                ShowRankingData();
-                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
-                {
-                    _rankInputPanel.SetActive(false);
-                    _rankDataPanel.SetActive(true);
-                }
-            }
-            else
-            {
-                Debug.Log("That key Doesn't Exists");
-                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
-                {
-                    _rankInputPanel.SetActive(false);
-                    _rankDataPanel.SetActive(true);
-                }
-            }
+            LoadRanking();
+            ShowRankingData();
             return;
         }
 
         if (PlayerPrefs.HasKey("0Name"))
         {
-            Debug.Log("That key Exists");
+            if (DataPersistantManager.Instance != null)
+            {
+                _persistantManager = DataPersistantManager.Instance;
+                ChangeAndShowDevText($"Exp Total: {_persistantManager.SavedTotalPlayerExp}");
+                CalculateScore();
+            }
+            else 
+            { 
+                _currentScore = 0;
+            }
+
             LoadRanking();
+            ShowRankingData();
+            Debug.Log("That key Exists");
+            
+            if (GameSettings.Instance.IsEasyModeActive || (_currentScore <= _rankings[_rankingCount-1].Score && _rankingCount == _rankingCountMax))
+            {
+                _rankInputPanel.SetActive(false);
+                _rankDataPanel.SetActive(true);
+                return;
+            }
         }
         else
         {
             Debug.Log("That key Doesn't Exists");
-        }
-
-        if (DataPersistantManager.Instance != null)
-        {
-            _persistantManager = DataPersistantManager.Instance;
-            ChangeAndShowDevText($"Exp Total: {_persistantManager.SavedTotalPlayerExp}");
-            CalculateScore();
-            Debug.Log($"score: {_currentScore}");
-            if (_currentScore <= _rankings[_rankingCountMax - 1].Score)
-            {
-                ShowRankingData();
-                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
-                {
-                    _rankInputPanel.SetActive(false);
-                    _rankDataPanel.SetActive(true);
-                }
-            }
-        }
-        else
-        {
-            _currentScore = 0;
-            if (_rankingCount >= _rankingCountMax)
-            {
-                if (_currentScore <= _rankings[_rankingCountMax - 1].Score)
-                {
-                    ShowRankingData(); 
-                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Ranking))
-                    {
-                        _rankInputPanel.SetActive(false);
-                        _rankDataPanel.SetActive(true);
-                    }
-                }
-            }
         }
     }
 
@@ -112,7 +81,24 @@ public class RankingManager : MonoBehaviour
         var atkPoints = _persistantManager.SavedPlayerAttack * 50;
         var townPoints = _persistantManager.SavedTownHpShields.Count;
 
-        _currentScore = (townPoints * (expPoints + lpPoints + hpPoints + defPoints + criDMGPoints + criRatePoints + speedPoints + atkPoints)) / 10;
+        if (GameSettings.Instance.IsEasyModeActive) 
+        { 
+            _currentScore = 0; 
+            return; 
+        } 
+        else if(GameSettings.Instance.IsNormalModeActive)
+        {
+            _currentScore = (townPoints * (expPoints + lpPoints + hpPoints + defPoints + criDMGPoints + criRatePoints + speedPoints + atkPoints)) / 10;
+        }
+        else if (GameSettings.Instance.IsHardModeActive)
+        {
+            _currentScore = (townPoints * (expPoints + lpPoints + hpPoints + defPoints + criDMGPoints + criRatePoints + speedPoints + atkPoints)) / 10;
+            _currentScore *= 2;
+        }
+        else
+        {
+            Debug.Log($"Something Gone wrong, none difficulty activated");
+        }
     }
 
     public void CloseWarningPanel()
@@ -159,7 +145,6 @@ public class RankingManager : MonoBehaviour
     public void LoadRanking()
     {
         _rankings.Clear();
-
         if(PlayerPrefs.GetInt("RankingCount") < _rankingCountMax)
         {
             _rankingCount = PlayerPrefs.GetInt("RankingCount");
@@ -168,7 +153,6 @@ public class RankingManager : MonoBehaviour
         else
         {
             _rankingCount = _rankingCountMax;
-            _rankingCount = PlayerPrefs.GetInt("RankingCount");
             Debug.Log($"RankingSize: {_rankingCount}");
         }
         
@@ -197,6 +181,7 @@ public class RankingManager : MonoBehaviour
 
     public void ShowRankingData()
     {
+        ClearPrefabs();
         var count = 0;
         _isCurrentRank = false;
 
@@ -243,9 +228,8 @@ public class RankingManager : MonoBehaviour
         }
     }
 
-    public void EraseSavedData()
+    private void  ClearPrefabs()
     {
-        
         foreach (var prefab in _namesColumnText.GetComponentsInChildren<TextMeshProUGUI>())
         {
             Destroy(prefab.gameObject);
@@ -255,8 +239,12 @@ public class RankingManager : MonoBehaviour
         {
             Destroy(prefab.gameObject);
         }
+    }
 
-        for (int i = 0; i < PlayerPrefs.GetInt("RankingCount") - 1; i++) 
+    public void EraseSavedData()
+    {
+        ClearPrefabs();
+        for (int i = 0; i < PlayerPrefs.GetInt("RankingCount"); i++) 
         {
             PlayerPrefs.DeleteKey($"{i}Name");
             PlayerPrefs.DeleteKey($"{i}Score");
@@ -287,7 +275,7 @@ public class RankingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         _devText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         _devText.gameObject.SetActive(false);
     }
 }
