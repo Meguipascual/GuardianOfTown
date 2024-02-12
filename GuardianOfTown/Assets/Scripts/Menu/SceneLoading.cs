@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,18 +14,6 @@ public class SceneLoading : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _tipBody;
     [SerializeField] private string[] _tips;
  
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LoadNextSceneAsync()
     {
         _tipBody.text = _tips[Random.Range(0,_tips.Length)];

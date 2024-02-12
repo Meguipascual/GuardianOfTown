@@ -12195,13 +12195,13 @@ MonoBehaviour:
   _loadingValue: {fileID: 1968695241}
   _tipBody: {fileID: 19233190}
   _tips:
-  - When enemies comes to all gates you should kill hobgoblins of all gates first,
-    then goblins and finally trolls and bosses.
-  - The "triple shoot" powerUp is a trap.
-  - Your town's shields multiplies your final Score.
-  - The game becomes really difficult is your speed is less than 15.
-  - The sword is always a good option
-  - If a "Boss" pass through you'll die immediately.
+  - '"Your Speed is important to reach your enemies faster" - Barry (The Runner).'
+  - '"Please don''t let those Bosses enter the town" - Billy (The Butcher)'
+  - '"Be careful with the little ones" - Sam (The Hunter).'
+  - '"I''ve heard that certain powerup is a trap" - Lenny (The Trapologist).'
+  - '"The Sword is always a good option" - Cloud (The Bodyguard).'
+  - '"Keeping the city with as little damage as possible will make the king happier"
+    - Some Guy.'
 --- !u!1 &1087757194
 GameObject:
   m_ObjectHideFlags: 0
