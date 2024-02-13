@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuVolume : MonoBehaviour
@@ -20,7 +21,6 @@ public class MenuVolume : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
-
             LoadVolume();
         }
         else
@@ -38,6 +38,11 @@ public class MenuVolume : MonoBehaviour
 
     public void SetMasterVolume()
     {
+        if(SceneManager.GetActiveScene().name == Tags.Prologue)
+        {
+            _masterMixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume")) * 20);
+            return;
+        }
         float volume = _masterSlider.value;
         int volumeInt = (int) (volume * 100);
         _masterMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
@@ -47,6 +52,11 @@ public class MenuVolume : MonoBehaviour
 
     public void SetMusicVolume()
     {
+        if (SceneManager.GetActiveScene().name == Tags.Prologue)
+        {
+            _masterMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+            return;
+        }
         float volume = _musicSlider.value;
         int volumeInt = (int)(volume * 100);
         _masterMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
@@ -56,6 +66,11 @@ public class MenuVolume : MonoBehaviour
 
     public void SetSFXVolume()
     {
+        if (SceneManager.GetActiveScene().name == Tags.Prologue)
+        {
+            _masterMixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
+            return;
+        }
         float volume = _sfxSlider.value;
         int volumeInt = (int)(volume * 100);
         _masterMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
@@ -65,6 +80,12 @@ public class MenuVolume : MonoBehaviour
 
     private void LoadVolume()
     {
+        if (SceneManager.GetActiveScene().name == Tags.Prologue)
+        {
+
+            SetAllVolume();
+            return;
+        }
         _masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
         _sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         _musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");

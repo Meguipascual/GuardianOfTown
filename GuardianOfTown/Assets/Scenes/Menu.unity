@@ -1424,7 +1424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 259.635, y: -15.942627}
+  m_AnchoredPosition: {x: 259.635, y: -15.942612}
   m_SizeDelta: {x: -619.1354, y: 45.19812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104959829
@@ -10484,10 +10484,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1634372474}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1160138546}
+        m_TargetAssemblyTypeName: MenuTitleManager, Assembly-CSharp
+        m_MethodName: StartButtonClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10499,30 +10499,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1166543356}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1160138544}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1047698841}
-        m_TargetAssemblyTypeName: SceneLoading, Assembly-CSharp
-        m_MethodName: LoadNextSceneAsync
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13199,6 +13175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPrologueSkipped: 0
+  _loadingGameObject: {fileID: 1634372474}
+  _mainMenuGameObject: {fileID: 1160138544}
   skipToggle: {fileID: 1016202554}
 --- !u!114 &1160138547
 MonoBehaviour:
@@ -14232,7 +14210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 211.65515, y: -15.942627}
+  m_AnchoredPosition: {x: 211.65515, y: -15.942612}
   m_SizeDelta: {x: -640.86755, y: 45.19812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207644867
@@ -15816,7 +15794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 225.02014, y: -15.942871}
+  m_AnchoredPosition: {x: 225.02014, y: -15.942856}
   m_SizeDelta: {x: -640.86755, y: 45.19812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1397325935
@@ -17664,7 +17642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 273, y: -15.942871}
+  m_AnchoredPosition: {x: 273, y: -15.942856}
   m_SizeDelta: {x: -619.1354, y: 45.19812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1576216453
