@@ -37,6 +37,25 @@ public class GameSettings : MonoBehaviour
         if (_previousFPS != _frameRate) { ChangeFrameRate(); }
     }
 
+    public int GetDifficulty()
+    {
+        if (IsEasyModeActive)
+        {
+            return 0;
+        }
+        else if (IsNormalModeActive)
+        {
+            return 1;
+        }
+        else if (IsHardModeActive)
+        {
+            return 2;
+        }
+        else
+        {
+            return -1;
+        }
+    }
     public void ChangeFrameRate()
     {
         Application.targetFrameRate = _previousFPS = _frameRate;

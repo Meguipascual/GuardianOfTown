@@ -5,24 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MobileTouchTest.unity
-    guid: 6632db18f337ee54f9a9d995aa8b9062
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/WorldTotal.unity
-    guid: cf020353ddb398249abdb75f5bfbe362
   - enabled: 1
     path: Assets/Scenes/WorldTouch.unity
     guid: b4ded6820716b5e4589e264a565abde9
   - enabled: 1
     path: Assets/Scenes/Prologue.unity
     guid: b6e611777f28153479369998d7619816
-  - enabled: 0
-    path: Assets/Scenes/PrologueTouch.unity
-    guid: fefd359b871fa914eb0c53fe82fe4a3a
   - enabled: 1
     path: Assets/Scenes/Ranking.unity
     guid: 22c007f7ae139ed43bd6f3ceb2d86e55

@@ -136,7 +136,6 @@ public class DataPersistantManager : MonoBehaviour
         {
             Debug.Log($"Stage scriptable {Stage+1} empty");
             Debug.LogError($"Stage scriptable {Stage + 1} empty");
-            //Maybe Generate a random wave to fix the problem
             _stagesData.StagesDataList[Stage] = _stagesData.GenerateRandomStage(Stage);
             Debug.Log($"Number of waves that have been created random {_stagesData.StagesDataList[Stage]._wavesData.Count}");
         }

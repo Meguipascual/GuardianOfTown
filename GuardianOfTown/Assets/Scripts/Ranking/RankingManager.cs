@@ -50,7 +50,7 @@ public class RankingManager : MonoBehaviour
                 CalculateScore();
             }
             else 
-            { 
+            {
                 _currentScore = 0;
             }
 
@@ -128,23 +128,18 @@ public class RankingManager : MonoBehaviour
     {
         var playerScore = _currentScore;//here we need to put our Score calculated.
         var playerName = _inputField.text;
+        var playerDifficulty = GameSettings.Instance.GetDifficulty();
+
         if(playerName.Equals(null) || playerName.Equals(""))
         {
             playerName = "Player";
         }
+
         _currentRanking.Name = playerName;
         _currentRanking.Score = playerScore;
-
-        if (_rankings != null) 
-        {
-            _rankings.Add(_currentRanking);
-            SortRanking();
-        }
-        else
-        {
-            _rankings.Add(_currentRanking);
-        }
-
+        _currentRanking.Difficulty = playerDifficulty;
+        _rankings.Add(_currentRanking);
+        SortRanking();
         SaveRankingData();
     }
 
@@ -171,20 +166,21 @@ public class RankingManager : MonoBehaviour
         {
             var name = PlayerPrefs.GetString($"{i}Name");
             var score = PlayerPrefs.GetInt($"{i}Score");
-            RankingData rankingData = new RankingData(name,score);
+            var difficulty = PlayerPrefs.GetInt($"{i}Difficulty");
+            RankingData rankingData = new RankingData(name, score, difficulty);
             _rankings.Add(rankingData);
         } 
     }
 
     public void SaveRankingData()
     {
-        
         var count = 0;
         foreach (var value in _rankings)
         {
-            Debug.Log($"{count} Name String: {value.Name} Value: {value.Score}");
+            Debug.Log($"{count} Name String: {value.Name} Value: {value.Score} Difficulty: {value.Difficulty}");
             PlayerPrefs.SetString($"{count}Name", value.Name);
             PlayerPrefs.SetInt($"{count}Score", value.Score);
+            PlayerPrefs.SetInt($"{count}Difficulty", value.Difficulty);
             count++;
         }
         PlayerPrefs.SetInt("RankingCount", count);
@@ -202,6 +198,7 @@ public class RankingManager : MonoBehaviour
             {
                 PlayerPrefs.DeleteKey($"{count}Name");
                 PlayerPrefs.DeleteKey($"{count}Score");
+                PlayerPrefs.DeleteKey($"{count}Difficulty");
                 count++;
                 continue; 
             }
@@ -213,7 +210,15 @@ public class RankingManager : MonoBehaviour
                     count++;
                     _isCurrentRank = true;
                     _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
-                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                    if (value.Difficulty == 2)
+                    {
+                        _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score} (H)\n";
+                    }
+                    else
+                    {
+                        _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                    }
+
                     var name = Instantiate(_peopleTextPrefab, _namesColumnText.transform);
                     var score = Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
                     name.GetComponent<TextMeshProUGUI>().color = Color.yellow;
@@ -223,7 +228,16 @@ public class RankingManager : MonoBehaviour
                 {
                     count++;
                     _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
-                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+
+                    if (value.Difficulty == 2)
+                    {
+                        _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score} (H)\n";
+                    }
+                    else
+                    {
+                        _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                    }
+                    
                     Instantiate(_peopleTextPrefab, _namesColumnText.transform);
                     Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
                 }
@@ -232,7 +246,16 @@ public class RankingManager : MonoBehaviour
             {
                 count++;
                 _peopleTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{count}. {value.Name}\n";
-                _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+
+                if (value.Difficulty == 2)
+                {
+                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score} (H)\n";
+                }
+                else
+                {
+                    _scoreTextPrefab.GetComponent<TextMeshProUGUI>().text = $"{value.Score}\n";
+                }
+
                 Instantiate(_peopleTextPrefab, _namesColumnText.transform);
                 Instantiate(_scoreTextPrefab, _scoresColumnText.transform);
             }
@@ -259,9 +282,10 @@ public class RankingManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey($"{i}Name");
             PlayerPrefs.DeleteKey($"{i}Score");
+            PlayerPrefs.DeleteKey($"{i}Difficulty");
         }
         PlayerPrefs.SetInt("RankingCount", 0);
-        //PlayerPrefs.DeleteAll(); Only if you need to clean all the stored options and registers
+        //PlayerPrefs.DeleteAll(); //Only if you need to clean all the stored options and registers
         _rankingCount = 0;
     }
 
