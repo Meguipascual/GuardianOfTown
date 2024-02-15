@@ -41,6 +41,8 @@ public class RankingManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("0Name"))
         {
+            Debug.Log("That key Exists");
+
             if (DataPersistantManager.Instance != null)
             {
                 _persistantManager = DataPersistantManager.Instance;
@@ -54,7 +56,6 @@ public class RankingManager : MonoBehaviour
 
             LoadRanking();
             ShowRankingData();
-            Debug.Log("That key Exists");
             
             if (GameSettings.Instance.IsEasyModeActive || (_currentScore <= _rankings[_rankingCount-1].Score && _rankingCount == _rankingCountMax))
             {
@@ -66,6 +67,16 @@ public class RankingManager : MonoBehaviour
         else
         {
             Debug.Log("That key Doesn't Exists");
+            if (DataPersistantManager.Instance != null)
+            {
+                _persistantManager = DataPersistantManager.Instance;
+                ChangeAndShowDevText($"Exp Total: {_persistantManager.SavedTotalPlayerExp}");
+                CalculateScore();
+            }
+            else
+            {
+                _currentScore = 0;
+            }
         }
     }
 
