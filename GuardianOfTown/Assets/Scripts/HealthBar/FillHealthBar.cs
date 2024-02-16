@@ -8,16 +8,10 @@ public class FillHealthBar : MonoBehaviour
     public PlayerController playerController;
     public Image fillImage;
     public Slider slider;
-
-    // Start is called before the first frame update
-    /*void Start()
-    {
-        slider.maxValue = 1;
-        FillSliderValue();
-    }*/
-    
+        
     public void FillSliderValue()
     {
+        fillImage.enabled = true;
         float fillValue = (float)playerController.HP / (float)playerController.HpMax;
         slider.value = fillValue;
         if (slider.value <= slider.minValue)

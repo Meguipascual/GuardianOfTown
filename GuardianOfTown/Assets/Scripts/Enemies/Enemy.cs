@@ -227,7 +227,7 @@ public abstract class Enemy : Character
     {
         Player.ReceiveDamage(Attack - (Player.Defense / 2));
         Player.ComprobateLifeRemaining();
-
+        Die();
         if (!Player.IsDead)
         {
             Player.ShowOuchImageInSeconds(.5f);
@@ -236,7 +236,6 @@ public abstract class Enemy : Character
             Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
             DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
-            Die();
         }
     }
 

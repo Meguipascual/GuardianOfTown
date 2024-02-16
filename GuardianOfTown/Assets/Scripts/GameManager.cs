@@ -37,17 +37,18 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI _menuPlayerCriticalRateText;
     public TextMeshProUGUI _menuPlayerCriticalDamageText;
     public Image[] _powerUpIcons; 
-    public GameObject _menuCanvas;
-    public GameObject _generalCanvas;
-    public GameObject _levelEndCanvas;
-    public GameObject _gameOverCanvas;
-    public GameObject _winCanvas;
+    public GameObject _menuPanel;
+    public GameObject _generalPanel;
+    public GameObject _levelEndPanel;
+    public GameObject _rewardedAdPanel;
+    public GameObject _gameOverPanel;
+    public GameObject _winPanel;
     public GameObject _powerUpIconsPanel;
     public GameObject _levelUpPanel;
     public GameObject _keyboardControlsPanel;
     public GameObject _touchControlsInGamePanel;
     public GameObject _gamepadControlsPanel;
-    public Button _retryButton, _winMainMenuButton, _resumeButton;
+    public Button _retryButton, _winMainMenuButton, _resumeButton, _adButton;
     private Coroutine _previousCoroutine;
     private float[] _iconsOffsetX;
     private Vector3 _iconLocalScale;
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         DataPersistantManager.Instance.IsStageEnded = false;
 
-        PlayerController.OnDie += ShowGameOverPanel;
+        PlayerController.OnDie += ShowRewardedAdPanel;
         DataPersistantManager.OnWin += ShowWinPanel;
         Enemy.OnEnemyDie += DecreaseNumberOfEnemies;
 
@@ -133,18 +134,19 @@ public class GameManager : MonoBehaviour
 
     private void ShowWinPanel()
     {
-        if(_winCanvas == null)
+        if(_winPanel == null)
         {
             Debug.Log($"win canvas null");
         }
         Debug.Log("you win, son?");
-       
-        _generalCanvas.gameObject.SetActive(true);
+
+        _rewardedAdPanel.gameObject.SetActive(false);
+        _generalPanel.gameObject.SetActive(true);
         _winMainMenuButton.Select();
-        _gameOverCanvas.gameObject.SetActive(false);
-        _menuCanvas.gameObject.SetActive(false); 
-        _levelEndCanvas.gameObject.SetActive(false); 
-        _winCanvas.gameObject.SetActive(true);
+        _gameOverPanel.gameObject.SetActive(false);
+        _menuPanel.gameObject.SetActive(false); 
+        _levelEndPanel.gameObject.SetActive(false); 
+        _winPanel.gameObject.SetActive(true);
     }
 
     private void OnDestroy()
@@ -159,22 +161,69 @@ public class GameManager : MonoBehaviour
 
     public void Unsubscribe()
     {
-        PlayerController.OnDie -= ShowGameOverPanel;
+        PlayerController.OnDie -= ShowRewardedAdPanel;
         DataPersistantManager.OnWin -= ShowWinPanel;
         Enemy.OnEnemyDie -= DecreaseNumberOfEnemies;
     }
 
-    private void ShowGameOverPanel()
+    public void RevivePlayerReward()
+    {
+        playerController.HP = playerController.HpMax;
+        playerController.FillSliderValue();
+
+        if (TownHpShieldsDamaged == 0)
+        {
+            _rewardedAdPanel.gameObject.SetActive(false);
+            StartCoroutine("ResumeCountDown");
+            return;
+        }
+
+        var shields = _townHpText.GetComponentsInChildren(TownHpShields[TownHpShields.Count - 1].GetType());
+        shields[shields.Length - TownHpShieldsDamaged].GetComponent<Image>().sprite
+            = TownHpShields[0].GetComponent<Image>().sprite;
+        TownHpShieldsDamaged--;
+        _rewardedAdPanel.gameObject.SetActive(false);
+        StartCoroutine("ResumeCountDown");
+    }
+
+    IEnumerator ResumeCountDown()
+    {
+        Debug.Log("entra");
+        _stagePopUpText.gameObject.SetActive(true);
+        var count = 3;
+        while(count > 0)
+        {
+            _stagePopUpText.text = $"{count}";
+            yield return new WaitForSeconds(1);
+            count--;
+        }
+        _stagePopUpText.gameObject.SetActive(false);
+        playerController.IsDead = false;
+    }
+
+    private void ShowRewardedAdPanel()
     {
         if (playerController.IsDead)
         {
-            _gameOverCanvas.gameObject.SetActive(true);
-            _generalCanvas.gameObject.SetActive(true);
-            _menuCanvas.gameObject.SetActive(false);
-            _levelEndCanvas.gameObject.SetActive(false);
-            _winCanvas.gameObject.SetActive(false);
-            _retryButton.Select();
+            _rewardedAdPanel.gameObject.SetActive(true);
+            _generalPanel.gameObject.SetActive(true);
+            _gameOverPanel.gameObject.SetActive(false);
+            _menuPanel.gameObject.SetActive(false);
+            _levelEndPanel.gameObject.SetActive(false);
+            _winPanel.gameObject.SetActive(false);
+            _adButton.Select();
         }
+    }
+
+    public void ShowGameOverPanel()
+    {
+        _gameOverPanel.gameObject.SetActive(true);
+        _generalPanel.gameObject.SetActive(true);
+        _menuPanel.gameObject.SetActive(false);
+        _levelEndPanel.gameObject.SetActive(false);
+        _winPanel.gameObject.SetActive(false);
+        _rewardedAdPanel.gameObject.SetActive(false);
+        _retryButton.Select();
     }
 
     public IEnumerator ShowWaveText(string text)
@@ -234,14 +283,14 @@ public class GameManager : MonoBehaviour
         if (IsGamePaused)
         {
             Time.timeScale = 1;
-            _menuCanvas.SetActive(false);
+            _menuPanel.SetActive(false);
             _keyboardControlsPanel.SetActive(false);
             _gamepadControlsPanel.SetActive(false);
         }
         else
         {
             Time.timeScale = 0;
-            _menuCanvas.SetActive(true);
+            _menuPanel.SetActive(true);
         }
         _resumeButton.Select();
         IsGamePaused = !IsGamePaused;
@@ -251,7 +300,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }
         Time.timeScale = 1;
-        _menuCanvas.SetActive(false);
+        _menuPanel.SetActive(false);
         _keyboardControlsPanel.SetActive(false);
         _gamepadControlsPanel.SetActive(false);
         _resumeButton.Select();
@@ -320,8 +369,8 @@ public class GameManager : MonoBehaviour
 
     public void LevelUp()
     {
-        _generalCanvas.SetActive(false);
-        _levelEndCanvas.SetActive(true);
+        _generalPanel.SetActive(false);
+        _levelEndPanel.SetActive(true);
     }
 
     public void ChangeAndShowDevText(string Text)
