@@ -5,7 +5,7 @@ using GoogleMobileAds.Api;
 using System;
 using TMPro;
 
-public class AdsManager : MonoBehaviour
+public class InterstitialAdsManager : MonoBehaviour
 {
 #if UNITY_ANDROID
     private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
@@ -15,7 +15,6 @@ public class AdsManager : MonoBehaviour
   private string _adUnitId = "unused";
 #endif
     private InterstitialAd _interstitialAd;
-    private RewardedAd _rewardedAd;
     [SerializeField] private GameObject _soundSettingsManager;
     [SerializeField] private TextMeshProUGUI _debugText;
 

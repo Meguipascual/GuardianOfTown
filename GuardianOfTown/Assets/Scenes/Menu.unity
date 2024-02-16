@@ -4800,6 +4800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 347232848}
   - component: {fileID: 347232847}
+  - component: {fileID: 347232849}
   m_Layer: 0
   m_Name: AdManager
   m_TagString: Untagged
@@ -4835,6 +4836,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347232849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347232846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b84720e4934e741b66b00fad1494ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundSettingsManager: {fileID: 1166543353}
 --- !u!114 &353735982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2852455192923589147, guid: 16685bf665c33124f9b537733b60bd74, type: 3}
@@ -22399,7 +22413,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 347232847}
-        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: InterstitialAdsManager, Assembly-CSharp
         m_MethodName: ShowInterstitialAd
         m_Mode: 1
         m_Arguments:
