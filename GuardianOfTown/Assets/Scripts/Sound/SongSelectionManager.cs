@@ -21,7 +21,7 @@ public class SongSelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1 && DataPersistantManager.Instance.Stage >= GameManager.Instance.StageToActivateRedFog)
+        if(SceneManager.GetActiveScene().name == Tags.WorldTouch && DataPersistantManager.Instance.Stage >= GameManager.Instance.StageToActivateRedFog)
         {
             RedFogSongsPlay();
         }

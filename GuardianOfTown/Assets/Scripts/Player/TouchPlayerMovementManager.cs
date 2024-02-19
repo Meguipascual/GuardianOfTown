@@ -19,7 +19,7 @@ public class TouchPlayerMovementManager : MonoBehaviour
     void FixedUpdate()
     {
         if (_outOfFocus) { return; }
-
+        Debug.Log("Pasa del out of focus");
         foreach (UnityEngine.InputSystem.EnhancedTouch.Touch touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
             if (touch.startScreenPosition.x > (Screen.width / 3) * 2 || touch.startScreenPosition.y > (Screen.height / 3)) { continue; }
@@ -53,12 +53,28 @@ public class TouchPlayerMovementManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        _outOfFocus = !focus;
+        Debug.Log($"Focus State: {focus}");
+        if (!focus)
+        {
+            GameManager.Instance.OpenMenu();
+            EnhancedTouchSupport.Disable();
+        }
+        else
+        {
+            EnhancedTouchSupport.Enable();
+        }
+        _direction = 0;
+    }
+
     private void OnApplicationPause(bool pause)
     {
         _outOfFocus = pause;
-        if (pause) 
-        { 
-            GameManager.Instance.ToggleMenu();
+        if (pause)
+        {
+            GameManager.Instance.OpenMenu();
             EnhancedTouchSupport.Disable();
         }
         else

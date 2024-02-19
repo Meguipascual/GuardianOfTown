@@ -44,7 +44,7 @@ public class PermanentPowerUpsSettings : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.buildIndex != 0)
+        if (scene.name == Tags.WorldTouch)
         {
             _playerController = FindObjectOfType<PlayerController>();
             _playerComponents = _playerController.GetComponentsInChildren<Component>(true);

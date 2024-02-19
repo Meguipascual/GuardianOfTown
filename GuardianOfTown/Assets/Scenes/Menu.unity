@@ -13188,6 +13188,7 @@ MonoBehaviour:
   _isPrologueSkipped: 0
   _loadingGameObject: {fileID: 1634372474}
   _mainMenuGameObject: {fileID: 1160138544}
+  _sceneLoading: {fileID: 1047698841}
   skipToggle: {fileID: 1016202554}
 --- !u!114 &1160138547
 MonoBehaviour:

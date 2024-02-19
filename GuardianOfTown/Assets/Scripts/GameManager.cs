@@ -298,6 +298,16 @@ public class GameManager : MonoBehaviour
         _levelUpPanel.gameObject.SetActive(false);
     }
 
+    public void OpenMenu()
+    {
+        if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }
+        Time.timeScale = 0;
+        _menuPanel.SetActive(true);
+        _keyboardControlsPanel.SetActive(false);
+        _gamepadControlsPanel.SetActive(false);
+        IsGamePaused = true;
+    }
+
     public void ToggleMenu()
     {
         if (playerController.IsDead || DataPersistantManager.Instance.IsStageEnded) { return; }

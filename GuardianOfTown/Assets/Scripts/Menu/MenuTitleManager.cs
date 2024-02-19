@@ -12,19 +12,17 @@ public class MenuTitleManager : MonoBehaviour
     [SerializeField] private bool _isPrologueSkipped;
     [SerializeField] private GameObject _loadingGameObject;
     [SerializeField] private GameObject _mainMenuGameObject;
-    private SceneLoading _sceneLoading;
+    [SerializeField] private SceneLoading _sceneLoading;
     public Toggle skipToggle;
 
     private void Start()
     {
-        if (!(SceneManager.GetActiveScene().buildIndex == 0))
+        if (!(SceneManager.GetActiveScene().name == Tags.Menu))
         {
             return;
         }
         
         if (skipToggle == null) { return; }
-
-        _sceneLoading = FindObjectOfType<SceneLoading>();
 
         if (PlayerPrefs.GetString("IsSkipped") == "False")
         {
@@ -52,6 +50,7 @@ public class MenuTitleManager : MonoBehaviour
 
     public void SkipPrologueButton()
     {
+        //Silence Prologue Sounds
         SceneManager.LoadScene(Tags.WorldTouch);
     }
 

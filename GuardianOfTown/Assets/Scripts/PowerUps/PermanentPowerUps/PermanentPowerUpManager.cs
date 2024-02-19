@@ -32,7 +32,7 @@ public class PermanentPowerUpManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex != 0) 
+        if (scene.name == Tags.WorldTouch) 
         {
             _parentGameObject = FindObjectOfType<PermanentPowerUpParent>(true).gameObject;
         }
