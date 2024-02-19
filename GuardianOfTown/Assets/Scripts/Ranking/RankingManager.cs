@@ -292,6 +292,7 @@ public class RankingManager : MonoBehaviour
     public void FinishButton()
     {
         Time.timeScale = 1;
+        GameSettings.Instance.IsRewardedAdUsed = false;
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
