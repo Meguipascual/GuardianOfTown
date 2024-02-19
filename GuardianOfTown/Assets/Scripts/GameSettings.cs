@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance;
+    public bool IsRewardedAdUsed { get; set; }
     public bool IsEasyModeActive { get; set; } //easy mode 
     public bool IsNormalModeActive { get; set; } //Normal mode 
     public bool IsHardModeActive { get; set; } //Hard mode 

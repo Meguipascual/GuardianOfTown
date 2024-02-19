@@ -92,9 +92,7 @@ public class GameManager : MonoBehaviour
         _enemiesLeftText.text = $": {NumberOfEnemiesAndBosses}";
         DataPersistantManager.Instance.IsStageEnded = false;
 
-        PlayerController.OnDie += ShowRewardedAdPanel;
-        DataPersistantManager.OnWin += ShowWinPanel;
-        Enemy.OnEnemyDie += DecreaseNumberOfEnemies;
+        SubscribeEvents();
 
         if (DataPersistantManager.Instance.SavedTownHpShields.Count > 0)
         {
@@ -128,7 +126,7 @@ public class GameManager : MonoBehaviour
         {
             RenderSettings.fog = true;
             RenderSettings.fogColor = new Color(0.49f,0,0.06f);
-            //Maybe increase the difficulty
+            //TODO Maybe increase the difficulty
         }
     }
 
@@ -151,25 +149,50 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Unsubscribe();
+        UnsubscribeEvents();
     }
 
     private void OnDisable()
     {
-        Unsubscribe();
+        UnsubscribeEvents();
     }
 
-    public void Unsubscribe()
+    public void SubscribeEvents()
+    {
+        if (GameSettings.Instance.IsRewardedAdUsed)
+        {
+            PlayerController.OnDie += ShowGameOverPanel;
+        }
+        else
+        {
+            PlayerController.OnDie += ShowRewardedAdPanel;
+        }
+
+        DataPersistantManager.OnWin += ShowWinPanel;
+        Enemy.OnEnemyDie += DecreaseNumberOfEnemies;
+    }
+
+    public void UnsubscribeEvents()
     {
         PlayerController.OnDie -= ShowRewardedAdPanel;
+        PlayerController.OnDie -= ShowGameOverPanel;
         DataPersistantManager.OnWin -= ShowWinPanel;
         Enemy.OnEnemyDie -= DecreaseNumberOfEnemies;
+    }
+
+    private void ChangeOnDieSubscription()
+    {
+        PlayerController.OnDie -= ShowRewardedAdPanel;
+        PlayerController.OnDie -= ShowGameOverPanel;
+        PlayerController.OnDie += ShowGameOverPanel;
     }
 
     public void RevivePlayerReward()
     {
         playerController.HP = playerController.HpMax;
         playerController.FillSliderValue();
+        ChangeOnDieSubscription();
+        GameSettings.Instance.IsRewardedAdUsed = true;
 
         if (TownHpShieldsDamaged == 0)
         {
@@ -179,8 +202,7 @@ public class GameManager : MonoBehaviour
         }
 
         var shields = _townHpText.GetComponentsInChildren(TownHpShields[TownHpShields.Count - 1].GetType());
-        shields[shields.Length - TownHpShieldsDamaged].GetComponent<Image>().sprite
-            = TownHpShields[0].GetComponent<Image>().sprite;
+        shields[shields.Length - TownHpShieldsDamaged].GetComponent<Image>().sprite = TownHpShields[0].GetComponent<Image>().sprite;
         TownHpShieldsDamaged--;
         _rewardedAdPanel.gameObject.SetActive(false);
         StartCoroutine("ResumeCountDown");
@@ -201,7 +223,7 @@ public class GameManager : MonoBehaviour
         playerController.IsDead = false;
     }
 
-    private void ShowRewardedAdPanel()
+    public void ShowRewardedAdPanel()
     {
         if (playerController.IsDead)
         {
@@ -310,6 +332,7 @@ public class GameManager : MonoBehaviour
     public void RetryButton()
     {
         Time.timeScale = 1;
+        GameSettings.Instance.IsRewardedAdUsed = false;
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);
@@ -322,6 +345,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenuButton()
     {
         Time.timeScale = 1;
+        GameSettings.Instance.IsRewardedAdUsed = false;
         Destroy(PermanentPowerUpsSettings.Instance.gameObject);
         Destroy(DataPersistantManager.Instance.gameObject);
         Destroy(PermanentPowerUpManager.Instance.gameObject);

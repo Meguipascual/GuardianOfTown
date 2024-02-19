@@ -2,6 +2,7 @@ using GoogleMobileAds.Api;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RewardedAdManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class RewardedAdManager : MonoBehaviour
 
     private RewardedAd _rewardedAd;
     [SerializeField] private GameObject _soundSettingsManager;
+    [SerializeField] private TextMeshProUGUI _ShowErrorText;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +119,7 @@ public class RewardedAdManager : MonoBehaviour
             {
                 audioSource.UnPause();
             }
+            GameManager.Instance.RevivePlayerReward();
         };
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
@@ -130,6 +133,9 @@ public class RewardedAdManager : MonoBehaviour
             {
                 audioSource.UnPause();
             }
+            GameManager.Instance.ShowRewardedAdPanel();
+            _ShowErrorText.text = "Ad failed";
+            _ShowErrorText.color = Color.red;
         };
     }
 

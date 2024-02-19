@@ -27,10 +27,11 @@ public class InterstitialAdsManager : MonoBehaviour
 
     IEnumerator ShowDebugText(string text)
     {
-        _debugText.text = text;
+        /*_debugText.text = text;
         _debugText.gameObject.SetActive(true);
         yield return new WaitForSeconds (3);
-        _debugText.gameObject.SetActive(false);
+        _debugText.gameObject.SetActive(false);*/
+        yield return null;
     }
 
     public void LoadInterstitial()
