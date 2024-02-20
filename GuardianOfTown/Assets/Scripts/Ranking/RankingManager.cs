@@ -24,12 +24,14 @@ public class RankingManager : MonoBehaviour
     private int _rankingCountMax;
     private List<RankingData> _rankings;
     private RankingData _currentRanking;
-    private bool _isCurrentRank; 
+    private bool _isCurrentRank;
+    private float _adPenalty;
 
     // Start is called before the first frame update
     void Start()
     {
         _rankingCountMax = 10;
+        _adPenalty = 0.8f;
         _rankings = new List<RankingData>();
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Tags.Menu))
@@ -109,6 +111,11 @@ public class RankingManager : MonoBehaviour
         else
         {
             Debug.Log($"Something Gone wrong, none difficulty activated");
+        }
+
+        if (GameSettings.Instance.IsRewardedAdUsed)
+        {
+            _currentScore = (int)(_currentScore * _adPenalty);
         }
     }
 
