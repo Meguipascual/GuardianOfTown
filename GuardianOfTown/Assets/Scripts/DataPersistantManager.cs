@@ -223,6 +223,6 @@ public class DataPersistantManager : MonoBehaviour
     public void ReloadScene()
     {
         SavePlayerStats();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Tags.WorldTouch);
     }
 }

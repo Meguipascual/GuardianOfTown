@@ -1,29 +1,45 @@
 using GoogleMobileAds.Api;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class RewardedAdManager : MonoBehaviour
 {
-    #if UNITY_ANDROID
-        private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
-    #elif UNITY_IPHONE
-        private string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
-    #else
-        private string _adUnitId = "unused";
-    #endif
-
+    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
     private RewardedAd _rewardedAd;
     [SerializeField] private GameObject _soundSettingsManager;
     [SerializeField] private TextMeshProUGUI _ShowErrorText;
+    private bool _adClosed;
+    private bool _adOpened;
+    private bool _adFailed;
+    private AdError _error;
 
     // Start is called before the first frame update
     void Start()
     {
         MobileAds.Initialize(initStatus => { });
         LoadRewardedAd();
+    }
+
+    private void Update()
+    {
+        if (_adClosed)
+        {
+            _adClosed = false;
+            AdClosed();
+        }
+
+        if (_adOpened)
+        {
+            _adOpened = false;
+            AdOpened();
+        }
+
+        if (_adFailed)
+        {
+            _adFailed = false;
+            AdFailed();
+        }
     }
 
     /// <summary>
@@ -82,6 +98,42 @@ public class RewardedAdManager : MonoBehaviour
         _rewardedAd.Destroy();
     }
 
+    private void AdOpened()
+    {
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.Pause();
+        }
+    }
+
+    private void AdClosed()
+    {
+        //Reward archieved I suppose.
+        DestroyRewarded();
+        LoadRewardedAd();
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.UnPause();
+        }
+        GameManager.Instance.RevivePlayerReward();
+    }
+
+    private void AdFailed()
+    {
+        DestroyRewarded();
+        LoadRewardedAd();
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.UnPause();
+        }
+        GameManager.Instance.ShowRewardedAdPanel();
+        _ShowErrorText.text = "Ad failed";
+        _ShowErrorText.color = Color.red;
+    }
+
     private void RegisterEventHandlers(RewardedAd ad)
     {
         // Raised when the ad is estimated to have earned money.
@@ -100,42 +152,22 @@ public class RewardedAdManager : MonoBehaviour
         // Raised when an ad opened full screen content.
         ad.OnAdFullScreenContentOpened += () =>
         {
+            _adOpened = true;
             Debug.Log("Rewarded ad full screen content opened.");
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.Pause();
-            }
         };
         // Raised when the ad closed full screen content.
         ad.OnAdFullScreenContentClosed += () =>
         {
+            _adClosed = true;
             Debug.Log("Rewarded ad full screen content closed.");
-            //Reward archieved I suppose.
-            DestroyRewarded();
-            LoadRewardedAd();
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.UnPause();
-            }
-            GameManager.Instance.RevivePlayerReward();
         };
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
         {
+            _adFailed = true;
+            _error = error;
             Debug.LogError("Rewarded ad failed to open full screen content " +
                            "with error : " + error);
-            DestroyRewarded();
-            LoadRewardedAd();
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.UnPause();
-            }
-            GameManager.Instance.ShowRewardedAdPanel();
-            _ShowErrorText.text = "Ad failed";
-            _ShowErrorText.color = Color.red;
         };
     }
 

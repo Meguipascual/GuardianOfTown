@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
@@ -7,16 +6,14 @@ using TMPro;
 
 public class InterstitialAdsManager : MonoBehaviour
 {
-#if UNITY_ANDROID
     private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
-#elif UNITY_IPHONE
-  private string _adUnitId = "ca-app-pub-3940256099942544/4411468910";
-#else
-  private string _adUnitId = "unused";
-#endif
     private InterstitialAd _interstitialAd;
     [SerializeField] private GameObject _soundSettingsManager;
     [SerializeField] private TextMeshProUGUI _debugText;
+    private bool _adClosed;
+    private bool _adOpened;
+    private bool _adFailed;
+    private AdError _error;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +22,33 @@ public class InterstitialAdsManager : MonoBehaviour
         LoadInterstitial();
     }
 
+    private void Update()
+    {
+        if (_adClosed)
+        {
+            _adClosed = false;
+            AdClosed();
+        }
+
+        if (_adOpened)
+        {
+            _adOpened = false;
+            AdOpened();
+        }
+
+        if (_adFailed)
+        {
+            _adFailed = false;
+            AdFailed();
+        }
+    }
+
     IEnumerator ShowDebugText(string text)
     {
-        /*_debugText.text = text;
+        _debugText.text = text;
         _debugText.gameObject.SetActive(true);
         yield return new WaitForSeconds (3);
-        _debugText.gameObject.SetActive(false);*/
-        yield return null;
+        _debugText.gameObject.SetActive(false);
     }
 
     public void LoadInterstitial()
@@ -86,6 +103,41 @@ public class InterstitialAdsManager : MonoBehaviour
         _interstitialAd.Destroy();
     }
 
+    private void AdOpened()
+    {
+        StartCoroutine(ShowDebugText("Interstitial ad full screen content opened."));
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.Pause();
+        }
+    }
+
+    private void AdClosed()
+    {
+        StartCoroutine(ShowDebugText("Interstitial ad full screen content closed."));
+        DestroyInterstitial();
+        LoadInterstitial();
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.UnPause();
+        }
+    }
+
+    private void AdFailed()
+    {
+        StartCoroutine(ShowDebugText("Interstitial ad failed to open full screen content " +
+                           "with error : " + _error));
+        DestroyInterstitial();
+        LoadInterstitial();
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.UnPause();
+        }
+    }
+
     private void RegisterEventHandlers(InterstitialAd interstitialAd)
     {
         // Raised when the ad is estimated to have earned money.
@@ -99,45 +151,24 @@ public class InterstitialAdsManager : MonoBehaviour
         // Raised when an ad opened full screen content.
         interstitialAd.OnAdFullScreenContentOpened += () =>
         {
-
+            _adOpened = true;
             Debug.Log("Interstitial ad full screen content opened.");
-            StartCoroutine(ShowDebugText("Interstitial ad full screen content opened."));
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.Pause();
-            }
         };
 
         // Raised when the ad closed full screen content.
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
+            _adClosed = true;
             Debug.Log("Interstitial ad full screen content closed.");
-            StartCoroutine(ShowDebugText("Interstitial ad full screen content closed."));
-            DestroyInterstitial();
-            LoadInterstitial();
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.UnPause();
-            }
-            //
         };
 
         // Raised when the ad failed to open full screen content.
         interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
+            _adFailed = true;
+            _error = error;
             Debug.LogError("Interstitial ad failed to open full screen content " +
                            "with error : " + error);
-            StartCoroutine(ShowDebugText("Interstitial ad failed to open full screen content " +
-                           "with error : " + error));
-            DestroyInterstitial();
-            LoadInterstitial();
-            var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
-            foreach (var audioSource in audioSources)
-            {
-                audioSource.UnPause();
-            }
         };
     }
     
