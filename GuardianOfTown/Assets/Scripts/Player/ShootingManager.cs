@@ -32,7 +32,7 @@ public class ShootingManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused)
+        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused || GameManager.Instance.IsCountDownActive)
         {
             return;
         }
@@ -58,7 +58,7 @@ public class ShootingManager : MonoBehaviour
 
     public void TryToShoot(CallbackContext context)
     {
-        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started)
+        if (DataPersistantManager.Instance.IsStageEnded || _playerController.IsDead || GameManager.Instance.IsGamePaused || context.phase != InputActionPhase.Started || GameManager.Instance.IsCountDownActive)
         {
             return;
         }

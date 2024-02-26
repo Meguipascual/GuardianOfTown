@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static event CountDownAction OnCountDownToggle;
     public static GameManager Instance;
     public Camera MainCamera {get; set;}
+    public bool IsCountDownActive { get; set;}
     private Quaternion cameraStartRotation;
     private PlayerController playerController;
     private SpawnManager spawnManager;
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ResumeCountDown()
     {
         if (OnCountDownToggle != null) { OnCountDownToggle(); }
-
+        IsCountDownActive = true;
         playerController.IsDead = false;
         _stagePopUpText.gameObject.SetActive(true);
         var count = 3;
@@ -229,6 +230,8 @@ public class GameManager : MonoBehaviour
         _stagePopUpText.gameObject.SetActive(false);
 
         if (OnCountDownToggle != null) { OnCountDownToggle(); }
+
+        IsCountDownActive = false;
 
         if (NumberOfEnemiesAndBosses == 0 && !playerController.IsDead)
         {
@@ -364,7 +367,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(Tags.WorldTouch);
     }
 
-
     public void ReturnToMainMenuButton()
     {
         Time.timeScale = 1;
@@ -436,6 +438,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         _devText.gameObject.SetActive(false);
     }
+
     public void ShowSavedIcons(List <Image> PowerUpIcons)
     {
         Image icons;

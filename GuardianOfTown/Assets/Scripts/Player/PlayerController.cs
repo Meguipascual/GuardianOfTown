@@ -112,7 +112,6 @@ public class PlayerController : Character
         }
     }
 
-    
     public bool IsCritical()
     {
         var isCritical = false;
@@ -176,8 +175,6 @@ public class PlayerController : Character
             GameManager.Instance._playerLevelText.text = $"Lvl: {_realTimeLevel}";
         }
     }
-
-    
 
     public void PlayMoveSound()
     {

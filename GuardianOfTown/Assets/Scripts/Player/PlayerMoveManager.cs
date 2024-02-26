@@ -26,7 +26,7 @@ public class PlayerMoveManager : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || GameManager.Instance.IsCountDownActive)
         {
             return;
         }

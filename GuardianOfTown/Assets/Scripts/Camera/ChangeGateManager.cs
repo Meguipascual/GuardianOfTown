@@ -55,7 +55,7 @@ public class ChangeGateManager : MonoBehaviour
 
     public void RightButtonClicked()
     {
-        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || GameManager.Instance.IsCountDownActive)
         {
             return;
         }
@@ -109,7 +109,7 @@ public class ChangeGateManager : MonoBehaviour
 
     public void LeftButtonClicked()
     {
-        if (_playerController.IsDead || GameManager.Instance.IsGamePaused)
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || GameManager.Instance.IsCountDownActive)
         {
             return;
         }

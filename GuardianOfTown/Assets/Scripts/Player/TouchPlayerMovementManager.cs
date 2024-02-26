@@ -7,18 +7,26 @@ public class TouchPlayerMovementManager : MonoBehaviour
     [SerializeField] private float _currentAcceleration;
     private int _direction;//negative left , positive right
     private PlayerMoveManager _moveManager;
+    private PlayerController _playerController;
     private bool _outOfFocus;
     
     // Start is called before the first frame update
     void Start()
     {
         _moveManager = GetComponent<PlayerMoveManager>();
+        _playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if (_outOfFocus) { return; }
+
+        if (_playerController.IsDead || GameManager.Instance.IsGamePaused || GameManager.Instance.IsCountDownActive)
+        {
+            return;
+        }
+
         foreach (UnityEngine.InputSystem.EnhancedTouch.Touch touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
             if (touch.startScreenPosition.x > (Screen.width / 3) * 2 || touch.startScreenPosition.y > (Screen.height / 3)) { continue; }

@@ -5,12 +5,15 @@ using UnityEngine;
 public class PowerupMoveController : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float rewindSpeedMultiplier;
     [SerializeField] private string movementType;
     private PlayerController playerController;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+        rewindSpeedMultiplier = 3; 
+        SubscribeEvents();
     }
 
     // Update is called once per frame
@@ -63,5 +66,35 @@ public class PowerupMoveController : MonoBehaviour
     {
         //transform.position += Vector3.back * Time.deltaTime * speed;
         //transform.Rotate(Vector3.back * Time.deltaTime * 75);
+    }
+    private void SubscribeEvents()
+    {
+        GameManager.OnCountDownToggle += ChangeDirection;
+    }
+    private void UnsubscribeEvents()
+    {
+        GameManager.OnCountDownToggle -= ChangeDirection;
+    }
+    private void ChangeDirection()
+    {
+        if (speed > 0)
+        {
+            speed = -(speed * rewindSpeedMultiplier);
+        }
+        else
+        {
+            speed = -(speed / rewindSpeedMultiplier);
+        }
+
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
     }
 }
