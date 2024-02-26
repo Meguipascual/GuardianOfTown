@@ -10,7 +10,8 @@ public abstract class Enemy : Character
     private ParticleSystem _criticalHitParticleSystem;
     private Animator _animator;
     private Collider _collider;
-    private EnemySoundsManager _soundManager; 
+    private EnemySoundsManager _soundManager;
+    private int _rewindSpeedMultiplier;
     public delegate void EnemyDieAction(int gate);
     public static event EnemyDieAction OnEnemyDie;
     [SerializeField] private GameObject _enemyPanelTop;
@@ -53,8 +54,10 @@ public abstract class Enemy : Character
         _collider = GetComponent<Collider>();
         _soundManager = GetComponent<EnemySoundsManager>();
         _fillEnemyHealthBar.slider.gameObject.SetActive(false);
-        
+        _rewindSpeedMultiplier = 3;
+        SubscribeEvents();
     }
+
     protected void Trigger (Collider other, GameObject floatingTextPrefab, GameObject criticalHitPrefab)
     {
         if (other.CompareTag(Tags.Bullet))
@@ -130,11 +133,13 @@ public abstract class Enemy : Character
         }
         
     }
+
     private void Advance()
     {
         transform.position += Vector3.back * Time.deltaTime * Speed;
         
     }
+
     public override void LevelUp()
     {
         var randomUpgrade = Random.Range(0, Level * 2);
@@ -216,9 +221,10 @@ public abstract class Enemy : Character
         {
             PermanentPowerUpsSettings.Instance.DeactivateSword();
         }
-        //Player.shieldParticleSystem.Play();//Change to a sword particle or something
+
         Player.RealTimeLevelUp(Exp);
         Player.Exp += Exp;
+        Player.ActivateSwordParticles(gameObject.transform.position);
         DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
         Die();
     }
@@ -232,7 +238,7 @@ public abstract class Enemy : Character
         {
             Player.ShowOuchImageInSeconds(.5f);
             Player.PlayDamageReceivedSound();
-            Player.shieldParticleSystem.Play();
+            Player.ActivateShieldParticles();
             Player.RealTimeLevelUp(Exp);
             Player.Exp += Exp;
             DataPersistantManager.Instance.SavedTotalPlayerExp += Exp;
@@ -255,5 +261,43 @@ public abstract class Enemy : Character
             Instantiate(criticalHitPrefab, transform.position, Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().color = Color.yellow;
         }
+    }
+
+    private void SubscribeEvents()
+    {
+        GameManager.OnCountDownToggle += ChangeDirection;
+    }
+    private void UnsubscribeEvents()
+    {
+        GameManager.OnCountDownToggle -= ChangeDirection;
+    }
+
+    private void ChangeDirection()
+    {
+        if (Speed > 0)
+        {
+            RestingTimer /= _rewindSpeedMultiplier;
+            TimeToRest /= _rewindSpeedMultiplier;
+            _animator.speed = _rewindSpeedMultiplier;
+            Speed = -(Speed * _rewindSpeedMultiplier);
+        }
+        else
+        {
+            RestingTimer *= _rewindSpeedMultiplier;
+            TimeToRest *= _rewindSpeedMultiplier;
+            _animator.speed = 1;
+            Speed = -(Speed / _rewindSpeedMultiplier);
+        }
+        
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
     }
 }

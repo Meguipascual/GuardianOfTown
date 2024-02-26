@@ -13,6 +13,7 @@ public class PlayerController : Character
     [SerializeField] private AudioSource _leveUpAudioSource;
     [SerializeField] private AudioSource _powerUpAudioSource;
     [SerializeField] private AudioSource _damageReceivedSource;
+    [SerializeField] private AudioSource _swordHitSource;
     [SerializeField] private float _pitch;
     private int _realTimeLevel;
     private int _realTimeLVP;
@@ -20,7 +21,8 @@ public class PlayerController : Character
     private FillHealthBar _fillHealthBar;
     private PermanentPowerUpsSettings _permanentPowerUpsSettings;
     public Animator [] _animators {  get; private set; }
-    public ParticleSystem shieldParticleSystem;
+    [SerializeField] private ParticleSystem _shieldParticleSystem;
+    [SerializeField] private GameObject _swordParticleSystemPrefab;
     public Image wiiImage;
     public Image yeiiImage;
     public Image ouchImage;
@@ -39,7 +41,6 @@ public class PlayerController : Character
     {
         XLeftBound = DataPersistantManager.Instance.SpawnBoundariesLeft[0];
         XRightBound = DataPersistantManager.Instance.SpawnBoundariesRight[0];
-        shieldParticleSystem = GetComponentInChildren<ParticleSystem>();
         _fillHealthBar = FindObjectOfType<FillHealthBar>();
         DataPersistantManager.Instance.LoadPlayerStats();
         _animators = GetComponentsInChildren<Animator>();
@@ -65,6 +66,20 @@ public class PlayerController : Character
         IsDead = true;
         if (OnDie != null) { OnDie(); }
         //GameOver
+    }
+
+    public void ActivateSwordParticles(Vector3 position)
+    {
+        var rotation = Random.Range(0.0f, 360f);
+        var _swordParticleSystem = Instantiate(_swordParticleSystemPrefab);
+        _swordParticleSystem.transform.position = position;
+        _swordParticleSystem.transform.Rotate(0, 0, rotation);
+        PLaySwordHitSound();
+        //Activate slash sound
+    }
+    public void ActivateShieldParticles()
+    {
+        _shieldParticleSystem.Play();
     }
 
     public override void TryToMove()
@@ -181,6 +196,11 @@ public class PlayerController : Character
     public void PlayDamageReceivedSound()
     {
         _damageReceivedSource.Play();
+    }
+
+    public void PLaySwordHitSound()
+    {
+        _swordHitSource.Play();
     }
 
     public void PlayPowerUpSound()

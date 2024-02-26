@@ -5,12 +5,16 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using UnityEditor.Experimental.GraphView;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class GameManager : MonoBehaviour
 {
+    public delegate void CountDownAction();
+    public static event CountDownAction OnCountDownToggle;
     public static GameManager Instance;
     public Camera MainCamera {get; set;}
     private Quaternion cameraStartRotation;
@@ -210,9 +214,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ResumeCountDown()
     {
-        Debug.Log("entra");
+        if (OnCountDownToggle != null) { OnCountDownToggle(); }
+
+        playerController.IsDead = false;
         _stagePopUpText.gameObject.SetActive(true);
         var count = 3;
+
         while(count > 0)
         {
             _stagePopUpText.text = $"{count}";
@@ -220,7 +227,13 @@ public class GameManager : MonoBehaviour
             count--;
         }
         _stagePopUpText.gameObject.SetActive(false);
-        playerController.IsDead = false;
+
+        if (OnCountDownToggle != null) { OnCountDownToggle(); }
+
+        if (NumberOfEnemiesAndBosses == 0 && !playerController.IsDead)
+        {
+            spawnManager.ChangeWave();
+        }
     }
 
     public void ShowRewardedAdPanel()
