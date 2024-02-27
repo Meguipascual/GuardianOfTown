@@ -34,6 +34,8 @@ public class LevelUpPointsAssignManager : MonoBehaviour
     private int _currentLevelPoints;
     private float[] _increments;
     private float[] _playerStatsCopy;
+    private string[] _playerTexts;
+    private TextMeshProUGUI[] _playerTMP;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         _increments = new float[6];
         _playerStatsCopy = new float[6];
+        _playerTexts = new string[6];
+        _playerTMP = new TextMeshProUGUI[6];
         _increment1 = 1;
         _increment2 = 2; 
         _increment5 = 5;
@@ -48,6 +52,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _currentLevelPoints = 0; 
         _levelPoints = _playerController.LevelPoints;
         CopyPlayerStats();
+
         _levelPointsText.text = $"LevelUp Points: {_levelPoints}";
         _playerLevelText.text = $"Level: {_playerController.Level}";
         _playerHPText.text = $"HP Max: {_playerStatsCopy[0]}";
@@ -56,6 +61,20 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]}";
         _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}";
         _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]}";
+
+        _playerTMP[0] = _playerHPText;
+        _playerTMP[1] = _playerAttackText;
+        _playerTMP[2] = _playerDefenseText;
+        _playerTMP[3] = _playerCritRateText;
+        _playerTMP[4] = _playerCritDamageText;
+        _playerTMP[5] = _playerSpeedText;
+
+        _playerTexts[0] = $"HP Max: {_playerStatsCopy[0]}";
+        _playerTexts[1] = $"Attack: {_playerStatsCopy[1]}";
+        _playerTexts[2] = $"Defense: {_playerStatsCopy[2]}";
+        _playerTexts[3] = $"Critical Rate: {_playerStatsCopy[3]}";
+        _playerTexts[4] = $"Critical Damage: {_playerStatsCopy[4]}";
+        _playerTexts[5] = $"Speed: {_playerStatsCopy[5]}";
         TryToDisableButtons();
     }
 
@@ -90,12 +109,13 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         CopyPlayerStats();
         _currentLevelPoints = 0;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints}";
-        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]}";
-        _playerAttackText.text = $"Attack: {_playerStatsCopy[1]}";
-        _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]}";
-        _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]}";
-        _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]}";
-        _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]}";
+
+        for (int i = 0; i < _playerTexts.Length; i++)
+        {
+            _playerTMP[i].text = _playerTexts[i];
+            _playerTMP[i].color = Tags.Beige;
+        }
+           
         if (!_hpButton.interactable && (_levelPoints>0))
         {
             _hpButton.interactable = true;
@@ -112,7 +132,8 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _currentLevelPoints++;
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[0] += _increment10;
-        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]} +{_increments[0]}";
+
+        ColoringStatistics();
         TryToDisableButtons();
     }
     public void increaseAttack()
@@ -122,24 +143,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _increments[1] += _increment5;
         _increments[5] -= _increment1;
 
-        if (_increments[1] <= 0)
-        {
-            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} {_increments[1]}";
-        }
-        else
-        {
-            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
-        }
-
-        if (_increments[5] <= 0)  
-        {
-            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} {_increments[5]}";
-        }
-        else
-        {
-            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
-        }
-        
+        ColoringStatistics();
         TryToDisableButtons();
     }
     public void increaseDefense()
@@ -148,8 +152,8 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[2] += _increment5; 
         _increments[0] += _increment1;
-        _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} +{_increments[2]}";
-        _playerHPText.text = $"HP Max: {_playerStatsCopy[0]} +{_increments[0]}";
+
+        ColoringStatistics();
         TryToDisableButtons();
     }
     public void increaseCritRate()
@@ -159,23 +163,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _increments[3] += _increment5;
         _increments[2] -= _increment1;
 
-        if (_increments[3] <= 0)
-        {
-            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} {_increments[3]}";
-        }
-        else
-        {
-            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
-        }
-
-        if (_increments[2] <= 0)
-        {
-            _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} {_increments[2]}";
-        }
-        else
-        {
-            _playerDefenseText.text = $"Defense: {_playerStatsCopy[2]} +{_increments[2]}";
-        }
+        ColoringStatistics();
         TryToDisableButtons();
     }
     public void increaseCritDamage()
@@ -185,23 +173,7 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _increments[4] += _increment10;
         _increments[1] -= _increment1;
 
-        if (_increments[4] <= 0)
-        {
-            _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} {_increments[4]}";
-        }
-        else
-        {
-            _playerCritDamageText.text = $"Critical Damage: {_playerStatsCopy[4]} +{_increments[4]}";
-        }
-
-        if (_increments[1] <= 0)
-        {
-            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} {_increments[1]}";
-        }
-        else
-        {
-            _playerAttackText.text = $"Attack: {_playerStatsCopy[1]} +{_increments[1]}";
-        }
+        ColoringStatistics();
         TryToDisableButtons();
     }
     public void increaseSpeed()
@@ -210,25 +182,31 @@ public class LevelUpPointsAssignManager : MonoBehaviour
         _levelPointsText.text = $"LevelUp Points: {_levelPoints - _currentLevelPoints}";
         _increments[5] += _increment2;
         _increments[3] -= _increment1;
-        
-        if (_increments[5] <= 0)
-        {
-            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} {_increments[5]}";
-        }
-        else
-        {
-            _playerSpeedText.text = $"Speed: {_playerStatsCopy[5]} +{_increments[5]}";
-        }
 
-        if (_increments[3] <= 0)
-        {
-            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} {_increments[3]}";
-        }
-        else
-        {
-            _playerCritRateText.text = $"Critical Rate: {_playerStatsCopy[3]} +{_increments[3]}";
-        }
+        ColoringStatistics();
         TryToDisableButtons();
+    }
+
+    private void ColoringStatistics()
+    {
+        for (int i = 0; i < _playerTexts.Length; i++)
+        {
+            if (_increments[i] == 0)
+            {
+                _playerTMP[i].text = _playerTexts[i];
+                _playerTMP[i].color = Tags.Beige;
+            }
+            else if (_increments[i] < 0)
+            {
+                _playerTMP[i].text = $"{_playerTexts[i]} {_increments[i]}";
+                _playerTMP[i].color = Tags.RedLight;
+            }
+            else
+            {
+                _playerTMP[i].text = $"{_playerTexts[i]} +{_increments[i]}";
+                _playerTMP[i].color = Tags.GreenLight;
+            }
+        } 
     }
 
     public void TryToNextStage()

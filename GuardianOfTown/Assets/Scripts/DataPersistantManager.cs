@@ -78,7 +78,7 @@ public class DataPersistantManager : MonoBehaviour
         SavedPlayerCriticalDamage = 100;
         SavedPlayerExp = 0;
         SavedTotalPlayerExp = 0;    
-        SavedPlayerLevelPoints = 0;
+        SavedPlayerLevelPoints = 10;
         SavedPlayerBullets = 20;
         SavedPlayerBulletsRate = 0.2f;
         SavedPlayerTimeScale = 1;
