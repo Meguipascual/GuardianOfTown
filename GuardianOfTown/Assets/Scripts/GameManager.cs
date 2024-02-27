@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public GameObject _keyboardControlsPanel;
     public GameObject _touchControlsInGamePanel;
     public GameObject _gamepadControlsPanel;
+    [SerializeField] private GameObject _soundSettingsManager;
+    [SerializeField] private AudioSource _rewindSound;
     public Button _retryButton, _winMainMenuButton, _resumeButton, _adButton;
     private Coroutine _previousCoroutine;
     private float[] _iconsOffsetX;
@@ -219,6 +221,8 @@ public class GameManager : MonoBehaviour
         IsCountDownActive = true;
         playerController.IsDead = false;
         _stagePopUpText.gameObject.SetActive(true);
+        PauseSounds();
+        _rewindSound.Play();
         var count = 3;
 
         while(count > 0)
@@ -233,9 +237,29 @@ public class GameManager : MonoBehaviour
 
         IsCountDownActive = false;
 
+        UnPauseSounds();
+
         if (NumberOfEnemiesAndBosses == 0 && !playerController.IsDead)
         {
             spawnManager.ChangeWave();
+        }
+    }
+
+    public void PauseSounds()
+    {
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.Pause();
+        }
+    }
+
+    public void UnPauseSounds()
+    {
+        var audioSources = _soundSettingsManager.GetComponentsInChildren<AudioSource>();
+        foreach (var audioSource in audioSources)
+        {
+            audioSource.UnPause();
         }
     }
 

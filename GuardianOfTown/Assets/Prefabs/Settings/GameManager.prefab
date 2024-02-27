@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1136239616363345665}
   - component: {fileID: 1136239616363345666}
+  - component: {fileID: 260360907}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,25 +44,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53b693fab4d1c549b39bd31ccfc0861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   TownHpShields:
   - {fileID: 8508868436407028096, guid: 2e8c1d8fbf1be604980b859549d63e26, type: 3}
   - {fileID: 2489958921133196132, guid: 8a18a94d1a2ff514bbc92ba1d10bc09b, type: 3}
   - {fileID: 6383583984371938325, guid: 0123ff87f73dc8349a56fb6a906ff68b, type: 3}
   - {fileID: 7721675015665239592, guid: 2f5b248ec3d1bc0419bbe01bf9340b26, type: 3}
   - {fileID: 5463891549916907561, guid: be8b04906d9f45a4885edf87791d086d, type: 3}
-  TownHpText: {fileID: 0}
-  gameOverText: {fileID: 0}
-  waveText: {fileID: 0}
-  wavePopUpText: {fileID: 0}
-  playerLevelText: {fileID: 0}
-  enemiesLeftText: {fileID: 0}
-  projectileText: {fileID: 0}
-  menuPlayerLevelText: {fileID: 0}
-  menuPlayerHPText: {fileID: 0}
-  menuPlayerAttackText: {fileID: 0}
-  menuPlayerDefenseText: {fileID: 0}
-  menuPlayerSpeedText: {fileID: 0}
-  menuPlayerCriticalRateText: {fileID: 0}
-  menuPlayerCriticalDamageText: {fileID: 0}
-  menuCanvas: {fileID: 0}
+  TownDamagedShieldImages:
+  - {fileID: 8508868436407028096, guid: 3fdcd7f7d9af16a40beb3c51c235ec73, type: 3}
+  - {fileID: 2489958921133196132, guid: 97ad88fcd48e20d49ac0862019bfa974, type: 3}
+  - {fileID: 6383583984371938325, guid: 1f378b35e8e607f4f82c54c15a751906, type: 3}
+  - {fileID: 7721675015665239592, guid: e511307c620851d43915f731fb143e13, type: 3}
+  - {fileID: 5463891549916907561, guid: c243e7e116967914c971990d2a08edd6, type: 3}
+  _devText: {fileID: 0}
+  _gateText: {fileID: 0}
+  _townHpText: {fileID: 0}
+  _stageText: {fileID: 0}
+  _stagePopUpText: {fileID: 0}
+  _wavePopUpText: {fileID: 0}
+  _playerLevelText: {fileID: 0}
+  _playerLevelPointsText: {fileID: 0}
+  _enemiesLeftText: {fileID: 0}
+  _projectileText: {fileID: 0}
+  _menuPlayerLevelText: {fileID: 0}
+  _menuPlayerHPText: {fileID: 0}
+  _menuPlayerAttackText: {fileID: 0}
+  _menuPlayerDefenseText: {fileID: 0}
+  _menuPlayerSpeedText: {fileID: 0}
+  _menuPlayerCriticalRateText: {fileID: 0}
+  _menuPlayerCriticalDamageText: {fileID: 0}
+  _powerUpIcons:
+  - {fileID: 7114922951770955686, guid: ccf316393b2515e45b1b8b0ec3800e35, type: 3}
+  - {fileID: 4079129636759031752, guid: 20ef72ad51768ae4abd04d73aae8d187, type: 3}
+  - {fileID: 1227147202387780957, guid: 0a93aca4e12262b4b963393782a3940c, type: 3}
+  - {fileID: 2688534086176400874, guid: 628593debe9a7b6419162dbbe2018eb3, type: 3}
+  - {fileID: 5101657599831270054, guid: d23a8c8e14716a240814c2fce6a665fa, type: 3}
+  - {fileID: 3926904378361205523, guid: 26486810b6fa38d429641d647a928dbe, type: 3}
+  - {fileID: 1300705441877156740, guid: 595b462546cc78c4383e029cb7845861, type: 3}
+  - {fileID: 7063183763178135488, guid: f10871177f3273844abe2876cfcfbe12, type: 3}
+  _menuPanel: {fileID: 0}
+  _generalPanel: {fileID: 0}
+  _levelEndPanel: {fileID: 0}
+  _rewardedAdPanel: {fileID: 0}
+  _gameOverPanel: {fileID: 0}
+  _winPanel: {fileID: 0}
+  _powerUpIconsPanel: {fileID: 0}
+  _levelUpPanel: {fileID: 0}
+  _keyboardControlsPanel: {fileID: 0}
+  _touchControlsInGamePanel: {fileID: 0}
+  _gamepadControlsPanel: {fileID: 0}
+  _soundSettingsManager: {fileID: 0}
+  _rewindSound: {fileID: 0}
+  _retryButton: {fileID: 0}
+  _winMainMenuButton: {fileID: 0}
+  _resumeButton: {fileID: 0}
+  _adButton: {fileID: 0}
+--- !u!114 &260360907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136239616363345667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbec490d92225245b2ec1b9775b75fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 0.5
