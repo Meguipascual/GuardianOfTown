@@ -119,7 +119,8 @@ public class PlayerMoveManager : MonoBehaviour
         var text = $"H.Input: {horizontalInput}";
         GameManager.Instance.ChangeAndShowDevText(text);
 
-        if(horizontalInput < -1 || horizontalInput > 1) { return;}
+        if (double.IsNaN(horizontalInput)) { return; }
+        if (horizontalInput < -1 || horizontalInput > 1) { return; }
 
         transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * horizontalInput);
         _playerController.PlayMoveSound();
