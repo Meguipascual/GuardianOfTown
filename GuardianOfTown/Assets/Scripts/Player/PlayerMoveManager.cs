@@ -116,8 +116,11 @@ public class PlayerMoveManager : MonoBehaviour
     public void TouchMove(float horizontalInput)
     {
         
-        //var text = $"H.Input: {horizontalInput}";
-        //GameManager.Instance.ChangeAndShowDevText(text);
+        var text = $"H.Input: {horizontalInput}";
+        GameManager.Instance.ChangeAndShowDevText(text);
+
+        if(horizontalInput < -1 || horizontalInput > 1) { return;}
+
         transform.Translate(Vector3.right * Time.deltaTime * _playerController.Speed * horizontalInput);
         _playerController.PlayMoveSound();
 
@@ -136,5 +139,4 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
     }
-
 }

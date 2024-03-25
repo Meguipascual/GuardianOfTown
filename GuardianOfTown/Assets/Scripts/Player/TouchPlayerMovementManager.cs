@@ -36,27 +36,28 @@ public class TouchPlayerMovementManager : MonoBehaviour
                 {
                     if(_direction < 0){ _currentAcceleration = _accelerationDelay; }
                     _direction = 1;
-                    _moveManager.TouchMove(1 / _currentAcceleration);
+                    _moveManager.TouchMove(_direction / _currentAcceleration);
                     _currentAcceleration = (_currentAcceleration > 1) ? _currentAcceleration -= Time.deltaTime : 1 ;
                 }
                 else if (touch.startScreenPosition.x > touch.screenPosition.x)
                 {
                     if (_direction > 0) { _currentAcceleration = _accelerationDelay; }
                     _direction = -1;
-                    _moveManager.TouchMove(-1 / _currentAcceleration);
+                    _moveManager.TouchMove(_direction / _currentAcceleration);
                     _currentAcceleration = (_currentAcceleration > 1) ? _currentAcceleration -= Time.deltaTime : 1;
                 }
                 else
                 {
                     _direction = 0;
                     _currentAcceleration = _accelerationDelay;
-                    _moveManager.TouchMove(0);
+                    _moveManager.TouchMove(_direction);
                 }
             }
             else
             {
                 _currentAcceleration = _accelerationDelay;
             }
+            return;
         }
     }
 
