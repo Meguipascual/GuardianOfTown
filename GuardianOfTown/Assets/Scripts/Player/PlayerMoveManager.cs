@@ -115,9 +115,8 @@ public class PlayerMoveManager : MonoBehaviour
     }
     public void TouchMove(float horizontalInput)
     {
-        
-        var text = $"H.Input: {horizontalInput}";
-        GameManager.Instance.ChangeAndShowDevText(text);
+        //var text = $"H.Input: {horizontalInput}";
+        //GameManager.Instance.ChangeAndShowDevText(text);
 
         if (double.IsNaN(horizontalInput)) { return; }
         if (horizontalInput < -1 || horizontalInput > 1) { return; }

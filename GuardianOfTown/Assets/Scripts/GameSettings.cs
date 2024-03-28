@@ -29,8 +29,8 @@ public class GameSettings : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        _frameRate = 30;
-        ChangeFrameRate();  
+        //_frameRate = 30;
+        //ChangeFrameRate();  
     }
 
     private void Update()

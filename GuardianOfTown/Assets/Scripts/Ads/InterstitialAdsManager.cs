@@ -6,7 +6,7 @@ using TMPro;
 
 public class InterstitialAdsManager : MonoBehaviour
 {
-    private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
+    private string _adUnitId = "ca-app-pub-5808337888205967/8158243305";  //  Testing Add  "ca-app-pub-3940256099942544/1033173712"
     private InterstitialAd _interstitialAd;
     [SerializeField] private GameObject _soundSettingsManager;
     [SerializeField] private TextMeshProUGUI _debugText;

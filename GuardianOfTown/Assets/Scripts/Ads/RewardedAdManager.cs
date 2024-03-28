@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RewardedAdManager : MonoBehaviour
 {
-    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
+    private string _adUnitId = "ca-app-pub-5808337888205967/6015102178";  //  Testing ad "ca-app-pub-3940256099942544/5224354917"
     private RewardedAd _rewardedAd;
     [SerializeField] private GameObject _soundSettingsManager;
     [SerializeField] private TextMeshProUGUI _ShowErrorText;

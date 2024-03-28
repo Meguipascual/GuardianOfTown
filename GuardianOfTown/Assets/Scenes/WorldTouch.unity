@@ -12740,6 +12740,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 969156260336006132, guid: 502ffdfc2b36bf54483a0d95f40d078a, type: 3}
+      propertyPath: _frameRate
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 969156260336006132, guid: 502ffdfc2b36bf54483a0d95f40d078a, type: 3}
       propertyPath: _cameraTopViewPrefab
       value: 
       objectReference: {fileID: 21446430214163976, guid: 13c278508dd5a4e49811fb21bef697bb, type: 3}
@@ -52429,6 +52433,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 260360907, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1136239616363345665, guid: 68e265b81b9892f4196260195d8e8a94, type: 3}
       propertyPath: m_RootOrder
       value: 5
